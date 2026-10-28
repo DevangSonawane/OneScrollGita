@@ -31,7 +31,11 @@ KEEP AND SHARE WHAT MOVES YOU
 • Bookmark verses to find your place again
 • Your reading history, kept on your phone
 • Tap the Sanskrit, transliteration or translation to copy it
-• Share any verse as a beautiful picture card with a link
+• Share any verse as a picture: full-screen for Instagram Stories and WhatsApp Status, or a card for chats
+
+HOME-SCREEN WIDGETS
+• Verse of the day: a new verse on your home screen every day
+• Continue reading: your last verse, one tap away
 
 MADE FOR READING
 • Works completely offline. No internet needed, ever

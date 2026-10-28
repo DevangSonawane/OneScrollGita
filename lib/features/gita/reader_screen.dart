@@ -499,10 +499,13 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
         ? null
         : box.localToGlobal(Offset.zero) & box.size;
     try {
+      final format = await pickShareFormat(context);
+      if (format == null || !mounted) return;
       await shareVerse(
         context,
         widget.entry,
         ref.read(languageProvider),
+        format: format,
         origin: origin,
       );
     } catch (_) {

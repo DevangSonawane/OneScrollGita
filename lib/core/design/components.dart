@@ -5,6 +5,28 @@ import 'motion.dart';
 import 'tokens.dart';
 import 'typography.dart';
 
+/// Smaller pill buttons for secondary actions (Home). The tap area stays
+/// 48 dp through Material's padded tap target.
+ButtonStyle compactButtonStyle(BuildContext context, {bool filled = true}) {
+  final c = AppColors.of(context);
+  final style = ButtonStyle(
+    minimumSize: const WidgetStatePropertyAll(Size(0, 40)),
+    padding: const WidgetStatePropertyAll(
+      EdgeInsets.symmetric(horizontal: Space.s16),
+    ),
+    visualDensity: VisualDensity.compact,
+    textStyle: WidgetStatePropertyAll(UiStyles(c).label(size: 14)),
+    tapTargetSize: MaterialTapTargetSize.padded,
+  );
+  return filled
+      ? FilledButton.styleFrom(
+          backgroundColor: c.accentSoft,
+          foregroundColor: c.accentText,
+          shape: const StadiumBorder(),
+        ).merge(style)
+      : TextButton.styleFrom(foregroundColor: c.accentText).merge(style);
+}
+
 /// "Bhagavad-gita 2.47".
 class ReferenceChip extends StatelessWidget {
   const ReferenceChip({super.key, required this.label});

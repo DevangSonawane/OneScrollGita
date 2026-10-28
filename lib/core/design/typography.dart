@@ -32,8 +32,8 @@ class ReadingStyles {
   TextStyle get sanskrit => _weighted(
     TextStyle(
       fontFamily: Fonts.sanskrit,
-      fontSize: 26 * scale,
-      height: 1.75,
+      fontSize: 22 * scale,
+      height: 1.6,
       color: colors.textPrimary,
       locale: _devanagariLocale,
     ),
@@ -44,8 +44,8 @@ class ReadingStyles {
     TextStyle(
       fontFamily: Fonts.literata,
       fontStyle: FontStyle.italic,
-      fontSize: 16 * scale,
-      height: 1.6,
+      fontSize: 15 * scale,
+      height: 1.55,
       color: colors.textSecondary,
     ),
     FontWeight.w400,
@@ -55,8 +55,8 @@ class ReadingStyles {
       ? _weighted(
           TextStyle(
             fontFamily: Fonts.devanagari,
-            fontSize: 19 * scale,
-            height: 1.7,
+            fontSize: 18 * scale,
+            height: 1.65,
             color: colors.textPrimary,
             locale: _devanagariLocale,
           ),
@@ -65,8 +65,8 @@ class ReadingStyles {
       : _weighted(
           TextStyle(
             fontFamily: Fonts.literata,
-            fontSize: 19 * scale,
-            height: 1.55,
+            fontSize: 18 * scale,
+            height: 1.5,
             color: colors.textPrimary,
           ),
           FontWeight.w400,
@@ -75,8 +75,8 @@ class ReadingStyles {
   TextStyle purport(String lang) => _weighted(
     TextStyle(
       fontFamily: lang == 'hi' ? Fonts.devanagari : Fonts.literata,
-      fontSize: 18 * scale,
-      height: 1.7,
+      fontSize: 17 * scale,
+      height: 1.65,
       color: colors.textPrimary,
       locale: lang == 'hi' ? _devanagariLocale : null,
     ),
@@ -86,8 +86,8 @@ class ReadingStyles {
   TextStyle get purportSanskrit => _weighted(
     TextStyle(
       fontFamily: Fonts.sanskrit,
-      fontSize: 20 * scale,
-      height: 1.75,
+      fontSize: 19 * scale,
+      height: 1.6,
       color: colors.textPrimary,
       locale: _devanagariLocale,
     ),

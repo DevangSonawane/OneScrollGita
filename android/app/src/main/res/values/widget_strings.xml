@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name_widget">One Scroll Gita</string>
+    <string name="widget_daily_label">Verse of the day</string>
+    <string name="widget_daily_description">Today\'s verse from the Bhagavad-gītā. Changes every day.</string>
+    <string name="widget_recent_label">Continue reading</string>
+    <string name="widget_recent_description">The verse you read last, and a few before it.</string>
+    <string name="widget_daily_header">VERSE OF THE DAY</string>
+    <string name="widget_recent_header">CONTINUE READING</string>
+    <string name="widget_open_app">Open One Scroll Gita to load today\'s verse.</string>
+    <string name="widget_recent_empty">Verses you read will appear here.</string>
+</resources>

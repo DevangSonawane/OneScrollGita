@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../application/core_providers.dart';
 import '../application/scripture_providers.dart';
+import '../application/widget_sync.dart';
 import '../core/design/theme.dart';
 import '../domain/models/app_settings.dart';
 import 'router.dart';
@@ -19,6 +20,10 @@ class _GitaAppState extends ConsumerState<GitaApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    // Home-screen widgets: start syncing once the first verse is on screen.
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => ref.read(widgetSyncProvider),
+    );
   }
 
   @override

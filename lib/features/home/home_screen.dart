@@ -92,12 +92,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   _ => const SizedBox(height: 400),
                 },
               ),
+              // A hairline sets "Continue" apart from today's verse.
               const SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.only(top: Space.s16),
-                  child: ContinueRow(),
+                  padding: EdgeInsets.fromLTRB(
+                    Space.readingSide,
+                    Space.s24,
+                    Space.readingSide,
+                    Space.s8,
+                  ),
+                  child: Divider(),
                 ),
               ),
+              const SliverToBoxAdapter(child: ContinueRow()),
               SliverToBoxAdapter(child: SizedBox(height: navBarInset(context))),
             ],
           ),
@@ -114,8 +121,6 @@ class _DailyVerse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = AppColors.of(context);
-    final ui = UiStyles(c);
     final blocks = <Widget>[
       ShlokaView(lines: entry.sanskrit),
       TransliterationView(lines: entry.transliteration),
@@ -133,39 +138,37 @@ class _DailyVerse extends StatelessWidget {
             _Entrance(index: i, child: blocks[i]),
             const SizedBox(height: Space.s32),
           ],
-          Align(
-            alignment: Alignment.centerLeft,
-            child: ReferenceChip(label: 'Bhagavad-gita ${entry.label}'),
+          Center(
+            child: ReferenceChip(label: 'Bhagavad-gītā ${entry.label}'),
           ),
           const SizedBox(height: Space.s24),
           Wrap(
+            alignment: WrapAlignment.center,
             spacing: Space.s8,
             runSpacing: Space.s8,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               FilledButton.icon(
                 onPressed: () => openInReader(context, entry.id),
+                style: compactButtonStyle(context),
                 iconAlignment: IconAlignment.end,
-                icon: const Icon(Icons.arrow_forward_rounded, size: 18),
+                icon: const Icon(Icons.arrow_forward_rounded, size: 16),
                 label: const Text('Read in Gita'),
               ),
               if (entry.hasPurport)
                 TextButton(
                   onPressed: () => openPurport(context, entry.id),
+                  style: compactButtonStyle(context, filled: false),
                   child: const Text('Purport'),
                 ),
             ],
           ),
           const SizedBox(height: Space.s8),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SaveToggleButton(verseId: entry.id, kind: SaveKind.favourite),
               SaveToggleButton(verseId: entry.id, kind: SaveKind.bookmark),
-              const Spacer(),
-              Text(
-                'Chapter ${entry.chapter}',
-                style: ui.body(size: 13, color: c.textTertiary),
-              ),
             ],
           ),
         ],
