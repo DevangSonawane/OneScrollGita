@@ -1,0 +1,158 @@
+{
+  "isPlaceholder": false,
+  "source": {
+    "name": "vedabase.cc",
+    "edition": "Bhagavad-gītā As It Is, by His Divine Grace A.C. Bhaktivedanta Swami Prabhupāda",
+    "rightsHolder": "The Bhaktivedanta Book Trust",
+    "attribution": "Texts of Śrīla Prabhupāda from vedabase.cc (https://vedabase.cc), used with permission and reproduced without alteration.",
+    "datasetVersion": "vedabase-cc-2026-10-28",
+    "checksums": {
+      "chapter_01.json": "4f5a1f14e7d7975f79afbe94d86555625f48c95ba7b778ef0c95a90ce563270b",
+      "chapter_02.json": "f51012353d8398dedf2e27c6d30be5b32d6df3322bf99c7cb72b98b2fe65ebbb",
+      "chapter_03.json": "cf0d6f10b2f47fec9087dfb585335d341554b98a6ab372caf7c04eabda37c036",
+      "chapter_04.json": "9a8ccec680dfd3b391353bd40ee824d1655ac49b0ee5716a085079a99db72696",
+      "chapter_05.json": "9434d43bfc2fcff06bbd865ea326ef965a2fa94edcaf6c0288f73ff219da0c66",
+      "chapter_06.json": "ccd3db9ae734d209c6a8f5f31dcd1e8e1995eea27060f03afadf1daa9db9cfe4",
+      "chapter_07.json": "c049b718d0dd1422d571470c1d8e4b45dbe5a8864a452f4e5b340895e10e7743",
+      "chapter_08.json": "a1818cdfb2ae1915e3858b2064702f2c63b00f6a940277e0bdcfbaaf9daf91f2",
+      "chapter_09.json": "5a7fba88c09be04114521389ad3295821218ec787e760b5c600464fd12b6f87a",
+      "chapter_10.json": "8b622748931d6b12b7ea4c98abe26256b59c4fdec78bd68fcf90c7eab5dced28",
+      "chapter_11.json": "59959b2a1c87d475186444b13c8b743f29ccaee252ec09f284796e282086ce91",
+      "chapter_12.json": "00be356da320dee30bc76be41d8aa6fe224668938af006e71507b00982e7735f",
+      "chapter_13.json": "a8f89fff2d65a9bd1161f72f51ba87f8787abc90c3e291fddadc927932ce2224",
+      "chapter_14.json": "f69ffdc038f849d273e15653ef998813bf412999bd6a31d0d02bf9fcd92a29de",
+      "chapter_15.json": "9f532138de09d1b13a818e58a8b740d61d1c1653a234d5d4c737c34987b8cd4f",
+      "chapter_16.json": "1ecc03b6a13198b292893ec99da27c207e9393e7985df816dfe624e1c673a84e",
+      "chapter_17.json": "866e0b9070d7161c3d9d6fe932ba3229c1a72572a6fcec7043836b040f8c9b54",
+      "chapter_18.json": "cda2f0a41d8692690c04d2dbc384ffea1c87628ffdd5cc97792166862d950144"
+    }
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "titleEn": "Observing the Armies on the Battlefield of Kurukṣetra",
+      "titleHi": "कुरुक्षेत्र के युद्धक्षेत्र में सेनाओं का अवलोकन",
+      "verseCount": 46,
+      "entryCount": 39
+    },
+    {
+      "number": 2,
+      "titleEn": "Contents of the Gītā Summarized",
+      "titleHi": "गीता का सार",
+      "verseCount": 72,
+      "entryCount": 71
+    },
+    {
+      "number": 3,
+      "titleEn": "Karma-yoga",
+      "titleHi": "कर्म-योग",
+      "verseCount": 43,
+      "entryCount": 43
+    },
+    {
+      "number": 4,
+      "titleEn": "Transcendental Knowledge",
+      "titleHi": "दिव्य ज्ञान",
+      "verseCount": 42,
+      "entryCount": 42
+    },
+    {
+      "number": 5,
+      "titleEn": "Karma-yoga — Action in Kṛṣṇa Consciousness",
+      "titleHi": "कर्मयोग — कृष्णभावनामृत में कर्म",
+      "verseCount": 29,
+      "entryCount": 27
+    },
+    {
+      "number": 6,
+      "titleEn": "Sāṅkhya-yoga",
+      "titleHi": "सांख्ययोग",
+      "verseCount": 47,
+      "entryCount": 42
+    },
+    {
+      "number": 7,
+      "titleEn": "Knowledge of the Absolute",
+      "titleHi": "परम सत्य का ज्ञान",
+      "verseCount": 30,
+      "entryCount": 30
+    },
+    {
+      "number": 8,
+      "titleEn": "Attaining the Supreme",
+      "titleHi": "परमेश्वर की प्राप्ति",
+      "verseCount": 28,
+      "entryCount": 28
+    },
+    {
+      "number": 9,
+      "titleEn": "The Most Confidential Knowledge",
+      "titleHi": "परम गोपनीय ज्ञान",
+      "verseCount": 34,
+      "entryCount": 34
+    },
+    {
+      "number": 10,
+      "titleEn": "The Opulence of the Absolute",
+      "titleHi": "परमेश्वर का ऐश्वर्य",
+      "verseCount": 42,
+      "entryCount": 40
+    },
+    {
+      "number": 11,
+      "titleEn": "The Universal Form",
+      "titleHi": "विश्वरूप",
+      "verseCount": 55,
+      "entryCount": 52
+    },
+    {
+      "number": 12,
+      "titleEn": "Devotional Service",
+      "titleHi": "भक्तियोग",
+      "verseCount": 20,
+      "entryCount": 16
+    },
+    {
+      "number": 13,
+      "titleEn": "Nature, the Enjoyer, and Consciousness",
+      "titleHi": "प्रकृति, भोक्ता तथा चेतना",
+      "verseCount": 35,
+      "entryCount": 29
+    },
+    {
+      "number": 14,
+      "titleEn": "The Three Modes of Material Nature",
+      "titleHi": "प्रकृति के तीन गुण",
+      "verseCount": 27,
+      "entryCount": 24
+    },
+    {
+      "number": 15,
+      "titleEn": "The Yoga of the Supreme Person",
+      "titleHi": "पुरुषोत्तम योग",
+      "verseCount": 20,
+      "entryCount": 19
+    },
+    {
+      "number": 16,
+      "titleEn": "The Divine and Demoniac Natures",
+      "titleHi": "दैवी एवं आसुरी प्रकृति",
+      "verseCount": 24,
+      "entryCount": 19
+    },
+    {
+      "number": 17,
+      "titleEn": "The Divisions of Faith",
+      "titleHi": "श्रद्धा के विभाग",
+      "verseCount": 28,
+      "entryCount": 24
+    },
+    {
+      "number": 18,
+      "titleEn": "Conclusion — The Perfection of Renunciation",
+      "titleHi": "उपसंहार—संन्यास की सिद्धि",
+      "verseCount": 78,
+      "entryCount": 74
+    }
+  ]
+}

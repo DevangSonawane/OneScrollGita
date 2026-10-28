@@ -1,0 +1,922 @@
+{
+ "chapter": 15,
+ "entries": [
+  {
+   "id": "bg-15-001",
+   "chapter": 15,
+   "verseStart": 1,
+   "verseEnd": 1,
+   "label": "15.1",
+   "sanskrit": [
+    "श्रीभगवानुवाच ।",
+    "ऊर्ध्वमूलमधःशाखमश्वत्थं प्राहुरव्ययम् ।",
+    "छन्दांसि यस्य पर्णानि यस्तं वेद स वेदवित् ॥१॥"
+   ],
+   "transliteration": [
+    "śrī-bhagavān uvāca",
+    "ūrdhva-mūlam adhaḥ-śākham",
+    "aśvatthaṁ prāhur avyayam",
+    "chandāṁsi yasya parṇāni",
+    "yas taṁ veda sa veda-vit"
+   ],
+   "translation": {
+    "en": "The Blessed Lord said: There is a banyan tree which has its roots upward and its branches down and whose leaves are the Vedic hymns. One who knows this tree is the knower of the Vedas.",
+    "hi": "श्रीभगवान् ने कहा : एक वटवृक्ष है, जिसका मूल ऊपर की ओर और शाखाएँ नीचे की ओर हैं, तथा जिसके पत्ते वैदिक स्तोत्र हैं। जो इस वृक्ष को जानता है, वही वेदों का ज्ञाता है।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "After the discussion of the importance of <i>bhakti-yoga,</i> one may question, \"What about the <i>Vedas</i>?\" It is explained in this chapter that the purpose of Vedic study is to understand Kṛṣṇa. Therefore one who is in Kṛṣṇa consciousness, who is engaged in devotional service, already knows the <i>Vedas.</i>"
+     },
+     {
+      "type": "p",
+      "text": "The entanglement of this material world is compared here to a banyan tree. For one who is engaged in fruitive activities, there is no end to the banyan tree. He wanders from one branch to another, to another, to another. The tree of this material world has no end, and for one who is attached to this tree, there is no possibility of liberation. The Vedic hymns, meant for elevating oneself, are called the leaves of this tree. This tree's roots grow upward because they begin from where Brahmā is located, the topmost planet of this universe. If one can understand this indestructible tree of illusion, then one can get out of it."
+     },
+     {
+      "type": "p",
+      "text": "This process of extrication should be understood. In the previous chapters it has been explained that there are many processes by which to get out of the material entanglement. And, up to the Thirteenth Chapter, we have seen that devotional service to the Supreme Lord is the best way. Now, the basic principle of devotional service is detachment from material activities and attachment to the transcendental service of the Lord. The process of breaking attachment to the material world is discussed in the beginning of this chapter. The root of this material existence grows upward. This means that it begins from the total material substance, from the topmost planet of the universe. From there, the whole universe is expanded, with so many branches, representing the various planetary systems. The fruits represent the results of the living entities' activities, namely, religion, economic development, sense gratification and liberation."
+     },
+     {
+      "type": "p",
+      "text": "Now, there is no ready experience in this world of a tree situated with its branches down and its roots upward, but there is such a thing. That tree can be found beside a reservoir of water. We can see that the trees on the bank reflect upon the water with their branches down and roots up. In other words, the tree of this material world is only a reflection of the real tree of the spiritual world. This reflection of the spiritual world is situated on desire, just as the tree's reflection is situated on water. Desire is the cause of things' being situated in this reflected material light. One who wants to get out of this material existence must know this tree thoroughly through analytical study. Then he can cut off his relationship with it."
+     },
+     {
+      "type": "p",
+      "text": "This tree, being the reflection of the real tree, is an exact replica. Everything is there in the spiritual world. The impersonalists take Brahmā to be the root of this material tree, and from the root, according to <i>sāṅkhya</i> philosophy, come <i>prakṛti, puruṣa,</i> then the three <i>guṇas,</i> then the five gross elements (<i>pañca-mahābhūta</i>), then the ten senses (<i>daśendriya</i>), mind, etc. In this way they divide up the whole material world. If Brahmā is the center of all manifestations, then this material world is a manifestation of the center by 180 degrees, and the other 180 degrees constitute the spiritual world. The material world is the perverted reflection, so the spiritual world must have the same variegatedness, but in reality. The <i>prakṛti</i> is the external energy of the Supreme Lord, and the <i>puruṣa</i> is the Supreme Lord Himself, and that is explained in <i>Bhagavad-gītā.</i> Since this manifestation is material, it is temporary. A reflection is temporary, for it is sometimes seen and sometimes not seen. But the origin from whence the reflection is reflected is eternal. The material reflection of the real tree has to be cut off. When it is said that a person knows the <i>Vedas,</i> it is assumed that he knows how to cut off attachment to this material world. If one knows that process, he actually knows the <i>Vedas.</i> One who is attracted by the ritualistic formulas of the <i>Vedas</i> is attracted by the beautiful green leaves of the tree. He does not exactly know the purpose of the <i>Vedas.</i> The purpose of the <i>Vedas,</i> as disclosed by the Personality of Godhead Himself, is to cut down this reflected tree and attain the real tree of the spiritual world."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "भक्तियोग के महत्त्व की विवेचना के पश्चात् कोई यह प्रश्न उठा सकता है, \"तब वेदों का क्या?\" इस अध्याय में यह समझाया गया है कि वैदिक अध्ययन का प्रयोजन श्रीकृष्ण को समझना है। अतः जो कृष्णभावनामृत में स्थित है, जो भक्ति में संलग्न है, वह वेदों को पहले से ही जान चुका है।"
+     },
+     {
+      "type": "p",
+      "text": "इस भौतिक जगत् के बन्धन की तुलना यहाँ एक वटवृक्ष से की गई है। जो सकाम कर्म में संलग्न रहता है, उसके लिए इस वटवृक्ष का कोई अन्त नहीं। वह एक शाखा से दूसरी, दूसरी से तीसरी, तीसरी से चौथी पर भटकता रहता है। इस भौतिक जगत् रूपी वृक्ष का कोई अन्त नहीं, और जो इस वृक्ष से आसक्त है, उसके लिए मुक्ति की कोई सम्भावना नहीं। आत्मोन्नति के निमित्त बने वैदिक स्तोत्र इस वृक्ष के पत्ते कहे जाते हैं। इस वृक्ष के मूल ऊपर की ओर बढ़ते हैं, क्योंकि वे वहाँ से आरम्भ होते हैं जहाँ ब्रह्मा स्थित हैं—इस ब्रह्माण्ड का सर्वोच्च लोक। यदि कोई मोह के इस अविनाशी वृक्ष को समझ ले, तो वह इससे बाहर निकल सकता है।"
+     },
+     {
+      "type": "p",
+      "text": "इस निष्क्रमण की प्रक्रिया को समझना चाहिए। पूर्ववर्ती अध्यायों में यह समझाया जा चुका है कि भौतिक बन्धन से बाहर निकलने की अनेक विधियाँ हैं। और तेरहवें अध्याय तक हमने देखा कि परमेश्वर की भक्ति ही सर्वोत्तम मार्ग है। अब, भक्ति का मूल सिद्धान्त भौतिक कर्मों से अनासक्ति तथा भगवान् की दिव्य सेवा में आसक्ति है। भौतिक जगत् के प्रति आसक्ति को तोड़ने की प्रक्रिया इस अध्याय के आरम्भ में विवेचित है। इस भौतिक अस्तित्व का मूल ऊपर की ओर बढ़ता है। इसका अर्थ है कि यह समस्त भौतिक तत्त्व से, ब्रह्माण्ड के सर्वोच्च लोक से आरम्भ होता है। वहाँ से समूचा ब्रह्माण्ड विस्तृत होता है, जिसमें अनेक शाखाएँ हैं, जो विविध लोक-व्यवस्थाओं का प्रतिनिधित्व करती हैं। फल जीवों के कर्मों के परिणामों का प्रतिनिधित्व करते हैं, अर्थात् धर्म, अर्थ, इन्द्रियतृप्ति तथा मोक्ष का।"
+     },
+     {
+      "type": "p",
+      "text": "अब, इस संसार में ऐसे वृक्ष का कोई प्रत्यक्ष अनुभव नहीं होता जिसकी शाखाएँ नीचे और मूल ऊपर की ओर हों, किन्तु ऐसी वस्तु विद्यमान है। वह वृक्ष किसी जलाशय के निकट देखा जा सकता है। हम देख सकते हैं कि तट पर खड़े वृक्ष जल में अपनी शाखाओं को नीचे और मूल को ऊपर की ओर प्रतिबिम्बित करते हैं। दूसरे शब्दों में, इस भौतिक जगत् रूपी वृक्ष आध्यात्मिक जगत् के वास्तविक वृक्ष का मात्र प्रतिबिम्ब है। आध्यात्मिक जगत् का यह प्रतिबिम्ब इच्छा पर स्थित है, ठीक जैसे वृक्ष का प्रतिबिम्ब जल पर स्थित होता है। इच्छा ही इस प्रतिबिम्बित भौतिक प्रकाश में वस्तुओं के स्थित होने का कारण है। जो इस भौतिक अस्तित्व से बाहर निकलना चाहता है, उसे विश्लेषणात्मक अध्ययन द्वारा इस वृक्ष को भली-भाँति जान लेना चाहिए। तभी वह इससे अपना सम्बन्ध काट सकता है।"
+     },
+     {
+      "type": "p",
+      "text": "यह वृक्ष, वास्तविक वृक्ष का प्रतिबिम्ब होने के कारण, उसकी ठीक प्रतिकृति है। आध्यात्मिक जगत् में सब कुछ विद्यमान है। निर्विशेषवादी ब्रह्मा को इस भौतिक वृक्ष का मूल मानते हैं, और सांख्य दर्शन के अनुसार उस मूल से प्रकृति, पुरुष, फिर तीन गुण, फिर पाँच स्थूल तत्त्व (पञ्च-महाभूत), फिर दस इन्द्रियाँ (दशेन्द्रिय), मन आदि उत्पन्न होते हैं। इस प्रकार वे समूचे भौतिक जगत् का विभाजन करते हैं। यदि ब्रह्मा समस्त प्रकटीकरणों के केन्द्र हैं, तो यह भौतिक जगत् उस केन्द्र का 180 अंशों तक प्रकटीकरण है, और शेष 180 अंश आध्यात्मिक जगत् का निर्माण करते हैं। भौतिक जगत् विकृत प्रतिबिम्ब है, अतः आध्यात्मिक जगत् में वही विविधता होनी चाहिए, किन्तु यथार्थ रूप में। प्रकृति परमेश्वर की बहिरंगा शक्ति है, और पुरुष स्वयं परमेश्वर हैं, और यह भगवद्गीता में समझाया गया है। चूँकि यह प्रकटीकरण भौतिक है, अतः यह क्षणिक है। प्रतिबिम्ब क्षणिक होता है, क्योंकि वह कभी दिखता है और कभी नहीं दिखता। किन्तु जिससे प्रतिबिम्ब प्रतिबिम्बित होता है, वह उद्गम नित्य है। वास्तविक वृक्ष के इस भौतिक प्रतिबिम्ब को काट देना होता है। जब यह कहा जाता है कि कोई व्यक्ति वेदों को जानता है, तो यह मान लिया जाता है कि वह जानता है कि इस भौतिक जगत् के प्रति आसक्ति को कैसे काटा जाए। यदि कोई उस प्रक्रिया को जानता है, तो वह वस्तुतः वेदों को जानता है। जो वेदों के कर्मकाण्डीय सूत्रों से आकृष्ट होता है, वह वृक्ष के सुन्दर हरे पत्तों से आकृष्ट होता है। वह वेदों के प्रयोजन को ठीक से नहीं जानता। वेदों का प्रयोजन, जैसा कि स्वयं भगवान् ने प्रकट किया है, इस प्रतिबिम्बित वृक्ष को काट डालना तथा आध्यात्मिक जगत् के वास्तविक वृक्ष को प्राप्त करना है।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/1/"
+  },
+  {
+   "id": "bg-15-002",
+   "chapter": 15,
+   "verseStart": 2,
+   "verseEnd": 2,
+   "label": "15.2",
+   "sanskrit": [
+    "अधश्चोर्ध्वं प्रसृतास्तस्य शाखा",
+    "गुणप्रवृद्धा विषयप्रवालाः ।",
+    "अधश्च मूलान्यनुसन्ततानि",
+    "कर्मानुबन्धीनि मनुष्यलोके ॥२॥"
+   ],
+   "transliteration": [
+    "adhaś cordhvaṁ prasṛtās tasya śākhā",
+    "guṇa-pravṛddhā viṣaya-pravālāḥ",
+    "adhaś ca mūlāny anusantatāni",
+    "karmānubandhīni manuṣya-loke"
+   ],
+   "translation": {
+    "en": "The branches of this tree extend downward and upward, nourished by the three modes of material nature. The twigs are the objects of the senses. This tree also has roots going down, and these are bound to the fruitive actions of human society.",
+    "hi": "इस वृक्ष की शाखाएँ नीचे तथा ऊपर की ओर फैली हुई हैं, जो भौतिक प्रकृति के तीन गुणों से पोषित होती हैं। टहनियाँ इन्द्रियों के विषय हैं। इस वृक्ष के मूल भी नीचे की ओर जाते हैं, और ये मनुष्य-समाज के सकाम कर्मों से बँधे हुए हैं।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "The description of the banyan tree is further explained here. Its branches are spread in all directions. In the lower parts, there are variegated manifestations of living entities, such as human beings, animals, horses, cows, dogs, cats, etc. These are situated on the lower parts of the branches, whereas on the upper parts are higher forms of living entities: the demigods, Gandharvas (fairies), and many other higher species of life. As a tree is nourished by water, so this tree is nourished by the three modes of material nature. Sometimes we find that a tract of land is barren for want of sufficient water, and sometimes a tract is very green; similarly, where the modes of material nature are proportionately greater in quantity, the different species of life are manifested in that proportion."
+     },
+     {
+      "type": "p",
+      "text": "The twigs of the tree are considered to be the sense objects. By development of the different modes of nature, we develop different senses, and, by the senses, we enjoy different varieties of sense objects. The source of the senses—the ears, the nose, eyes, etc.—is considered to be the upper twigs, tuned to the enjoyment of different sense objects. The leaves are sound, form, touch-the sense objects. The roots, which are subsidiary, are the by-products of different varieties of suffering and sense enjoyment. Thus we develop attachment and aversion. The tendencies toward piety and impiety are considered to be the secondary roots, spreading in all directions. The real root is from Brahmaloka, and the other roots are in the human planetary systems. After one enjoys the results of virtuous activities in the upper planetary systems, he comes down to this earth and renews his <i>karma</i> or fruitive activities for promotion. This planet of human beings is considered the field of activities."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "वटवृक्ष का वर्णन यहाँ और आगे समझाया गया है। इसकी शाखाएँ सभी दिशाओं में फैली हुई हैं। निचले भागों में जीवों के विविध प्रकटीकरण हैं, जैसे मनुष्य, पशु, घोड़े, गायें, कुत्ते, बिल्लियाँ आदि। ये शाखाओं के निचले भागों पर स्थित हैं, जबकि ऊपरी भागों पर जीवों के उच्चतर रूप हैं—देवता, गन्धर्व तथा जीवन की अनेक अन्य उच्चतर योनियाँ। जैसे वृक्ष जल से पोषित होता है, वैसे ही यह वृक्ष भौतिक प्रकृति के तीन गुणों से पोषित होता है। कभी हम देखते हैं कि भूमि का कोई भाग पर्याप्त जल के अभाव में बंजर रहता है, और कभी कोई भाग अत्यन्त हरा-भरा होता है; इसी प्रकार, जहाँ भौतिक प्रकृति के गुण अनुपात में अधिक होते हैं, वहाँ जीवों की विभिन्न योनियाँ उसी अनुपात में प्रकट होती हैं।"
+     },
+     {
+      "type": "p",
+      "text": "वृक्ष की टहनियों को इन्द्रियों के विषय माना जाता है। प्रकृति के विभिन्न गुणों के विकास से हम विभिन्न इन्द्रियों का विकास करते हैं, और इन्द्रियों के द्वारा हम विभिन्न प्रकार के विषयों का भोग करते हैं। इन्द्रियों का उद्गम—कान, नाक, आँखें आदि—ऊपरी टहनियाँ माने जाते हैं, जो विभिन्न विषयों के भोग के अनुकूल हैं। पत्ते शब्द, रूप, स्पर्श—अर्थात् विषय हैं। मूल, जो गौण हैं, विविध प्रकार के दुःख तथा विषय-भोग के उपोत्पाद हैं। इस प्रकार हम आसक्ति तथा विरक्ति का विकास करते हैं। पुण्य तथा पाप की प्रवृत्तियाँ गौण मूल मानी जाती हैं, जो सभी दिशाओं में फैली हुई हैं। वास्तविक मूल ब्रह्मलोक से है, और अन्य मूल मनुष्य-लोक की व्यवस्थाओं में हैं। ऊपरी लोक-व्यवस्थाओं में पुण्य कर्मों के फल भोगने के पश्चात् मनुष्य इस पृथ्वी पर लौट आता है और उन्नति के निमित्त अपने कर्म अथवा सकाम कर्मों का नवीनीकरण करता है। मनुष्यों का यह लोक कर्मक्षेत्र माना जाता है।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/2/"
+  },
+  {
+   "id": "bg-15-003-004",
+   "chapter": 15,
+   "verseStart": 3,
+   "verseEnd": 4,
+   "label": "15.3-4",
+   "sanskrit": [
+    "न रूपमस्येह तथोपलभ्यते",
+    "नान्तो न चादिर्न च सम्प्रतिष्ठा ।",
+    "अश्वत्थमेनं सुविरूढमूलं",
+    "असङ्गशस्त्रेण दृढेन छित्त्वा ॥३॥",
+    "ततः पदं तत्परिमार्गितव्यं",
+    "यस्मिन्गता न निवर्तन्ति भूयः ।",
+    "तमेव चाद्यं पुरुषं प्रपद्ये",
+    "यतः प्रवृत्तिः प्रसृता पुराणी ॥४॥"
+   ],
+   "transliteration": [
+    "na rūpam asyeha tathopalabhyate",
+    "nānto na cādir na ca sampratiṣṭhā",
+    "aśvattham enaṁ su-virūḍha-mūlam",
+    "asaṅga-śastreṇa dṛḍhena chittvā",
+    "tataḥ padaṁ tat parimārgitavyaṁ",
+    "yasmin gatā na nivartanti bhūyaḥ",
+    "tam eva cādyaṁ puruṣaṁ prapadye",
+    "yataḥ pravṛttiḥ prasṛtā purāṇī"
+   ],
+   "translation": {
+    "en": "The real form of this tree cannot be perceived in this world. No one can understand where it ends, where it begins, or where its foundation is. But with determination one must cut down this tree with the weapon of detachment. So doing, one must seek that place from which, having once gone, one never returns, and there surrender to that Supreme Personality of Godhead from whom everything has begun and in whom everything is abiding since time immemorial.",
+    "hi": "इस वृक्ष का वास्तविक रूप इस संसार में अनुभव नहीं किया जा सकता। कोई नहीं समझ सकता कि इसका अन्त कहाँ है, आरम्भ कहाँ है, अथवा इसका आधार कहाँ है। किन्तु दृढ़ संकल्प के साथ मनुष्य को अनासक्ति रूपी शस्त्र से इस वृक्ष को काट डालना चाहिए। ऐसा करते हुए उसे उस स्थान को खोजना चाहिए, जहाँ एक बार जाकर कोई पुनः नहीं लौटता, और वहाँ उन पूर्ण पुरुषोत्तम भगवान् की शरण लेनी चाहिए, जिनसे सब कुछ आरम्भ हुआ है और जिनमें अनादि काल से सब कुछ स्थित है।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "It is now clearly stated that the real form of this banyan tree cannot be understood in this material world. Since the root is upwards, the extension of the real tree is at the other end. No one can see how far the tree extends, nor can one see the beginning of this tree. Yet one has to find out the cause. \"I am the son of my father, my father is the son of such and such a person, etc.\" By searching in this way, one comes to Brahmā, who is generated by the Garbhodakaśāyī Viṣṇu. Finally, in this way, when one reaches to the Supreme Personality of Godhead, that is the end of research work. One has to search out that origin of this tree, the Supreme Personality of Godhead, through the association of persons who are in the knowledge of that Supreme Personality of Godhead. Then by understanding one becomes gradually detached from this false reflection of reality, and by knowledge one can cut off the connection and actually become situated in the real tree."
+     },
+     {
+      "type": "p",
+      "text": "The word <i>asaṅga</i> is very important in this connection because the attachment for sense enjoyment and lording it over the material nature is very strong. Therefore one must learn detachment by discussion of spiritual science based on authoritative scriptures, and one must hear from persons who are actually in knowledge. As a result of such discussion in the association of devotees, one comes to the Supreme Personality of Godhead. Then the first thing one must do is surrender to Him. The description of that place whence going no one returns to this false reflected tree is given here. The Supreme Personality of Godhead, Kṛṣṇa, is the original root from whom everything has emanated. To gain favor of that Personality of Godhead, one has only to surrender, and this is a result of performing devotional service by hearing, chanting, etc. He is the cause of this extension of this material world. This is already explained by the Lord Himself: <i>ahaṁ sarvasya prabhavaḥ.</i> \"I am the origin of everything.\""
+     },
+     {
+      "type": "p",
+      "text": "Therefore to get out of the entanglement of this strong banyan tree of material life, one must surrender to Kṛṣṇa. As soon as one surrenders unto Kṛṣṇa, he becomes detached automatically from this material extension."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "अब स्पष्ट रूप से कहा गया है कि इस वटवृक्ष का वास्तविक रूप इस भौतिक जगत् में नहीं समझा जा सकता। चूँकि मूल ऊपर की ओर है, अतः वास्तविक वृक्ष का विस्तार दूसरे छोर पर है। कोई नहीं देख सकता कि वृक्ष कितनी दूर तक फैला है, और न ही कोई इस वृक्ष का आरम्भ देख सकता है। फिर भी मनुष्य को इसका कारण खोजना होता है। \"मैं अपने पिता का पुत्र हूँ, मेरे पिता अमुक-अमुक व्यक्ति के पुत्र हैं, आदि।\" इस प्रकार खोजते-खोजते मनुष्य ब्रह्मा तक पहुँचता है, जो गर्भोदकशायी विष्णु से उत्पन्न होते हैं। अन्ततः, इस प्रकार जब मनुष्य पूर्ण पुरुषोत्तम भगवान् तक पहुँचता है, तब अनुसन्धान-कार्य का अन्त होता है। मनुष्य को उन पूर्ण पुरुषोत्तम भगवान् के ज्ञानी व्यक्तियों की संगति द्वारा इस वृक्ष के उस उद्गम, अर्थात् पूर्ण पुरुषोत्तम भगवान् को खोजना होता है। तब समझ के द्वारा वह क्रमशः यथार्थ के इस मिथ्या प्रतिबिम्ब से अनासक्त हो जाता है, और ज्ञान के द्वारा वह सम्बन्ध को काट सकता है और वास्तव में वास्तविक वृक्ष में स्थित हो सकता है।"
+     },
+     {
+      "type": "p",
+      "text": "इस सन्दर्भ में असंग शब्द अत्यन्त महत्त्वपूर्ण है, क्योंकि विषय-भोग तथा भौतिक प्रकृति पर प्रभुत्व जमाने की आसक्ति अत्यन्त प्रबल है। अतः मनुष्य को प्रामाणिक शास्त्रों पर आधारित आध्यात्मिक विज्ञान की विवेचना द्वारा अनासक्ति सीखनी चाहिए, और उसे उन व्यक्तियों से सुनना चाहिए जो वास्तव में ज्ञानी हैं। भक्तगण की संगति में ऐसी विवेचना के फलस्वरूप मनुष्य पूर्ण पुरुषोत्तम भगवान् तक पहुँचता है। तब सर्वप्रथम उसे यही करना चाहिए कि उनकी शरण ले। उस स्थान का वर्णन यहाँ दिया गया है, जहाँ जाकर कोई इस मिथ्या प्रतिबिम्बित वृक्ष में पुनः नहीं लौटता। पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण ही वह आदि मूल हैं, जिनसे सब कुछ उद्भूत हुआ है। उन पूर्ण पुरुषोत्तम भगवान् की कृपा प्राप्त करने के लिए मनुष्य को केवल शरण लेनी होती है, और यह श्रवण, कीर्तन आदि द्वारा भक्ति सम्पन्न करने का फल है। वे ही इस भौतिक जगत् के विस्तार का कारण हैं। इसे स्वयं भगवान् ने पहले ही समझा दिया है : अहं सर्वस्य प्रभवः। \"मैं सब कुछ का उद्गम हूँ।\""
+     },
+     {
+      "type": "p",
+      "text": "अतः भौतिक जीवन के इस प्रबल वटवृक्ष के बन्धन से बाहर निकलने के लिए मनुष्य को श्रीकृष्ण की शरण लेनी चाहिए। ज्यों ही कोई श्रीकृष्ण की शरण लेता है, वह इस भौतिक विस्तार से स्वतः ही अनासक्त हो जाता है।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/3-4/"
+  },
+  {
+   "id": "bg-15-005",
+   "chapter": 15,
+   "verseStart": 5,
+   "verseEnd": 5,
+   "label": "15.5",
+   "sanskrit": [
+    "निर्मानमोहा जितसङ्गदोषा",
+    "अध्यात्मनित्या विनिवृत्तकामाः ।",
+    "द्वन्द्वैर्विमुक्ताः सुखदुःखसंज्ञैर्-",
+    "गच्छन्त्यमूढाः पदमव्ययं तत् ॥५॥"
+   ],
+   "transliteration": [
+    "nirmāna-mohā jita-saṅga-doṣā",
+    "adhyātma-nityā vinivṛtta-kāmāḥ",
+    "dvandvair vimuktāḥ sukha-duḥkha-saṁjñair",
+    "gacchanty amūḍhāḥ padam avyayaṁ tat"
+   ],
+   "translation": {
+    "en": "One who is free from illusion, false prestige, and false association, who understands the eternal, who is done with material lust and is freed from the duality of happiness and distress, and who knows how to surrender unto the Supreme Person, attains to that eternal kingdom.",
+    "hi": "जो मोह, मिथ्या प्रतिष्ठा तथा मिथ्या संगति से मुक्त है, जो नित्य को समझता है, जो भौतिक काम से रहित है तथा सुख और दुःख के द्वैत से मुक्त है, और जो पूर्ण पुरुष की शरण लेना जानता है, वह उस नित्य राज्य को प्राप्त करता है।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "The surrendering process is described here very nicely. The first qualification is that one should not be deluded by pride. Because the conditioned soul is puffed up, thinking himself the lord of material nature, it is very difficult for him to surrender unto the Supreme Personality of Godhead. One should know by the cultivation of real knowledge that he is not lord of material nature; the Supreme Personality of Godhead is the Lord. When one is free from delusion caused by pride, he can begin the process of surrender. For one who is always expecting some honor in this material world, it is not possible to surrender to the Supreme Person. Pride is due to illusion, for although one comes here, stays for a brief time and then goes away, he has the foolish notion that he is the lord of the world. He thus makes all things complicated, and he is always in trouble. The whole world moves under this impression. People are considering that the land, this earth, belongs to human society, and they have divided the land under the false impression that they are the proprietors. One has to get out of this false notion that human society is the proprietor of this world. When one is freed from such a false notion, he becomes free from all the false associations caused by familial, social, and national affections. These fake associations bind one to this material world. After this stage, one has to develop spiritual knowledge. One has to cultivate knowledge of what is actually his own and what is actually not his own. And, when one has an understanding of things as they are, he becomes free from all dual conceptions such as happiness and distress, pleasure and pain. He becomes full in knowledge; then it is possible for him to surrender to the Supreme Personality of Godhead."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "शरणागति की प्रक्रिया का यहाँ अत्यन्त सुन्दर वर्णन किया गया है। प्रथम योग्यता यह है कि मनुष्य को अहंकार से मोहित नहीं होना चाहिए। चूँकि बद्धजीव अहंकारग्रस्त रहता है, स्वयं को भौतिक प्रकृति का स्वामी मानता है, अतः उसके लिए पूर्ण पुरुषोत्तम भगवान् की शरण लेना अत्यन्त कठिन है। मनुष्य को वास्तविक ज्ञान के अनुशीलन द्वारा यह जान लेना चाहिए कि वह भौतिक प्रकृति का स्वामी नहीं है; पूर्ण पुरुषोत्तम भगवान् ही स्वामी हैं। जब मनुष्य अहंकार से उत्पन्न मोह से मुक्त हो जाता है, तब वह शरणागति की प्रक्रिया आरम्भ कर सकता है। जो इस भौतिक जगत् में सदा किसी सम्मान की प्रत्याशा रखता है, उसके लिए पूर्ण पुरुष की शरण लेना सम्भव नहीं। अहंकार मोह के कारण होता है, क्योंकि यद्यपि मनुष्य यहाँ आता है, थोड़े समय ठहरता है और फिर चला जाता है, तथापि उसकी यह मूर्खतापूर्ण धारणा रहती है कि वह संसार का स्वामी है। इस प्रकार वह सब वस्तुओं को जटिल बना देता है, और सदा संकट में रहता है। समूचा संसार इसी धारणा के अधीन चलता है। लोग यह मानते हैं कि यह भूमि, यह पृथ्वी, मनुष्य-समाज की है, और उन्होंने इस मिथ्या धारणा के अधीन भूमि का विभाजन कर लिया है कि वे ही इसके स्वामी हैं। मनुष्य को इस मिथ्या धारणा से बाहर निकलना होता है कि मनुष्य-समाज इस संसार का स्वामी है। जब मनुष्य ऐसी मिथ्या धारणा से मुक्त हो जाता है, तब वह पारिवारिक, सामाजिक तथा राष्ट्रीय अनुरागों से उत्पन्न सभी मिथ्या संगतियों से मुक्त हो जाता है। ये कूट संगतियाँ मनुष्य को इस भौतिक जगत् से बाँधती हैं। इस अवस्था के पश्चात् मनुष्य को आध्यात्मिक ज्ञान का विकास करना होता है। उसे इस ज्ञान का अनुशीलन करना होता है कि वस्तुतः उसका अपना क्या है और वस्तुतः उसका अपना क्या नहीं है। और जब मनुष्य को वस्तुओं का यथार्थ बोध हो जाता है, तब वह सुख और दुःख, हर्ष और पीड़ा जैसी सभी द्वैत-धारणाओं से मुक्त हो जाता है। वह ज्ञान से परिपूर्ण हो जाता है; तब उसके लिए पूर्ण पुरुषोत्तम भगवान् की शरण लेना सम्भव होता है।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/5/"
+  },
+  {
+   "id": "bg-15-006",
+   "chapter": 15,
+   "verseStart": 6,
+   "verseEnd": 6,
+   "label": "15.6",
+   "sanskrit": [
+    "न तद्भासयते सूर्यो न शशाङ्को न पावकः ।",
+    "यद्गत्वा न निवर्तन्ते तद्धाम परमं मम ॥६॥"
+   ],
+   "transliteration": [
+    "na tad bhāsayate sūryo",
+    "na śaśāṅko na pāvakaḥ",
+    "yad gatvā na nivartante",
+    "tad dhāma paramaṁ mama"
+   ],
+   "translation": {
+    "en": "That abode of Mine is not illumined by the sun or moon, nor by electricity. One who reaches it never returns to this material world.",
+    "hi": "मेरा वह धाम न तो सूर्य अथवा चन्द्रमा से, और न ही विद्युत से प्रकाशित होता है। जो उसे प्राप्त कर लेता है, वह इस भौतिक जगत् में पुनः कभी नहीं लौटता।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "The spiritual world, the abode of the Supreme Personality of Godhead, Kṛṣṇa—which is known as Kṛṣṇaloka, Goloka Vṛndāvana—is described here. In the spiritual sky there is no need of sunshine, moonshine, fire or electricity, because all the planets are self-luminous. We have only one planet in this universe, the sun, which is self-luminous, but all the planets in the spiritual sky are self-luminous. The shining effulgence of all those planets (called Vaikuṇṭhas) constitutes the shining sky known as the <i>brahmajyoti.</i> Actually, the effulgence is emanating from the planet of Kṛṣṇa, Goloka Vṛndāvana. Part of that shining effulgence is covered by the <i>mahat-tattva,</i> the material world. Other than this, the major portion of that shining sky is full of spiritual planets, which are called Vaikuṇṭhas, chief of which is Goloka Vṛndāvana."
+     },
+     {
+      "type": "p",
+      "text": "As long as a living entity is in this dark material world, he is in conditional life, but as soon as he reaches the spiritual sky, by cutting through the false, perverted tree of this material world, he becomes liberated. Then there is no chance of his coming back here. In his conditional life, the living entity considers himself to be the lord of this material world, but in his liberated state he enters into the spiritual kingdom and becomes the associate of the Supreme Lord. There he enjoys eternal bliss, eternal life, and full knowledge."
+     },
+     {
+      "type": "p",
+      "text": "One should be captivated by this information. He should desire to transfer himself to that eternal world and extricate himself from this false reflection of reality. For one who is too much attached to this material world, it is very difficult to cut that attachment, but if he takes to Kṛṣṇa consciousness, there is a chance of gradually becoming detached. One has to associate himself with devotees, those who are in Kṛṣṇa consciousness. One should search out a society dedicated to Kṛṣṇa consciousness and learn how to discharge devotional service. In this way he can cut off his attachment to the material world. One cannot become detached from the attraction of the material world simply by dressing himself in saffron cloth. He must become attached to the devotional service of the Lord. Therefore one should take it very seriously that devotional service as described in the Twelfth Chapter is the only way to get out of this false representation of the real tree. In Chapter Fourteen the contamination of all kinds of processes by material nature is described. Only devotional service is described as purely transcendental."
+     },
+     {
+      "type": "p",
+      "text": "The words <i>paramaṁ mama</i> are very important here. Actually every nook and corner is the property of the Supreme Lord, but the spiritual world is <i>paramam,</i> full of six opulences. In the <i>Upaniṣads</i> it is also confirmed that in the spiritual world there is no need of sunshine or moonshine, for the whole spiritual sky is illuminated by the internal potency of the Supreme Lord. That supreme abode can be achieved only by surrender and by no other means."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण के धाम—आध्यात्मिक जगत्—का यहाँ वर्णन किया गया है, जो कृष्णलोक, गोलोक वृन्दावन के नाम से विख्यात है। आध्यात्मिक आकाश में सूर्य के प्रकाश, चन्द्रमा के प्रकाश, अग्नि अथवा विद्युत की कोई आवश्यकता नहीं, क्योंकि वहाँ सभी लोक स्वयं-प्रकाशित हैं। इस ब्रह्माण्ड में हमारे पास केवल एक ही स्वयं-प्रकाशित लोक है, सूर्य, किन्तु आध्यात्मिक आकाश के सभी लोक स्वयं-प्रकाशित हैं। उन समस्त लोकों (जो वैकुण्ठ कहलाते हैं) का देदीप्यमान तेज ही वह दीप्तिमान आकाश बनाता है, जो ब्रह्मज्योति के नाम से विख्यात है। वस्तुतः यह तेज श्रीकृष्ण के लोक, गोलोक वृन्दावन से उद्भूत होता है। उस दीप्तिमान तेज का एक अंश महत्-तत्त्व, अर्थात् भौतिक जगत् से आच्छादित है। इसके अतिरिक्त, उस दीप्तिमान आकाश का अधिकांश भाग आध्यात्मिक लोकों से परिपूर्ण है, जो वैकुण्ठ कहलाते हैं, जिनमें प्रमुख गोलोक वृन्दावन है।"
+     },
+     {
+      "type": "p",
+      "text": "जब तक जीव इस अन्धकारमय भौतिक जगत् में है, तब तक वह बद्ध जीवन में है, किन्तु ज्यों ही वह इस भौतिक जगत् के मिथ्या, विकृत वृक्ष को काटकर आध्यात्मिक आकाश को प्राप्त करता है, वह मुक्त हो जाता है। तब उसके यहाँ पुनः लौटने की कोई सम्भावना नहीं रहती। अपने बद्ध जीवन में जीव स्वयं को इस भौतिक जगत् का स्वामी मानता है, किन्तु अपनी मुक्त अवस्था में वह आध्यात्मिक राज्य में प्रवेश करता है और परमेश्वर का पार्षद बन जाता है। वहाँ वह नित्य आनन्द, नित्य जीवन तथा पूर्ण ज्ञान का भोग करता है।"
+     },
+     {
+      "type": "p",
+      "text": "मनुष्य को इस जानकारी से मुग्ध हो जाना चाहिए। उसे यह इच्छा करनी चाहिए कि वह स्वयं को उस नित्य जगत् में स्थानान्तरित कर ले और यथार्थ के इस मिथ्या प्रतिबिम्ब से अपने को निकाल ले। जो इस भौतिक जगत् से अत्यधिक आसक्त है, उसके लिए उस आसक्ति को काटना अत्यन्त कठिन है, किन्तु यदि वह कृष्णभावनामृत को अपना ले, तो क्रमशः अनासक्त होने की सम्भावना है। मनुष्य को भक्तगण की, अर्थात् उन व्यक्तियों की संगति करनी चाहिए जो कृष्णभावनामृत में स्थित हैं। मनुष्य को कृष्णभावनामृत को समर्पित किसी समाज को खोजना चाहिए और यह सीखना चाहिए कि भक्ति कैसे सम्पन्न की जाए। इस प्रकार वह इस भौतिक जगत् के प्रति अपनी आसक्ति को काट सकता है। मनुष्य केवल गैरिक वस्त्र धारण करके भौतिक जगत् के आकर्षण से अनासक्त नहीं हो सकता। उसे भगवान् की भक्ति में आसक्त होना ही होगा। अतः मनुष्य को इसे अत्यन्त गम्भीरता से लेना चाहिए कि बारहवें अध्याय में वर्णित भक्ति ही वास्तविक वृक्ष के इस मिथ्या प्रतिरूप से बाहर निकलने का एकमात्र मार्ग है। चौदहवें अध्याय में भौतिक प्रकृति द्वारा सभी प्रकार की प्रक्रियाओं के संदूषण का वर्णन किया गया है। केवल भक्ति को ही विशुद्ध रूप से दिव्य बताया गया है।"
+     },
+     {
+      "type": "p",
+      "text": "यहाँ परमं मम शब्द अत्यन्त महत्त्वपूर्ण हैं। वस्तुतः प्रत्येक कोना-कोना परमेश्वर की सम्पत्ति है, किन्तु आध्यात्मिक जगत् परमम् है, छह ऐश्वर्यों से परिपूर्ण। उपनिषदों में भी इसकी पुष्टि होती है कि आध्यात्मिक जगत् में सूर्य के प्रकाश अथवा चन्द्रमा के प्रकाश की कोई आवश्यकता नहीं, क्योंकि समूचा आध्यात्मिक आकाश परमेश्वर की अन्तरंगा शक्ति से प्रकाशित होता है। वह परम धाम केवल शरणागति से ही प्राप्त किया जा सकता है, अन्य किसी साधन से नहीं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/6/"
+  },
+  {
+   "id": "bg-15-007",
+   "chapter": 15,
+   "verseStart": 7,
+   "verseEnd": 7,
+   "label": "15.7",
+   "sanskrit": [
+    "ममैवांशो जीवलोके जीवभूतः सनातनः ।",
+    "मनःषष्ठानीन्द्रियाणि प्रकृतिस्थानि कर्षति ॥७॥"
+   ],
+   "transliteration": [
+    "mamaivāṁśo jīva-loke",
+    "jīva-bhūtaḥ sanātanaḥ",
+    "manaḥ-ṣaṣṭhānīndriyāṇi",
+    "prakṛti-sthāni karṣati"
+   ],
+   "translation": {
+    "en": "The living entities in this conditioned world are My eternal, fragmental parts. Due to conditioned life, they are struggling very hard with the six senses, which include the mind.",
+    "hi": "इस बद्ध जगत् के जीव मेरे नित्य खण्डांश हैं। बद्ध जीवन के कारण वे मन सहित छह इन्द्रियों के साथ अत्यन्त कठोर संघर्ष कर रहे हैं।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "In this verse the identity of the living being is clearly given. The living entity is the fragmental part and parcel of the Supreme Lord—eternally. It is not that he assumes individuality in his conditional life and in his liberated state becomes one with the Supreme Lord. He is eternally fragmented. It is clearly said, <i>sanātanaḥ.</i> According to the Vedic version, the Supreme Lord manifests and expands Himself in innumerable expansions, of which the primary expansions are called <i>Viṣṇu-tattva,</i> and the secondary expansions are called the living entities. In other words, the <i>Viṣṇu-tattva</i> is the personal expansion, and the living entities are separated expansions. By His personal expansion, He is manifested in various forms like Lord Rāma, Nṛsiṁhadeva, Viṣṇumūrti and all the predominating Deities in the Vaikuṇṭha planets. The separated expansions, the living entities, are eternally servitors. The personal expansions of the Supreme Personality of Godhead, the individual identities of the Godhead, are always present. Similarly, the separated expansions of living entities have their identities. As fragmental parts and parcels of the Supreme Lord, the living entities have also fragmental qualities, of which independence is one. Every living entity has an individual soul, his personal individuality and a minute form of independence. By misuse of that independence, one becomes a conditioned soul, and by proper use of independence he is always liberated. In either case, he is qualititatively eternal, as the Supreme Lord is. In his liberated state he is freed from this material condition, and he is under the engagement of transcendental service unto the Lord; in his conditioned life he is dominated by the material modes of nature, and he forgets the transcendental loving service of the Lord. As a result, he has to struggle very hard to maintain his existence in the material world."
+     },
+     {
+      "type": "p",
+      "text": "The living entities, not only the human beings and the cats and dogs, but even the greater controllers of the material world—Brahmā, Lord Śiva, and even Viṣṇu—are all parts and parcels of the Supreme Lord. They are all eternal, not temporary manifestations. The word <i>karṣati</i> (struggling or grappling hard) is very significant. The conditioned soul is bound up, as though shackled by iron chains. He is bound up by the false ego, and the mind is the chief agent which is driving him in this material existence. When the mind is in the mode of goodness, his activities are good; when the mind is in the mode of passion, his activities are troublesome; and when the mind is in the mode of ignorance, he travels in the lower species of life. It is clear, however, in this verse, that the conditioned soul is covered by the material body, with the mind and the senses, and when he is liberated this material covering perishes, but his spiritual body manifests in its individual capacity. The following information is there in the <i>Mādhyandi-nāyana-śruti: sa vā eṣa brahma-niṣṭha idaṁ sarīraṁ marttyam atisṛjya brahmābhisampadya brahmaṇā paśyati brahmaṇā śṛnoti brahmaṇaivedaṁ sarvam anubhavati.</i> It is stated here that when a living entity gives up this material embodiment and enters into the spiritual world, he revives his spiritual body, and in his spiritual body he can see the Supreme Personality of Godhead face to face. He can hear and speak to Him face to face, and he can understand the Supreme Personality as He is. In <i>smṛti</i> also it is understood that in the spiritual planets everyone lives in bodies featured like the Supreme Personality of Godhead's. As far as bodily construction is concerned, there is no difference between the part and parcel living entities and the expansions of <i>Viṣṇumūrti.</i> In other words, at liberation the living entity gets a spiritual body by the grace of the Supreme Personality of Godhead."
+     },
+     {
+      "type": "p",
+      "text": "The word <i>mamaivāṁśaḥ</i> (fragmental parts and parcels of the Supreme Lord) is also very significant. The fragmental portion of the Supreme Lord is not like some material broken part. We have already understood in the Second Chapter that the spirit cannot be cut into pieces. This fragment is not materially conceived. It is not like matter which can be cut into pieces and joined together again. That conception is not applicable here because the Sanskrit word <i>sanātana</i> (eternal) is used. The fragmental portion is eternal. It is also stated in the beginning of the Second Chapter that (<i>dehino 'smin yathā</i>) in each and every individual body, the fragmental portion of the Supreme Lord is present. That fragmental portion, when liberated from the bodily entanglement, revives its original spiritual body in the spiritual sky in a spiritual planet and enjoys association with the Supreme Lord. It is, however, understood here that the living entity, being the fragmental part and parcel of the Supreme Lord, is qualitatively one, just as the parts and parcels of gold are also gold."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "इस श्लोक में जीव की पहचान स्पष्ट रूप से दी गई है। जीव परमेश्वर का नित्य खण्डांश है—नित्यरूप से। ऐसा नहीं है कि वह अपने बद्ध जीवन में व्यक्तित्व धारण करता है और अपनी मुक्त अवस्था में परमेश्वर के साथ एक हो जाता है। वह नित्य रूप से खण्डित है। स्पष्ट रूप से कहा गया है, सनातनः। वैदिक मत के अनुसार परमेश्वर असंख्य विस्तारों में स्वयं को प्रकट तथा विस्तृत करते हैं, जिनमें प्रमुख विस्तार विष्णु-तत्त्व कहलाते हैं, और गौण विस्तार जीव कहलाते हैं। दूसरे शब्दों में, विष्णु-तत्त्व उनका स्वांश विस्तार है, और जीव विभिन्नांश विस्तार हैं। अपने स्वांश विस्तार से वे विविध रूपों में प्रकट होते हैं, जैसे भगवान् श्रीराम, नृसिंहदेव, विष्णुमूर्ति तथा वैकुण्ठ लोकों के सभी अधिष्ठाता देव। विभिन्नांश विस्तार, अर्थात् जीव, नित्य रूप से सेवक हैं। पूर्ण पुरुषोत्तम भगवान् के स्वांश विस्तार, अर्थात् भगवान् की व्यष्टि पहचानें, सदा विद्यमान रहती हैं। इसी प्रकार, जीवों के विभिन्नांश विस्तारों की भी अपनी पहचानें हैं। परमेश्वर के खण्डांश होने के कारण जीवों में भी खण्डांश-गुण हैं, जिनमें स्वतन्त्रता एक है। प्रत्येक जीव में एक व्यष्टि आत्मा, उसका वैयक्तिक व्यक्तित्व तथा स्वतन्त्रता का एक सूक्ष्म रूप है। उस स्वतन्त्रता के दुरुपयोग से मनुष्य बद्धजीव बन जाता है, और स्वतन्त्रता के उचित उपयोग से वह सदा मुक्त रहता है। दोनों ही दशाओं में वह गुणात्मक रूप से नित्य है, जैसे परमेश्वर हैं। अपनी मुक्त अवस्था में वह इस भौतिक दशा से मुक्त रहता है, और वह भगवान् की दिव्य सेवा में संलग्न रहता है; अपने बद्ध जीवन में वह भौतिक प्रकृति के गुणों से अभिभूत रहता है, और वह भगवान् की दिव्य प्रेममयी सेवा को भूल जाता है। फलस्वरूप उसे भौतिक जगत् में अपने अस्तित्व को बनाए रखने के लिए अत्यन्त कठोर संघर्ष करना पड़ता है।"
+     },
+     {
+      "type": "p",
+      "text": "जीव—केवल मनुष्य तथा बिल्लियाँ और कुत्ते ही नहीं, अपितु भौतिक जगत् के बड़े नियन्ता—ब्रह्मा, शिवजी, और यहाँ तक कि विष्णु भी—सभी परमेश्वर के खण्डांश हैं। ये सभी नित्य हैं, क्षणिक प्रकटीकरण नहीं। कर्षति (कठोर संघर्ष अथवा जूझना) शब्द अत्यन्त सार्थक है। बद्धजीव बँधा हुआ है, मानो लौह श्रृंखलाओं से जकड़ा हो। वह मिथ्या अहंकार से बँधा हुआ है, और मन ही वह प्रमुख कारक है जो इस भौतिक अस्तित्व में उसे संचालित करता है। जब मन सत्त्वगुण में होता है, तब उसके कर्म शुभ होते हैं; जब मन रजोगुण में होता है, तब उसके कर्म क्लेशकर होते हैं; और जब मन तमोगुण में होता है, तब वह जीवन की निम्न योनियों में भ्रमण करता है। तथापि इस श्लोक में यह स्पष्ट है कि बद्धजीव भौतिक शरीर से, मन तथा इन्द्रियों सहित, आच्छादित है, और जब वह मुक्त होता है, तब यह भौतिक आवरण नष्ट हो जाता है, किन्तु उसका आध्यात्मिक शरीर अपने व्यष्टि रूप में प्रकट हो जाता है। माध्यन्दिनायन-श्रुति में निम्नलिखित जानकारी दी गई है : स वा एष ब्रह्म-निष्ठ इदं शरीरं मर्त्यम् अतिसृज्य ब्रह्माभिसम्पद्य ब्रह्मणा पश्यति ब्रह्मणा शृणोति ब्रह्मणैवेदं सर्वम् अनुभवति। यहाँ कहा गया है कि जब जीव इस भौतिक शरीर का त्याग करता है और आध्यात्मिक जगत् में प्रवेश करता है, तब वह अपने आध्यात्मिक शरीर को पुनः प्राप्त कर लेता है, और अपने आध्यात्मिक शरीर में वह पूर्ण पुरुषोत्तम भगवान् को आमने-सामने देख सकता है। वह उन्हें आमने-सामने सुन तथा उनसे बात कर सकता है, और पूर्ण पुरुष को उनके यथार्थ रूप में समझ सकता है। स्मृति में भी यह बताया गया है कि आध्यात्मिक लोकों में प्रत्येक जीव पूर्ण पुरुषोत्तम भगवान् के समान आकृति वाले शरीरों में निवास करता है। जहाँ तक शरीर की रचना का प्रश्न है, खण्डांश जीवों तथा विष्णुमूर्ति के विस्तारों में कोई भेद नहीं। दूसरे शब्दों में, मुक्ति के समय जीव पूर्ण पुरुषोत्तम भगवान् की कृपा से एक आध्यात्मिक शरीर प्राप्त करता है।"
+     },
+     {
+      "type": "p",
+      "text": "ममैवांशः (परमेश्वर के खण्डांश) शब्द भी अत्यन्त सार्थक है। परमेश्वर का खण्डांश किसी भौतिक टूटे हुए भाग के समान नहीं है। हम द्वितीय अध्याय में पहले ही समझ चुके हैं कि आत्मा के टुकड़े नहीं किए जा सकते। यह खण्ड भौतिक रूप से परिकल्पित नहीं है। यह उस पदार्थ के समान नहीं है जिसके टुकड़े किए जा सकते हैं और जिन्हें पुनः जोड़ा जा सकता है। वह धारणा यहाँ लागू नहीं होती, क्योंकि संस्कृत शब्द सनातन (नित्य) प्रयुक्त हुआ है। खण्डांश नित्य है। द्वितीय अध्याय के आरम्भ में भी यह कहा गया है कि (देहिनोऽस्मिन् यथा) प्रत्येक व्यष्टि शरीर में परमेश्वर का खण्डांश विद्यमान है। वह खण्डांश, जब शारीरिक बन्धन से मुक्त होता है, तब आध्यात्मिक आकाश में किसी आध्यात्मिक लोक पर अपने मूल आध्यात्मिक शरीर को पुनः प्राप्त कर लेता है और परमेश्वर की संगति का भोग करता है। तथापि यहाँ यह समझा जाता है कि जीव, परमेश्वर का खण्डांश होने के कारण, गुणात्मक रूप से एक है, ठीक जैसे स्वर्ण के खण्डांश भी स्वर्ण ही होते हैं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/7/"
+  },
+  {
+   "id": "bg-15-008",
+   "chapter": 15,
+   "verseStart": 8,
+   "verseEnd": 8,
+   "label": "15.8",
+   "sanskrit": [
+    "शरीरं यदवाप्नोति यच्चाप्युत्क्रामतीश्वरः ।",
+    "गृहीत्वैतानि संयाति वायुर्गन्धानिवाशयात् ॥८॥"
+   ],
+   "transliteration": [
+    "śarīraṁ yad avāpnoti",
+    "yac cāpy utkrāmatīśvaraḥ",
+    "gṛhītvaitāni saṁyāti",
+    "vāyur gandhān ivāśayāt"
+   ],
+   "translation": {
+    "en": "The living entity in the material world carries his different conceptions of life from one body to another as the air carries aromas.",
+    "hi": "भौतिक जगत् में जीव अपनी जीवन की विभिन्न धारणाओं को एक शरीर से दूसरे शरीर में उसी प्रकार ले जाता है, जैसे वायु सुगन्ध को ले जाती है।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "Here the living entity is described as <i>īśvara,</i> the controller of his own body. If he likes, he can change his body to a higher grade, and if he likes he can move to a lower class. Minute independence is there. The change his body undergoes depends upon him. At the time of death, the consciousness he has created will carry him on to the next type of body. If he has made his consciousness like that of a cat or dog, he is sure to change to a cat's or dog's body. And, if he has fixed his consciousness on godly qualities, he will change into the form of a demigod. And, if he is in Kṛṣṇa consciousness, he will be transferred to Kṛṣṇaloka in the spiritual world and will associate with Kṛṣṇa. It is a false claim that after the annihilation of this body everything is finished. The individual soul is transmigrating from one body to another, and his present body and present activities are the background of his next body. One gets a different body according to <i>karma,</i> and he has to quit this body in due course. It is stated here that the subtle body, which carries the conception of the next body, develops another body in the next life. This process of transmigrating from one body to another and struggling while in the body is called <i>karṣati</i> or struggle for existence."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "यहाँ जीव को ईश्वर, अर्थात् अपने शरीर का नियन्ता बताया गया है। यदि वह चाहे, तो अपने शरीर को उच्चतर श्रेणी में बदल सकता है, और यदि वह चाहे, तो निम्नतर श्रेणी में जा सकता है। सूक्ष्म स्वतन्त्रता वहाँ है। उसका शरीर जो परिवर्तन झेलता है, वह उसी पर निर्भर है। मृत्यु के समय उसने जो चेतना निर्मित की है, वही उसे अगले प्रकार के शरीर तक ले जाएगी। यदि उसने अपनी चेतना बिल्ली अथवा कुत्ते के समान बना ली है, तो वह निश्चय ही बिल्ली अथवा कुत्ते के शरीर में बदल जाएगा। और यदि उसने अपनी चेतना दिव्य गुणों पर स्थिर कर ली है, तो वह देवता के रूप में बदल जाएगा। और यदि वह कृष्णभावनामृत में है, तो वह आध्यात्मिक जगत् में कृष्णलोक को स्थानान्तरित कर दिया जाएगा और श्रीकृष्ण की संगति करेगा। यह मिथ्या दावा है कि इस शरीर के विनाश के पश्चात् सब कुछ समाप्त हो जाता है। जीवात्मा एक शरीर से दूसरे शरीर में देहान्तरण करती रहती है, और उसका वर्तमान शरीर तथा वर्तमान कर्म ही उसके अगले शरीर की पृष्ठभूमि हैं। मनुष्य कर्म के अनुसार भिन्न शरीर प्राप्त करता है, और उसे यथासमय इस शरीर का त्याग करना ही होता है। यहाँ कहा गया है कि सूक्ष्म शरीर, जो अगले शरीर की धारणा को धारण करता है, अगले जीवन में दूसरे शरीर का विकास करता है। एक शरीर से दूसरे शरीर में देहान्तरण करने तथा शरीर में रहते हुए संघर्ष करने की यह प्रक्रिया कर्षति, अर्थात् अस्तित्व के लिए संघर्ष कहलाती है।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/8/"
+  },
+  {
+   "id": "bg-15-009",
+   "chapter": 15,
+   "verseStart": 9,
+   "verseEnd": 9,
+   "label": "15.9",
+   "sanskrit": [
+    "श्रोत्रं चक्षुः स्पर्शनं च रसनं घ्राणमेव च ।",
+    "अधिष्ठाय मनश्चायं विषयानुपसेवते ॥९॥"
+   ],
+   "transliteration": [
+    "śrotraṁ cakṣuḥ sparśanaṁ ca",
+    "rasanaṁ ghrāṇam eva ca",
+    "adhiṣṭhāya manaś cāyaṁ",
+    "viṣayān upasevate"
+   ],
+   "translation": {
+    "en": "The living entity, thus taking another gross body, obtains a certain type of ear, tongue, and nose and sense of touch, which are grouped about the mind. He thus enjoys a particular set of sense objects.",
+    "hi": "इस प्रकार जीव दूसरा स्थूल शरीर ग्रहण करके एक विशेष प्रकार के कान, जिह्वा, नाक तथा स्पर्शेन्द्रिय प्राप्त करता है, जो मन के चारों ओर समूहबद्ध हैं। इस प्रकार वह विषयों के एक विशेष समूह का भोग करता है।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "In other words, if the living entity adulterates his consciousness with the qualities of cats and dogs, in his next life he gets a cat or dog body and enjoys. Consciousness is originally pure, like water. But if we mix water with a certain color, it changes. Similarly, consciousness is pure, for the spirit soul is pure. But consciousness is changed according to the association of the material qualities. Real consciousness is Kṛṣṇa consciousness. When, therefore, one is situated in Kṛṣṇa consciousness, he is in his pure life. But if his consciousness is adulterated by some type of material mentality, in the next life he gets a corresponding body. He does not necessarily get a human body again; he can get the body of a cat, dog, hog, demigod or one of many other forms, for there are 8,400,000 species."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "दूसरे शब्दों में, यदि जीव अपनी चेतना को बिल्लियों तथा कुत्तों के गुणों से मिश्रित कर लेता है, तो वह अपने अगले जीवन में बिल्ली अथवा कुत्ते का शरीर प्राप्त करके भोग करता है। चेतना मूल रूप से जल के समान शुद्ध होती है। किन्तु यदि हम जल को किसी रंग से मिला दें, तो वह बदल जाता है। इसी प्रकार चेतना शुद्ध है, क्योंकि आत्मा शुद्ध है। किन्तु चेतना भौतिक गुणों की संगति के अनुसार बदल जाती है। वास्तविक चेतना कृष्णभावनामृत है। अतः जब मनुष्य कृष्णभावनामृत में स्थित होता है, तब वह अपने शुद्ध जीवन में होता है। किन्तु यदि उसकी चेतना किसी प्रकार की भौतिक मानसिकता से मिश्रित हो जाती है, तो अगले जीवन में वह तदनुरूप शरीर प्राप्त करता है। आवश्यक नहीं कि वह पुनः मनुष्य शरीर ही प्राप्त करे; वह बिल्ली, कुत्ते, सूअर, देवता अथवा अनेक अन्य रूपों में से किसी एक का शरीर प्राप्त कर सकता है, क्योंकि चौरासी लाख योनियाँ हैं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/9/"
+  },
+  {
+   "id": "bg-15-010",
+   "chapter": 15,
+   "verseStart": 10,
+   "verseEnd": 10,
+   "label": "15.10",
+   "sanskrit": [
+    "उत्क्रामन्तं स्थितं वापि भुञ्जानं वा गुणान्वितम् ।",
+    "विमूढा नानुपश्यन्ति पश्यन्ति ज्ञानचक्षुषः ॥१०॥"
+   ],
+   "transliteration": [
+    "utkrāmantaṁ sthitaṁ vāpi",
+    "bhuñjānaṁ vā guṇānvitam",
+    "vimūḍhā nānupaśyanti",
+    "paśyanti jñāna-cakṣuṣaḥ"
+   ],
+   "translation": {
+    "en": "The foolish cannot understand how a living entity can quit his body, nor can they understand what sort of body he enjoys under the spell of the modes of nature. But one whose eyes are trained in knowledge can see all this.",
+    "hi": "मूर्ख यह नहीं समझ सकते कि जीव अपने शरीर को किस प्रकार छोड़ता है, और न ही वे यह समझ सकते हैं कि वह प्रकृति के गुणों के वश में किस प्रकार के शरीर का भोग करता है। किन्तु जिसके नेत्र ज्ञान में प्रशिक्षित हैं, वह यह सब देख सकता है।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "The word <i>jñāna-cakṣuṣaḥ</i> is very significant. Without knowledge, one cannot understand how a living entity leaves his present body, nor what form of body he is going to take in the next life, nor even why he is living in a particular type of body. This requires a great amount of knowledge understood from <i>Bhagavad-gītā</i> and similar literatures heard from a bona fide spiritual master. One who is trained to perceive all these things is fortunate. Every living entity is quitting his body under certain circumstances; he is living under certain circumstances and enjoying under certain circumstances under the spell of material nature. As a result, he is suffering different kinds of happiness and distress, under the illusion of sense enjoyment. Persons who are everlastingly fooled by lust and desire lose all power of understanding their change of body and their stay in a particular body. They cannot comprehend it. Those who have developed spiritual knowledge, however, can see that the spirit is different from the body and is changing its body and enjoying in different ways. A person in such knowledge can understand how the conditioned living entity is suffering in this material existence. Therefore those who are highly developed in Kṛṣṇa consciousness try their best to give this knowledge to the people in general, for their conditional life is very much troublesome. They should come out of it and be Kṛṣṇa conscious and liberate themselves to transfer to the spiritual world."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "ज्ञान-चक्षुषः शब्द अत्यन्त सार्थक है। ज्ञान के बिना मनुष्य यह नहीं समझ सकता कि जीव अपने वर्तमान शरीर को किस प्रकार छोड़ता है, न ही यह कि वह अगले जीवन में किस रूप का शरीर ग्रहण करने जा रहा है, और न ही यह कि वह किसी विशेष प्रकार के शरीर में क्यों रह रहा है। इसके लिए भगवद्गीता तथा प्रामाणिक आध्यात्मिक गुरु से सुने गए समान साहित्य से प्राप्त बहुत अधिक ज्ञान आवश्यक है। जो इन सब वस्तुओं को अनुभव करने में प्रशिक्षित है, वह सौभाग्यशाली है। प्रत्येक जीव कुछ विशेष परिस्थितियों के अधीन अपना शरीर छोड़ रहा है; वह कुछ विशेष परिस्थितियों के अधीन जीवित है और भौतिक प्रकृति के वश में कुछ विशेष परिस्थितियों के अधीन भोग कर रहा है। फलस्वरूप वह विषय-भोग के मोह में विभिन्न प्रकार के सुख तथा दुःख भोगता है। जो व्यक्ति काम तथा इच्छा से सदा मूर्ख बने रहते हैं, वे अपने शरीर के परिवर्तन तथा किसी विशेष शरीर में अपने निवास को समझने की समस्त शक्ति खो देते हैं। वे इसे समझ नहीं सकते। किन्तु जिन्होंने आध्यात्मिक ज्ञान का विकास किया है, वे देख सकते हैं कि आत्मा शरीर से भिन्न है और अपना शरीर बदल रही है तथा विभिन्न प्रकार से भोग कर रही है। ऐसे ज्ञान में स्थित व्यक्ति समझ सकता है कि बद्धजीव इस भौतिक अस्तित्व में किस प्रकार दुःख भोग रहा है। अतः जो कृष्णभावनामृत में अत्यधिक उन्नत हैं, वे साधारण जनों को यह ज्ञान देने का भरसक प्रयत्न करते हैं, क्योंकि उनका बद्ध जीवन अत्यन्त क्लेशकर है। उन्हें इससे बाहर निकलना चाहिए, कृष्णभावनाभावित होना चाहिए और आध्यात्मिक जगत् को स्थानान्तरित होने के लिए स्वयं को मुक्त करना चाहिए।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/10/"
+  },
+  {
+   "id": "bg-15-011",
+   "chapter": 15,
+   "verseStart": 11,
+   "verseEnd": 11,
+   "label": "15.11",
+   "sanskrit": [
+    "यतन्तो योगिनश्चैनं पश्यन्त्यात्मन्यवस्थितम् ।",
+    "यतन्तोऽप्यकृतात्मानो नैनं पश्यन्त्यचेतसः ॥११॥"
+   ],
+   "transliteration": [
+    "yatanto yoginaś cainaṁ",
+    "paśyanty ātmany avasthitam",
+    "yatanto 'py akṛtātmāno",
+    "nainaṁ paśyanty acetasaḥ"
+   ],
+   "translation": {
+    "en": "The endeavoring transcendentalist, who is situated in self-realization, can see all this clearly. But those who are not situated in self-realization cannot see what is taking place, though they may try to.",
+    "hi": "प्रयत्नशील योगी, जो आत्म-साक्षात्कार में स्थित है, इस सबको स्पष्ट रूप से देख सकता है। किन्तु जो आत्म-साक्षात्कार में स्थित नहीं हैं, वे यह नहीं देख सकते कि क्या घटित हो रहा है, भले ही वे प्रयत्न करें।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "There are many transcendentalists in the path of spiritual self-realization, but one who is not situated in self-realization cannot see how things are changing in the body of the living entity. The word <i>yoginaḥ</i> is significant in this connection. In the present day there are many so-called <i>yogīs,</i> and there are many so-called associations of <i>yogīs,</i> but they are actually blind in the matter of self-realization. They are simply addicted to some sort of gymnastic exercise and are satisfied if the body is well-built and healthy. They have no other information. They are called <i>yatanto 'py akṛtātmānaḥ.</i> Even though they are endeavoring in a so-called <i>yoga</i> system, they are not self-realized. Such people cannot understand the process of the transmigration of the soul. Only those who are actually in the <i>yoga</i> system and have realized the self, the world, and the Supreme Lord, in other words, the <i>bhakti-yogīs,</i> those engaged in pure devotional service in Krsṇa consciousness, can understand how things are taking place."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "आध्यात्मिक आत्म-साक्षात्कार के मार्ग पर अनेक योगी हैं, किन्तु जो आत्म-साक्षात्कार में स्थित नहीं है, वह यह नहीं देख सकता कि जीव के शरीर में वस्तुएँ किस प्रकार बदल रही हैं। इस सन्दर्भ में योगिनः शब्द सार्थक है। आजकल अनेक तथाकथित योगी हैं, और योगियों के अनेक तथाकथित संघ हैं, किन्तु वे आत्म-साक्षात्कार के विषय में वस्तुतः अन्धे हैं। वे केवल किसी प्रकार के व्यायाम के व्यसनी हैं और इसी से सन्तुष्ट हैं कि शरीर सुगठित तथा स्वस्थ है। उनके पास और कोई जानकारी नहीं। वे यतन्तोऽप्यकृतात्मानः कहलाते हैं। यद्यपि वे किसी तथाकथित योग-पद्धति में प्रयत्न कर रहे हैं, तथापि वे आत्म-साक्षात्कारी नहीं हैं। ऐसे लोग आत्मा के देहान्तरण की प्रक्रिया को नहीं समझ सकते। केवल वे ही समझ सकते हैं कि वस्तुएँ किस प्रकार घटित हो रही हैं, जो वास्तव में योग-पद्धति में स्थित हैं और जिन्होंने आत्मा, जगत् तथा परमेश्वर का साक्षात्कार किया है—दूसरे शब्दों में, भक्तियोगी, अर्थात् वे जो कृष्णभावनामृत में विशुद्ध भक्ति में संलग्न हैं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/11/"
+  },
+  {
+   "id": "bg-15-012",
+   "chapter": 15,
+   "verseStart": 12,
+   "verseEnd": 12,
+   "label": "15.12",
+   "sanskrit": [
+    "यदादित्यगतं तेजो जगद्भासयतेऽखिलम् ।",
+    "यच्चन्द्रमसि यच्चाग्नौ तत्तेजो विद्धि मामकम् ॥१२॥"
+   ],
+   "transliteration": [
+    "yad āditya-gataṁ tejo",
+    "jagad bhāsayate 'khilam",
+    "yac candramasi yac cāgnau",
+    "tat tejo viddhi māmakam"
+   ],
+   "translation": {
+    "en": "The splendor of the sun, which dissipates the darkness of this whole world, comes from Me. And the splendor of the moon and the splendor of fire are also from Me.",
+    "hi": "सूर्य का तेज, जो इस समूचे संसार के अन्धकार को दूर करता है, मुझसे आता है। और चन्द्रमा का तेज तथा अग्नि का तेज भी मुझसे ही आता है।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "The unintelligent cannot understand how things are taking place. The beginning of knowledge can be established by understanding what the Lord explains here. Everyone sees the sun, moon, fire and electricity. One should simply try to understand that the splendor of the sun, the splendor of the moon, and the splendor of electricity or fire are coming from the Supreme Personality of Godhead. In such a conception of life, the beginning of Kṛṣṇa consciousness, lies a great deal of advancement for the conditioned soul in this material world. The living entities are essentially the parts and parcels of the Supreme Lord, and He is giving herewith the hint how they can come back to Godhead, back to home. From this verse we can understand that the sun is illuminating the whole solar system. There are different universes and solar systems, and there are different suns, moons and planets also. Sunlight is due to the spiritual effulgence in the spiritual sky of the Supreme Lord. With the rise of the sun, the activities of human beings are set up. They set fire to prepare their foodstuff; they set fire to start the factories, etc. So many things are done with the help of fire. Therefore sunrise, fire and moonlight are so pleasing to the living entities. Without their help no living entity can live. So if one can understand that the light and splendor of the sun, moon and fire are emanating from the Supreme Personality of Godhead, Kṛṣṇa, then one's Kṛṣṇa consciousness will begin. By the moonshine, all the vegetables are nourished. The moonshine is so pleasing that people can easily understand that they are living by the mercy of the Supreme Personality of Godhead Kṛṣṇa. Without His mercy there cannot be sun, without His mercy there cannot be moon, and without His mercy there cannot be fire, and without the help of sun, moon and fire, no one can live. These are some thoughts to provoke Kṛṣṇa consciousness in the conditioned soul."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "अल्पबुद्धि व्यक्ति यह नहीं समझ सकते कि वस्तुएँ किस प्रकार घटित हो रही हैं। भगवान् यहाँ जो समझा रहे हैं, उसे समझकर ज्ञान का आरम्भ किया जा सकता है। प्रत्येक व्यक्ति सूर्य, चन्द्रमा, अग्नि तथा विद्युत को देखता है। मनुष्य को केवल यह समझने का प्रयत्न करना चाहिए कि सूर्य का तेज, चन्द्रमा का तेज तथा विद्युत अथवा अग्नि का तेज पूर्ण पुरुषोत्तम भगवान् से आ रहा है। जीवन की ऐसी धारणा में, अर्थात् कृष्णभावनामृत के आरम्भ में, इस भौतिक जगत् के बद्धजीव के लिए बहुत अधिक उन्नति निहित है। जीव अनिवार्यतः परमेश्वर के खण्डांश हैं, और वे यहाँ यह संकेत दे रहे हैं कि वे किस प्रकार भगवद्धाम को, अपने घर लौट सकते हैं। इस श्लोक से हम समझ सकते हैं कि सूर्य समूचे सौरमण्डल को प्रकाशित कर रहा है। विभिन्न ब्रह्माण्ड तथा सौरमण्डल हैं, और विभिन्न सूर्य, चन्द्रमा तथा लोक भी हैं। सूर्य का प्रकाश परमेश्वर के आध्यात्मिक आकाश में विद्यमान आध्यात्मिक तेज के कारण है। सूर्य के उदय के साथ मनुष्यों के कर्म आरम्भ हो जाते हैं। वे अपना भोजन तैयार करने के लिए अग्नि प्रज्वलित करते हैं; वे कारखाने आरम्भ करने के लिए अग्नि प्रज्वलित करते हैं, आदि। अग्नि की सहायता से अनेक कार्य किए जाते हैं। अतः सूर्योदय, अग्नि तथा चन्द्रमा का प्रकाश जीवों के लिए इतने आनन्ददायक हैं। उनकी सहायता के बिना कोई जीव जीवित नहीं रह सकता। अतः यदि कोई यह समझ ले कि सूर्य, चन्द्रमा तथा अग्नि का प्रकाश तथा तेज पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण से उद्भूत हो रहा है, तो उसका कृष्णभावनामृत आरम्भ हो जाएगा। चन्द्रमा के प्रकाश से समस्त वनस्पतियाँ पोषित होती हैं। चन्द्रमा का प्रकाश इतना आनन्ददायक है कि लोग सरलता से समझ सकते हैं कि वे पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण की कृपा से जीवित हैं। उनकी कृपा के बिना न तो सूर्य हो सकता है, न चन्द्रमा हो सकता है, और न अग्नि हो सकती है, और सूर्य, चन्द्रमा तथा अग्नि की सहायता के बिना कोई जीवित नहीं रह सकता। ये कुछ विचार हैं जो बद्धजीव में कृष्णभावनामृत को जागृत करने के लिए हैं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/12/"
+  },
+  {
+   "id": "bg-15-013",
+   "chapter": 15,
+   "verseStart": 13,
+   "verseEnd": 13,
+   "label": "15.13",
+   "sanskrit": [
+    "गामाविश्य च भूतानि धारयाम्यहमोजसा ।",
+    "पुष्णामि चौषधीः सर्वाः सोमो भूत्वा रसात्मकः ॥१३॥"
+   ],
+   "transliteration": [
+    "gām āviśya ca bhūtāni",
+    "dhārayāmy aham ojasā",
+    "puṣṇāmi cauṣadhīḥ sarvāḥ",
+    "somo bhūtvā rasātmakaḥ"
+   ],
+   "translation": {
+    "en": "I enter into each planet, and by My energy they stay in orbit. I become the moon and thereby supply the juice of life to all vegetables.",
+    "hi": "मैं प्रत्येक लोक में प्रवेश करता हूँ, और मेरी ऊर्जा से वे अपनी कक्षा में बने रहते हैं। मैं चन्द्रमा बनता हूँ और इस प्रकार समस्त वनस्पतियों को जीवन-रस प्रदान करता हूँ।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "It is understood that all the planets are floating in the air only by the energy of the Lord. The Lord enters into every atom, every planet, and every living being. That is discussed in the <i>Brahmā-saṁhitā.</i> It is said there that one plenary portion of the Supreme Personality of Godhead, Paramātmā, enters into the planets, the universe, the living entity, and even into the atom. So due to His entrance, everything is appropriately manifested. When the spirit soul is there, a living man can float on the water, but when the living spark is out of the body and the body is dead, it sinks. Of course when it is decomposed it floats just like straw and other things, but as soon as the man is dead, he at once sinks in the water. Similarly, all these planets are floating in space, and this is due to the entrance of the supreme energy of the Supreme Personality of Godhead. His energy is sustaining each planet, just like a handful of dust. If someone holds a handful of dust, there is no possibility of the dust falling, but if one throws it in the air, it will fall down. Similarly, these planets, which are floating in air, are actually held in the fist of the universal form of the Supreme Lord. By His strength and energy, all moving and unmoving things stay in their place. It is said that because of the Supreme Personality of Godhead, the sun is shining and the planets are steadily moving. Were it not for Him, all the planets would scatter, like dust in air, and perish. Similarly, it is due to the Supreme Personality of Godhead that the moon nourishes all vegetables. Due to the moon's influence, the vegetables become delicious. Without the moonshine, the vegetables can neither grow nor taste succulent. Human society is working, living comfortably and enjoying food due to the supply from the Supreme Lord. Otherwise, mankind could not survive. The word <i>rasātmakaḥ</i> is very significant. Everything becomes palatable by the agency of the Supreme Lord through the influence of the moon."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "यह समझा जाता है कि समस्त लोक केवल भगवान् की ऊर्जा से ही आकाश में तैर रहे हैं। भगवान् प्रत्येक अणु, प्रत्येक लोक तथा प्रत्येक जीव में प्रवेश करते हैं। इसकी विवेचना ब्रह्म-संहिता में की गई है। वहाँ कहा गया है कि पूर्ण पुरुषोत्तम भगवान् का एक पूर्णांश, परमात्मा, लोकों, ब्रह्माण्ड, जीव तथा यहाँ तक कि अणु में भी प्रवेश करते हैं। अतः उनके प्रवेश के कारण ही सब कुछ समुचित रूप से प्रकट होता है। जब आत्मा वहाँ होती है, तब जीवित मनुष्य जल पर तैर सकता है, किन्तु जब जीवन-स्फुलिंग शरीर से बाहर हो जाता है और शरीर मृत हो जाता है, तब वह डूब जाता है। निस्सन्देह, जब वह विघटित हो जाता है, तब वह तिनके तथा अन्य वस्तुओं के समान तैरता है, किन्तु ज्यों ही मनुष्य मृत होता है, वह तुरन्त जल में डूब जाता है। इसी प्रकार, ये समस्त लोक अन्तरिक्ष में तैर रहे हैं, और यह पूर्ण पुरुषोत्तम भगवान् की परम ऊर्जा के प्रवेश के कारण है। उनकी ऊर्जा प्रत्येक लोक को धारण कर रही है, ठीक मुट्ठी भर धूल के समान। यदि कोई मुट्ठी भर धूल पकड़ ले, तो धूल के गिरने की कोई सम्भावना नहीं, किन्तु यदि कोई उसे आकाश में उछाल दे, तो वह नीचे गिर जाएगी। इसी प्रकार, ये लोक, जो आकाश में तैर रहे हैं, वस्तुतः परमेश्वर के विराट रूप की मुट्ठी में थमे हुए हैं। उनकी शक्ति तथा ऊर्जा से समस्त चर तथा अचर वस्तुएँ अपने स्थान पर बनी रहती हैं। कहा जाता है कि पूर्ण पुरुषोत्तम भगवान् के कारण ही सूर्य प्रकाशित हो रहा है और लोक स्थिर रूप से गतिमान हैं। यदि वे न होते, तो समस्त लोक आकाश में धूल के समान बिखर जाते और नष्ट हो जाते। इसी प्रकार, यह पूर्ण पुरुषोत्तम भगवान् के कारण है कि चन्द्रमा समस्त वनस्पतियों को पोषित करता है। चन्द्रमा के प्रभाव के कारण वनस्पतियाँ स्वादिष्ट हो जाती हैं। चन्द्रमा के प्रकाश के बिना वनस्पतियाँ न तो उग सकती हैं और न ही रसमय स्वाद वाली हो सकती हैं। मनुष्य-समाज परमेश्वर से प्राप्त आपूर्ति के कारण कार्य कर रहा है, सुखपूर्वक जी रहा है तथा भोजन का भोग कर रहा है। अन्यथा मानवजाति जीवित न रह पाती। रसात्मकः शब्द अत्यन्त सार्थक है। प्रत्येक वस्तु चन्द्रमा के प्रभाव द्वारा परमेश्वर के माध्यम से स्वादिष्ट हो जाती है।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/13/"
+  },
+  {
+   "id": "bg-15-014",
+   "chapter": 15,
+   "verseStart": 14,
+   "verseEnd": 14,
+   "label": "15.14",
+   "sanskrit": [
+    "अहं वैश्वानरो भूत्वा प्राणिनां देहमाश्रितः ।",
+    "प्राणापानसमायुक्तः पचाम्यन्नं चतुर्विधम् ॥१४॥"
+   ],
+   "transliteration": [
+    "ahaṁ vaiśvānaro bhūtvā",
+    "prāṇināṁ deham āśritaḥ",
+    "prāṇāpāna-samāyuktaḥ",
+    "pacāmy annaṁ catur-vidham"
+   ],
+   "translation": {
+    "en": "I am the fire of digestion in every living body, and I am the air of life, outgoing and incoming, by which I digest the four kinds of foodstuff.",
+    "hi": "मैं प्रत्येक जीवित शरीर में पाचन की अग्नि हूँ, और मैं प्राण-वायु हूँ, बहिर्गामी तथा अन्तर्गामी, जिसके द्वारा मैं चार प्रकार के भोजन को पचाता हूँ।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "According to <i>Āyur-vedic śāstra,</i> we understand that there is a fire in the stomach which digests all food sent there. When the fire is not blazing, there is no hunger, and when the fire is in order, we become hungry. Sometimes when the fire is not going nicely, treatment is required. In any case, this fire is representative of the Supreme Personality of Godhead. Vedic <i>mantras</i> also confirm that the Supreme Lord or Brahman is situated in the form of fire within the stomach and is digesting all kinds of foodstuff. Therefore since He is helping the digestion of all kinds of foodstuff, the living entity is not independent in the eating process. Unless the Supreme Lord helps him in digesting, there is no possibility of eating. He thus produces and digests foodstuff, and, by His grace, we are enjoying life. In the <i>Vedānta-sūtra</i> this is also confirmed: <i>śabdādibhyo 'ntaḥ pratiṣṭhānāc ca.</i> The Lord is situated within sound and within the body, within the air and even within the stomach as the digestive force. There are four kinds of foodstuff: some are swallowed, some are chewed, some are licked up, and some are sucked, and He is the digestive force for all of them."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "आयुर्वेदिक शास्त्र के अनुसार हम समझते हैं कि उदर में एक अग्नि है, जो वहाँ भेजे गए समस्त भोजन को पचाती है। जब अग्नि प्रज्वलित नहीं होती, तब भूख नहीं लगती, और जब अग्नि ठीक रहती है, तब हमें भूख लगती है। कभी जब अग्नि भली-भाँति नहीं जलती, तब उपचार की आवश्यकता होती है। किसी भी दशा में, यह अग्नि पूर्ण पुरुषोत्तम भगवान् की प्रतिनिधि है। वैदिक मन्त्र भी इसकी पुष्टि करते हैं कि परमेश्वर अथवा ब्रह्म उदर के भीतर अग्नि के रूप में स्थित हैं और समस्त प्रकार के भोजन को पचा रहे हैं। अतः चूँकि वे समस्त प्रकार के भोजन के पाचन में सहायता कर रहे हैं, अतः जीव भोजन की प्रक्रिया में स्वतन्त्र नहीं है। जब तक परमेश्वर पाचन में उसकी सहायता न करें, तब तक भोजन की कोई सम्भावना नहीं। इस प्रकार वे भोजन का उत्पादन तथा पाचन करते हैं, और उनकी कृपा से हम जीवन का भोग कर रहे हैं। वेदान्त-सूत्र में भी इसकी पुष्टि होती है : शब्दादिभ्योऽन्तः प्रतिष्ठानाच्च। भगवान् ध्वनि के भीतर तथा शरीर के भीतर, वायु के भीतर तथा यहाँ तक कि उदर के भीतर पाचक शक्ति के रूप में स्थित हैं। चार प्रकार के भोजन होते हैं : कुछ निगले जाते हैं, कुछ चबाए जाते हैं, कुछ चाटे जाते हैं, और कुछ चूसे जाते हैं, और वे ही इन सबकी पाचक शक्ति हैं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/14/"
+  },
+  {
+   "id": "bg-15-015",
+   "chapter": 15,
+   "verseStart": 15,
+   "verseEnd": 15,
+   "label": "15.15",
+   "sanskrit": [
+    "सर्वस्य चाहं हृदि सन्निविष्टो",
+    "मत्तः स्मृतिर्ज्ञानमपोहनञ्च ।",
+    "वेदैश्च सर्वैरहमेव वेद्यो",
+    "वेदान्तकृद्वेदविदेव चाहम् ॥१५॥"
+   ],
+   "transliteration": [
+    "sarvasya cāhaṁ hṛdi sanniviṣṭo",
+    "mattaḥ smṛtir jñānam apohanaṁ ca",
+    "vedaiś ca sarvair aham eva vedyo",
+    "vedānta-kṛd veda-vid eva cāham"
+   ],
+   "translation": {
+    "en": "I am seated in everyone's heart, and from Me come remembrance, knowledge and forgetfulness. By all the Vedas am I to be known; indeed I am the compiler of Vedānta, and I am the knower of the Vedas.",
+    "hi": "मैं प्रत्येक के हृदय में स्थित हूँ, और मुझसे ही स्मरण, ज्ञान तथा विस्मृति आते हैं। समस्त वेदों के द्वारा मैं ही जानने योग्य हूँ; वस्तुतः मैं ही वेदान्त का संकलनकर्ता हूँ, और मैं ही वेदों का ज्ञाता हूँ।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "The Supreme Lord is situated as Paramātmā in everyone's heart, and it is from Him that all activities are initiated. The living entity forgets everything of his past life, but he has to act according to the direction of the Supreme Lord, who is witness to all his work. Therefore he begins his work according to his past deeds. Required knowledge is supplied to him, and remembrance is given to him, and he forgets, also, about his past life. Thus, the Lord is not only all-pervading; He is also localized in every individual heart. He awards the different fruitive results. He is not only worshipable as the impersonal Brahman, the Supreme Personality of Godhead, and the localized Paramātmā, but as the form of the incarnation of the <i>Vedas</i> as well. The <i>Vedas</i> give the right direction to the people so that they can properly mold their lives and come back to Godhead, back to home. The <i>Vedas</i> offer knowledge of the Supreme Personality of Godhead, Kṛṣṇa, and Kṛṣṇa in His incarnation as Vyāsadeva is the compiler of the <i>Vedānta-sūtra.</i> The commentation on the <i>Vedānta-sūtra</i> by Vyāsadeva in the <i>Śrīmad-Bhāgavatam</i> gives the real understanding of <i>Vedānta-sūtra.</i> The Supreme Lord is so full that for the deliverance of the conditioned soul He is the supplier and digester of foodstuff, the witness of his activity, the giver of knowledge in the form of <i>Vedas</i> and as the Supreme Personality of Godhead, Śrī Kṛṣṇa, the teacher of the <i>Bhagavad-gītā.</i> He is worshipable by the conditioned soul. Thus God is all-good; God is all-merciful."
+     },
+     {
+      "type": "p",
+      "text": "<i>Antaḥpraviṣṭaḥ śāstā janānām.</i> The living entity forgets as soon as he quits his present body, but he begins his work again, initiated by the Supreme Lord. Although he forgets, the Lord gives him the intelligence to renew his work where he ended his last life. So not only does a living entity enjoy or suffer in this world according to the dictation from the Supreme Lord situated locally in the heart, but he receives the opportunity to understand <i>Vedas</i> from Him. If one is serious to understand the Vedic knowledge, then Kṛṣṇa gives the required intelligence. Why does He present the Vedic knowledge for understanding? Because a living entity individually needs to understand Kṛṣṇa. Vedic literature confirms this: <i>yo 'sau sarvair vedair gīyate.</i> In all Vedic literature, beginning from the four <i>Vedas, Vedānta-sūtra</i> and the <i>Upaniṣads</i> and <i>Purāṇas,</i> the glories of the Supreme Lord are celebrated. By performing Vedic rituals, discussing the Vedic philosophy and worshiping the Lord in devotional service, He is attained. Therefore the purpose of the <i>Vedas</i> is to understand Kṛṣṇa. The <i>Vedas</i> give us direction to understand Kṛṣṇa and the process of understanding. The ultimate goal is the Supreme Personality of Godhead. <i>Vedānta-sūtra</i> confirms this in the following words: <i>tat tu samanvayāt.</i> One can attain perfection by understanding Vedic literature, and one can understand his relationship with the Supreme Personality of Godhead by performing the different processes. Thus one can approach Him and at the end attain the supreme goal, who is no other than the Supreme Personality of Godhead. In this verse, however, the purpose of the <i>Vedas,</i> the understanding of the <i>Vedas</i> and the goal of <i>Vedas</i> are clearly defined."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "परमेश्वर परमात्मा के रूप में प्रत्येक के हृदय में स्थित हैं, और उन्हीं से समस्त कर्म आरम्भ होते हैं। जीव अपने पूर्व जीवन की सब बातें भूल जाता है, किन्तु उसे परमेश्वर के निर्देशानुसार कर्म करना होता है, जो उसके समस्त कर्मों के साक्षी हैं। अतः वह अपने पूर्व कर्मों के अनुसार अपना कर्म आरम्भ करता है। आवश्यक ज्ञान उसे प्रदान किया जाता है, और स्मरण उसे दिया जाता है, और वह अपने पूर्व जीवन के विषय में विस्मृति भी प्राप्त करता है। इस प्रकार भगवान् न केवल सर्वव्यापी हैं; वे प्रत्येक व्यष्टि हृदय में स्थानिक रूप से भी स्थित हैं। वे विभिन्न सकाम फल प्रदान करते हैं। वे न केवल निराकार ब्रह्म, पूर्ण पुरुषोत्तम भगवान् तथा स्थानिक परमात्मा के रूप में आराध्य हैं, अपितु वेदों के अवतार के रूप में भी आराध्य हैं। वेद लोगों को सही दिशा प्रदान करते हैं, ताकि वे अपने जीवन को समुचित रूप से ढाल सकें और भगवद्धाम को, अपने घर लौट सकें। वेद पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण का ज्ञान प्रदान करते हैं, और श्रीकृष्ण व्यासदेव के रूप में अपने अवतार में वेदान्त-सूत्र के संकलनकर्ता हैं। श्रीमद्भागवत में व्यासदेव द्वारा की गई वेदान्त-सूत्र की टीका वेदान्त-सूत्र का वास्तविक बोध प्रदान करती है। परमेश्वर इतने पूर्ण हैं कि बद्धजीव के उद्धार के लिए वे भोजन के आपूर्तिकर्ता तथा पाचक हैं, उसके कर्म के साक्षी हैं, वेदों के रूप में ज्ञान के दाता हैं, और पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण के रूप में भगवद्गीता के उपदेष्टा हैं। वे बद्धजीव के लिए आराध्य हैं। इस प्रकार भगवान् सर्व-मंगलमय हैं; भगवान् सर्व-कृपालु हैं।"
+     },
+     {
+      "type": "p",
+      "text": "अन्तःप्रविष्टः शास्ता जनानाम्। जीव ज्यों ही अपना वर्तमान शरीर छोड़ता है, त्यों ही भूल जाता है, किन्तु वह परमेश्वर द्वारा प्रेरित होकर अपना कर्म पुनः आरम्भ करता है। यद्यपि वह भूल जाता है, तथापि भगवान् उसे वहीं से अपना कर्म पुनः आरम्भ करने की बुद्धि प्रदान करते हैं, जहाँ उसने अपना पूर्व जीवन समाप्त किया था। अतः जीव न केवल हृदय में स्थानिक रूप से स्थित परमेश्वर के आदेशानुसार इस संसार में भोग अथवा दुःख भोगता है, अपितु उनसे वेदों को समझने का अवसर भी प्राप्त करता है। यदि कोई वैदिक ज्ञान को समझने में गम्भीर है, तो श्रीकृष्ण उसे आवश्यक बुद्धि प्रदान करते हैं। वे वैदिक ज्ञान को समझने के लिए क्यों प्रस्तुत करते हैं? क्योंकि प्रत्येक जीव को व्यक्तिगत रूप से श्रीकृष्ण को समझना आवश्यक है। वैदिक साहित्य इसकी पुष्टि करता है : योऽसौ सर्वैर्वेदैर्गीयते। समस्त वैदिक साहित्य में, चार वेदों, वेदान्त-सूत्र तथा उपनिषदों एवं पुराणों से आरम्भ करके, परमेश्वर की महिमा का गान किया गया है। वैदिक कर्मकाण्ड सम्पन्न करके, वैदिक दर्शन की विवेचना करके तथा भक्ति में भगवान् की आराधना करके, वे प्राप्त किए जाते हैं। अतः वेदों का प्रयोजन श्रीकृष्ण को समझना है। वेद हमें श्रीकृष्ण को समझने तथा समझने की प्रक्रिया की दिशा प्रदान करते हैं। परम लक्ष्य पूर्ण पुरुषोत्तम भगवान् हैं। वेदान्त-सूत्र निम्नलिखित शब्दों में इसकी पुष्टि करता है : तत्तु समन्वयात्। मनुष्य वैदिक साहित्य को समझकर पूर्णता प्राप्त कर सकता है, और विभिन्न प्रक्रियाओं को सम्पन्न करके पूर्ण पुरुषोत्तम भगवान् के साथ अपने सम्बन्ध को समझ सकता है। इस प्रकार मनुष्य उन तक पहुँच सकता है और अन्त में उस परम लक्ष्य को प्राप्त कर सकता है, जो पूर्ण पुरुषोत्तम भगवान् के अतिरिक्त और कोई नहीं। तथापि इस श्लोक में वेदों का प्रयोजन, वेदों का बोध तथा वेदों का लक्ष्य स्पष्ट रूप से परिभाषित किया गया है।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/15/"
+  },
+  {
+   "id": "bg-15-016",
+   "chapter": 15,
+   "verseStart": 16,
+   "verseEnd": 16,
+   "label": "15.16",
+   "sanskrit": [
+    "द्वाविमौ पुरुषौ लोके क्षरश्चाक्षर एव च ।",
+    "क्षरः सर्वाणि भूतानि कूटस्थोऽक्षर उच्यते ॥१६॥"
+   ],
+   "transliteration": [
+    "dvāv imau puruṣau loke",
+    "kṣaraś cākṣara eva ca",
+    "kṣaraḥ sarvāṇi bhūtāni",
+    "kūṭa-stho 'kṣara ucyate"
+   ],
+   "translation": {
+    "en": "There are two classes of beings, the fallible and the infallible. In the material world every entity is fallible, and in the spiritual world every entity is called infallible.",
+    "hi": "दो प्रकार के जीव हैं—च्युत तथा अच्युत। भौतिक जगत् में प्रत्येक जीव च्युत है, और आध्यात्मिक जगत् में प्रत्येक जीव अच्युत कहलाता है।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "As already explained, the Lord in His incarnation as Vyāsadeva compiled the <i>Vedānta-sutra.</i> Here the Lord is giving, in summary, the contents of the <i>Vedānta-sūtra:</i> He says that the living entities, who are innumerable, can be divided into two classes—the fallible and the infallible. The living entities are eternally separated parts and parcels of the Supreme Personality of Godhead. When they are in contact with the material world, they are called <i>jīva-bhūtāḥ,</i> and the Sanskrit words given here, <i>sarvāṇi bhūtāni</i> mean that they are fallible. Those who are in oneness with the Supreme Personality of Godhead, however, are called infallible. Oneness does not mean that they have no individuality, but that there is no disunity. They are all agreeable to the purpose of the creation. Of course, in the spiritual world, there is no such thing as creation, but since the Supreme Personality of Godhead has stated in the <i>Vedānta-sūtra</i> that He is the source of all emanations, that conception is explained."
+     },
+     {
+      "type": "p",
+      "text": "According to the statement of the Supreme Personality of Godhead, Lord Kṛṣṇa, there are two classes of men. The <i>Vedas</i> give evidence of this, so there is no doubt about it. The living entities, who are struggling in this world with the mind and five senses, have their material bodies which are changing as long as the living entities are conditioned. One's body changes due to contact with matter; matter is changing, so the living entity appears to be changing. But in the spiritual world the body is not made of matter; therefore there is no change. In the material world the living entity undergoes six changes—birth, growth, duration, reproduction, then dwindling and vanishing. These are the changes of the material body. But in the spiritual world the body does not change; there is no old age, there is no birth, there is no death. There all exists in oneness. It is more clearly explained as <i>sarvāṇi bhūtāni:</i> any living entity who has come in contact with matter, beginning from the first created being, Brahmā, down to a small ant, is changing its body; therefore they are all fallible. In the spiritual world, however, they are always liberated in oneness."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "जैसा कि पहले समझाया जा चुका है, भगवान् ने व्यासदेव के रूप में अपने अवतार में वेदान्त-सूत्र का संकलन किया। यहाँ भगवान् संक्षेप में वेदान्त-सूत्र की विषय-वस्तु दे रहे हैं : वे कहते हैं कि जीव, जो असंख्य हैं, दो वर्गों में विभाजित किए जा सकते हैं—च्युत तथा अच्युत। जीव पूर्ण पुरुषोत्तम भगवान् के नित्य विभिन्नांश हैं। जब वे भौतिक जगत् के सम्पर्क में होते हैं, तब वे जीव-भूताः कहलाते हैं, और यहाँ दिए गए संस्कृत शब्द, सर्वाणि भूतानि, यह बताते हैं कि वे च्युत हैं। तथापि जो पूर्ण पुरुषोत्तम भगवान् के साथ एकता में हैं, वे अच्युत कहलाते हैं। एकता का अर्थ यह नहीं कि उनमें व्यक्तित्व नहीं, अपितु यह कि उनमें कोई फूट नहीं। वे सभी सृष्टि के प्रयोजन के प्रति अनुकूल हैं। निस्सन्देह, आध्यात्मिक जगत् में सृष्टि जैसी कोई वस्तु नहीं, किन्तु चूँकि पूर्ण पुरुषोत्तम भगवान् ने वेदान्त-सूत्र में कहा है कि वे समस्त उद्भवों के स्रोत हैं, अतः वह धारणा समझाई गई है।"
+     },
+     {
+      "type": "p",
+      "text": "पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण के कथन के अनुसार दो प्रकार के मनुष्य हैं। वेद इसका प्रमाण देते हैं, अतः इसमें कोई सन्देह नहीं। जो जीव इस संसार में मन तथा पाँच इन्द्रियों के साथ संघर्ष कर रहे हैं, उनके भौतिक शरीर हैं, जो तब तक बदलते रहते हैं जब तक जीव बद्ध हैं। मनुष्य का शरीर पदार्थ के सम्पर्क के कारण बदलता है; पदार्थ बदलता रहता है, अतः जीव बदलता प्रतीत होता है। किन्तु आध्यात्मिक जगत् में शरीर पदार्थ से नहीं बना होता; अतः वहाँ कोई परिवर्तन नहीं। भौतिक जगत् में जीव छह परिवर्तन झेलता है—जन्म, वृद्धि, स्थिति, प्रजनन, फिर क्षय तथा विनाश। ये भौतिक शरीर के परिवर्तन हैं। किन्तु आध्यात्मिक जगत् में शरीर नहीं बदलता; वहाँ न वृद्धावस्था है, न जन्म है, न मृत्यु है। वहाँ सब कुछ एकता में विद्यमान है। इसे सर्वाणि भूतानि के रूप में और अधिक स्पष्ट रूप से समझाया गया है : कोई भी जीव जो पदार्थ के सम्पर्क में आया है, प्रथम सृष्ट प्राणी ब्रह्मा से लेकर एक छोटी चींटी तक, अपना शरीर बदल रहा है; अतः वे सभी च्युत हैं। तथापि आध्यात्मिक जगत् में वे सदा एकता में मुक्त रहते हैं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/16/"
+  },
+  {
+   "id": "bg-15-017",
+   "chapter": 15,
+   "verseStart": 17,
+   "verseEnd": 17,
+   "label": "15.17",
+   "sanskrit": [
+    "उत्तमः पुरुषस्त्वन्यः परमात्मेत्युधाहृतः ।",
+    "यो लोकत्रयमाविश्य बिभर्त्यव्यय ईश्वरः ॥१७॥"
+   ],
+   "transliteration": [
+    "uttamaḥ puruṣas tv anyaḥ",
+    "paramātmety udāhṛtaḥ",
+    "yo loka-trayam āviśya",
+    "bibharty avyaya īśvaraḥ"
+   ],
+   "translation": {
+    "en": "Besides these two, there is the greatest living personality, the Lord Himself, who has entered into these worlds and is maintaining them.",
+    "hi": "इन दोनों के अतिरिक्त एक परम पुरुष भी है, साक्षात् भगवान्, जिन्होंने इन समस्त लोकों में प्रवेश किया है और उनका पालन कर रहे हैं।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "This verse is very nicely expressed in the <i>Kaṭha Upaniṣad</i> and <i>Śvetāśvatara Upaniṣad.</i> It is clearly stated there that above the innumerable living entities, some of whom are conditioned and some of whom are liberated, there is the Supreme Personality who is Paramātmā. The Upanisadic verse runs as follows: <i>nityo nityānāṁ cetanaś cetanānām.</i> The purport is that amongst all the living entities, both conditioned and liberated, there is one supreme living personality, the Supreme Personality of Godhead, who maintains them and gives them all the facility of enjoyment according to different work. That Supreme Personality of Godhead is situated in everyone's heart as Paramātmā. A wise man who can understand Him is eligible to attain the perfect peace, not others."
+     },
+     {
+      "type": "p",
+      "text": "It is incorrect to think of the Supreme Lord and the living entities as being on the same level or equal in all respects. There is always the question of superiority and inferiority in their personalities. This particular word <i>uttama</i> is very significant. No one can surpass the Supreme Personality of Godhead. <i>Loke</i> is also significant because in the <i>Pauruṣa,</i> a Vedic literature, it is stated: <i>lokyate vedārtho 'nena.</i> This Supreme Lord in His localized aspect as Paramātmā explains the purpose of the <i>Vedas.</i> The following verse also appears in the <i>Vedas:</i>"
+     },
+     {
+      "type": "quote",
+      "text": "tāvad eṣa samprasādo 'smāc\ncharīrāt samutthāya paraṁ\njyoti-rūpaṁ sampadya svena\nrūpeṇābhiniṣpadyate sa uttamaḥ puruṣaḥ"
+     },
+     {
+      "type": "p",
+      "text": "\"The Supersoul coming out of the body enters the impersonal <i>brahmajyoti;</i> then in His form He remains in His spiritual identity. That Supreme is called the Supreme Personality.\" This means that the Supreme Personality is exhibiting and diffusing His spiritual effulgence, which is the ultimate illumination. That Supreme Personality also has a localized aspect as Paramātmā. By incarnating Himself as the son of Satyavatī and Parāśara, He explains the Vedic knowledge as Vyāsadeva."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "इस श्लोक का भाव कठोपनिषद् तथा श्वेताश्वतर उपनिषद् में अत्यन्त सुन्दर रीति से व्यक्त हुआ है। वहाँ स्पष्ट कहा गया है कि असंख्य जीवों के ऊपर, जिनमें से कुछ बद्ध हैं और कुछ मुक्त, एक परम पुरुष विद्यमान हैं, जो परमात्मा हैं। उपनिषद् का वह श्लोक इस प्रकार है—nityo nityānāṁ cetanaś cetanānām। इसका तात्पर्य यह है कि समस्त जीवों में, चाहे वे बद्ध हों या मुक्त, एक परम जीव-पुरुष हैं, पूर्ण पुरुषोत्तम भगवान्, जो उनका पालन करते हैं और भिन्न-भिन्न कर्म के अनुसार उन्हें भोग की समस्त सुविधाएँ प्रदान करते हैं। वे पूर्ण पुरुषोत्तम भगवान् परमात्मा रूप में प्रत्येक के हृदय में स्थित हैं। जो विवेकी पुरुष उन्हें समझ सकता है, वही पूर्ण शान्ति प्राप्त करने का अधिकारी है, अन्य नहीं।"
+     },
+     {
+      "type": "p",
+      "text": "परमेश्वर तथा जीवों को एक ही स्तर पर अथवा सब प्रकार से समान मान लेना भ्रामक है। उनके व्यक्तित्व में सदैव श्रेष्ठता और निम्नता का प्रश्न बना रहता है। यह विशेष शब्द uttama अत्यन्त सार्थक है। पूर्ण पुरुषोत्तम भगवान् को कोई भी पार नहीं कर सकता। Loke शब्द भी सार्थक है, क्योंकि पौरुष नामक वैदिक ग्रन्थ में कहा गया है—lokyate vedārtho 'nena। परमात्मा रूप में अपने स्थानिक पक्ष से यही परमेश्वर वेदों के प्रयोजन की व्याख्या करते हैं। वेदों में निम्नलिखित श्लोक भी आता है—"
+     },
+     {
+      "type": "p",
+      "text": "tāvad eṣa samprasādo 'smāc"
+     },
+     {
+      "type": "p",
+      "text": "charīrāt samutthāya paraṁ"
+     },
+     {
+      "type": "p",
+      "text": "jyoti-rūpaṁ sampadya svena"
+     },
+     {
+      "type": "p",
+      "text": "rūpeṇābhiniṣpadyate sa uttamaḥ puruṣaḥ"
+     },
+     {
+      "type": "p",
+      "text": "\"शरीर से बाहर निकलकर परमात्मा निराकार ब्रह्मज्योति में प्रवेश करते हैं; तत्पश्चात् वे अपने रूप में अपनी आध्यात्मिक पहचान सहित स्थित रहते हैं। वही परम परम पुरुष कहलाते हैं।\" इसका अर्थ यह है कि वे परम पुरुष अपनी आध्यात्मिक प्रभा को प्रकट तथा प्रसारित कर रहे हैं, जो परम प्रकाश है। उन परम पुरुष का परमात्मा रूप में एक स्थानिक पक्ष भी है। सत्यवती तथा पराशर के पुत्र रूप में अवतीर्ण होकर वे व्यासदेव के रूप में वैदिक ज्ञान की व्याख्या करते हैं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/17/"
+  },
+  {
+   "id": "bg-15-018",
+   "chapter": 15,
+   "verseStart": 18,
+   "verseEnd": 18,
+   "label": "15.18",
+   "sanskrit": [
+    "यस्मात्क्षरमतीतोऽहमक्षरादपि चोत्तमः ।",
+    "अतोऽस्मि लोके वेदे च प्रथितः पुरुषोत्तमः ॥१८॥"
+   ],
+   "transliteration": [
+    "yasmāt kṣaram atīto 'ham",
+    "akṣarād api cottamaḥ",
+    "ato 'smi loke vede ca",
+    "prathitaḥ puruṣottamaḥ"
+   ],
+   "translation": {
+    "en": "Because I am transcendental, beyond both the fallible and the infallible, and because I am the greatest, I am celebrated both in the world and in the Vedas as that Supreme Person.",
+    "hi": "क्योंकि मैं दिव्य हूँ, पतनशील तथा अपतनशील दोनों से परे हूँ, और क्योंकि मैं सर्वोत्तम हूँ, इसलिए मैं संसार तथा वेदों दोनों में उस परम पुरुष के रूप में विख्यात हूँ।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "No one can surpass the Supreme Personality of Godhead, Kṛṣṇa—neither the conditioned soul nor the liberated soul. He is, therefore, the greatest of personalities. Now it is clear here that the living entities and the Supreme Personality of Godhead are individuals. The difference is that the living entities, either in the conditioned state or in the liberated state, cannot surpass in quantity the inconceivable potencies of the Supreme Personality of Godhead."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण को कोई भी पार नहीं कर सकता—न बद्धजीव, न मुक्त आत्मा। अतः वे समस्त पुरुषों में सर्वोत्तम हैं। यहाँ अब यह स्पष्ट है कि जीव तथा पूर्ण पुरुषोत्तम भगवान् पृथक्-पृथक् व्यक्ति हैं। भेद यह है कि जीव, चाहे बद्ध अवस्था में हों या मुक्त अवस्था में, पूर्ण पुरुषोत्तम भगवान् की अचिन्त्य शक्तियों को मात्रा में पार नहीं कर सकते।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/18/"
+  },
+  {
+   "id": "bg-15-019",
+   "chapter": 15,
+   "verseStart": 19,
+   "verseEnd": 19,
+   "label": "15.19",
+   "sanskrit": [
+    "यो मामेवमसम्मूढो जानाति पुरुषोत्तमम् ।",
+    "स सर्वविद्भजति मां सर्वभावेन भारत ॥१९॥"
+   ],
+   "transliteration": [
+    "yo mām evam asammūḍho",
+    "jānāti puruṣottamam",
+    "sa sarva-vid bhajati māṁ",
+    "sarva-bhāvena bhārata"
+   ],
+   "translation": {
+    "en": "Whoever knows Me as the Supreme Personality of Godhead, without doubting, is to be understood as the knower of everything, and he therefore engages himself in full devotional service, O son of Bharata.",
+    "hi": "जो कोई मुझे पूर्ण पुरुषोत्तम भगवान् के रूप में सन्देहरहित होकर जानता है, उसे सर्वज्ञ समझना चाहिए, और इसलिए वह सब प्रकार से मेरी पूर्ण भक्ति में संलग्न होता है, हे भरतपुत्र।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "There are many philosophical speculations about the constitutional position of the living entities and the Supreme Absolute Truth. Now in this verse the Supreme Personality of Godhead clearly explains that anyone who knows Lord Kṛṣṇa as the Supreme Person is actually the knower of everything. The imperfect knower goes on simply speculating about the Absolute Truth, but the perfect knower, without wasting his valuable time, engages directly in Kṛṣṇa consciousness, the devotional service of the Supreme Lord. Throughout the whole of <i>Bhagavad-gītā,</i> this fact is being stressed at every step. And still there are so many stubborn commentators on <i>Bhagavad-gītā</i> who consider the Supreme Absolute Truth and the living entities to be one and the same."
+     },
+     {
+      "type": "p",
+      "text": "Vedic knowledge is called <i>śruti</i> learning by aural reception. One should actually receive the Vedic message from authorities like Kṛṣṇa and His representatives. Here Kṛṣṇa distinguishes everything very nicely, and one should hear from this source. Simply to hear like the hogs is not sufficient; one must be able to understand from the authorities. It is not that one should simply speculate academically. One should submissively hear from <i>Bhagavad-gītā</i> that these living entities are always subordinate to the Supreme Personality of Godhead. Anyone who is able to understand this, according to the Supreme Personality of Godhead, Śrī Kṛṣṇa, knows the purpose of the <i>Vedas;</i> no one else knows the purpose of the <i>Vedas.</i>"
+     },
+     {
+      "type": "p",
+      "text": "The word <i>bhajate</i> is very significant. In many places the word <i>bhajate</i> is expressed in relationship with the service of the Supreme Lord. If a person is engaged in full Kṛṣṇa consciousness in devotional service of the Lord, it is to be understood that he has understood all the Vedic knowledge. In the Vaiṣṇava <i>paramparā</i> it is said that if one is engaged in the devotional service of Kṛṣṇa, then there is no need for a spiritual process to understand the Supreme Absolute Truth. He has already come to the post because he is engaged in the devotional service of the Lord. He has ended all preliminary processes of understanding; similarly, if anyone, after speculating for hundreds of thousands of lives, does not come to the point that Kṛṣṇa is the Supreme Personality of Godhead and that one has to surrender there, all his speculation for so many years and lives is a useless waste of time."
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "जीवों तथा परम परब्रह्म की स्वरूपगत स्थिति के विषय में अनेक दार्शनिक कल्पनाएँ प्रचलित हैं। अब इस श्लोक में पूर्ण पुरुषोत्तम भगवान् स्पष्ट रूप से समझाते हैं कि जो कोई भगवान् श्रीकृष्ण को परम पुरुष रूप में जानता है, वही वस्तुतः सर्वज्ञ है। अपूर्ण ज्ञानी केवल परम सत्य के विषय में कल्पना करता रहता है, किन्तु पूर्ण ज्ञानी अपने अमूल्य समय को व्यर्थ किए बिना सीधे कृष्णभावनामृत में, परमेश्वर की भक्ति में, संलग्न हो जाता है। सम्पूर्ण भगवद्गीता में पग-पग पर इसी तथ्य पर बल दिया गया है। और तब भी भगवद्गीता के ऐसे अनेक हठी टीकाकार हैं, जो परम परब्रह्म तथा जीवों को एक ही मानते हैं।"
+     },
+     {
+      "type": "p",
+      "text": "वैदिक ज्ञान श्रुति कहलाता है, अर्थात् श्रवण द्वारा प्राप्त ज्ञान। मनुष्य को वस्तुतः वैदिक सन्देश श्रीकृष्ण तथा उनके प्रतिनिधियों जैसे अधिकारियों से ही ग्रहण करना चाहिए। यहाँ श्रीकृष्ण प्रत्येक वस्तु का भली-भाँति विवेचन करते हैं, और मनुष्य को इसी स्रोत से सुनना चाहिए। केवल सूअरों की भाँति सुन लेना पर्याप्त नहीं है; मनुष्य को अधिकारियों से समझ पाने में समर्थ होना चाहिए। ऐसा नहीं है कि मनुष्य केवल शैक्षिक रूप से कल्पना करता रहे। मनुष्य को विनम्रतापूर्वक भगवद्गीता से यह सुनना चाहिए कि ये जीव सदैव पूर्ण पुरुषोत्तम भगवान् के अधीन हैं। पूर्ण पुरुषोत्तम भगवान् श्रीकृष्ण के अनुसार, जो कोई इसे समझ पाने में समर्थ है, वही वेदों के प्रयोजन को जानता है; अन्य कोई वेदों के प्रयोजन को नहीं जानता।"
+     },
+     {
+      "type": "p",
+      "text": "bhajate शब्द अत्यन्त सार्थक है। अनेक स्थानों पर bhajate शब्द परमेश्वर की सेवा के सम्बन्ध में व्यक्त हुआ है। यदि कोई व्यक्ति पूर्ण कृष्णभावनामृत में भगवान् की भक्ति में संलग्न है, तो समझना चाहिए कि उसने समस्त वैदिक ज्ञान को समझ लिया है। वैष्णव परम्परा में कहा गया है कि यदि कोई श्रीकृष्ण की भक्ति में संलग्न है, तो परम परब्रह्म को समझने के लिए किसी आध्यात्मिक प्रक्रिया की आवश्यकता नहीं रहती। वह पहले से ही उस पद पर पहुँच चुका है, क्योंकि वह भगवान् की भक्ति में संलग्न है। उसने समझ की समस्त प्रारम्भिक प्रक्रियाओं को पूर्ण कर लिया है; इसी प्रकार, यदि कोई व्यक्ति लाखों जन्मों तक कल्पना करने के पश्चात् भी इस निष्कर्ष पर नहीं पहुँचता कि श्रीकृष्ण पूर्ण पुरुषोत्तम भगवान् हैं और मनुष्य को वहीं शरणागत होना है, तो इतने वर्षों तथा जन्मों की उसकी समस्त कल्पना समय का व्यर्थ अपव्यय है।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/19/"
+  },
+  {
+   "id": "bg-15-020",
+   "chapter": 15,
+   "verseStart": 20,
+   "verseEnd": 20,
+   "label": "15.20",
+   "sanskrit": [
+    "इति गुह्यतमं शास्त्रमिदमुक्तं मयानघ ।",
+    "एतद्बुद्ध्वा बुद्धिमान्स्यात्कृतकृत्यश्च भारत ॥२०॥"
+   ],
+   "transliteration": [
+    "iti guhyatamaṁ śāstram",
+    "idam uktaṁ mayānagha",
+    "etad buddhvā buddhimān syāt",
+    "kṛta-kṛtyaś ca bhārata"
+   ],
+   "translation": {
+    "en": "This is the most confidential part of the Vedic scriptures, O sinless one, and it is disclosed now by Me. Whoever understands this will become wise, and his endeavors will know perfection.",
+    "hi": "हे निष्पाप, यह वैदिक शास्त्रों का परम गोपनीय अंश है, और अब मैंने इसे प्रकट किया है। जो कोई इसे समझ लेगा, वह बुद्धिमान् हो जाएगा, और उसके प्रयास सिद्धि को प्राप्त करेंगे।"
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "The Lord clearly explains here that this is the substance of all revealed scriptures. And one should understand this as it is given by the Supreme Personality of Godhead. Thus one will become intelligent and perfect in transcendental knowledge. In other words, by understanding this philosophy of the Supreme Personality of Godhead and engaging in His transcendental service, everyone can become freed from all contaminations of the modes of material nature. Devotional service is a process of spiritual understanding. Wherever devotional service exists, the material contamination cannot coexist. Devotional service to the Lord and the Lord Himself are one and the same because they are spiritual—the internal energy of the Supreme Lord. The Lord is said to be the sun, and ignorance is called darkness. Where the sun is present, there is no question of darkness. Therefore, whenever devotional service is present under the proper guidance of a bona fide spiritual master, there is no question of ignorance."
+     },
+     {
+      "type": "p",
+      "text": "Everyone must take to this consciousness of Kṛṣṇa and engage in devotional service to become intelligent and purified. Unless one comes to this position of understanding Kṛṣṇa and engages in devotional service, however intelligent he may be in the estimation of some common man, he is not perfectly intelligent."
+     },
+     {
+      "type": "p",
+      "text": "The word <i>anagha,</i> by which Arjuna is addressed, is significant. <i>Anagha,</i> O sinless one, means that unless one is free from all sinful reactions, it is very difficult to understand Kṛṣṇa. One has to become free from all contamination, all sinful activities; then he can understand. But devotional service is so pure and potent that once one is engaged in devotional service he automatically comes to the stage of sinlessness."
+     },
+     {
+      "type": "p",
+      "text": "While performing devotional service in the association of pure devotees in full Kṛṣṇa consciousness, there are certain things which require to be vanquished altogether. The most important thing one has to surmount is weakness of the heart. The first falldown is caused by the desire to lord it over material nature. Thus one gives up the transcendental loving service of the Supreme Lord. The second weakness of the heart is that as one increases the propensity of lording it over material nature, he becomes attached to matter and the possession of matter. The problems of material existence are due to these weaknesses of the heart."
+     },
+     {
+      "type": "p",
+      "text": "<i>Thus end the Bhaktivedanta Purports to the Fifteenth Chapter of the</i> Śrīmad-Bhagavad-gītā <i>in the matter of Puruṣottama-yoga, the Yoga of the Supreme Person.</i>"
+     }
+    ],
+    "hi": [
+     {
+      "type": "p",
+      "text": "भगवान् यहाँ स्पष्ट रूप से समझाते हैं कि यह समस्त प्रकट शास्त्रों का सार है। और मनुष्य को इसे उसी रूप में समझना चाहिए, जैसा पूर्ण पुरुषोत्तम भगवान् ने इसे दिया है। इस प्रकार मनुष्य दिव्य ज्ञान में बुद्धिमान् तथा सिद्ध हो जाएगा। दूसरे शब्दों में, पूर्ण पुरुषोत्तम भगवान् के इस दर्शन को समझकर तथा उनकी दिव्य सेवा में संलग्न होकर प्रत्येक व्यक्ति प्रकृति के गुणों के समस्त कल्मष से मुक्त हो सकता है। भक्ति आध्यात्मिक बोध की एक प्रक्रिया है। जहाँ भी भक्ति विद्यमान रहती है, वहाँ भौतिक कल्मष साथ नहीं रह सकता। भगवान् की भक्ति तथा स्वयं भगवान् एक ही हैं, क्योंकि वे आध्यात्मिक हैं—परमेश्वर की अन्तरंगा शक्ति। भगवान् को सूर्य कहा गया है, और अज्ञान को अन्धकार कहा गया है। जहाँ सूर्य उपस्थित है, वहाँ अन्धकार का प्रश्न ही नहीं उठता। अतः जहाँ भी प्रामाणिक आध्यात्मिक गुरु के समुचित मार्गदर्शन में भक्ति विद्यमान है, वहाँ अज्ञान का प्रश्न ही नहीं उठता।"
+     },
+     {
+      "type": "p",
+      "text": "प्रत्येक व्यक्ति को इस कृष्णभावनामृत को ग्रहण करना चाहिए और भक्ति में संलग्न होकर बुद्धिमान् तथा शुद्ध बनना चाहिए। जब तक मनुष्य श्रीकृष्ण को समझने की इस स्थिति पर नहीं पहुँचता और भक्ति में संलग्न नहीं होता, तब तक वह किसी साधारण व्यक्ति की दृष्टि में चाहे जितना भी बुद्धिमान् क्यों न हो, पूर्ण रूप से बुद्धिमान् नहीं है।"
+     },
+     {
+      "type": "p",
+      "text": "anagha शब्द, जिससे अर्जुन को सम्बोधित किया गया है, सार्थक है। anagha, अर्थात् हे निष्पाप, का अर्थ यह है कि जब तक मनुष्य समस्त पापमय प्रतिक्रियाओं से मुक्त नहीं होता, तब तक श्रीकृष्ण को समझ पाना अत्यन्त कठिन है। मनुष्य को समस्त कल्मष, समस्त पापमय कर्मों से मुक्त होना पड़ता है; तभी वह समझ सकता है। किन्तु भक्ति इतनी शुद्ध तथा सामर्थ्यवान् है कि एक बार भक्ति में संलग्न होने पर मनुष्य स्वतः ही निष्पापता की अवस्था को प्राप्त हो जाता है।"
+     },
+     {
+      "type": "p",
+      "text": "पूर्ण कृष्णभावनामृत में शुद्ध भक्तों की संगति में भक्ति करते समय कुछ ऐसी बातें हैं, जिन्हें पूर्णतया जीतना आवश्यक है। सबसे प्रमुख बात जिसे मनुष्य को पार करना है, वह है हृदय की दुर्बलता। प्रथम पतन भौतिक प्रकृति पर प्रभुत्व जमाने की इच्छा के कारण होता है। इस प्रकार मनुष्य परमेश्वर की दिव्य प्रेममयी सेवा का त्याग कर देता है। हृदय की दूसरी दुर्बलता यह है कि ज्यों-ज्यों मनुष्य भौतिक प्रकृति पर प्रभुत्व जमाने की प्रवृत्ति को बढ़ाता है, त्यों-त्यों वह पदार्थ तथा पदार्थ के स्वामित्व के प्रति आसक्त होता जाता है। भौतिक अस्तित्व की समस्याएँ हृदय की इन्हीं दुर्बलताओं के कारण हैं।"
+     },
+     {
+      "type": "p",
+      "text": "इस प्रकार श्रीमद्भगवद्गीता के पन्द्रहवें अध्याय \"पुरुषोत्तम-योग, परम पुरुष का योग\" पर भक्तिवेदान्त तात्पर्य समाप्त होते हैं।"
+     }
+    ]
+   },
+   "synonyms": null,
+   "sourceUrl": "https://vedabase.cc/bg/15/20/"
+  }
+ ]
+}
