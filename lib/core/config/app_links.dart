@@ -25,4 +25,8 @@ abstract final class AppLinks {
     final params = Uri.splitQueryString(referrer);
     return params['verse'];
   }
+
+  /// Store link appended to the streak share caption. Empty for now; set it
+  /// before release (docs/review-needed.md). Omitted while empty.
+  static const shareLink = '';
 }

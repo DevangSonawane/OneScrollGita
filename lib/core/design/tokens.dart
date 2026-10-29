@@ -146,6 +146,12 @@ abstract final class AppDurations {
   static const positionDebounce = Duration(milliseconds: 600);
   static const historyDwell = Duration(seconds: 2);
   static const undo = Duration(seconds: 5);
+
+  /// "Good work" popup auto-dismiss (PRD_v2 section 4).
+  static const streakPopup = Duration(seconds: 4);
+
+  /// Search typing debounce (PRD_v2 section 10).
+  static const searchDebounce = Duration(milliseconds: 250);
 }
 
 abstract final class AppCurves {
@@ -159,13 +165,32 @@ abstract final class Elevation {
   ];
 }
 
+/// Floating glass menu (reader overflow).
+abstract final class GlassMenuMetrics {
+  static const width = 232.0;
+  static const rowHeight = 52.0;
+  static const gap = 8.0;
+
+  /// Scale the menu grows from when it opens (1 under reduced motion).
+  static const openScale = 0.92;
+}
+
+/// Streak card and share card sizes.
+abstract final class StreakMetrics {
+  static const dot = 10.0;
+  static const bigNumber = 44.0;
+
+  /// 1080 x 1350 at pixel ratio 3.
+  static const shareCardSize = Size(360, 450);
+}
+
 /// Navigation pill geometry.
 abstract final class NavBarMetrics {
-  static const height = 64.0;
-  static const maxWidth = 360.0;
+  static const height = 52.0;
+  static const maxWidth = 300.0;
   static const sideMargin = 20.0;
-  static const bottomGap = 12.0;
-  static const minTabWidth = 56.0;
+  static const bottomGap = 8.0;
+  static const minTabWidth = 48.0;
 }
 
 /// Every tunable of the glass look in one place, light and dark.

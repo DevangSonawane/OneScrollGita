@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 
 import '../../application/core_providers.dart';
 import '../../application/scripture_providers.dart';
@@ -13,7 +14,9 @@ import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/models/app_settings.dart';
 import '../../domain/models/verse_entry.dart';
+import '../../domain/read_rule.dart';
 import '../common/common_widgets.dart';
+import '../common/qualifying_read.dart';
 import '../common/save_toggle_button.dart';
 
 /// Purport page (PRD 5.6): a quiet typeset book page.
@@ -27,7 +30,11 @@ class PurportScreen extends ConsumerWidget {
     final entry = ref.watch(entryProvider(verseId));
     return Scaffold(
       body: switch (entry) {
-        AsyncData(value: final e?) when e.hasPurport => _PurportBody(entry: e),
+        AsyncData(value: final e?) when e.hasPurport => QualifyingRead(
+          verseId: e.id,
+          dwell: ReadRule.readerDwell,
+          child: _PurportBody(entry: e),
+        ),
         AsyncData() => const _NoPurport(),
         AsyncError(:final error) => LoadError(
           error: error,
@@ -143,7 +150,10 @@ class _PurportBodyState extends ConsumerState<_PurportBody> {
                 Text('BHAGAVAD-GITA ${e.label}', style: ui.overline),
                 bottom: Space.s24,
               ),
-              pad(VerseTextBlock(entry: e, gap: Space.s24), bottom: Space.s32),
+              pad(
+                VerseTextBlock(entry: e, gap: Space.s24),
+                bottom: Space.s32,
+              ),
               pad(const Divider(), bottom: Space.s24),
               pad(
                 Semantics(
@@ -223,7 +233,7 @@ class _PurportBodyState extends ConsumerState<_PurportBody> {
               child: Row(
                 children: [
                   GlassIconButton(
-                    icon: Icons.arrow_back_rounded,
+                    icon: LucideIcons.chevron_left,
                     semanticLabel: 'Back',
                     onTap: () => Navigator.of(context).maybePop(),
                   ),
@@ -248,10 +258,7 @@ class _PurportBodyState extends ConsumerState<_PurportBody> {
                             child: SizedBox.square(
                               dimension: Touch.minTarget,
                               child: Center(
-                                child: Text(
-                                  'Aa',
-                                  style: ui.label(size: 16),
-                                ),
+                                child: Text('Aa', style: ui.label(size: 16)),
                               ),
                             ),
                           ),
@@ -346,7 +353,11 @@ const _stepNames = ['Small', 'Medium small', 'Default', 'Large', 'Extra large'];
 
 /// 5-step slider (A ---o--- A).
 class TextSizeSlider extends StatelessWidget {
-  const TextSizeSlider({super.key, required this.step, required this.onChanged});
+  const TextSizeSlider({
+    super.key,
+    required this.step,
+    required this.onChanged,
+  });
 
   final int step;
   final ValueChanged<int> onChanged;
@@ -365,7 +376,8 @@ class TextSizeSlider extends StatelessWidget {
             max: (readingScaleSteps.length - 1).toDouble(),
             divisions: readingScaleSteps.length - 1,
             label: _stepNames[step],
-            semanticFormatterCallback: (v) => 'Text size ${_stepNames[v.round()]}',
+            semanticFormatterCallback: (v) =>
+                'Text size ${_stepNames[v.round()]}',
             onChanged: (v) {
               if (v.round() != step) onChanged(v.round());
             },

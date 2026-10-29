@@ -83,10 +83,11 @@ void main() {
     final app = await pumpApp(tester);
     await tester.tap(find.bySemanticsLabel(RegExp('^Profile, tab')));
     await settle(tester);
-    await tester.drag(find.byType(ListView).first, const Offset(0, -600));
+    // Start above the text-size slider, which would take the drag.
+    await tester.dragFrom(const Offset(195, 160), const Offset(0, -600));
     await settle(tester);
     expect(app.container.read(navBarVisibleProvider), isFalse);
-    await tester.drag(find.byType(ListView).first, const Offset(0, 200));
+    await tester.dragFrom(const Offset(195, 160), const Offset(0, 200));
     await settle(tester);
     expect(app.container.read(navBarVisibleProvider), isTrue);
   });

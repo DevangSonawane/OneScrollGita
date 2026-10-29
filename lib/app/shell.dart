@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
 
 import '../application/ui_providers.dart';
@@ -10,18 +11,18 @@ import '../core/design/tokens.dart';
 const _items = [
   GlassNavItem(
     label: 'Home',
-    icon: Icons.home_outlined,
-    selectedIcon: Icons.home_rounded,
+    icon: LucideIcons.house,
+    selectedIcon: LucideIcons.house,
   ),
   GlassNavItem(
     label: 'Gita',
-    icon: Icons.menu_book_outlined,
-    selectedIcon: Icons.menu_book_rounded,
+    icon: LucideIcons.book,
+    selectedIcon: LucideIcons.book,
   ),
   GlassNavItem(
     label: 'Profile',
-    icon: Icons.person_outline_rounded,
-    selectedIcon: Icons.person_rounded,
+    icon: LucideIcons.user,
+    selectedIcon: LucideIcons.user,
   ),
 ];
 

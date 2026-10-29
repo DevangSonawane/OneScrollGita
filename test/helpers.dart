@@ -9,10 +9,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:versescroll/app/app.dart';
 import 'package:versescroll/application/core_providers.dart';
+import 'package:versescroll/application/scripture_providers.dart';
+import 'package:versescroll/application/streak_providers.dart';
 import 'package:versescroll/application/ui_providers.dart';
 import 'package:versescroll/data/scripture/scripture_repository.dart';
 import 'package:versescroll/data/settings/settings_repository.dart';
+import 'package:versescroll/data/content/content_repository.dart';
+import 'package:versescroll/data/user/activity_repository.dart';
 import 'package:versescroll/data/user/database.dart';
+import 'package:versescroll/domain/local_date.dart';
 import 'package:versescroll/data/user/user_data_repository.dart';
 
 /// Reads assets straight from disk with synchronous futures, so widget
@@ -45,6 +50,10 @@ Future<TestApp> pumpApp(
   Size size = const Size(390, 844),
   double textScale = 1.0,
   bool reducedMotion = false,
+
+  /// Off: today's "Good work" popup counts as already shown, so it never
+  /// covers buttons a test taps.
+  bool streakPopup = false,
   Brightness brightness = Brightness.light,
   GlassMode? glass = GlassMode.solid,
 }) async {
@@ -60,18 +69,29 @@ Future<TestApp> pumpApp(
   addTearDown(tester.view.reset);
   addTearDown(tester.platformDispatcher.clearAllTestValues);
 
-  SharedPreferences.setMockInitialValues(prefs);
+  SharedPreferences.setMockInitialValues({
+    if (!streakPopup)
+      SettingsRepository.kStreakPopupShownDate: dateKey(now ?? DateTime.now()),
+    ...prefs,
+  });
   final sp = await tester.runAsync(SharedPreferences.getInstance);
   final db = AppDatabase.memory();
   final container = ProviderContainer(
     overrides: [
       settingsRepositoryProvider.overrideWithValue(SettingsRepository(sp!)),
       userDataRepositoryProvider.overrideWithValue(UserDataRepository(db)),
+      activityRepositoryProvider.overrideWithValue(
+        ActivityRepository(db, clock: now == null ? null : () => now),
+      ),
+      contentRepositoryProvider.overrideWithValue(
+        ContentRepository(bundle: DiskAssetBundle()),
+      ),
       scriptureRepositoryProvider.overrideWithValue(
         ScriptureRepository(bundle: DiskAssetBundle(), parseInIsolate: false),
       ),
       if (glass != null) glassModeOverrideProvider.overrideWithValue(glass),
       if (now != null) clockProvider.overrideWithValue(() => now),
+      todayProvider.overrideWith(_TestToday.new),
     ],
   );
   addTearDown(() async {
@@ -91,7 +111,15 @@ Future<TestApp> pumpApp(
 /// animations finish.
 Future<void> settle(WidgetTester tester, [int rounds = 3]) async {
   for (var i = 0; i < rounds; i++) {
-    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 5)));
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 5)),
+    );
     await tester.pump(const Duration(milliseconds: 400));
   }
+}
+
+/// No midnight timer in tests.
+class _TestToday extends TodayNotifier {
+  @override
+  void scheduleMidnight(DateTime now) {}
 }

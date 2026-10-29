@@ -6,7 +6,9 @@ import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 
 import '../../application/core_providers.dart';
 import '../../application/ui_providers.dart';
+import 'motion.dart';
 import 'tokens.dart';
+import 'typography.dart';
 
 export '../../application/ui_providers.dart' show GlassMode;
 
@@ -138,7 +140,9 @@ class GlassShape extends StatelessWidget {
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: c.surface.withValues(
-                    alpha: light ? t.lightTintOpacity + 0.15 : t.tintOpacity + 0.1,
+                    alpha: light
+                        ? t.lightTintOpacity + 0.15
+                        : t.tintOpacity + 0.1,
                   ),
                   borderRadius: borderRadius,
                   border: Border.all(color: c.hairline),
@@ -312,6 +316,146 @@ class GlassIconButton extends StatelessWidget {
         child: SizedBox.square(
           dimension: size,
           child: Icon(icon, size: IconSizes.regular, color: c.textPrimary),
+        ),
+      ),
+    );
+  }
+}
+
+/// One row of a [showGlassMenu].
+class GlassMenuItem<T> {
+  const GlassMenuItem({
+    required this.value,
+    required this.icon,
+    required this.label,
+  });
+
+  final T value;
+  final IconData icon;
+  final String label;
+}
+
+/// A floating liquid-glass menu under [anchor] (the button that opened it),
+/// right-aligned to it. Returns the chosen value, or null when dismissed.
+/// Counts as one glass surface while open.
+Future<T?> showGlassMenu<T>(
+  BuildContext anchor, {
+  required List<GlassMenuItem<T>> items,
+  String barrierLabel = 'Close menu',
+}) {
+  final box = anchor.findRenderObject()! as RenderBox;
+  final topLeft = box.localToGlobal(Offset.zero);
+  final screen = MediaQuery.sizeOf(anchor);
+  final top = topLeft.dy + box.size.height + GlassMenuMetrics.gap;
+  final right = (screen.width - topLeft.dx - box.size.width).clamp(
+    Space.s8,
+    screen.width,
+  );
+  final motion = Motion.of(anchor);
+  return showGeneralDialog<T>(
+    context: anchor,
+    useRootNavigator: true,
+    barrierDismissible: true,
+    barrierLabel: barrierLabel,
+    barrierColor: Colors.transparent,
+    transitionDuration: motion.crossFade,
+    pageBuilder: (context, _, _) => Stack(
+      children: [
+        Positioned(
+          top: top,
+          right: right,
+          child: _GlassMenu<T>(items: items),
+        ),
+      ],
+    ),
+    transitionBuilder: (context, a, _, child) {
+      final curved = CurvedAnimation(parent: a, curve: AppCurves.standard);
+      final fade = FadeTransition(opacity: curved, child: child);
+      if (Motion.of(context).reduced) return fade;
+      return ScaleTransition(
+        alignment: Alignment.topRight,
+        scale: Tween(
+          begin: GlassMenuMetrics.openScale,
+          end: 1.0,
+        ).animate(curved),
+        child: fade,
+      );
+    },
+  );
+}
+
+class _GlassMenu<T> extends StatelessWidget {
+  const _GlassMenu({required this.items});
+
+  final List<GlassMenuItem<T>> items;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = AppColors.of(context);
+    final ui = UiStyles(c);
+    return MediaQuery.withClampedTextScaling(
+      maxScaleFactor: 1.6,
+      child: Material(
+        type: MaterialType.transparency,
+        child: GlassLayer(
+          child: GlassShape(
+            radius: Radii.card,
+            child: SizedBox(
+              width: GlassMenuMetrics.width,
+              child: Padding(
+                padding: const EdgeInsets.all(Space.s4),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (var i = 0; i < items.length; i++) ...[
+                      if (i > 0)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: Space.s12,
+                          ),
+                          child: Divider(
+                            height: 1,
+                            color: c.hairline.withValues(alpha: 0.6),
+                          ),
+                        ),
+                      Pressable(
+                        radius: Radii.card - Space.s4,
+                        semanticLabel: items[i].label,
+                        onTap: () => Navigator.of(context).pop(items[i].value),
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            minHeight: GlassMenuMetrics.rowHeight,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: Space.s12,
+                              vertical: Space.s8,
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  items[i].icon,
+                                  size: IconSizes.small,
+                                  color: c.accentText,
+                                ),
+                                const SizedBox(width: Space.s12),
+                                Expanded(
+                                  child: Text(
+                                    items[i].label,
+                                    style: ui.label(size: 15),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

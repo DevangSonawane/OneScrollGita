@@ -75,12 +75,16 @@ void main() {
       expect(await repo.allReferencedIds(), {'bg-01-001'});
     });
 
-    test('schema version 1 creates all tables', () async {
-      expect(db.schemaVersion, 1);
+    test('schema version 2 creates all tables', () async {
+      expect(db.schemaVersion, 2);
       expect(db.allTables.map((t) => t.actualTableName).toSet(), {
         'favourites',
         'bookmarks',
         'history',
+        'read_days',
+        'read_day_verses',
+        'notif_assignments',
+        'search_history',
       });
     });
   });

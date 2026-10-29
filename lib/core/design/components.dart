@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 
 import 'glass.dart';
 import 'motion.dart';
@@ -48,6 +50,20 @@ class ReferenceChip extends StatelessWidget {
       child: Text(label, style: UiStyles(c).reference),
     );
   }
+}
+
+/// Plain, consistent Lucide back affordance for app bars and page headers.
+class LucideBackButton extends StatelessWidget {
+  const LucideBackButton({super.key, required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) => IconButton(
+    tooltip: 'Back',
+    onPressed: onPressed,
+    icon: const Icon(LucideIcons.chevron_left, size: 22),
+  );
 }
 
 /// Small spaced uppercase-free section label ("TODAY'S VERSE", "READING").
@@ -189,7 +205,7 @@ class SettingsRow extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: Space.s4),
                     child: Icon(
-                      Icons.chevron_right_rounded,
+                      LucideIcons.chevron_right,
                       color: c.textTertiary,
                       size: IconSizes.regular,
                     ),
@@ -206,10 +222,13 @@ class SettingsRow extends StatelessWidget {
       children: [
         onTap == null
             ? row
-            : InkWell(onTap: onTap, child: ConstrainedBox(
-                constraints: const BoxConstraints(minHeight: Touch.minTarget),
-                child: row,
-              )),
+            : InkWell(
+                onTap: onTap,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: Touch.minTarget),
+                  child: row,
+                ),
+              ),
         if (divider)
           const Padding(
             padding: EdgeInsets.only(left: Space.readingSide),
@@ -228,7 +247,7 @@ class Choice<T> {
 }
 
 /// Segmented control for language and theme.
-class SegmentedChoice<T> extends StatelessWidget {
+class SegmentedChoice<T> extends StatefulWidget {
   const SegmentedChoice({
     super.key,
     required this.choices,
@@ -249,78 +268,159 @@ class SegmentedChoice<T> extends StatelessWidget {
   final bool onSurface;
 
   @override
+  State<SegmentedChoice<T>> createState() => _SegmentedChoiceState<T>();
+}
+
+class _SegmentedChoiceState<T> extends State<SegmentedChoice<T>>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _position = AnimationController.unbounded(
+    vsync: this,
+    value: _selectedIndex.toDouble(),
+  );
+
+  static final _spring = SpringDescription.withDampingRatio(
+    mass: 1,
+    stiffness: 320,
+    ratio: 0.78,
+  );
+
+  int get _selectedIndex {
+    final index = widget.choices.indexWhere(
+      (choice) => choice.value == widget.value,
+    );
+    return index < 0 ? 0 : index;
+  }
+
+  @override
+  void didUpdateWidget(covariant SegmentedChoice<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final oldIndex = oldWidget.choices.indexWhere(
+      (choice) => choice.value == oldWidget.value,
+    );
+    if (_selectedIndex != (oldIndex < 0 ? 0 : oldIndex)) {
+      final motion = Motion.of(context);
+      if (motion.reduced) {
+        _position.animateTo(
+          _selectedIndex.toDouble(),
+          duration: AppDurations.fast,
+          curve: AppCurves.standard,
+        );
+      } else {
+        _position.animateWith(
+          SpringSimulation(
+            _spring,
+            _position.value,
+            _selectedIndex.toDouble(),
+            0,
+          ),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _position.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
     final ui = UiStyles(c);
-    final height = compact ? 36.0 : Touch.minTarget;
-    final motion = Motion.of(context);
-    return Container(
+    final height = widget.compact ? 36.0 : Touch.minTarget;
+    return SizedBox(
+      width: widget.compact ? widget.choices.length * 52.0 : double.infinity,
       height: height,
-      padding: const EdgeInsets.all(3),
-      decoration: BoxDecoration(
-        color: onSurface ? Colors.transparent : c.surfaceSoft,
-        borderRadius: BorderRadius.circular(Radii.pill),
-      ),
-      child: Row(
-        mainAxisSize: compact ? MainAxisSize.min : MainAxisSize.max,
-        children: [
-          for (final ch in choices)
-            _wrap(
-              compact,
-              Semantics(
-                selected: ch.value == value,
-                button: true,
-                label: ch.semanticLabel ?? ch.label,
-                excludeSemantics: true,
-                child: Pressable(
-                  button: false,
-                  onTap: () => onChanged(ch.value),
-                  child: AnimatedContainer(
-                    duration: motion.crossFade,
-                    curve: AppCurves.standard,
-                    constraints: BoxConstraints(
-                      minWidth: compact ? 40 : 0,
-                      minHeight: height - 6,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: compact ? Space.s8 : Space.s12,
-                    ),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: ch.value == value ? c.surface : Colors.transparent,
-                      borderRadius: BorderRadius.circular(Radii.pill),
-                      boxShadow: ch.value == value && !onSurface
-                          ? [
-                              BoxShadow(
-                                color: c.shadow,
-                                blurRadius: 4,
-                                offset: const Offset(0, 1),
-                              ),
-                            ]
-                          : null,
-                    ),
-                    child: Text(
-                      ch.label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: ui.label(
-                        size: compact ? 13 : 14,
-                        color: ch.value == value
-                            ? (compact ? c.accentText : c.textPrimary)
-                            : c.textSecondary,
+      child: Container(
+        padding: const EdgeInsets.all(3),
+        decoration: BoxDecoration(
+          color: widget.onSurface ? Colors.transparent : c.surfaceSoft,
+          borderRadius: BorderRadius.circular(Radii.pill),
+        ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final tabWidth = constraints.maxWidth / widget.choices.length;
+            return Stack(
+              children: [
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  width: tabWidth,
+                  height: height - 6,
+                  child: AnimatedBuilder(
+                    animation: _position,
+                    child: RepaintBoundary(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: widget.onSurface ? c.accentSoft : c.surface,
+                          borderRadius: BorderRadius.circular(Radii.pill),
+                          boxShadow: widget.onSurface
+                              ? [
+                                  BoxShadow(
+                                    color: c.shadow,
+                                    blurRadius: 3,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ]
+                              : [
+                                  BoxShadow(
+                                    color: c.shadow,
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
+                        ),
                       ),
+                    ),
+                    builder: (context, child) => Transform.translate(
+                      offset: Offset(_position.value * tabWidth, 0),
+                      child: child,
                     ),
                   ),
                 ),
-              ),
-            ),
-        ],
+                Row(
+                  children: [
+                    for (final choice in widget.choices)
+                      Expanded(
+                        child: Semantics(
+                          selected: choice.value == widget.value,
+                          button: true,
+                          label: choice.semanticLabel ?? choice.label,
+                          excludeSemantics: true,
+                          child: Pressable(
+                            button: false,
+                            onTap: () => widget.onChanged(choice.value),
+                            child: SizedBox(
+                              height: height - 6,
+                              child: Center(
+                                child: Text(
+                                  choice.label,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: ui.label(
+                                    size: widget.compact ? 13 : 14,
+                                    color: choice.value == widget.value
+                                        ? (widget.compact
+                                              ? c.accentText
+                                              : c.textPrimary)
+                                        : c.textSecondary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
-
-  Widget _wrap(bool compact, Widget child) =>
-      compact ? child : Expanded(child: child);
 }
 
 /// Confirmation dialog. Returns true when the user confirms.
@@ -436,6 +536,8 @@ class VerseListTile extends StatelessWidget {
     required this.onTap,
     this.onLongPress,
     this.previewLocale,
+    this.highlightPreview = false,
+    this.compact = false,
   });
 
   final String reference;
@@ -445,6 +547,12 @@ class VerseListTile extends StatelessWidget {
   final VoidCallback? onLongPress;
   final Locale? previewLocale;
 
+  /// [preview] marks matches with \u0001 ... \u0002 (search snippets).
+  final bool highlightPreview;
+
+  /// Denser layout for result-heavy views such as Search.
+  final bool compact;
+
   @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
@@ -453,16 +561,19 @@ class VerseListTile extends StatelessWidget {
       onTap: onTap,
       onLongPress: onLongPress,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: Space.readingSide,
-          vertical: Space.s16,
+          vertical: compact ? Space.s8 : Space.s16,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Text(reference, style: ui.label(size: 15, color: c.accentText)),
+                Text(
+                  reference,
+                  style: ui.label(size: compact ? 14 : 15, color: c.accentText),
+                ),
                 const SizedBox(width: Space.s8),
                 Expanded(
                   child: Text(
@@ -475,16 +586,43 @@ class VerseListTile extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Space.s4),
-            Text(
-              preview,
-              maxLines: 2,
+            Text.rich(
+              highlightPreview
+                  ? _highlighted(preview, c)
+                  : TextSpan(text: preview),
+              maxLines: highlightPreview && !compact ? 3 : 2,
               overflow: TextOverflow.ellipsis,
               locale: previewLocale,
-              style: ui.body(color: c.textPrimary, size: 15),
+              style: ui.body(color: c.textPrimary, size: compact ? 14 : 15),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+TextSpan _highlighted(String text, AppColors c) {
+  final spans = <TextSpan>[];
+  final parts = text.split('\u0001');
+  for (var i = 0; i < parts.length; i++) {
+    if (i == 0) {
+      spans.add(TextSpan(text: parts[i]));
+      continue;
+    }
+    final end = parts[i].indexOf('\u0002');
+    final hit = end < 0 ? parts[i] : parts[i].substring(0, end);
+    spans.add(
+      TextSpan(
+        text: hit,
+        style: TextStyle(
+          color: c.accentText,
+          backgroundColor: c.accentSoft,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+    if (end >= 0) spans.add(TextSpan(text: parts[i].substring(end + 1)));
+  }
+  return TextSpan(children: spans);
 }

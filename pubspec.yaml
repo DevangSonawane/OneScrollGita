@@ -44,9 +44,16 @@ dependencies:
   share_plus: ^13.3.1
   play_install_referrer: ^0.6.0
   home_widget: ^0.10.0
+  flutter_local_notifications: ^22.3.3
+  timezone: ^0.11.2
+  flutter_timezone: ^5.1.1
+  url_launcher: ^6.3.3
+  flutter_lucide: ^1.62.0
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -62,6 +69,9 @@ flutter:
   uses-material-design: true
   assets:
     - assets/scripture/
+    - assets/messages/
+    - assets/summaries/
+    - assets/search/
     - assets/fonts/licences/
   fonts:
     - family: Literata

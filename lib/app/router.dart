@@ -15,6 +15,9 @@ import '../features/profile/about_screen.dart';
 import '../features/profile/library_list_screen.dart';
 import '../features/profile/profile_screen.dart';
 import '../features/purport/purport_screen.dart';
+import '../features/reminders/reminders_screen.dart';
+import '../features/search/search_screen.dart';
+import '../features/summary/summary_screen.dart';
 import '../features/specimen/specimen_screen.dart';
 import 'shell.dart';
 
@@ -51,7 +54,9 @@ final routerProvider = Provider<GoRouter>((ref) {
           if (id != null && parseVerseId(id) != null) {
             ref.read(readerJumpProvider.notifier).request(id);
           }
-          return ref.read(settingsProvider).firstLaunchDone ? '/gita' : '/welcome';
+          return ref.read(settingsProvider).firstLaunchDone
+              ? '/gita'
+              : '/welcome';
         },
       ),
       GoRoute(
@@ -84,6 +89,26 @@ final routerProvider = Provider<GoRouter>((ref) {
                   return '/gita';
                 },
                 builder: (context, state) => const ReaderScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'summary/:chapter',
+                    parentNavigatorKey: rootNavigatorKey,
+                    redirect: (context, state) {
+                      final n = int.tryParse(
+                        state.pathParameters['chapter'] ?? '',
+                      );
+                      return n == null || n < 1 || n > chapterCount
+                          ? '/gita'
+                          : null;
+                    },
+                    pageBuilder: (context, state) => _risePage(
+                      state,
+                      SummaryScreen(
+                        chapter: int.parse(state.pathParameters['chapter']!),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -99,6 +124,10 @@ final routerProvider = Provider<GoRouter>((ref) {
                       builder: (context, state) =>
                           LibraryListScreen(kind: kind),
                     ),
+                  GoRoute(
+                    path: 'reminders',
+                    builder: (context, state) => const RemindersScreen(),
+                  ),
                   GoRoute(
                     path: 'about',
                     builder: (context, state) => const AboutScreen(),
@@ -117,28 +146,17 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/purport/:verseId',
         parentNavigatorKey: rootNavigatorKey,
-        pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          transitionDuration: AppDurations.base,
-          reverseTransitionDuration: AppDurations.base,
-          child: PurportScreen(verseId: state.pathParameters['verseId']!),
-          transitionsBuilder: (context, animation, secondary, child) {
-            final motion = Motion.of(context);
-            final curved = CurvedAnimation(
-              parent: animation,
-              curve: AppCurves.standard,
-            );
-            final fade = FadeTransition(opacity: curved, child: child);
-            if (motion.reduced) return fade;
-            return AnimatedBuilder(
-              animation: curved,
-              builder: (context, child) => Transform.translate(
-                offset: Offset(0, 16 * (1 - curved.value)),
-                child: child,
-              ),
-              child: fade,
-            );
-          },
+        pageBuilder: (context, state) => _risePage(
+          state,
+          PurportScreen(verseId: state.pathParameters['verseId']!),
+        ),
+      ),
+      GoRoute(
+        path: '/search',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) => _risePage(
+          state,
+          SearchScreen(initialQuery: state.uri.queryParameters['q']),
         ),
       ),
     ],
@@ -149,6 +167,31 @@ final routerProvider = Provider<GoRouter>((ref) {
   });
   return router;
 });
+
+/// Fade with a 16 px rise (fade only under reduced motion).
+Page<void> _risePage(GoRouterState state, Widget child) => CustomTransitionPage(
+  key: state.pageKey,
+  transitionDuration: AppDurations.base,
+  reverseTransitionDuration: AppDurations.base,
+  child: child,
+  transitionsBuilder: (context, animation, secondary, child) {
+    final motion = Motion.of(context);
+    final curved = CurvedAnimation(
+      parent: animation,
+      curve: AppCurves.standard,
+    );
+    final fade = FadeTransition(opacity: curved, child: child);
+    if (motion.reduced) return fade;
+    return AnimatedBuilder(
+      animation: curved,
+      builder: (context, child) => Transform.translate(
+        offset: Offset(0, 16 * (1 - curved.value)),
+        child: child,
+      ),
+      child: fade,
+    );
+  },
+);
 
 Page<void> _fadePage(GoRouterState state, Widget child) =>
     CustomTransitionPage<void>(

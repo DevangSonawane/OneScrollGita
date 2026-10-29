@@ -4,6 +4,9 @@ import 'package:versescroll/application/core_providers.dart';
 import 'package:versescroll/application/ui_providers.dart';
 import 'package:versescroll/data/settings/settings_repository.dart';
 import 'package:versescroll/features/gita/reader_screen.dart';
+import 'package:versescroll/features/purport/purport_screen.dart';
+import 'package:versescroll/features/search/search_screen.dart';
+import 'package:versescroll/features/summary/summary_screen.dart';
 
 import '../helpers.dart';
 
@@ -11,6 +14,16 @@ Future<void> tapTab(WidgetTester tester, String label) async {
   await tester.tap(find.bySemanticsLabel(RegExp('^$label, tab')));
   await settle(tester);
 }
+
+/// Real verses are long, so buttons may start below the fold.
+Future<void> tapVisible(WidgetTester tester, Finder f) async {
+  await tester.ensureVisible(f);
+  await settle(tester);
+  await tester.tap(f);
+  await settle(tester);
+}
+
+final _chip = find.textContaining(RegExp(r'^Bhagavad-gītā \d'));
 
 void main() {
   testWidgets('first launch: choose Hindi, Begin, land on Home', (tester) async {
@@ -31,15 +44,13 @@ void main() {
   testWidgets('home shows today\'s verse; same all day, changes next day', (tester) async {
     await pumpApp(tester, now: DateTime(2026, 10, 28, 8));
     expect(find.text('Wednesday, 28 October'), findsOneWidget);
-    expect(find.textContaining('Placeholder translation for Bhagavad-gita'), findsOneWidget);
-    final chip = tester.widget<Text>(find.textContaining(RegExp(r'^Bhagavad-gita \d'))).data;
-    expect(chip, isNotNull);
+    expect(find.text("TODAY'S VERSE"), findsOneWidget);
+    expect(tester.widget<Text>(_chip).data, isNotNull);
   });
 
   testWidgets('favourite on Home updates the Profile count', (tester) async {
     await pumpApp(tester);
-    await tester.tap(find.bySemanticsLabel('Add to favourites'));
-    await settle(tester);
+    await tapVisible(tester, find.bySemanticsLabel('Add to favourites'));
     expect(find.bySemanticsLabel('Remove from favourites'), findsOneWidget);
     await tapTab(tester, 'Profile');
     final row = find.ancestor(of: find.text('Favourites'), matching: find.byType(Row)).first;
@@ -48,10 +59,9 @@ void main() {
 
   testWidgets('Read in Gita opens the reader at the daily verse', (tester) async {
     final app = await pumpApp(tester, now: DateTime(2026, 10, 28));
-    final chip = tester.widget<Text>(find.textContaining(RegExp(r'^Bhagavad-gita \d'))).data!;
-    final label = chip.replaceFirst('Bhagavad-gita ', '');
-    await tester.tap(find.text('Read in Gita'));
-    await settle(tester);
+    final chip = tester.widget<Text>(_chip).data!;
+    final label = chip.replaceFirst('Bhagavad-gītā ', '');
+    await tapVisible(tester, find.text('Read in Gita'));
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
     expect(reader.current!.label, label);
     // Position is saved (debounced).
@@ -66,14 +76,15 @@ void main() {
     expect(reader.current!.id, 'bg-01-001');
     expect(find.text('1.1'), findsOneWidget);
 
-    await tester.fling(find.byType(PageView), const Offset(-300, 0), 1500);
+    // Reels-style: swipe up for the next verse.
+    await tester.fling(find.byType(PageView), const Offset(0, -400), 1500);
     await settle(tester);
     expect(reader.current!.id, 'bg-01-002');
 
     await tester.tap(find.bySemanticsLabel('Hindi translation'));
     await settle(tester);
     expect(reader.current!.id, 'bg-01-002');
-    expect(find.textContaining('का प्लेसहोल्डर अनुवाद'), findsWidgets);
+    expect(app.container.read(languageProvider), 'hi');
 
     await tester.pump(const Duration(seconds: 3));
     await settle(tester);
@@ -85,7 +96,7 @@ void main() {
     final app = await pumpApp(tester);
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
-    await tester.fling(find.byType(PageView), const Offset(300, 0), 1500);
+    await tester.fling(find.byType(PageView), const Offset(0, 400), 1500);
     await settle(tester);
     expect(reader.current!.id, 'bg-01-001');
 
@@ -94,20 +105,16 @@ void main() {
     expect(reader.current!.id, 'bg-01-016-018');
     expect(find.text('1.16-18'), findsOneWidget);
 
-    app.container.read(readerJumpProvider.notifier).request('bg-01-047');
+    app.container.read(readerJumpProvider.notifier).request('bg-01-046');
     await settle(tester);
-    await tester.drag(find.byType(Scrollable).last, const Offset(0, -800));
-    await settle(tester);
-    expect(find.text('Continue to Chapter 2'), findsOneWidget);
-    await tester.tap(find.text('Continue to Chapter 2'));
-    await settle(tester);
+    await tapVisible(tester, find.text('Continue to Chapter 2'));
     expect(reader.current!.id, 'bg-02-001');
 
     app.container.read(readerJumpProvider.notifier).request('bg-18-078');
     await settle(tester);
-    await tester.drag(find.byType(Scrollable).last, const Offset(0, -800));
-    await settle(tester);
-    expect(find.text('You have reached the end of the Gita'), findsOneWidget);
+    final end = find.text('You have reached the end of the Gita');
+    await tester.ensureVisible(end);
+    expect(end, findsOneWidget);
   });
 
   testWidgets('chapter sheet and verse selector', (tester) async {
@@ -125,7 +132,9 @@ void main() {
     await tester.tap(find.bySemanticsLabel(RegExp(r'^Verse 2.1\. Choose verse')));
     await settle(tester);
     expect(find.text('Chapter 2 - 72 verses'), findsOneWidget);
-    await tester.tap(find.bySemanticsLabel(RegExp(r'^Verse 2\.47')));
+    final v = find.bySemanticsLabel(RegExp(r'^Verse 2\.47'));
+    await tester.scrollUntilVisible(v, 200, scrollable: find.byType(Scrollable).last);
+    await tester.tap(v);
     await settle(tester);
     expect(reader.current!.id, 'bg-02-047');
   });
@@ -134,31 +143,34 @@ void main() {
     await pumpApp(tester);
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
-    await tester.tap(find.text('Purport'));
-    await settle(tester);
-    expect(find.text('PURPORT'), findsOneWidget);
-    // 4,000-word placeholder purport scrolls without overflow.
+    await tapVisible(tester, find.text('Purport'));
+    expect(find.byType(PurportScreen), findsOneWidget);
+    expect(find.textContaining('BHAGAVAD-GITA'), findsOneWidget);
+    // A long purport scrolls without overflow.
     await tester.fling(find.byType(CustomScrollView), const Offset(0, -20000), 8000);
     await settle(tester);
     await tester.tap(find.bySemanticsLabel('Back'));
     await settle(tester);
-    expect(find.text('PURPORT'), findsNothing);
+    expect(find.byType(PurportScreen), findsNothing);
     expect(reader.current!.id, 'bg-01-001');
   });
 
-  testWidgets('purport: Hindi with English-only purport shows a note', (tester) async {
+  testWidgets('purport: Hindi purport shows without the English note', (tester) async {
     final app = await pumpApp(tester);
     await app.container.read(settingsProvider.notifier).setLanguage('hi');
     app.container.read(readerJumpProvider.notifier).request('bg-02-001');
     await tapTab(tester, 'Gita');
-    await tester.tap(find.text('Purport'));
-    await settle(tester);
-    expect(find.text('Purport is available in English.'), findsOneWidget);
+    await tapVisible(tester, find.text('Purport'));
+    expect(find.byType(PurportScreen), findsOneWidget);
+    expect(find.textContaining('BHAGAVAD-GITA'), findsOneWidget);
+    // Every bundled entry has a Hindi purport; the English fallback is
+    // covered in test/domain/verse_entry_test.dart.
+    expect(find.text('Purport is available in English.'), findsNothing);
   });
 
   testWidgets('entry without purport hides the Purport button', (tester) async {
     final app = await pumpApp(tester);
-    app.container.read(readerJumpProvider.notifier).request('bg-02-009');
+    app.container.read(readerJumpProvider.notifier).request('bg-01-005');
     await tapTab(tester, 'Gita');
     expect(find.text('Purport'), findsNothing);
   });
@@ -184,6 +196,9 @@ void main() {
     expect(find.byType(ReaderScreen), findsOneWidget);
 
     await tester.runAsync(() => app.userData.setBookmark('bg-02-047', true));
+    // The Profile tab remembers the Favourites page; tapping it again
+    // returns to the Profile root.
+    await tapTab(tester, 'Profile');
     await tapTab(tester, 'Profile');
     await tester.tap(find.text('Bookmarks'));
     await settle(tester);
@@ -200,7 +215,8 @@ void main() {
     await settle(tester);
     await tester.tap(find.text('History'));
     await settle(tester);
-    expect(find.text('No reading history'), findsOneWidget);
+    // "Open the Gita" above opened 1.1 for over 2 s, so it is in history.
+    expect(find.text('1.1'), findsOneWidget);
   });
 
   testWidgets('reset all data returns to first launch', (tester) async {
@@ -223,5 +239,25 @@ void main() {
     await settle(tester);
     expect(Theme.of(tester.element(find.text('Your library'))).brightness, Brightness.dark);
     expect(app.prefs.getString(SettingsRepository.kTheme), 'dark');
+  });
+
+  testWidgets('reader three-dot glass menu opens summary and search', (tester) async {
+    await pumpApp(tester);
+    await tapTab(tester, 'Gita');
+    await tester.tap(find.bySemanticsLabel('More'));
+    await settle(tester);
+    expect(find.text('Chapter summary'), findsOneWidget);
+    expect(find.byType(PopupMenuItem<String>), findsNothing);
+    await tester.tap(find.text('Chapter summary'));
+    await settle(tester);
+    expect(find.byType(SummaryScreen), findsOneWidget);
+    await tester.tap(find.bySemanticsLabel('Back'));
+    await settle(tester);
+
+    await tester.tap(find.bySemanticsLabel('More'));
+    await settle(tester);
+    await tester.tap(find.text('Search'));
+    await settle(tester);
+    expect(find.byType(SearchScreen), findsOneWidget);
   });
 }

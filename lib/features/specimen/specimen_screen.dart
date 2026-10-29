@@ -14,7 +14,8 @@ import '../../domain/models/verse_entry.dart';
 class SpecimenScreen extends ConsumerWidget {
   const SpecimenScreen({super.key});
 
-  static const _conjuncts = 'क्ष त्र ज्ञ श्र द्ध द्व ह्म ह्य ङ्क्ष ष्ट्र क्त्य स्त्र न्द्र';
+  static const _conjuncts =
+      'क्ष त्र ज्ञ श्र द्ध द्व ह्म ह्य ङ्क्ष ष्ट्र क्त्य स्त्र न्द्र';
   static const _compound = 'प्रत्युत्पन्नमतित्वसंप्रज्ञातसमाधिस्थितप्रज्ञ';
   static const _dandas = 'पङ्क्तिः प्रथमा । पङ्क्तिः द्वितीया ॥ १ ॥';
   static const _hindi = 'ज़िंदगी फ़िक्र ख़ुशी — हँसना चाँद आँगन';
@@ -52,19 +53,43 @@ class SpecimenScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Typography specimen'),
-        leading: BackButton(onPressed: () => context.go('/profile')),
+        leading: LucideBackButton(onPressed: () => context.go('/profile')),
       ),
       body: ListView(
         padding: EdgeInsets.only(bottom: navBarInset(context)),
         children: [
           const SectionHeader('SANSKRIT — NOTO SERIF DEVANAGARI'),
-          sample('Conjuncts', _conjuncts, styles.sanskrit.copyWith(fontFamily: Fonts.devanagari)),
-          sample('Long compound', _compound, styles.sanskrit.copyWith(fontFamily: Fonts.devanagari)),
-          sample('Danda and double danda', _dandas, styles.sanskrit.copyWith(fontFamily: Fonts.devanagari)),
+          sample(
+            'Conjuncts',
+            _conjuncts,
+            styles.sanskrit.copyWith(fontFamily: Fonts.devanagari),
+          ),
+          sample(
+            'Long compound',
+            _compound,
+            styles.sanskrit.copyWith(fontFamily: Fonts.devanagari),
+          ),
+          sample(
+            'Danda and double danda',
+            _dandas,
+            styles.sanskrit.copyWith(fontFamily: Fonts.devanagari),
+          ),
           const SectionHeader('SANSKRIT — TIRO DEVANAGARI SANSKRIT'),
-          sample('Conjuncts', _conjuncts, styles.sanskrit.copyWith(fontFamily: Fonts.tiro)),
-          sample('Long compound', _compound, styles.sanskrit.copyWith(fontFamily: Fonts.tiro)),
-          sample('Danda and double danda', _dandas, styles.sanskrit.copyWith(fontFamily: Fonts.tiro)),
+          sample(
+            'Conjuncts',
+            _conjuncts,
+            styles.sanskrit.copyWith(fontFamily: Fonts.tiro),
+          ),
+          sample(
+            'Long compound',
+            _compound,
+            styles.sanskrit.copyWith(fontFamily: Fonts.tiro),
+          ),
+          sample(
+            'Danda and double danda',
+            _dandas,
+            styles.sanskrit.copyWith(fontFamily: Fonts.tiro),
+          ),
           const SectionHeader('HINDI'),
           sample('Nukta and chandrabindu', _hindi, styles.translation('hi')),
           const SectionHeader('TRANSLITERATION'),

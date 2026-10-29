@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 
 import '../../application/scripture_providers.dart';
+import '../../application/streak_providers.dart';
 import '../../application/ui_providers.dart';
 import '../../core/design/components.dart';
 import '../../core/design/glass_nav_bar.dart';
@@ -11,7 +13,9 @@ import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../core/utils/date_format.dart';
 import '../../domain/models/verse_entry.dart';
+import '../../domain/read_rule.dart';
 import '../common/common_widgets.dart';
+import '../common/qualifying_read.dart';
 import '../common/save_toggle_button.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -29,7 +33,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
     ref.listenManual(tabReselectProvider, (_, next) {
       if (next.tab == 0 && _scroll.hasClients) {
-        _scroll.animateTo(0, duration: AppDurations.base, curve: AppCurves.position);
+        _scroll.animateTo(
+          0,
+          duration: AppDurations.base,
+          curve: AppCurves.position,
+        );
       }
     });
   }
@@ -71,6 +79,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       ),
                       const LanguageToggle(),
+                      const SizedBox(width: Space.s8),
+                      IconButton(
+                        tooltip: 'Search',
+                        icon: const Icon(Icons.search_rounded),
+                        onPressed: () => openSearch(context),
+                      ),
                     ],
                   ),
                 ),
@@ -114,64 +128,82 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
-class _DailyVerse extends StatelessWidget {
+class _DailyVerse extends ConsumerWidget {
   const _DailyVerse({super.key, required this.entry});
 
   final VerseEntry entry;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Any action on today's verse counts it at once.
+    void qualify() => ref.read(readTrackerProvider.notifier).qualify(entry.id);
     final blocks = <Widget>[
       ShlokaView(lines: entry.sanskrit),
       TransliterationView(lines: entry.transliteration),
       TranslationView(entry: entry),
     ];
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Space.readingSide),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const SizedBox(height: Space.s32),
-          const SectionHeader("TODAY'S VERSE", padding: EdgeInsets.zero),
-          const SizedBox(height: Space.s32),
-          for (var i = 0; i < blocks.length; i++) ...[
-            _Entrance(index: i, child: blocks[i]),
+    return QualifyingRead(
+      verseId: entry.id,
+      dwell: ReadRule.homeDwell,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Space.readingSide),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
             const SizedBox(height: Space.s32),
-          ],
-          Center(
-            child: ReferenceChip(label: 'Bhagavad-gītā ${entry.label}'),
-          ),
-          const SizedBox(height: Space.s24),
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: Space.s8,
-            runSpacing: Space.s8,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              FilledButton.icon(
-                onPressed: () => openInReader(context, entry.id),
-                style: compactButtonStyle(context),
-                iconAlignment: IconAlignment.end,
-                icon: const Icon(Icons.arrow_forward_rounded, size: 16),
-                label: const Text('Read in Gita'),
-              ),
-              if (entry.hasPurport)
-                TextButton(
-                  onPressed: () => openPurport(context, entry.id),
-                  style: compactButtonStyle(context, filled: false),
-                  child: const Text('Purport'),
+            const SectionHeader("TODAY'S VERSE", padding: EdgeInsets.zero),
+            const SizedBox(height: Space.s32),
+            for (var i = 0; i < blocks.length; i++) ...[
+              _Entrance(index: i, child: blocks[i]),
+              const SizedBox(height: Space.s32),
+            ],
+            Center(child: ReferenceChip(label: 'Bhagavad-gītā ${entry.label}')),
+            const SizedBox(height: Space.s24),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: Space.s8,
+              runSpacing: Space.s8,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                FilledButton.icon(
+                  onPressed: () {
+                    qualify();
+                    openInReader(context, entry.id);
+                  },
+                  style: compactButtonStyle(context),
+                  iconAlignment: IconAlignment.end,
+                  icon: const Icon(LucideIcons.chevron_right, size: 16),
+                  label: const Text('Read in Gita'),
                 ),
-            ],
-          ),
-          const SizedBox(height: Space.s8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SaveToggleButton(verseId: entry.id, kind: SaveKind.favourite),
-              SaveToggleButton(verseId: entry.id, kind: SaveKind.bookmark),
-            ],
-          ),
-        ],
+                if (entry.hasPurport)
+                  TextButton(
+                    onPressed: () {
+                      qualify();
+                      openPurport(context, entry.id);
+                    },
+                    style: compactButtonStyle(context, filled: false),
+                    child: const Text('Purport'),
+                  ),
+              ],
+            ),
+            const SizedBox(height: Space.s8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SaveToggleButton(
+                  verseId: entry.id,
+                  kind: SaveKind.favourite,
+                  onToggled: qualify,
+                ),
+                SaveToggleButton(
+                  verseId: entry.id,
+                  kind: SaveKind.bookmark,
+                  onToggled: qualify,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

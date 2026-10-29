@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain/daily_verse.dart';
@@ -35,11 +36,13 @@ class TodayNotifier extends Notifier<DateTime> {
   DateTime build() {
     ref.onDispose(() => _timer?.cancel());
     final now = ref.watch(clockProvider)();
-    _schedule(now);
+    scheduleMidnight(now);
     return DateTime(now.year, now.month, now.day);
   }
 
-  void _schedule(DateTime now) {
+  /// Widget tests override this: a day-long timer would outlive the test.
+  @protected
+  void scheduleMidnight(DateTime now) {
     _timer?.cancel();
     final next = DateTime(now.year, now.month, now.day + 1);
     _timer = Timer(next.difference(now) + const Duration(seconds: 1), refresh);
@@ -48,7 +51,7 @@ class TodayNotifier extends Notifier<DateTime> {
   void refresh() {
     final now = ref.read(clockProvider)();
     final today = DateTime(now.year, now.month, now.day);
-    _schedule(now);
+    scheduleMidnight(now);
     if (today != state) state = today;
   }
 }

@@ -151,7 +151,8 @@ class _GlassNavBarState extends State<GlassNavBar>
                     builder: (context, _) {
                       final stretch = (_velocity.abs() / 40).clamp(0.0, 0.22);
                       final w = tabWidth * (1 + stretch);
-                      final h = (NavBarMetrics.height - inset * 2) *
+                      final h =
+                          (NavBarMetrics.height - inset * 2) *
                           (1 - stretch * 0.25);
                       final left =
                           inset + _pos.value * tabWidth - (w - tabWidth) / 2;
@@ -220,7 +221,6 @@ class _Tab extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
     final iconColor = selected ? c.accent : c.textSecondary;
-    final labelColor = selected ? c.accentText : c.textSecondary;
     return Semantics(
       label: '${item.label}, tab ${index + 1} of $count',
       selected: selected,
@@ -242,15 +242,6 @@ class _Tab extends StatelessWidget {
                   size: IconSizes.regular,
                   color: iconColor,
                 ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                item.label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelSmall!.copyWith(color: labelColor),
               ),
             ],
           ),

@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain/models/user_items.dart';
 import 'core_providers.dart';
+import 'reminder_providers.dart';
+import 'streak_providers.dart';
 import 'ui_providers.dart';
 
 final favouritesProvider = StreamProvider<List<SavedItem>>(
@@ -16,12 +18,14 @@ final historyProvider = StreamProvider<List<SavedItem>>(
 
 final _favouriteIdsProvider = Provider<Set<String>>(
   (ref) => {
-    for (final i in ref.watch(favouritesProvider).value ?? const <SavedItem>[]) i.verseId,
+    for (final i in ref.watch(favouritesProvider).value ?? const <SavedItem>[])
+      i.verseId,
   },
 );
 final _bookmarkIdsProvider = Provider<Set<String>>(
   (ref) => {
-    for (final i in ref.watch(bookmarksProvider).value ?? const <SavedItem>[]) i.verseId,
+    for (final i in ref.watch(bookmarksProvider).value ?? const <SavedItem>[])
+      i.verseId,
   },
 );
 
@@ -80,7 +84,9 @@ class LibraryController extends Notifier<PendingSaves> {
   Future<bool> setFavourite(String id, bool value, {DateTime? at}) async {
     _setPending(id, value, favourite: true);
     try {
-      await ref.read(userDataRepositoryProvider).setFavourite(id, value, at: at);
+      await ref
+          .read(userDataRepositoryProvider)
+          .setFavourite(id, value, at: at);
       return true;
     } catch (_) {
       _setPending(id, null, favourite: true);
@@ -116,11 +122,16 @@ class LibraryController extends Notifier<PendingSaves> {
   Future<void> clearHistory() =>
       ref.read(userDataRepositoryProvider).clearHistory();
 
-  /// Clears favourites, bookmarks, history and settings (back to first
+  /// Clears favourites, bookmarks, history, v2 data (streak, reminders,
+  /// search history), scheduled notifications and settings (back to first
   /// launch).
   Future<void> resetAll() async {
     await ref.read(userDataRepositoryProvider).resetAll();
+    await ref.read(activityRepositoryProvider).resetAll();
     await ref.read(settingsProvider.notifier).resetAll();
+    await ref.read(reminderControllerProvider.notifier).reset();
+    ref.read(readTrackerProvider.notifier).forget();
+    ref.read(streakPopupProvider.notifier).dismiss();
     ref.invalidate(readerJumpProvider);
     state = const PendingSaves();
   }

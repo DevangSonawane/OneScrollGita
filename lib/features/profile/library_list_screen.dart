@@ -72,7 +72,7 @@ class LibraryListScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(_title),
-        leading: BackButton(onPressed: () => context.go('/profile')),
+        leading: LucideBackButton(onPressed: () => context.go('/profile')),
         actions: [
           if (kind == LibraryKind.history && list.isNotEmpty)
             TextButton(
@@ -84,7 +84,9 @@ class LibraryListScreen extends ConsumerWidget {
                   confirmLabel: 'Clear',
                 );
                 if (ok) {
-                  await ref.read(libraryControllerProvider.notifier).clearHistory();
+                  await ref
+                      .read(libraryControllerProvider.notifier)
+                      .clearHistory();
                 }
               },
               child: const Text('Clear'),

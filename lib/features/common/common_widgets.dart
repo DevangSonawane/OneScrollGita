@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../application/core_providers.dart';
@@ -17,6 +18,10 @@ void openInReader(BuildContext context, String verseId) =>
 
 void openPurport(BuildContext context, String verseId) =>
     context.push('/purport/${Uri.encodeComponent(verseId)}');
+
+void openSearch(BuildContext context, {String? query}) => context.push(
+  query == null ? '/search' : '/search?q=${Uri.encodeQueryComponent(query)}',
+);
 
 /// EN | हि toggle.
 class LanguageToggle extends ConsumerWidget {
@@ -35,7 +40,13 @@ class LanguageToggle extends ConsumerWidget {
         Choice('en', 'EN', semanticLabel: 'English translation'),
         Choice('hi', 'हि', semanticLabel: 'Hindi translation'),
       ],
-      onChanged: (v) => ref.read(settingsProvider.notifier).setLanguage(v),
+      // Avoid restarting the visual transition when the selected segment is
+      // tapped again.
+      onChanged: (v) {
+        if (v != lang) {
+          ref.read(settingsProvider.notifier).setLanguage(v);
+        }
+      },
     );
   }
 }
@@ -72,7 +83,7 @@ class ContinueRow extends ConsumerWidget {
                   style: UiStyles(c).label(color: c.textTertiary, size: 15),
                 ),
               ),
-              Icon(Icons.chevron_right_rounded, color: c.textTertiary),
+              Icon(LucideIcons.chevron_right, color: c.textTertiary),
             ],
           ),
         ),
@@ -93,16 +104,20 @@ class NavHideOnScroll extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allow = Motion.of(context).allowNavHide;
-    return NotificationListener<UserScrollNotification>(
+    return NotificationListener<ScrollNotification>(
       onNotification: (n) {
         if (!allow || n.metrics.axis != Axis.vertical || n.depth < minDepth) {
           return false;
         }
         final nav = ref.read(navBarVisibleProvider.notifier);
-        if (n.direction == ScrollDirection.reverse &&
+        // Checked during the drag, so one swipe from the top also hides it.
+        if (n is ScrollUpdateNotification &&
+            n.dragDetails != null &&
+            (n.scrollDelta ?? 0) > 0 &&
             n.metrics.pixels > 24) {
           nav.hide();
-        } else if (n.direction == ScrollDirection.forward) {
+        } else if (n is UserScrollNotification &&
+            n.direction == ScrollDirection.forward) {
           nav.show();
         }
         return false;

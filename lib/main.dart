@@ -10,9 +10,13 @@ import 'app/app.dart';
 import 'app/router.dart';
 import 'application/core_providers.dart';
 import 'application/library_providers.dart';
+import 'application/reminder_providers.dart';
+import 'application/streak_providers.dart';
 import 'application/ui_providers.dart';
 import 'core/config/app_links.dart';
 import 'data/settings/settings_repository.dart';
+import 'data/notifications/notification_service.dart';
+import 'data/user/activity_repository.dart';
 import 'data/user/database.dart';
 import 'data/user/user_data_repository.dart';
 import 'domain/verse_navigation.dart';
@@ -28,10 +32,18 @@ Future<void> main() async {
     overrides: [
       settingsRepositoryProvider.overrideWithValue(SettingsRepository(prefs)),
       userDataRepositoryProvider.overrideWithValue(UserDataRepository(db)),
+      activityRepositoryProvider.overrideWithValue(ActivityRepository(db)),
+      if (defaultTargetPlatform == TargetPlatform.android ||
+          defaultTargetPlatform == TargetPlatform.iOS)
+        notificationServiceProvider.overrideWithValue(
+          LocalNotificationService(),
+        ),
     ],
   );
 
-  runApp(UncontrolledProviderScope(container: container, child: const GitaApp()));
+  runApp(
+    UncontrolledProviderScope(container: container, child: const GitaApp()),
+  );
 
   // Not awaited: the first readable verse must not wait for these.
   LiquidGlass.precache().ignore();

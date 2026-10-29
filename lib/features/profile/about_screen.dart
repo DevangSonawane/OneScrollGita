@@ -39,7 +39,7 @@ class AboutScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('About and credits'),
-        leading: BackButton(onPressed: () => context.go('/profile')),
+        leading: LucideBackButton(onPressed: () => context.go('/profile')),
       ),
       body: ContentWidth(
         child: ListView(
@@ -55,7 +55,9 @@ class AboutScreen extends ConsumerWidget {
               child: Text('One Scroll Gita', style: ui.title),
             ),
             para(
-              info == null ? '' : 'Version ${info.version} (${info.buildNumber})',
+              info == null
+                  ? ''
+                  : 'Version ${info.version} (${info.buildNumber})',
               color: c.textSecondary,
             ),
             const SectionHeader('SOURCE'),
@@ -70,14 +72,23 @@ class AboutScreen extends ConsumerWidget {
               para('Source: ${source.name}', color: c.textSecondary),
               para('Rights: ${source.rightsHolder}', color: c.textSecondary),
               para(source.attribution),
-              para(
-                'Dataset ${source.datasetVersion}',
-                color: c.textSecondary,
-              ),
+              para('Dataset ${source.datasetVersion}', color: c.textSecondary),
             ],
             const SectionHeader('PRIVACY'),
             para(
-              'Works offline. No account. Your reading stays on this device.',
+              'Works offline. No account. Your reading, streak, searches and '
+              'reminder settings stay on this device.',
+            ),
+            para(
+              'Reminders are scheduled on this phone. Nothing is sent from a '
+              'server, and the app makes no network calls. Sharing only hands '
+              'a picture to your phone\'s share sheet.',
+            ),
+            const SectionHeader('WRITTEN CONTENT'),
+            para(
+              'Reminder messages, chapter summaries and search themes are '
+              "written for this app. They are not part of Srila Prabhupada's "
+              'text.',
             ),
             const SectionHeader('FONTS'),
             for (final f in const [

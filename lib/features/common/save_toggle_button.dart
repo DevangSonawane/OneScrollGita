@@ -13,10 +13,18 @@ enum SaveKind { favourite, bookmark }
 
 /// Favourite or bookmark toggle. Optimistic, with a 1.0 → 1.15 → 1.0 pulse.
 class SaveToggleButton extends ConsumerStatefulWidget {
-  const SaveToggleButton({super.key, required this.verseId, required this.kind});
+  const SaveToggleButton({
+    super.key,
+    required this.verseId,
+    required this.kind,
+    this.onToggled,
+  });
 
   final String verseId;
   final SaveKind kind;
+
+  /// Called after each tap (Home uses it to count a qualifying read).
+  final VoidCallback? onToggled;
 
   @override
   ConsumerState<SaveToggleButton> createState() => _SaveToggleButtonState();
@@ -40,6 +48,7 @@ class _SaveToggleButtonState extends ConsumerState<SaveToggleButton>
   }
 
   Future<void> _toggle() async {
+    widget.onToggled?.call();
     unawaited(HapticFeedback.lightImpact());
     if (!Motion.of(context).reduced) unawaited(_pulse.forward(from: 0));
     final library = ref.read(libraryControllerProvider.notifier);

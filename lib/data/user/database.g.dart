@@ -668,12 +668,1036 @@ class HistoryCompanion extends UpdateCompanion<HistoryRow> {
   }
 }
 
+class $ReadDaysTable extends ReadDays
+    with TableInfo<$ReadDaysTable, ReadDayRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ReadDaysTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _verseCountMeta = const VerificationMeta(
+    'verseCount',
+  );
+  @override
+  late final GeneratedColumn<int> verseCount = GeneratedColumn<int>(
+    'verse_count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _firstReadAtMeta = const VerificationMeta(
+    'firstReadAt',
+  );
+  @override
+  late final GeneratedColumn<String> firstReadAt = GeneratedColumn<String>(
+    'first_read_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [date, verseCount, firstReadAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'read_days';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ReadDayRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('verse_count')) {
+      context.handle(
+        _verseCountMeta,
+        verseCount.isAcceptableOrUnknown(data['verse_count']!, _verseCountMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_verseCountMeta);
+    }
+    if (data.containsKey('first_read_at')) {
+      context.handle(
+        _firstReadAtMeta,
+        firstReadAt.isAcceptableOrUnknown(
+          data['first_read_at']!,
+          _firstReadAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_firstReadAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {date};
+  @override
+  ReadDayRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ReadDayRow(
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      verseCount: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}verse_count'],
+      )!,
+      firstReadAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}first_read_at'],
+      )!,
+    );
+  }
+
+  @override
+  $ReadDaysTable createAlias(String alias) {
+    return $ReadDaysTable(attachedDatabase, alias);
+  }
+}
+
+class ReadDayRow extends DataClass implements Insertable<ReadDayRow> {
+  final String date;
+  final int verseCount;
+  final String firstReadAt;
+  const ReadDayRow({
+    required this.date,
+    required this.verseCount,
+    required this.firstReadAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['date'] = Variable<String>(date);
+    map['verse_count'] = Variable<int>(verseCount);
+    map['first_read_at'] = Variable<String>(firstReadAt);
+    return map;
+  }
+
+  ReadDaysCompanion toCompanion(bool nullToAbsent) {
+    return ReadDaysCompanion(
+      date: Value(date),
+      verseCount: Value(verseCount),
+      firstReadAt: Value(firstReadAt),
+    );
+  }
+
+  factory ReadDayRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ReadDayRow(
+      date: serializer.fromJson<String>(json['date']),
+      verseCount: serializer.fromJson<int>(json['verseCount']),
+      firstReadAt: serializer.fromJson<String>(json['firstReadAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'date': serializer.toJson<String>(date),
+      'verseCount': serializer.toJson<int>(verseCount),
+      'firstReadAt': serializer.toJson<String>(firstReadAt),
+    };
+  }
+
+  ReadDayRow copyWith({String? date, int? verseCount, String? firstReadAt}) =>
+      ReadDayRow(
+        date: date ?? this.date,
+        verseCount: verseCount ?? this.verseCount,
+        firstReadAt: firstReadAt ?? this.firstReadAt,
+      );
+  ReadDayRow copyWithCompanion(ReadDaysCompanion data) {
+    return ReadDayRow(
+      date: data.date.present ? data.date.value : this.date,
+      verseCount: data.verseCount.present
+          ? data.verseCount.value
+          : this.verseCount,
+      firstReadAt: data.firstReadAt.present
+          ? data.firstReadAt.value
+          : this.firstReadAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReadDayRow(')
+          ..write('date: $date, ')
+          ..write('verseCount: $verseCount, ')
+          ..write('firstReadAt: $firstReadAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(date, verseCount, firstReadAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ReadDayRow &&
+          other.date == this.date &&
+          other.verseCount == this.verseCount &&
+          other.firstReadAt == this.firstReadAt);
+}
+
+class ReadDaysCompanion extends UpdateCompanion<ReadDayRow> {
+  final Value<String> date;
+  final Value<int> verseCount;
+  final Value<String> firstReadAt;
+  final Value<int> rowid;
+  const ReadDaysCompanion({
+    this.date = const Value.absent(),
+    this.verseCount = const Value.absent(),
+    this.firstReadAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ReadDaysCompanion.insert({
+    required String date,
+    required int verseCount,
+    required String firstReadAt,
+    this.rowid = const Value.absent(),
+  }) : date = Value(date),
+       verseCount = Value(verseCount),
+       firstReadAt = Value(firstReadAt);
+  static Insertable<ReadDayRow> custom({
+    Expression<String>? date,
+    Expression<int>? verseCount,
+    Expression<String>? firstReadAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (date != null) 'date': date,
+      if (verseCount != null) 'verse_count': verseCount,
+      if (firstReadAt != null) 'first_read_at': firstReadAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ReadDaysCompanion copyWith({
+    Value<String>? date,
+    Value<int>? verseCount,
+    Value<String>? firstReadAt,
+    Value<int>? rowid,
+  }) {
+    return ReadDaysCompanion(
+      date: date ?? this.date,
+      verseCount: verseCount ?? this.verseCount,
+      firstReadAt: firstReadAt ?? this.firstReadAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (verseCount.present) {
+      map['verse_count'] = Variable<int>(verseCount.value);
+    }
+    if (firstReadAt.present) {
+      map['first_read_at'] = Variable<String>(firstReadAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReadDaysCompanion(')
+          ..write('date: $date, ')
+          ..write('verseCount: $verseCount, ')
+          ..write('firstReadAt: $firstReadAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ReadDayVersesTable extends ReadDayVerses
+    with TableInfo<$ReadDayVersesTable, ReadDayVerseRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ReadDayVersesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _verseIdMeta = const VerificationMeta(
+    'verseId',
+  );
+  @override
+  late final GeneratedColumn<String> verseId = GeneratedColumn<String>(
+    'verse_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [date, verseId];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'read_day_verses';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ReadDayVerseRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('verse_id')) {
+      context.handle(
+        _verseIdMeta,
+        verseId.isAcceptableOrUnknown(data['verse_id']!, _verseIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_verseIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {date, verseId};
+  @override
+  ReadDayVerseRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ReadDayVerseRow(
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      verseId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}verse_id'],
+      )!,
+    );
+  }
+
+  @override
+  $ReadDayVersesTable createAlias(String alias) {
+    return $ReadDayVersesTable(attachedDatabase, alias);
+  }
+}
+
+class ReadDayVerseRow extends DataClass implements Insertable<ReadDayVerseRow> {
+  final String date;
+  final String verseId;
+  const ReadDayVerseRow({required this.date, required this.verseId});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['date'] = Variable<String>(date);
+    map['verse_id'] = Variable<String>(verseId);
+    return map;
+  }
+
+  ReadDayVersesCompanion toCompanion(bool nullToAbsent) {
+    return ReadDayVersesCompanion(date: Value(date), verseId: Value(verseId));
+  }
+
+  factory ReadDayVerseRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ReadDayVerseRow(
+      date: serializer.fromJson<String>(json['date']),
+      verseId: serializer.fromJson<String>(json['verseId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'date': serializer.toJson<String>(date),
+      'verseId': serializer.toJson<String>(verseId),
+    };
+  }
+
+  ReadDayVerseRow copyWith({String? date, String? verseId}) => ReadDayVerseRow(
+    date: date ?? this.date,
+    verseId: verseId ?? this.verseId,
+  );
+  ReadDayVerseRow copyWithCompanion(ReadDayVersesCompanion data) {
+    return ReadDayVerseRow(
+      date: data.date.present ? data.date.value : this.date,
+      verseId: data.verseId.present ? data.verseId.value : this.verseId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReadDayVerseRow(')
+          ..write('date: $date, ')
+          ..write('verseId: $verseId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(date, verseId);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ReadDayVerseRow &&
+          other.date == this.date &&
+          other.verseId == this.verseId);
+}
+
+class ReadDayVersesCompanion extends UpdateCompanion<ReadDayVerseRow> {
+  final Value<String> date;
+  final Value<String> verseId;
+  final Value<int> rowid;
+  const ReadDayVersesCompanion({
+    this.date = const Value.absent(),
+    this.verseId = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ReadDayVersesCompanion.insert({
+    required String date,
+    required String verseId,
+    this.rowid = const Value.absent(),
+  }) : date = Value(date),
+       verseId = Value(verseId);
+  static Insertable<ReadDayVerseRow> custom({
+    Expression<String>? date,
+    Expression<String>? verseId,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (date != null) 'date': date,
+      if (verseId != null) 'verse_id': verseId,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ReadDayVersesCompanion copyWith({
+    Value<String>? date,
+    Value<String>? verseId,
+    Value<int>? rowid,
+  }) {
+    return ReadDayVersesCompanion(
+      date: date ?? this.date,
+      verseId: verseId ?? this.verseId,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (verseId.present) {
+      map['verse_id'] = Variable<String>(verseId.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReadDayVersesCompanion(')
+          ..write('date: $date, ')
+          ..write('verseId: $verseId, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $NotifAssignmentsTable extends NotifAssignments
+    with TableInfo<$NotifAssignmentsTable, NotifAssignmentRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $NotifAssignmentsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<String> date = GeneratedColumn<String>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _slotMeta = const VerificationMeta('slot');
+  @override
+  late final GeneratedColumn<String> slot = GeneratedColumn<String>(
+    'slot',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _messageIdMeta = const VerificationMeta(
+    'messageId',
+  );
+  @override
+  late final GeneratedColumn<String> messageId = GeneratedColumn<String>(
+    'message_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _verseIdMeta = const VerificationMeta(
+    'verseId',
+  );
+  @override
+  late final GeneratedColumn<String> verseId = GeneratedColumn<String>(
+    'verse_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [date, slot, messageId, verseId];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'notif_assignments';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<NotifAssignmentRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('slot')) {
+      context.handle(
+        _slotMeta,
+        slot.isAcceptableOrUnknown(data['slot']!, _slotMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_slotMeta);
+    }
+    if (data.containsKey('message_id')) {
+      context.handle(
+        _messageIdMeta,
+        messageId.isAcceptableOrUnknown(data['message_id']!, _messageIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_messageIdMeta);
+    }
+    if (data.containsKey('verse_id')) {
+      context.handle(
+        _verseIdMeta,
+        verseId.isAcceptableOrUnknown(data['verse_id']!, _verseIdMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {date, slot};
+  @override
+  NotifAssignmentRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return NotifAssignmentRow(
+      date: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date'],
+      )!,
+      slot: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}slot'],
+      )!,
+      messageId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}message_id'],
+      )!,
+      verseId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}verse_id'],
+      ),
+    );
+  }
+
+  @override
+  $NotifAssignmentsTable createAlias(String alias) {
+    return $NotifAssignmentsTable(attachedDatabase, alias);
+  }
+}
+
+class NotifAssignmentRow extends DataClass
+    implements Insertable<NotifAssignmentRow> {
+  final String date;
+  final String slot;
+  final String messageId;
+  final String? verseId;
+  const NotifAssignmentRow({
+    required this.date,
+    required this.slot,
+    required this.messageId,
+    this.verseId,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['date'] = Variable<String>(date);
+    map['slot'] = Variable<String>(slot);
+    map['message_id'] = Variable<String>(messageId);
+    if (!nullToAbsent || verseId != null) {
+      map['verse_id'] = Variable<String>(verseId);
+    }
+    return map;
+  }
+
+  NotifAssignmentsCompanion toCompanion(bool nullToAbsent) {
+    return NotifAssignmentsCompanion(
+      date: Value(date),
+      slot: Value(slot),
+      messageId: Value(messageId),
+      verseId: verseId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(verseId),
+    );
+  }
+
+  factory NotifAssignmentRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return NotifAssignmentRow(
+      date: serializer.fromJson<String>(json['date']),
+      slot: serializer.fromJson<String>(json['slot']),
+      messageId: serializer.fromJson<String>(json['messageId']),
+      verseId: serializer.fromJson<String?>(json['verseId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'date': serializer.toJson<String>(date),
+      'slot': serializer.toJson<String>(slot),
+      'messageId': serializer.toJson<String>(messageId),
+      'verseId': serializer.toJson<String?>(verseId),
+    };
+  }
+
+  NotifAssignmentRow copyWith({
+    String? date,
+    String? slot,
+    String? messageId,
+    Value<String?> verseId = const Value.absent(),
+  }) => NotifAssignmentRow(
+    date: date ?? this.date,
+    slot: slot ?? this.slot,
+    messageId: messageId ?? this.messageId,
+    verseId: verseId.present ? verseId.value : this.verseId,
+  );
+  NotifAssignmentRow copyWithCompanion(NotifAssignmentsCompanion data) {
+    return NotifAssignmentRow(
+      date: data.date.present ? data.date.value : this.date,
+      slot: data.slot.present ? data.slot.value : this.slot,
+      messageId: data.messageId.present ? data.messageId.value : this.messageId,
+      verseId: data.verseId.present ? data.verseId.value : this.verseId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('NotifAssignmentRow(')
+          ..write('date: $date, ')
+          ..write('slot: $slot, ')
+          ..write('messageId: $messageId, ')
+          ..write('verseId: $verseId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(date, slot, messageId, verseId);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is NotifAssignmentRow &&
+          other.date == this.date &&
+          other.slot == this.slot &&
+          other.messageId == this.messageId &&
+          other.verseId == this.verseId);
+}
+
+class NotifAssignmentsCompanion extends UpdateCompanion<NotifAssignmentRow> {
+  final Value<String> date;
+  final Value<String> slot;
+  final Value<String> messageId;
+  final Value<String?> verseId;
+  final Value<int> rowid;
+  const NotifAssignmentsCompanion({
+    this.date = const Value.absent(),
+    this.slot = const Value.absent(),
+    this.messageId = const Value.absent(),
+    this.verseId = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  NotifAssignmentsCompanion.insert({
+    required String date,
+    required String slot,
+    required String messageId,
+    this.verseId = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : date = Value(date),
+       slot = Value(slot),
+       messageId = Value(messageId);
+  static Insertable<NotifAssignmentRow> custom({
+    Expression<String>? date,
+    Expression<String>? slot,
+    Expression<String>? messageId,
+    Expression<String>? verseId,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (date != null) 'date': date,
+      if (slot != null) 'slot': slot,
+      if (messageId != null) 'message_id': messageId,
+      if (verseId != null) 'verse_id': verseId,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  NotifAssignmentsCompanion copyWith({
+    Value<String>? date,
+    Value<String>? slot,
+    Value<String>? messageId,
+    Value<String?>? verseId,
+    Value<int>? rowid,
+  }) {
+    return NotifAssignmentsCompanion(
+      date: date ?? this.date,
+      slot: slot ?? this.slot,
+      messageId: messageId ?? this.messageId,
+      verseId: verseId ?? this.verseId,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (date.present) {
+      map['date'] = Variable<String>(date.value);
+    }
+    if (slot.present) {
+      map['slot'] = Variable<String>(slot.value);
+    }
+    if (messageId.present) {
+      map['message_id'] = Variable<String>(messageId.value);
+    }
+    if (verseId.present) {
+      map['verse_id'] = Variable<String>(verseId.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('NotifAssignmentsCompanion(')
+          ..write('date: $date, ')
+          ..write('slot: $slot, ')
+          ..write('messageId: $messageId, ')
+          ..write('verseId: $verseId, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $SearchHistoryTable extends SearchHistory
+    with TableInfo<$SearchHistoryTable, SearchHistoryRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $SearchHistoryTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _queryMeta = const VerificationMeta('query');
+  @override
+  late final GeneratedColumn<String> query = GeneratedColumn<String>(
+    'query',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _lastUsedAtMeta = const VerificationMeta(
+    'lastUsedAt',
+  );
+  @override
+  late final GeneratedColumn<String> lastUsedAt = GeneratedColumn<String>(
+    'last_used_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [query, lastUsedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'search_history';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<SearchHistoryRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('query')) {
+      context.handle(
+        _queryMeta,
+        query.isAcceptableOrUnknown(data['query']!, _queryMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_queryMeta);
+    }
+    if (data.containsKey('last_used_at')) {
+      context.handle(
+        _lastUsedAtMeta,
+        lastUsedAt.isAcceptableOrUnknown(
+          data['last_used_at']!,
+          _lastUsedAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_lastUsedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {query};
+  @override
+  SearchHistoryRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return SearchHistoryRow(
+      query: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}query'],
+      )!,
+      lastUsedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}last_used_at'],
+      )!,
+    );
+  }
+
+  @override
+  $SearchHistoryTable createAlias(String alias) {
+    return $SearchHistoryTable(attachedDatabase, alias);
+  }
+}
+
+class SearchHistoryRow extends DataClass
+    implements Insertable<SearchHistoryRow> {
+  final String query;
+  final String lastUsedAt;
+  const SearchHistoryRow({required this.query, required this.lastUsedAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['query'] = Variable<String>(query);
+    map['last_used_at'] = Variable<String>(lastUsedAt);
+    return map;
+  }
+
+  SearchHistoryCompanion toCompanion(bool nullToAbsent) {
+    return SearchHistoryCompanion(
+      query: Value(query),
+      lastUsedAt: Value(lastUsedAt),
+    );
+  }
+
+  factory SearchHistoryRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return SearchHistoryRow(
+      query: serializer.fromJson<String>(json['query']),
+      lastUsedAt: serializer.fromJson<String>(json['lastUsedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'query': serializer.toJson<String>(query),
+      'lastUsedAt': serializer.toJson<String>(lastUsedAt),
+    };
+  }
+
+  SearchHistoryRow copyWith({String? query, String? lastUsedAt}) =>
+      SearchHistoryRow(
+        query: query ?? this.query,
+        lastUsedAt: lastUsedAt ?? this.lastUsedAt,
+      );
+  SearchHistoryRow copyWithCompanion(SearchHistoryCompanion data) {
+    return SearchHistoryRow(
+      query: data.query.present ? data.query.value : this.query,
+      lastUsedAt: data.lastUsedAt.present
+          ? data.lastUsedAt.value
+          : this.lastUsedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SearchHistoryRow(')
+          ..write('query: $query, ')
+          ..write('lastUsedAt: $lastUsedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(query, lastUsedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SearchHistoryRow &&
+          other.query == this.query &&
+          other.lastUsedAt == this.lastUsedAt);
+}
+
+class SearchHistoryCompanion extends UpdateCompanion<SearchHistoryRow> {
+  final Value<String> query;
+  final Value<String> lastUsedAt;
+  final Value<int> rowid;
+  const SearchHistoryCompanion({
+    this.query = const Value.absent(),
+    this.lastUsedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  SearchHistoryCompanion.insert({
+    required String query,
+    required String lastUsedAt,
+    this.rowid = const Value.absent(),
+  }) : query = Value(query),
+       lastUsedAt = Value(lastUsedAt);
+  static Insertable<SearchHistoryRow> custom({
+    Expression<String>? query,
+    Expression<String>? lastUsedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (query != null) 'query': query,
+      if (lastUsedAt != null) 'last_used_at': lastUsedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  SearchHistoryCompanion copyWith({
+    Value<String>? query,
+    Value<String>? lastUsedAt,
+    Value<int>? rowid,
+  }) {
+    return SearchHistoryCompanion(
+      query: query ?? this.query,
+      lastUsedAt: lastUsedAt ?? this.lastUsedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (query.present) {
+      map['query'] = Variable<String>(query.value);
+    }
+    if (lastUsedAt.present) {
+      map['last_used_at'] = Variable<String>(lastUsedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SearchHistoryCompanion(')
+          ..write('query: $query, ')
+          ..write('lastUsedAt: $lastUsedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
   late final $FavouritesTable favourites = $FavouritesTable(this);
   late final $BookmarksTable bookmarks = $BookmarksTable(this);
   late final $HistoryTable history = $HistoryTable(this);
+  late final $ReadDaysTable readDays = $ReadDaysTable(this);
+  late final $ReadDayVersesTable readDayVerses = $ReadDayVersesTable(this);
+  late final $NotifAssignmentsTable notifAssignments = $NotifAssignmentsTable(
+    this,
+  );
+  late final $SearchHistoryTable searchHistory = $SearchHistoryTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -682,6 +1706,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     favourites,
     bookmarks,
     history,
+    readDays,
+    readDayVerses,
+    notifAssignments,
+    searchHistory,
   ];
 }
 
@@ -1138,6 +2166,688 @@ typedef $$HistoryTableProcessedTableManager =
       HistoryRow,
       PrefetchHooks Function()
     >;
+typedef $$ReadDaysTableCreateCompanionBuilder = ReadDaysCompanion Function({
+  required String date,
+  required int verseCount,
+  required String firstReadAt,
+  Value<int> rowid,
+});
+typedef $$ReadDaysTableUpdateCompanionBuilder = ReadDaysCompanion Function({
+  Value<String> date,
+  Value<int> verseCount,
+  Value<String> firstReadAt,
+  Value<int> rowid,
+});
+
+class $$ReadDaysTableFilterComposer
+    extends Composer<_$AppDatabase, $ReadDaysTable> {
+  $$ReadDaysTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get verseCount => $composableBuilder(
+    column: $table.verseCount,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get firstReadAt => $composableBuilder(
+    column: $table.firstReadAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ReadDaysTableOrderingComposer
+    extends Composer<_$AppDatabase, $ReadDaysTable> {
+  $$ReadDaysTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get verseCount => $composableBuilder(
+    column: $table.verseCount,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get firstReadAt => $composableBuilder(
+    column: $table.firstReadAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ReadDaysTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ReadDaysTable> {
+  $$ReadDaysTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<int> get verseCount => $composableBuilder(
+    column: $table.verseCount,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get firstReadAt => $composableBuilder(
+    column: $table.firstReadAt,
+    builder: (column) => column,
+  );
+}
+
+class $$ReadDaysTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ReadDaysTable,
+          ReadDayRow,
+          $$ReadDaysTableFilterComposer,
+          $$ReadDaysTableOrderingComposer,
+          $$ReadDaysTableAnnotationComposer,
+          $$ReadDaysTableCreateCompanionBuilder,
+          $$ReadDaysTableUpdateCompanionBuilder,
+          (
+            ReadDayRow,
+            BaseReferences<_$AppDatabase, $ReadDaysTable, ReadDayRow>,
+          ),
+          ReadDayRow,
+          PrefetchHooks Function()
+        > {
+  $$ReadDaysTableTableManager(_$AppDatabase db, $ReadDaysTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ReadDaysTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ReadDaysTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ReadDaysTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> date = const Value.absent(),
+                Value<int> verseCount = const Value.absent(),
+                Value<String> firstReadAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ReadDaysCompanion(
+                date: date,
+                verseCount: verseCount,
+                firstReadAt: firstReadAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String date,
+                required int verseCount,
+                required String firstReadAt,
+                Value<int> rowid = const Value.absent(),
+              }) => ReadDaysCompanion.insert(
+                date: date,
+                verseCount: verseCount,
+                firstReadAt: firstReadAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$ReadDaysTable, ReadDayRow>(table),
+                  BaseReferences<_$AppDatabase, $ReadDaysTable, ReadDayRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ReadDaysTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ReadDaysTable,
+      ReadDayRow,
+      $$ReadDaysTableFilterComposer,
+      $$ReadDaysTableOrderingComposer,
+      $$ReadDaysTableAnnotationComposer,
+      $$ReadDaysTableCreateCompanionBuilder,
+      $$ReadDaysTableUpdateCompanionBuilder,
+      (ReadDayRow, BaseReferences<_$AppDatabase, $ReadDaysTable, ReadDayRow>),
+      ReadDayRow,
+      PrefetchHooks Function()
+    >;
+typedef $$ReadDayVersesTableCreateCompanionBuilder =
+    ReadDayVersesCompanion Function({
+      required String date,
+      required String verseId,
+      Value<int> rowid,
+    });
+typedef $$ReadDayVersesTableUpdateCompanionBuilder =
+    ReadDayVersesCompanion Function({
+      Value<String> date,
+      Value<String> verseId,
+      Value<int> rowid,
+    });
+
+class $$ReadDayVersesTableFilterComposer
+    extends Composer<_$AppDatabase, $ReadDayVersesTable> {
+  $$ReadDayVersesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ReadDayVersesTableOrderingComposer
+    extends Composer<_$AppDatabase, $ReadDayVersesTable> {
+  $$ReadDayVersesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ReadDayVersesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ReadDayVersesTable> {
+  $$ReadDayVersesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get verseId =>
+      $composableBuilder(column: $table.verseId, builder: (column) => column);
+}
+
+class $$ReadDayVersesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ReadDayVersesTable,
+          ReadDayVerseRow,
+          $$ReadDayVersesTableFilterComposer,
+          $$ReadDayVersesTableOrderingComposer,
+          $$ReadDayVersesTableAnnotationComposer,
+          $$ReadDayVersesTableCreateCompanionBuilder,
+          $$ReadDayVersesTableUpdateCompanionBuilder,
+          (
+            ReadDayVerseRow,
+            BaseReferences<_$AppDatabase, $ReadDayVersesTable, ReadDayVerseRow>,
+          ),
+          ReadDayVerseRow,
+          PrefetchHooks Function()
+        > {
+  $$ReadDayVersesTableTableManager(_$AppDatabase db, $ReadDayVersesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ReadDayVersesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ReadDayVersesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ReadDayVersesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> date = const Value.absent(),
+                Value<String> verseId = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ReadDayVersesCompanion(
+                date: date,
+                verseId: verseId,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String date,
+                required String verseId,
+                Value<int> rowid = const Value.absent(),
+              }) => ReadDayVersesCompanion.insert(
+                date: date,
+                verseId: verseId,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$ReadDayVersesTable, ReadDayVerseRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $ReadDayVersesTable,
+                    ReadDayVerseRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ReadDayVersesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ReadDayVersesTable,
+      ReadDayVerseRow,
+      $$ReadDayVersesTableFilterComposer,
+      $$ReadDayVersesTableOrderingComposer,
+      $$ReadDayVersesTableAnnotationComposer,
+      $$ReadDayVersesTableCreateCompanionBuilder,
+      $$ReadDayVersesTableUpdateCompanionBuilder,
+      (
+        ReadDayVerseRow,
+        BaseReferences<_$AppDatabase, $ReadDayVersesTable, ReadDayVerseRow>,
+      ),
+      ReadDayVerseRow,
+      PrefetchHooks Function()
+    >;
+typedef $$NotifAssignmentsTableCreateCompanionBuilder =
+    NotifAssignmentsCompanion Function({
+      required String date,
+      required String slot,
+      required String messageId,
+      Value<String?> verseId,
+      Value<int> rowid,
+    });
+typedef $$NotifAssignmentsTableUpdateCompanionBuilder =
+    NotifAssignmentsCompanion Function({
+      Value<String> date,
+      Value<String> slot,
+      Value<String> messageId,
+      Value<String?> verseId,
+      Value<int> rowid,
+    });
+
+class $$NotifAssignmentsTableFilterComposer
+    extends Composer<_$AppDatabase, $NotifAssignmentsTable> {
+  $$NotifAssignmentsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get slot => $composableBuilder(
+    column: $table.slot,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get messageId => $composableBuilder(
+    column: $table.messageId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$NotifAssignmentsTableOrderingComposer
+    extends Composer<_$AppDatabase, $NotifAssignmentsTable> {
+  $$NotifAssignmentsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get slot => $composableBuilder(
+    column: $table.slot,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get messageId => $composableBuilder(
+    column: $table.messageId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$NotifAssignmentsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $NotifAssignmentsTable> {
+  $$NotifAssignmentsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get slot =>
+      $composableBuilder(column: $table.slot, builder: (column) => column);
+
+  GeneratedColumn<String> get messageId =>
+      $composableBuilder(column: $table.messageId, builder: (column) => column);
+
+  GeneratedColumn<String> get verseId =>
+      $composableBuilder(column: $table.verseId, builder: (column) => column);
+}
+
+class $$NotifAssignmentsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $NotifAssignmentsTable,
+          NotifAssignmentRow,
+          $$NotifAssignmentsTableFilterComposer,
+          $$NotifAssignmentsTableOrderingComposer,
+          $$NotifAssignmentsTableAnnotationComposer,
+          $$NotifAssignmentsTableCreateCompanionBuilder,
+          $$NotifAssignmentsTableUpdateCompanionBuilder,
+          (
+            NotifAssignmentRow,
+            BaseReferences<
+              _$AppDatabase,
+              $NotifAssignmentsTable,
+              NotifAssignmentRow
+            >,
+          ),
+          NotifAssignmentRow,
+          PrefetchHooks Function()
+        > {
+  $$NotifAssignmentsTableTableManager(
+    _$AppDatabase db,
+    $NotifAssignmentsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$NotifAssignmentsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$NotifAssignmentsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$NotifAssignmentsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> date = const Value.absent(),
+                Value<String> slot = const Value.absent(),
+                Value<String> messageId = const Value.absent(),
+                Value<String?> verseId = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => NotifAssignmentsCompanion(
+                date: date,
+                slot: slot,
+                messageId: messageId,
+                verseId: verseId,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String date,
+                required String slot,
+                required String messageId,
+                Value<String?> verseId = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => NotifAssignmentsCompanion.insert(
+                date: date,
+                slot: slot,
+                messageId: messageId,
+                verseId: verseId,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$NotifAssignmentsTable, NotifAssignmentRow>(
+                    table,
+                  ),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $NotifAssignmentsTable,
+                    NotifAssignmentRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$NotifAssignmentsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $NotifAssignmentsTable,
+      NotifAssignmentRow,
+      $$NotifAssignmentsTableFilterComposer,
+      $$NotifAssignmentsTableOrderingComposer,
+      $$NotifAssignmentsTableAnnotationComposer,
+      $$NotifAssignmentsTableCreateCompanionBuilder,
+      $$NotifAssignmentsTableUpdateCompanionBuilder,
+      (
+        NotifAssignmentRow,
+        BaseReferences<
+          _$AppDatabase,
+          $NotifAssignmentsTable,
+          NotifAssignmentRow
+        >,
+      ),
+      NotifAssignmentRow,
+      PrefetchHooks Function()
+    >;
+typedef $$SearchHistoryTableCreateCompanionBuilder =
+    SearchHistoryCompanion Function({
+      required String query,
+      required String lastUsedAt,
+      Value<int> rowid,
+    });
+typedef $$SearchHistoryTableUpdateCompanionBuilder =
+    SearchHistoryCompanion Function({
+      Value<String> query,
+      Value<String> lastUsedAt,
+      Value<int> rowid,
+    });
+
+class $$SearchHistoryTableFilterComposer
+    extends Composer<_$AppDatabase, $SearchHistoryTable> {
+  $$SearchHistoryTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get query => $composableBuilder(
+    column: $table.query,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get lastUsedAt => $composableBuilder(
+    column: $table.lastUsedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$SearchHistoryTableOrderingComposer
+    extends Composer<_$AppDatabase, $SearchHistoryTable> {
+  $$SearchHistoryTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get query => $composableBuilder(
+    column: $table.query,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get lastUsedAt => $composableBuilder(
+    column: $table.lastUsedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$SearchHistoryTableAnnotationComposer
+    extends Composer<_$AppDatabase, $SearchHistoryTable> {
+  $$SearchHistoryTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get query =>
+      $composableBuilder(column: $table.query, builder: (column) => column);
+
+  GeneratedColumn<String> get lastUsedAt => $composableBuilder(
+    column: $table.lastUsedAt,
+    builder: (column) => column,
+  );
+}
+
+class $$SearchHistoryTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $SearchHistoryTable,
+          SearchHistoryRow,
+          $$SearchHistoryTableFilterComposer,
+          $$SearchHistoryTableOrderingComposer,
+          $$SearchHistoryTableAnnotationComposer,
+          $$SearchHistoryTableCreateCompanionBuilder,
+          $$SearchHistoryTableUpdateCompanionBuilder,
+          (
+            SearchHistoryRow,
+            BaseReferences<
+              _$AppDatabase,
+              $SearchHistoryTable,
+              SearchHistoryRow
+            >,
+          ),
+          SearchHistoryRow,
+          PrefetchHooks Function()
+        > {
+  $$SearchHistoryTableTableManager(_$AppDatabase db, $SearchHistoryTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$SearchHistoryTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$SearchHistoryTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$SearchHistoryTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> query = const Value.absent(),
+                Value<String> lastUsedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => SearchHistoryCompanion(
+                query: query,
+                lastUsedAt: lastUsedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String query,
+                required String lastUsedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => SearchHistoryCompanion.insert(
+                query: query,
+                lastUsedAt: lastUsedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$SearchHistoryTable, SearchHistoryRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $SearchHistoryTable,
+                    SearchHistoryRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$SearchHistoryTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $SearchHistoryTable,
+      SearchHistoryRow,
+      $$SearchHistoryTableFilterComposer,
+      $$SearchHistoryTableOrderingComposer,
+      $$SearchHistoryTableAnnotationComposer,
+      $$SearchHistoryTableCreateCompanionBuilder,
+      $$SearchHistoryTableUpdateCompanionBuilder,
+      (
+        SearchHistoryRow,
+        BaseReferences<_$AppDatabase, $SearchHistoryTable, SearchHistoryRow>,
+      ),
+      SearchHistoryRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -1148,4 +2858,12 @@ class $AppDatabaseManager {
       $$BookmarksTableTableManager(_db, _db.bookmarks);
   $$HistoryTableTableManager get history =>
       $$HistoryTableTableManager(_db, _db.history);
+  $$ReadDaysTableTableManager get readDays =>
+      $$ReadDaysTableTableManager(_db, _db.readDays);
+  $$ReadDayVersesTableTableManager get readDayVerses =>
+      $$ReadDayVersesTableTableManager(_db, _db.readDayVerses);
+  $$NotifAssignmentsTableTableManager get notifAssignments =>
+      $$NotifAssignmentsTableTableManager(_db, _db.notifAssignments);
+  $$SearchHistoryTableTableManager get searchHistory =>
+      $$SearchHistoryTableTableManager(_db, _db.searchHistory);
 }

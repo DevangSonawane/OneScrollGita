@@ -69,32 +69,40 @@ class TranslationView extends ConsumerWidget {
     final lang = fallback ? 'en' : selected;
     final style = readingStyles(context, ref).translation(lang);
     final c = AppColors.of(context);
-    return AnimatedSwitcher(
-      duration: Motion.of(context).crossFade,
-      layoutBuilder: (current, previous) => Stack(
-        alignment: Alignment.topLeft,
-        children: [...previous, ?current],
-      ),
-      child: SizedBox(
-        key: ValueKey('${entry.id}-$selected'),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (fallback)
-              Padding(
-                padding: const EdgeInsets.only(bottom: Space.s8),
-                child: Text(
-                  'Hindi translation is not available yet. Showing English.',
-                  style: UiStyles(c).body(size: 13, color: c.textTertiary),
+    final duration = Motion.of(context).crossFade;
+    return AnimatedSize(
+      duration: duration,
+      curve: AppCurves.position,
+      alignment: Alignment.topLeft,
+      child: AnimatedSwitcher(
+        duration: duration,
+        layoutBuilder: (current, previous) => Stack(
+          alignment: Alignment.topLeft,
+          children: [...previous, ?current],
+        ),
+        child: SizedBox(
+          key: ValueKey('${entry.id}-$selected'),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (fallback)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: Space.s8),
+                  child: Text(
+                    'Hindi translation is not available yet. Showing English.',
+                    style: UiStyles(c).body(size: 13, color: c.textTertiary),
+                  ),
                 ),
+              Text(
+                entry.translation(lang),
+                style: style,
+                locale: lang == 'hi'
+                    ? const Locale('hi')
+                    : const Locale('en'),
               ),
-            Text(
-              entry.translation(lang),
-              style: style,
-              locale: lang == 'hi' ? const Locale('hi') : const Locale('en'),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

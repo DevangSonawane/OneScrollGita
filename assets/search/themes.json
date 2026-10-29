@@ -1,0 +1,2640 @@
+{
+ "version": 1,
+ "note": "Situation-search themes. Each verse was chosen from FTS5 keyword searches of the bundled dataset and kept only when its translation text addresses the theme (docs/theme-review.csv). reviewed:false until the owner checks every mapping.",
+ "themes": [
+  {
+   "id": "peace",
+   "title": {
+    "en": "Peace of mind",
+    "hi": "मन की शांति"
+   },
+   "synonyms": [
+    "peace",
+    "calm",
+    "shanti",
+    "shanti mann",
+    "sukoon",
+    "inner peace",
+    "शांति",
+    "सुकून"
+   ],
+   "verseIds": [
+    "bg-02-066",
+    "bg-02-071",
+    "bg-04-039",
+    "bg-05-029",
+    "bg-06-007",
+    "bg-09-031",
+    "bg-18-062",
+    "bg-02-070"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "anger",
+   "title": {
+    "en": "Anger",
+    "hi": "क्रोध"
+   },
+   "synonyms": [
+    "anger",
+    "angry",
+    "gussa",
+    "krodh",
+    "rage",
+    "irritation",
+    "गुस्सा",
+    "क्रोध"
+   ],
+   "verseIds": [
+    "bg-02-062",
+    "bg-02-063",
+    "bg-03-037",
+    "bg-16-021",
+    "bg-05-026",
+    "bg-02-056",
+    "bg-05-023"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "fear",
+   "title": {
+    "en": "Fear",
+    "hi": "भय"
+   },
+   "synonyms": [
+    "fear",
+    "scared",
+    "afraid",
+    "dar",
+    "darr",
+    "bhay",
+    "anxiety about future",
+    "डर",
+    "भय"
+   ],
+   "verseIds": [
+    "bg-18-066",
+    "bg-02-040",
+    "bg-02-056",
+    "bg-04-010",
+    "bg-16-001-003",
+    "bg-06-013-014"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "grief",
+   "title": {
+    "en": "Grief",
+    "hi": "शोक"
+   },
+   "synonyms": [
+    "grief",
+    "grieving",
+    "loss",
+    "mourning",
+    "shok",
+    "dukh",
+    "शोक",
+    "दुख"
+   ],
+   "verseIds": [
+    "bg-02-011",
+    "bg-02-013",
+    "bg-02-025",
+    "bg-02-027",
+    "bg-02-030",
+    "bg-01-046",
+    "bg-02-008"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "doubt",
+   "title": {
+    "en": "Doubt",
+    "hi": "संदेह"
+   },
+   "synonyms": [
+    "doubt",
+    "confusion",
+    "uncertain",
+    "shak",
+    "sandeh",
+    "दुविधा",
+    "संदेह",
+    "शक"
+   ],
+   "verseIds": [
+    "bg-04-040",
+    "bg-04-042",
+    "bg-06-039",
+    "bg-06-040",
+    "bg-18-073",
+    "bg-05-025"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "duty",
+   "title": {
+    "en": "Duty",
+    "hi": "कर्तव्य"
+   },
+   "synonyms": [
+    "duty",
+    "responsibility",
+    "kartavya",
+    "dharma",
+    "farz",
+    "कर्तव्य",
+    "धर्म",
+    "फ़र्ज़"
+   ],
+   "verseIds": [
+    "bg-02-047",
+    "bg-03-008",
+    "bg-03-035",
+    "bg-18-047",
+    "bg-03-019",
+    "bg-18-009",
+    "bg-16-024"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "purpose",
+   "title": {
+    "en": "Purpose of life",
+    "hi": "जीवन का उद्देश्य"
+   },
+   "synonyms": [
+    "purpose",
+    "meaning of life",
+    "goal",
+    "why am i here",
+    "maqsad",
+    "uddeshya",
+    "उद्देश्य",
+    "मक़सद"
+   ],
+   "verseIds": [
+    "bg-07-019",
+    "bg-08-015",
+    "bg-08-021",
+    "bg-12-020",
+    "bg-06-047",
+    "bg-09-034",
+    "bg-18-065"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "detachment",
+   "title": {
+    "en": "Detachment",
+    "hi": "वैराग्य"
+   },
+   "synonyms": [
+    "detachment",
+    "letting go",
+    "non attachment",
+    "vairagya",
+    "moh maya",
+    "वैराग्य",
+    "अनासक्ति"
+   ],
+   "verseIds": [
+    "bg-02-047",
+    "bg-02-048",
+    "bg-03-019",
+    "bg-05-010",
+    "bg-04-020",
+    "bg-18-049",
+    "bg-06-035",
+    "bg-02-062"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "devotion",
+   "title": {
+    "en": "Devotion",
+    "hi": "भक्ति"
+   },
+   "synonyms": [
+    "devotion",
+    "bhakti",
+    "love for god",
+    "worship",
+    "भक्ति",
+    "प्रेम"
+   ],
+   "verseIds": [
+    "bg-09-026",
+    "bg-09-034",
+    "bg-10-009",
+    "bg-10-010",
+    "bg-18-065",
+    "bg-12-020",
+    "bg-09-014"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "mind-control",
+   "title": {
+    "en": "Control of the mind",
+    "hi": "मन पर नियंत्रण"
+   },
+   "synonyms": [
+    "control mind",
+    "restless mind",
+    "overthinking",
+    "focus",
+    "mann",
+    "man ko kaise roke",
+    "मन",
+    "एकाग्रता"
+   ],
+   "verseIds": [
+    "bg-06-005",
+    "bg-06-006",
+    "bg-06-026",
+    "bg-06-034",
+    "bg-06-035",
+    "bg-06-019",
+    "bg-02-060"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "success-failure",
+   "title": {
+    "en": "Success and failure",
+    "hi": "सफलता और असफलता"
+   },
+   "synonyms": [
+    "success",
+    "failure",
+    "winning",
+    "losing",
+    "result",
+    "safalta",
+    "asafalta",
+    "सफलता",
+    "असफलता",
+    "हार जीत"
+   ],
+   "verseIds": [
+    "bg-02-048",
+    "bg-02-038",
+    "bg-04-022",
+    "bg-18-026",
+    "bg-02-047",
+    "bg-02-057"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "loneliness",
+   "title": {
+    "en": "Loneliness",
+    "hi": "अकेलापन"
+   },
+   "synonyms": [
+    "loneliness",
+    "lonely",
+    "alone",
+    "akela",
+    "akelapan",
+    "no one cares",
+    "अकेला",
+    "अकेलापन"
+   ],
+   "verseIds": [
+    "bg-09-018",
+    "bg-09-029",
+    "bg-06-030",
+    "bg-13-016",
+    "bg-18-061",
+    "bg-18-064",
+    "bg-05-029"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "stress",
+   "title": {
+    "en": "Stress and anxiety",
+    "hi": "तनाव और चिंता"
+   },
+   "synonyms": [
+    "stress",
+    "anxiety",
+    "tension",
+    "worried",
+    "overwhelmed",
+    "chinta",
+    "tanav",
+    "तनाव",
+    "चिंता"
+   ],
+   "verseIds": [
+    "bg-02-014",
+    "bg-02-015",
+    "bg-02-056",
+    "bg-12-015",
+    "bg-02-066",
+    "bg-06-017",
+    "bg-18-058"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "desire",
+   "title": {
+    "en": "Desire",
+    "hi": "इच्छा"
+   },
+   "synonyms": [
+    "desire",
+    "wanting",
+    "craving",
+    "lust",
+    "ichha",
+    "kaamna",
+    "इच्छा",
+    "कामना",
+    "लालसा"
+   ],
+   "verseIds": [
+    "bg-02-062",
+    "bg-02-070",
+    "bg-02-071",
+    "bg-03-037",
+    "bg-03-039",
+    "bg-03-041",
+    "bg-05-023"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "patience",
+   "title": {
+    "en": "Patience",
+    "hi": "धैर्य"
+   },
+   "synonyms": [
+    "patience",
+    "tolerance",
+    "endure",
+    "dhairya",
+    "sabr",
+    "सब्र",
+    "धैर्य",
+    "सहनशीलता"
+   ],
+   "verseIds": [
+    "bg-02-014",
+    "bg-05-023",
+    "bg-13-008-012",
+    "bg-12-013-014",
+    "bg-06-035",
+    "bg-06-025"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "freedom",
+   "title": {
+    "en": "Freedom and free will",
+    "hi": "स्वतंत्रता और स्वतंत्र इच्छा"
+   },
+   "synonyms": [
+    "freedom",
+    "free will",
+    "free thinking",
+    "choice",
+    "decide",
+    "azadi",
+    "swatantrata",
+    "आज़ादी",
+    "स्वतंत्रता",
+    "अपनी मर्ज़ी"
+   ],
+   "verseIds": [
+    "bg-18-063",
+    "bg-03-033",
+    "bg-06-005",
+    "bg-18-060",
+    "bg-05-003",
+    "bg-02-064"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "knowledge",
+   "title": {
+    "en": "Knowledge",
+    "hi": "ज्ञान"
+   },
+   "synonyms": [
+    "knowledge",
+    "wisdom",
+    "learning",
+    "gyan",
+    "jnana",
+    "ज्ञान",
+    "विद्या"
+   ],
+   "verseIds": [
+    "bg-04-033",
+    "bg-04-034",
+    "bg-04-037",
+    "bg-04-038",
+    "bg-05-016",
+    "bg-10-011",
+    "bg-13-008-012"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "humility",
+   "title": {
+    "en": "Humility",
+    "hi": "विनम्रता"
+   },
+   "synonyms": [
+    "humility",
+    "humble",
+    "ego",
+    "pride",
+    "vinamrata",
+    "ahankar",
+    "विनम्रता",
+    "अहंकार"
+   ],
+   "verseIds": [
+    "bg-13-008-012",
+    "bg-04-034",
+    "bg-05-018",
+    "bg-16-004",
+    "bg-18-026",
+    "bg-02-071"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "forgiveness",
+   "title": {
+    "en": "Forgiveness",
+    "hi": "क्षमा"
+   },
+   "synonyms": [
+    "forgiveness",
+    "forgive",
+    "sorry",
+    "kshama",
+    "maafi",
+    "माफ़ी",
+    "क्षमा"
+   ],
+   "verseIds": [
+    "bg-10-004-005",
+    "bg-16-001-003",
+    "bg-11-041-042",
+    "bg-11-044"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "sadness",
+   "title": {
+    "en": "Sadness",
+    "hi": "उदासी"
+   },
+   "synonyms": [
+    "sadness",
+    "sad",
+    "depressed",
+    "unhappy",
+    "low",
+    "udaas",
+    "udasi",
+    "dukhi",
+    "उदास",
+    "उदासी",
+    "दुखी"
+   ],
+   "verseIds": [
+    "bg-01-046",
+    "bg-02-001",
+    "bg-02-008",
+    "bg-02-011",
+    "bg-02-014",
+    "bg-02-065",
+    "bg-06-020-023"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "motivation",
+   "title": {
+    "en": "Motivation",
+    "hi": "प्रेरणा"
+   },
+   "synonyms": [
+    "motivation",
+    "motivated",
+    "courage to act",
+    "get up",
+    "energy",
+    "prerna",
+    "josh",
+    "प्रेरणा",
+    "हिम्मत"
+   ],
+   "verseIds": [
+    "bg-02-003",
+    "bg-02-037",
+    "bg-03-008",
+    "bg-04-042",
+    "bg-11-033",
+    "bg-06-005",
+    "bg-18-026"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "death-soul",
+   "title": {
+    "en": "Death and the soul",
+    "hi": "मृत्यु और आत्मा"
+   },
+   "synonyms": [
+    "death",
+    "soul",
+    "dying",
+    "afterlife",
+    "atma",
+    "mrityu",
+    "maut",
+    "आत्मा",
+    "मृत्यु",
+    "मौत"
+   ],
+   "verseIds": [
+    "bg-02-012",
+    "bg-02-013",
+    "bg-02-017",
+    "bg-02-020",
+    "bg-02-022",
+    "bg-02-023",
+    "bg-02-027",
+    "bg-08-005"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "work-results",
+   "title": {
+    "en": "Work and results",
+    "hi": "कर्म और फल"
+   },
+   "synonyms": [
+    "work",
+    "results",
+    "karma",
+    "job",
+    "career",
+    "kaam",
+    "phal",
+    "कर्म",
+    "फल",
+    "काम"
+   ],
+   "verseIds": [
+    "bg-02-047",
+    "bg-03-019",
+    "bg-04-020",
+    "bg-05-010",
+    "bg-05-012",
+    "bg-18-023",
+    "bg-12-011"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "hope",
+   "title": {
+    "en": "Hope",
+    "hi": "आशा"
+   },
+   "synonyms": [
+    "hope",
+    "hopeless",
+    "no way out",
+    "asha",
+    "umeed",
+    "आशा",
+    "उम्मीद"
+   ],
+   "verseIds": [
+    "bg-09-031",
+    "bg-18-066",
+    "bg-06-040",
+    "bg-04-036",
+    "bg-09-022",
+    "bg-02-040",
+    "bg-18-058"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "shelter",
+   "title": {
+    "en": "Shelter and refuge",
+    "hi": "शरण"
+   },
+   "synonyms": [
+    "shelter",
+    "refuge",
+    "protection",
+    "sharan",
+    "aashray",
+    "surrender",
+    "शरण",
+    "आश्रय"
+   ],
+   "verseIds": [
+    "bg-18-066",
+    "bg-18-062",
+    "bg-07-014",
+    "bg-09-032",
+    "bg-07-029",
+    "bg-09-018",
+    "bg-04-010"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "courage",
+   "title": {
+    "en": "Courage",
+    "hi": "साहस"
+   },
+   "synonyms": [
+    "courage",
+    "brave",
+    "strength",
+    "himmat",
+    "sahas",
+    "saahas",
+    "हिम्मत",
+    "साहस"
+   ],
+   "verseIds": [
+    "bg-16-001-003",
+    "bg-18-043",
+    "bg-02-003",
+    "bg-02-040",
+    "bg-18-066",
+    "bg-04-010"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "greed",
+   "title": {
+    "en": "Greed",
+    "hi": "लोभ"
+   },
+   "synonyms": [
+    "greed",
+    "greedy",
+    "money",
+    "lobh",
+    "lalach",
+    "लालच",
+    "लोभ"
+   ],
+   "verseIds": [
+    "bg-16-021",
+    "bg-01-037-038",
+    "bg-16-011-012",
+    "bg-16-013-015",
+    "bg-18-027"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "envy",
+   "title": {
+    "en": "Envy and jealousy",
+    "hi": "ईर्ष्या"
+   },
+   "synonyms": [
+    "envy",
+    "jealousy",
+    "jealous",
+    "irshya",
+    "jalan",
+    "जलन",
+    "ईर्ष्या"
+   ],
+   "verseIds": [
+    "bg-09-001",
+    "bg-12-013-014",
+    "bg-16-018",
+    "bg-18-071",
+    "bg-03-031",
+    "bg-04-022",
+    "bg-09-029"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "equality",
+   "title": {
+    "en": "Equal vision",
+    "hi": "समदृष्टि"
+   },
+   "synonyms": [
+    "equality",
+    "equal",
+    "sameness",
+    "prejudice",
+    "samdrishti",
+    "सब बराबर",
+    "समदृष्टि"
+   ],
+   "verseIds": [
+    "bg-05-018",
+    "bg-06-009",
+    "bg-06-029",
+    "bg-06-032",
+    "bg-13-028",
+    "bg-13-029",
+    "bg-09-029",
+    "bg-14-022-025"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "self-control",
+   "title": {
+    "en": "Self-control",
+    "hi": "आत्म-संयम"
+   },
+   "synonyms": [
+    "self control",
+    "discipline",
+    "senses",
+    "sanyam",
+    "indriya",
+    "संयम",
+    "इन्द्रिय"
+   ],
+   "verseIds": [
+    "bg-02-058",
+    "bg-02-060",
+    "bg-02-061",
+    "bg-02-064",
+    "bg-02-068",
+    "bg-03-007",
+    "bg-03-041",
+    "bg-05-023"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "meditation",
+   "title": {
+    "en": "Meditation",
+    "hi": "ध्यान"
+   },
+   "synonyms": [
+    "meditation",
+    "meditate",
+    "dhyan",
+    "focus",
+    "ध्यान"
+   ],
+   "verseIds": [
+    "bg-06-010",
+    "bg-06-011-012",
+    "bg-06-013-014",
+    "bg-06-019",
+    "bg-06-025",
+    "bg-06-026",
+    "bg-12-012",
+    "bg-08-008"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "food",
+   "title": {
+    "en": "Food and eating",
+    "hi": "भोजन"
+   },
+   "synonyms": [
+    "food",
+    "eating",
+    "diet",
+    "bhojan",
+    "khana",
+    "भोजन",
+    "खाना"
+   ],
+   "verseIds": [
+    "bg-03-013",
+    "bg-06-016",
+    "bg-06-017",
+    "bg-17-008-010",
+    "bg-09-027",
+    "bg-15-014",
+    "bg-09-026"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "sleep-balance",
+   "title": {
+    "en": "Balance in daily life",
+    "hi": "संतुलित जीवन"
+   },
+   "synonyms": [
+    "balance",
+    "sleep",
+    "routine",
+    "moderation",
+    "niyam",
+    "संतुलन",
+    "नींद"
+   ],
+   "verseIds": [
+    "bg-06-016",
+    "bg-06-017",
+    "bg-14-008",
+    "bg-18-039"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "leadership",
+   "title": {
+    "en": "Leadership and example",
+    "hi": "नेतृत्व और उदाहरण"
+   },
+   "synonyms": [
+    "leadership",
+    "leader",
+    "role model",
+    "example",
+    "neta",
+    "नेतृत्व",
+    "उदाहरण"
+   ],
+   "verseIds": [
+    "bg-03-020",
+    "bg-03-021",
+    "bg-03-023",
+    "bg-03-025",
+    "bg-03-026",
+    "bg-18-043"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "friendship",
+   "title": {
+    "en": "Friendship",
+    "hi": "मित्रता"
+   },
+   "synonyms": [
+    "friendship",
+    "friend",
+    "dost",
+    "dosti",
+    "मित्र",
+    "दोस्ती"
+   ],
+   "verseIds": [
+    "bg-06-005",
+    "bg-06-006",
+    "bg-09-029",
+    "bg-12-013-014",
+    "bg-06-009",
+    "bg-11-041-042",
+    "bg-18-064"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "family",
+   "title": {
+    "en": "Family and relatives",
+    "hi": "परिवार"
+   },
+   "synonyms": [
+    "family",
+    "relatives",
+    "parents",
+    "parivar",
+    "ghar",
+    "परिवार",
+    "रिश्तेदार"
+   ],
+   "verseIds": [
+    "bg-01-026",
+    "bg-01-027",
+    "bg-01-028",
+    "bg-01-031",
+    "bg-01-032-035",
+    "bg-02-011"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "compassion",
+   "title": {
+    "en": "Compassion and kindness",
+    "hi": "करुणा और दया"
+   },
+   "synonyms": [
+    "compassion",
+    "kindness",
+    "kind",
+    "daya",
+    "karuna",
+    "दया",
+    "करुणा"
+   ],
+   "verseIds": [
+    "bg-12-013-014",
+    "bg-05-025",
+    "bg-10-011",
+    "bg-16-001-003",
+    "bg-02-001",
+    "bg-12-003-004"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "truth",
+   "title": {
+    "en": "Truthfulness",
+    "hi": "सत्य"
+   },
+   "synonyms": [
+    "truth",
+    "honesty",
+    "honest",
+    "satya",
+    "sach",
+    "सच",
+    "सत्य"
+   ],
+   "verseIds": [
+    "bg-10-004-005",
+    "bg-16-001-003",
+    "bg-17-015",
+    "bg-04-034",
+    "bg-04-035",
+    "bg-07-007"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "speech",
+   "title": {
+    "en": "Right speech",
+    "hi": "वाणी"
+   },
+   "synonyms": [
+    "speech",
+    "words",
+    "speaking",
+    "talk",
+    "vaani",
+    "bolna",
+    "वाणी",
+    "बोलना"
+   ],
+   "verseIds": [
+    "bg-17-015",
+    "bg-02-054",
+    "bg-18-015",
+    "bg-02-011"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "charity",
+   "title": {
+    "en": "Charity and giving",
+    "hi": "दान"
+   },
+   "synonyms": [
+    "charity",
+    "giving",
+    "donation",
+    "daan",
+    "दान"
+   ],
+   "verseIds": [
+    "bg-17-020",
+    "bg-17-021",
+    "bg-17-022",
+    "bg-18-005",
+    "bg-09-027",
+    "bg-16-001-003"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "sacrifice",
+   "title": {
+    "en": "Sacrifice",
+    "hi": "यज्ञ"
+   },
+   "synonyms": [
+    "sacrifice",
+    "yajna",
+    "offering",
+    "yagya",
+    "यज्ञ",
+    "त्याग"
+   ],
+   "verseIds": [
+    "bg-03-009",
+    "bg-03-010",
+    "bg-03-014",
+    "bg-04-024",
+    "bg-04-033",
+    "bg-17-011",
+    "bg-18-005"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "renunciation",
+   "title": {
+    "en": "Renunciation",
+    "hi": "त्याग"
+   },
+   "synonyms": [
+    "renunciation",
+    "renounce",
+    "sannyasa",
+    "tyag",
+    "tyaag",
+    "त्याग",
+    "संन्यास"
+   ],
+   "verseIds": [
+    "bg-18-002",
+    "bg-18-009",
+    "bg-18-011",
+    "bg-06-001",
+    "bg-05-003",
+    "bg-06-002",
+    "bg-18-049"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "surrender",
+   "title": {
+    "en": "Surrender to God",
+    "hi": "भगवान की शरण"
+   },
+   "synonyms": [
+    "surrender",
+    "give up control",
+    "sharanagati",
+    "samarpan",
+    "समर्पण",
+    "शरणागति"
+   ],
+   "verseIds": [
+    "bg-18-066",
+    "bg-18-062",
+    "bg-07-014",
+    "bg-07-019",
+    "bg-03-030",
+    "bg-04-011",
+    "bg-02-007"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "god-everywhere",
+   "title": {
+    "en": "God in everything",
+    "hi": "सब में भगवान"
+   },
+   "synonyms": [
+    "god everywhere",
+    "presence of god",
+    "where is god",
+    "bhagwan kahan hai",
+    "सर्वत्र भगवान"
+   ],
+   "verseIds": [
+    "bg-06-029",
+    "bg-06-030",
+    "bg-09-004",
+    "bg-09-006",
+    "bg-13-014",
+    "bg-13-016",
+    "bg-07-007",
+    "bg-10-020"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "remembrance",
+   "title": {
+    "en": "Remembering God",
+    "hi": "भगवान का स्मरण"
+   },
+   "synonyms": [
+    "remember god",
+    "remembrance",
+    "thinking of god",
+    "smaran",
+    "yaad",
+    "स्मरण"
+   ],
+   "verseIds": [
+    "bg-08-005",
+    "bg-08-006",
+    "bg-08-007",
+    "bg-08-008",
+    "bg-08-014",
+    "bg-18-065",
+    "bg-09-034"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "prayer",
+   "title": {
+    "en": "Prayer and worship",
+    "hi": "प्रार्थना और पूजा"
+   },
+   "synonyms": [
+    "prayer",
+    "worship",
+    "puja",
+    "prarthana",
+    "pooja",
+    "पूजा",
+    "प्रार्थना"
+   ],
+   "verseIds": [
+    "bg-09-014",
+    "bg-09-022",
+    "bg-09-026",
+    "bg-10-010",
+    "bg-11-014",
+    "bg-12-002",
+    "bg-18-065"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "faith",
+   "title": {
+    "en": "Faith",
+    "hi": "श्रद्धा"
+   },
+   "synonyms": [
+    "faith",
+    "belief",
+    "trust",
+    "shraddha",
+    "vishwas",
+    "श्रद्धा",
+    "विश्वास"
+   ],
+   "verseIds": [
+    "bg-04-039",
+    "bg-04-040",
+    "bg-12-002",
+    "bg-12-020",
+    "bg-17-003",
+    "bg-18-071",
+    "bg-06-047"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "confusion",
+   "title": {
+    "en": "Confusion about what to do",
+    "hi": "क्या करूँ, यह उलझन"
+   },
+   "synonyms": [
+    "confused",
+    "what should i do",
+    "decision",
+    "dilemma",
+    "uljhan",
+    "kya karu",
+    "उलझन",
+    "दुविधा"
+   ],
+   "verseIds": [
+    "bg-02-007",
+    "bg-03-002",
+    "bg-05-001",
+    "bg-18-030",
+    "bg-18-031",
+    "bg-18-073",
+    "bg-04-016"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "weakness",
+   "title": {
+    "en": "Weakness of heart",
+    "hi": "मन की कमज़ोरी"
+   },
+   "synonyms": [
+    "weak",
+    "weakness",
+    "giving up",
+    "kamzori",
+    "कमज़ोरी"
+   ],
+   "verseIds": [
+    "bg-02-002",
+    "bg-02-003",
+    "bg-02-007",
+    "bg-18-073"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "change",
+   "title": {
+    "en": "Change and impermanence",
+    "hi": "परिवर्तन"
+   },
+   "synonyms": [
+    "change",
+    "impermanence",
+    "temporary",
+    "nothing lasts",
+    "badlav",
+    "parivartan",
+    "बदलाव",
+    "परिवर्तन"
+   ],
+   "verseIds": [
+    "bg-02-014",
+    "bg-02-013",
+    "bg-02-022",
+    "bg-08-004",
+    "bg-08-019",
+    "bg-02-028"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "happiness",
+   "title": {
+    "en": "Happiness",
+    "hi": "सुख"
+   },
+   "synonyms": [
+    "happiness",
+    "happy",
+    "joy",
+    "khushi",
+    "sukh",
+    "ख़ुशी",
+    "सुख"
+   ],
+   "verseIds": [
+    "bg-05-021",
+    "bg-05-022",
+    "bg-05-024",
+    "bg-06-020-023",
+    "bg-06-027",
+    "bg-18-036-037",
+    "bg-02-066",
+    "bg-18-038"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "suffering",
+   "title": {
+    "en": "Suffering",
+    "hi": "दुःख"
+   },
+   "synonyms": [
+    "suffering",
+    "pain",
+    "misery",
+    "dukh",
+    "kasht",
+    "peeda",
+    "दुःख",
+    "पीड़ा"
+   ],
+   "verseIds": [
+    "bg-02-014",
+    "bg-05-022",
+    "bg-06-020-023",
+    "bg-08-015",
+    "bg-04-036",
+    "bg-02-065",
+    "bg-02-056"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "rebirth",
+   "title": {
+    "en": "Rebirth",
+    "hi": "पुनर्जन्म"
+   },
+   "synonyms": [
+    "rebirth",
+    "reincarnation",
+    "next life",
+    "punarjanm",
+    "पुनर्जन्म"
+   ],
+   "verseIds": [
+    "bg-02-013",
+    "bg-02-022",
+    "bg-02-027",
+    "bg-08-016",
+    "bg-04-009",
+    "bg-06-041",
+    "bg-06-043",
+    "bg-15-008"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "time",
+   "title": {
+    "en": "Time",
+    "hi": "काल"
+   },
+   "synonyms": [
+    "time",
+    "kaal",
+    "samay",
+    "काल",
+    "समय"
+   ],
+   "verseIds": [
+    "bg-10-030",
+    "bg-10-033",
+    "bg-11-032",
+    "bg-08-017",
+    "bg-02-012"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "nature-modes",
+   "title": {
+    "en": "The three modes of nature",
+    "hi": "प्रकृति के तीन गुण"
+   },
+   "synonyms": [
+    "gunas",
+    "modes",
+    "goodness passion ignorance",
+    "sattva rajas tamas",
+    "गुण",
+    "सत्त्व रज तम"
+   ],
+   "verseIds": [
+    "bg-14-005",
+    "bg-14-006",
+    "bg-14-007",
+    "bg-14-008",
+    "bg-14-010",
+    "bg-07-013",
+    "bg-14-019"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "goodness",
+   "title": {
+    "en": "Goodness",
+    "hi": "सत्त्व"
+   },
+   "synonyms": [
+    "goodness",
+    "good",
+    "sattva",
+    "acchai",
+    "अच्छाई",
+    "सत्त्व"
+   ],
+   "verseIds": [
+    "bg-14-006",
+    "bg-14-011",
+    "bg-14-016",
+    "bg-14-017",
+    "bg-17-011",
+    "bg-18-009",
+    "bg-18-020"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "laziness",
+   "title": {
+    "en": "Laziness and procrastination",
+    "hi": "आलस्य"
+   },
+   "synonyms": [
+    "laziness",
+    "lazy",
+    "procrastination",
+    "aalas",
+    "alas",
+    "आलस",
+    "आलस्य"
+   ],
+   "verseIds": [
+    "bg-14-008",
+    "bg-18-028",
+    "bg-18-039",
+    "bg-03-030",
+    "bg-14-013",
+    "bg-03-008"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "determination",
+   "title": {
+    "en": "Determination",
+    "hi": "दृढ़ संकल्प"
+   },
+   "synonyms": [
+    "determination",
+    "resolve",
+    "willpower",
+    "sankalp",
+    "irada",
+    "संकल्प",
+    "इरादा"
+   ],
+   "verseIds": [
+    "bg-02-041",
+    "bg-06-024",
+    "bg-09-014",
+    "bg-18-026",
+    "bg-18-033",
+    "bg-06-036"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "self-realization",
+   "title": {
+    "en": "Self-realization",
+    "hi": "आत्म-साक्षात्कार"
+   },
+   "synonyms": [
+    "self realization",
+    "who am i",
+    "true self",
+    "atma gyan",
+    "आत्म-ज्ञान",
+    "मैं कौन हूँ"
+   ],
+   "verseIds": [
+    "bg-06-008",
+    "bg-06-020-023",
+    "bg-02-055",
+    "bg-03-017",
+    "bg-15-011",
+    "bg-03-043",
+    "bg-13-035"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "illusion",
+   "title": {
+    "en": "Illusion",
+    "hi": "माया"
+   },
+   "synonyms": [
+    "illusion",
+    "maya",
+    "delusion",
+    "bhram",
+    "माया",
+    "भ्रम"
+   ],
+   "verseIds": [
+    "bg-07-013",
+    "bg-07-014",
+    "bg-07-025",
+    "bg-07-027",
+    "bg-02-052",
+    "bg-18-073"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "liberation",
+   "title": {
+    "en": "Liberation",
+    "hi": "मुक्ति"
+   },
+   "synonyms": [
+    "liberation",
+    "moksha",
+    "mukti",
+    "freedom from rebirth",
+    "मोक्ष",
+    "मुक्ति"
+   ],
+   "verseIds": [
+    "bg-02-015",
+    "bg-02-051",
+    "bg-04-009",
+    "bg-05-026",
+    "bg-09-028",
+    "bg-14-020",
+    "bg-08-015"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "krishna-who",
+   "title": {
+    "en": "Who is Krishna",
+    "hi": "कृष्ण कौन हैं"
+   },
+   "synonyms": [
+    "who is krishna",
+    "god",
+    "supreme",
+    "bhagwan",
+    "ishwar",
+    "भगवान",
+    "ईश्वर"
+   ],
+   "verseIds": [
+    "bg-07-007",
+    "bg-10-008",
+    "bg-10-002",
+    "bg-10-020",
+    "bg-15-015",
+    "bg-15-018",
+    "bg-09-018",
+    "bg-04-006"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "divine-qualities",
+   "title": {
+    "en": "Good qualities",
+    "hi": "दैवी गुण"
+   },
+   "synonyms": [
+    "good qualities",
+    "virtues",
+    "character",
+    "gun",
+    "sadgun",
+    "सद्गुण",
+    "अच्छे गुण"
+   ],
+   "verseIds": [
+    "bg-16-001-003",
+    "bg-16-005",
+    "bg-13-008-012",
+    "bg-12-013-014",
+    "bg-18-042",
+    "bg-10-004-005"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "pride",
+   "title": {
+    "en": "Pride and arrogance",
+    "hi": "घमंड"
+   },
+   "synonyms": [
+    "pride",
+    "arrogance",
+    "arrogant",
+    "ghamand",
+    "ahankar",
+    "घमंड",
+    "अहंकार"
+   ],
+   "verseIds": [
+    "bg-16-004",
+    "bg-16-013-015",
+    "bg-16-017",
+    "bg-16-018",
+    "bg-03-027",
+    "bg-18-024"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "contentment",
+   "title": {
+    "en": "Contentment",
+    "hi": "संतोष"
+   },
+   "synonyms": [
+    "contentment",
+    "content",
+    "satisfied",
+    "santosh",
+    "संतोष"
+   ],
+   "verseIds": [
+    "bg-02-055",
+    "bg-03-017",
+    "bg-04-020",
+    "bg-04-022",
+    "bg-06-008",
+    "bg-12-013-014",
+    "bg-10-009"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "equanimity",
+   "title": {
+    "en": "Equanimity",
+    "hi": "समता"
+   },
+   "synonyms": [
+    "equanimity",
+    "balanced",
+    "even minded",
+    "samta",
+    "samatva",
+    "समता",
+    "समभाव"
+   ],
+   "verseIds": [
+    "bg-02-048",
+    "bg-02-015",
+    "bg-02-038",
+    "bg-02-056",
+    "bg-06-007",
+    "bg-12-018-019",
+    "bg-14-022-025"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "war-conflict",
+   "title": {
+    "en": "Conflict and hard battles",
+    "hi": "संघर्ष"
+   },
+   "synonyms": [
+    "conflict",
+    "battle",
+    "fight",
+    "struggle",
+    "sangharsh",
+    "yudh",
+    "संघर्ष",
+    "युद्ध"
+   ],
+   "verseIds": [
+    "bg-02-018",
+    "bg-02-031",
+    "bg-02-037",
+    "bg-02-038",
+    "bg-03-030",
+    "bg-11-033"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "guilt-past",
+   "title": {
+    "en": "Mistakes and the past",
+    "hi": "पिछली ग़लतियाँ"
+   },
+   "synonyms": [
+    "past mistakes",
+    "regret",
+    "sinful",
+    "sin",
+    "galti",
+    "pachtava",
+    "पछतावा",
+    "ग़लती"
+   ],
+   "verseIds": [
+    "bg-04-036",
+    "bg-04-037",
+    "bg-09-030",
+    "bg-09-031",
+    "bg-18-066",
+    "bg-05-010"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "teacher",
+   "title": {
+    "en": "Learning from a teacher",
+    "hi": "गुरु से सीखना"
+   },
+   "synonyms": [
+    "teacher",
+    "guru",
+    "spiritual master",
+    "mentor",
+    "गुरु",
+    "शिक्षक"
+   ],
+   "verseIds": [
+    "bg-04-034",
+    "bg-02-007",
+    "bg-13-008-012",
+    "bg-17-014",
+    "bg-04-002"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "study",
+   "title": {
+    "en": "Study of scripture",
+    "hi": "शास्त्र अध्ययन"
+   },
+   "synonyms": [
+    "study",
+    "scripture",
+    "reading",
+    "shastra",
+    "padhai",
+    "शास्त्र",
+    "अध्ययन"
+   ],
+   "verseIds": [
+    "bg-18-070",
+    "bg-16-023",
+    "bg-16-024",
+    "bg-02-046",
+    "bg-15-015"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "austerity",
+   "title": {
+    "en": "Austerity and discipline",
+    "hi": "तप"
+   },
+   "synonyms": [
+    "austerity",
+    "tapasya",
+    "discipline",
+    "tap",
+    "तपस्या",
+    "तप"
+   ],
+   "verseIds": [
+    "bg-17-014",
+    "bg-17-015",
+    "bg-17-016",
+    "bg-17-017",
+    "bg-17-018",
+    "bg-17-019",
+    "bg-18-005"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "yoga",
+   "title": {
+    "en": "Yoga",
+    "hi": "योग"
+   },
+   "synonyms": [
+    "yoga",
+    "yogi",
+    "practice",
+    "योग"
+   ],
+   "verseIds": [
+    "bg-02-048",
+    "bg-02-050",
+    "bg-06-002",
+    "bg-06-018",
+    "bg-06-046",
+    "bg-06-047",
+    "bg-06-003"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "health",
+   "title": {
+    "en": "Health and the body",
+    "hi": "शरीर और स्वास्थ्य"
+   },
+   "synonyms": [
+    "health",
+    "body",
+    "sickness",
+    "illness",
+    "old age",
+    "swasthya",
+    "sharir",
+    "शरीर",
+    "स्वास्थ्य"
+   ],
+   "verseIds": [
+    "bg-02-013",
+    "bg-06-016",
+    "bg-06-017",
+    "bg-17-008-010",
+    "bg-14-020",
+    "bg-02-022"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "old-age",
+   "title": {
+    "en": "Old age",
+    "hi": "बुढ़ापा"
+   },
+   "synonyms": [
+    "old age",
+    "ageing",
+    "aging",
+    "budhapa",
+    "बुढ़ापा"
+   ],
+   "verseIds": [
+    "bg-02-013",
+    "bg-07-029",
+    "bg-14-020",
+    "bg-13-008-012",
+    "bg-02-022"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "mortality",
+   "title": {
+    "en": "Fear of death",
+    "hi": "मृत्यु का भय"
+   },
+   "synonyms": [
+    "fear of death",
+    "afraid of dying",
+    "maut ka dar",
+    "मौत का डर"
+   ],
+   "verseIds": [
+    "bg-02-020",
+    "bg-02-027",
+    "bg-08-005",
+    "bg-08-006",
+    "bg-02-022",
+    "bg-07-030",
+    "bg-08-010"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "loss-of-loved",
+   "title": {
+    "en": "Losing someone",
+    "hi": "किसी अपने को खोना"
+   },
+   "synonyms": [
+    "lost someone",
+    "loved one died",
+    "bereavement",
+    "kisi ko khona",
+    "अपनों को खोना"
+   ],
+   "verseIds": [
+    "bg-02-011",
+    "bg-02-025",
+    "bg-02-026",
+    "bg-02-027",
+    "bg-02-028",
+    "bg-02-030",
+    "bg-02-012"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "comparison",
+   "title": {
+    "en": "Comparing with others",
+    "hi": "दूसरों से तुलना"
+   },
+   "synonyms": [
+    "comparison",
+    "comparing",
+    "another's duty",
+    "tulna",
+    "तुलना"
+   ],
+   "verseIds": [
+    "bg-03-035",
+    "bg-18-047",
+    "bg-18-048",
+    "bg-03-033"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "anxiety-results",
+   "title": {
+    "en": "Worry about results",
+    "hi": "परिणाम की चिंता"
+   },
+   "synonyms": [
+    "worry about results",
+    "exam",
+    "outcome",
+    "result ki chinta",
+    "परिणाम",
+    "नतीजा"
+   ],
+   "verseIds": [
+    "bg-02-047",
+    "bg-02-048",
+    "bg-03-019",
+    "bg-04-020",
+    "bg-12-011",
+    "bg-18-011",
+    "bg-05-012"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "selfless-service",
+   "title": {
+    "en": "Selfless service",
+    "hi": "निःस्वार्थ सेवा"
+   },
+   "synonyms": [
+    "service",
+    "seva",
+    "selfless",
+    "helping others",
+    "sewa",
+    "सेवा"
+   ],
+   "verseIds": [
+    "bg-03-009",
+    "bg-03-019",
+    "bg-03-025",
+    "bg-05-025",
+    "bg-12-003-004",
+    "bg-12-010",
+    "bg-18-057"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "love",
+   "title": {
+    "en": "Love",
+    "hi": "प्रेम"
+   },
+   "synonyms": [
+    "love",
+    "prem",
+    "pyaar",
+    "प्यार",
+    "प्रेम"
+   ],
+   "verseIds": [
+    "bg-09-026",
+    "bg-10-010",
+    "bg-07-017",
+    "bg-12-013-014",
+    "bg-11-044",
+    "bg-11-055"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "nonviolence",
+   "title": {
+    "en": "Nonviolence",
+    "hi": "अहिंसा"
+   },
+   "synonyms": [
+    "nonviolence",
+    "ahimsa",
+    "peaceful",
+    "hurting others",
+    "अहिंसा"
+   ],
+   "verseIds": [
+    "bg-10-004-005",
+    "bg-16-001-003",
+    "bg-13-008-012",
+    "bg-17-014"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "cleanliness",
+   "title": {
+    "en": "Purity",
+    "hi": "शुद्धता"
+   },
+   "synonyms": [
+    "purity",
+    "pure",
+    "clean",
+    "shuddhi",
+    "पवित्रता",
+    "शुद्धता"
+   ],
+   "verseIds": [
+    "bg-16-001-003",
+    "bg-17-014",
+    "bg-17-016",
+    "bg-13-008-012",
+    "bg-05-011",
+    "bg-04-038"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "silence",
+   "title": {
+    "en": "Silence and solitude",
+    "hi": "मौन और एकांत"
+   },
+   "synonyms": [
+    "silence",
+    "solitude",
+    "quiet",
+    "ekant",
+    "maun",
+    "एकांत",
+    "मौन"
+   ],
+   "verseIds": [
+    "bg-06-010",
+    "bg-06-011-012",
+    "bg-10-038",
+    "bg-12-018-019",
+    "bg-13-008-012",
+    "bg-18-051-053"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "senses",
+   "title": {
+    "en": "The senses",
+    "hi": "इन्द्रियाँ"
+   },
+   "synonyms": [
+    "senses",
+    "temptation",
+    "pleasure",
+    "indriyan",
+    "इन्द्रियाँ"
+   ],
+   "verseIds": [
+    "bg-02-058",
+    "bg-02-060",
+    "bg-02-067",
+    "bg-03-034",
+    "bg-03-040",
+    "bg-03-042",
+    "bg-05-022"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "lust",
+   "title": {
+    "en": "Lust",
+    "hi": "काम"
+   },
+   "synonyms": [
+    "lust",
+    "kaam",
+    "vasna",
+    "वासना",
+    "काम"
+   ],
+   "verseIds": [
+    "bg-03-037",
+    "bg-03-038",
+    "bg-03-039",
+    "bg-03-040",
+    "bg-03-041",
+    "bg-03-043",
+    "bg-02-062"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "hell-gates",
+   "title": {
+    "en": "Lust, anger and greed",
+    "hi": "काम, क्रोध, लोभ"
+   },
+   "synonyms": [
+    "three gates",
+    "lust anger greed",
+    "kaam krodh lobh"
+   ],
+   "verseIds": [
+    "bg-16-021",
+    "bg-16-022",
+    "bg-02-062",
+    "bg-02-063",
+    "bg-03-037"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "creation",
+   "title": {
+    "en": "Creation of the world",
+    "hi": "सृष्टि"
+   },
+   "synonyms": [
+    "creation",
+    "universe",
+    "cosmos",
+    "srishti",
+    "brahmand",
+    "सृष्टि",
+    "ब्रह्मांड"
+   ],
+   "verseIds": [
+    "bg-07-004",
+    "bg-07-005",
+    "bg-07-006",
+    "bg-09-007",
+    "bg-09-008",
+    "bg-09-010",
+    "bg-08-018",
+    "bg-10-008"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "universal-form",
+   "title": {
+    "en": "The universal form",
+    "hi": "विश्वरूप"
+   },
+   "synonyms": [
+    "universal form",
+    "vishwaroop",
+    "cosmic form",
+    "विश्वरूप"
+   ],
+   "verseIds": [
+    "bg-11-005",
+    "bg-11-009",
+    "bg-11-012",
+    "bg-11-013",
+    "bg-11-016",
+    "bg-11-032",
+    "bg-11-047"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "avatar",
+   "title": {
+    "en": "Why God appears",
+    "hi": "भगवान का अवतार"
+   },
+   "synonyms": [
+    "avatar",
+    "incarnation",
+    "descent",
+    "avtar",
+    "अवतार"
+   ],
+   "verseIds": [
+    "bg-04-006",
+    "bg-04-007",
+    "bg-04-008",
+    "bg-04-009",
+    "bg-09-011",
+    "bg-07-024"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "om",
+   "title": {
+    "en": "Om",
+    "hi": "ओम्"
+   },
+   "synonyms": [
+    "om",
+    "aum",
+    "omkar",
+    "ॐ",
+    "ओम्"
+   ],
+   "verseIds": [
+    "bg-07-008",
+    "bg-08-013",
+    "bg-10-025",
+    "bg-17-023",
+    "bg-17-024",
+    "bg-09-017"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "mercy",
+   "title": {
+    "en": "Grace and mercy",
+    "hi": "कृपा"
+   },
+   "synonyms": [
+    "grace",
+    "mercy",
+    "kripa",
+    "daya",
+    "कृपा"
+   ],
+   "verseIds": [
+    "bg-18-056",
+    "bg-18-058",
+    "bg-18-062",
+    "bg-18-073",
+    "bg-10-011",
+    "bg-02-064"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "protection",
+   "title": {
+    "en": "God's protection",
+    "hi": "भगवान की रक्षा"
+   },
+   "synonyms": [
+    "protection",
+    "safety",
+    "kept safe",
+    "raksha",
+    "रक्षा"
+   ],
+   "verseIds": [
+    "bg-09-022",
+    "bg-09-031",
+    "bg-18-056",
+    "bg-18-057",
+    "bg-18-066",
+    "bg-09-013"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "thinking-positive",
+   "title": {
+    "en": "Lifting yourself up",
+    "hi": "स्वयं को ऊपर उठाना"
+   },
+   "synonyms": [
+    "self help",
+    "lift yourself",
+    "self improvement",
+    "positive thinking",
+    "apne aap ko uthao"
+   ],
+   "verseIds": [
+    "bg-06-005",
+    "bg-06-006",
+    "bg-02-003",
+    "bg-06-040",
+    "bg-06-036",
+    "bg-04-036"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "enemy-mind",
+   "title": {
+    "en": "The mind as friend or enemy",
+    "hi": "मन, मित्र या शत्रु"
+   },
+   "synonyms": [
+    "mind friend enemy",
+    "negative thoughts",
+    "mann dushman",
+    "मन शत्रु"
+   ],
+   "verseIds": [
+    "bg-06-005",
+    "bg-06-006",
+    "bg-06-007",
+    "bg-03-043",
+    "bg-06-026"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "habit",
+   "title": {
+    "en": "Habits and practice",
+    "hi": "आदत और अभ्यास"
+   },
+   "synonyms": [
+    "habit",
+    "practice",
+    "consistency",
+    "routine",
+    "aadat",
+    "abhyas",
+    "आदत",
+    "अभ्यास"
+   ],
+   "verseIds": [
+    "bg-06-035",
+    "bg-06-017",
+    "bg-12-009",
+    "bg-12-010",
+    "bg-06-036",
+    "bg-06-024"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "honor",
+   "title": {
+    "en": "Honour and dishonour",
+    "hi": "मान और अपमान"
+   },
+   "synonyms": [
+    "honour",
+    "honor",
+    "insult",
+    "respect",
+    "izzat",
+    "apmaan",
+    "इज़्ज़त",
+    "अपमान"
+   ],
+   "verseIds": [
+    "bg-02-034",
+    "bg-06-007",
+    "bg-12-018-019",
+    "bg-14-022-025",
+    "bg-17-018"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "praise-blame",
+   "title": {
+    "en": "Praise and criticism",
+    "hi": "प्रशंसा और निंदा"
+   },
+   "synonyms": [
+    "praise",
+    "criticism",
+    "blame",
+    "ninda",
+    "tarif",
+    "निंदा",
+    "तारीफ़"
+   ],
+   "verseIds": [
+    "bg-14-022-025",
+    "bg-12-018-019",
+    "bg-06-007",
+    "bg-02-057"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "destiny",
+   "title": {
+    "en": "Destiny and what is beyond control",
+    "hi": "नियति"
+   },
+   "synonyms": [
+    "destiny",
+    "fate",
+    "kismat",
+    "bhagya",
+    "beyond control",
+    "किस्मत",
+    "भाग्य"
+   ],
+   "verseIds": [
+    "bg-11-033",
+    "bg-18-061",
+    "bg-18-060",
+    "bg-18-059",
+    "bg-03-027",
+    "bg-05-014",
+    "bg-18-016"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "own-nature",
+   "title": {
+    "en": "Your own nature",
+    "hi": "अपना स्वभाव"
+   },
+   "synonyms": [
+    "nature",
+    "personality",
+    "swabhav",
+    "स्वभाव"
+   ],
+   "verseIds": [
+    "bg-03-033",
+    "bg-18-047",
+    "bg-18-048",
+    "bg-18-060",
+    "bg-18-041",
+    "bg-18-045"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "god-love-devotee",
+   "title": {
+    "en": "God's love for His devotees",
+    "hi": "भक्त से भगवान का प्रेम"
+   },
+   "synonyms": [
+    "god loves me",
+    "dear to god",
+    "does god care",
+    "bhagwan pyar",
+    "भगवान का प्यार"
+   ],
+   "verseIds": [
+    "bg-07-017",
+    "bg-09-029",
+    "bg-12-013-014",
+    "bg-12-015",
+    "bg-12-020",
+    "bg-18-064",
+    "bg-18-065",
+    "bg-18-069"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "equal-to-all",
+   "title": {
+    "en": "God is equal to all",
+    "hi": "भगवान सबके लिए समान"
+   },
+   "synonyms": [
+    "god equal",
+    "partial",
+    "unfair",
+    "bhagwan sab ke liye",
+    "सबके लिए समान"
+   ],
+   "verseIds": [
+    "bg-09-029",
+    "bg-05-018",
+    "bg-06-009",
+    "bg-09-032",
+    "bg-06-032"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "offering",
+   "title": {
+    "en": "Offering to God",
+    "hi": "भगवान को अर्पण"
+   },
+   "synonyms": [
+    "offering",
+    "bhog",
+    "prasad",
+    "arpan",
+    "अर्पण",
+    "प्रसाद"
+   ],
+   "verseIds": [
+    "bg-09-026",
+    "bg-09-027",
+    "bg-03-013",
+    "bg-05-010",
+    "bg-03-030",
+    "bg-12-006-007"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "chanting",
+   "title": {
+    "en": "Chanting and glorifying",
+    "hi": "कीर्तन और जप"
+   },
+   "synonyms": [
+    "chanting",
+    "kirtan",
+    "jap",
+    "japa",
+    "naam",
+    "कीर्तन",
+    "जप"
+   ],
+   "verseIds": [
+    "bg-09-014",
+    "bg-10-025",
+    "bg-08-013",
+    "bg-17-023",
+    "bg-10-009"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "heaven",
+   "title": {
+    "en": "Heaven and higher worlds",
+    "hi": "स्वर्ग"
+   },
+   "synonyms": [
+    "heaven",
+    "swarg",
+    "higher planets",
+    "स्वर्ग"
+   ],
+   "verseIds": [
+    "bg-09-020",
+    "bg-09-021",
+    "bg-02-042-043",
+    "bg-08-016",
+    "bg-14-018",
+    "bg-07-023"
+   ],
+   "reviewed": false
+  },
+  {
+   "id": "wealth",
+   "title": {
+    "en": "Wealth and possessions",
+    "hi": "धन और संपत्ति"
+   },
+   "synonyms": [
+    "wealth",
+    "money",
+    "possessions",
+    "riches",
+    "dhan",
+    "paisa",
+    "पैसा",
+    "धन"
+   ],
+   "verseIds": [
+    "bg-16-013-015",
+    "bg-04-021",
+    "bg-02-071",
+    "bg-16-011-012",
+    "bg-07-016",
+    "bg-16-017"
+   ],
+   "reviewed": false
+  }
+ ]
+}

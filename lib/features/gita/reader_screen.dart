@@ -17,10 +17,13 @@ import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/models/chapter.dart';
 import '../../domain/models/verse_entry.dart';
+import '../../domain/read_rule.dart';
 import '../../domain/verse_navigation.dart';
 import '../common/common_widgets.dart';
+import '../common/qualifying_read.dart';
 import '../common/save_toggle_button.dart';
 import '../../core/design/copy_on_tap.dart';
+import '../summary/summary_screen.dart' show openSummary;
 import 'chapter_sheet.dart';
 import 'heart_burst.dart';
 import 'share_card.dart';
@@ -56,6 +59,7 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _settings; // read now, while ref is usable
     final jump = ref.read(readerJumpProvider);
     final start =
         jump?.verseId ??
@@ -101,9 +105,7 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
       _pendingId = id;
     });
     try {
-      final entries = await ref.read(
-        chapterEntriesProvider(chapter).future,
-      );
+      final entries = await ref.read(chapterEntriesProvider(chapter).future);
       if (!mounted || serial != _loadSerial) return;
       final i = indexOfId(entries, id);
       _pages?.dispose();
@@ -165,10 +167,13 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
     });
   }
 
+  // Kept in a field: dispose() saves too, when ref is no longer usable.
+  late final SettingsNotifier _settings = ref.read(settingsProvider.notifier);
+
   void _saveNow() {
     final e = current;
     if (e == null) return;
-    ref.read(settingsProvider.notifier).setLastVerseId(e.id);
+    _settings.setLastVerseId(e.id);
   }
 
   void _openChapterSheet(ChaptersIndex index) async {
@@ -208,7 +213,10 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
         error: _error ?? indexAsync.error,
         onRetry: () {
           ref.invalidate(chaptersIndexProvider);
-          _open(_pendingId ?? current?.id ?? formatVerseId(1, 1), animate: false);
+          _open(
+            _pendingId ?? current?.id ?? formatVerseId(1, 1),
+            animate: false,
+          );
         },
       );
     } else if (_entries == null || _pages == null || !indexAsync.hasValue) {
@@ -224,7 +232,13 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(child: body),
+          Positioned.fill(
+            child: QualifyingRead(
+              verseId: current?.id,
+              dwell: ReadRule.readerDwell,
+              child: body,
+            ),
+          ),
           if (chapter != null && current != null)
             Positioned(
               left: 0,
@@ -263,7 +277,9 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
     final e = current;
     if (e == null) return;
     unawaited(HapticFeedback.lightImpact());
-    unawaited(ref.read(libraryControllerProvider.notifier).setFavourite(e.id, true));
+    unawaited(
+      ref.read(libraryControllerProvider.notifier).setFavourite(e.id, true),
+    );
     setState(() => _hearts.add((key: UniqueKey(), position: position)));
   }
 
@@ -371,30 +387,55 @@ class _TopBar extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GlassPill(
-                      onTap: onChapterTap,
-                      semanticLabel:
-                          'Chapter ${chapter.number}, ${chapter.titleEn}. '
-                          'Choose chapter',
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              'Ch ${chapter.number} · ${chapter.titleEn}',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: ui.label(size: 14),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: GlassPill(
+                            onTap: onChapterTap,
+                            semanticLabel:
+                                'Chapter ${chapter.number}, ${chapter.titleEn}. '
+                                'Choose chapter',
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    'Ch ${chapter.number} · ${chapter.titleEn}',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: ui.label(size: 14),
+                                  ),
+                                ),
+                                const SizedBox(width: Space.s4),
+                                Icon(
+                                  Icons.expand_more_rounded,
+                                  size: IconSizes.small,
+                                  color: c.textSecondary,
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(width: Space.s4),
-                          Icon(
-                            Icons.expand_more_rounded,
-                            size: IconSizes.small,
-                            color: c.textSecondary,
+                        ),
+                        const SizedBox(width: Space.s8),
+                        GlassPill(
+                          onTap: () => openSummary(context, chapter.number),
+                          semanticLabel: 'Summary of chapter ${chapter.number}',
+                          padding: EdgeInsets.zero,
+                          child: SizedBox(
+                            width: Touch.pillHeight,
+                            child: Icon(
+                              Icons.info_outline_rounded,
+                              size: IconSizes.small,
+                              color: c.textPrimary,
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(width: Space.s8),
+                        GlassPill(
+                          padding: EdgeInsets.zero,
+                          child: _ReaderOverflow(chapter: chapter.number),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: Space.s8),
                     Row(
@@ -448,6 +489,52 @@ class _TopBar extends StatelessWidget {
   }
 }
 
+/// Overflow menu in the reader's top row: search and chapter summary, in
+/// a floating glass menu that matches the rest of the reader.
+class _ReaderOverflow extends StatelessWidget {
+  const _ReaderOverflow({required this.chapter});
+
+  final int chapter;
+
+  Future<void> _open(BuildContext context) async {
+    final picked = await showGlassMenu<String>(
+      context,
+      items: const [
+        GlassMenuItem(
+          value: 'search',
+          icon: Icons.search_rounded,
+          label: 'Search',
+        ),
+        GlassMenuItem(
+          value: 'summary',
+          icon: Icons.info_outline_rounded,
+          label: 'Chapter summary',
+        ),
+      ],
+    );
+    if (!context.mounted || picked == null) return;
+    picked == 'search' ? openSearch(context) : openSummary(context, chapter);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final c = AppColors.of(context);
+    return Pressable(
+      onTap: () => _open(context),
+      semanticLabel: 'More',
+      radius: Touch.pillHeight / 2,
+      child: SizedBox.square(
+        dimension: Touch.pillHeight,
+        child: Icon(
+          Icons.more_horiz_rounded,
+          size: IconSizes.small,
+          color: c.textPrimary,
+        ),
+      ),
+    );
+  }
+}
+
 class _EntryPage extends ConsumerStatefulWidget {
   const _EntryPage({
     required this.entry,
@@ -482,7 +569,8 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
       _turned = false;
     } else if (n is OverscrollNotification) {
       // Drags and flicks both count, so a quick swipe at the edge turns.
-      _pull += n.overscroll + n.velocity.sign * (n.dragDetails == null ? 24 : 0);
+      _pull +=
+          n.overscroll + n.velocity.sign * (n.dragDetails == null ? 24 : 0);
       if (!_turned && _pull.abs() > _pullToTurn) {
         _turned = true;
         widget.onPullPastEdge(_pull.sign.toInt());
@@ -538,27 +626,42 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
             children: [
               VerseTextBlock(entry: entry, copyable: true),
               const SizedBox(height: Space.s24),
-              Row(
+              // Wraps at large text sizes so the Purport button never
+              // overflows.
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                runSpacing: Space.s8,
                 children: [
-                  SaveToggleButton(verseId: entry.id, kind: SaveKind.favourite),
-                  SaveToggleButton(verseId: entry.id, kind: SaveKind.bookmark),
-                  Builder(
-                    builder: (buttonContext) => Pressable(
-                      onTap: _sharing ? null : () => _share(buttonContext),
-                      semanticLabel: 'Share verse',
-                      child: SizedBox.square(
-                        dimension: Touch.minTarget,
-                        child: Icon(
-                          Theme.of(context).platform == TargetPlatform.iOS
-                              ? Icons.ios_share_rounded
-                              : Icons.share_rounded,
-                          size: IconSizes.regular,
-                          color: c.textSecondary,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SaveToggleButton(
+                        verseId: entry.id,
+                        kind: SaveKind.favourite,
+                      ),
+                      SaveToggleButton(
+                        verseId: entry.id,
+                        kind: SaveKind.bookmark,
+                      ),
+                      Builder(
+                        builder: (buttonContext) => Pressable(
+                          onTap: _sharing ? null : () => _share(buttonContext),
+                          semanticLabel: 'Share verse',
+                          child: SizedBox.square(
+                            dimension: Touch.minTarget,
+                            child: Icon(
+                              Theme.of(context).platform == TargetPlatform.iOS
+                                  ? Icons.ios_share_rounded
+                                  : Icons.share_rounded,
+                              size: IconSizes.regular,
+                              color: c.textSecondary,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                  const Spacer(),
                   if (entry.hasPurport)
                     FilledButton(
                       onPressed: () => openPurport(context, entry.id),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/design/components.dart';
 import '../../core/design/tokens.dart';
@@ -68,9 +69,7 @@ class _ChapterListState extends State<_ChapterList> {
         return Semantics(
           selected: selected,
           button: true,
-          label:
-              'Chapter ${ch.number}, ${ch.titleEn}, ${ch.verseCount} verses',
-          excludeSemantics: true,
+          label: 'Chapter ${ch.number}, ${ch.titleEn}, ${ch.verseCount} verses',
           child: Material(
             color: selected ? c.accentSoft : Colors.transparent,
             child: InkWell(
@@ -95,32 +94,50 @@ class _ChapterListState extends State<_ChapterList> {
                           shape: BoxShape.circle,
                           color: selected ? c.surface : c.surfaceSoft,
                         ),
-                        child: Text(
-                          '${ch.number}',
-                          style: ui.label(size: 14, color: c.accentText),
+                        child: ExcludeSemantics(
+                          child: Text(
+                            '${ch.number}',
+                            style: ui.label(size: 14, color: c.accentText),
+                          ),
                         ),
                       ),
                       const SizedBox(width: Space.s16),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              ch.titleEn,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: ui.label(size: 16),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              '${ch.verseCount} verses',
-                              style: ui.body(size: 13),
-                            ),
-                          ],
+                        child: ExcludeSemantics(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                ch.titleEn,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: ui.label(size: 16),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                '${ch.verseCount} verses',
+                                style: ui.body(size: 13),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       if (selected)
                         Icon(Icons.check_rounded, color: c.accentText),
+                      // Opens the written summary (not Prabhupada's text).
+                      Semantics(
+                        button: true,
+                        label: 'Summary of chapter ${ch.number}',
+                        excludeSemantics: true,
+                        child: TextButton(
+                          onPressed: () {
+                            final router = GoRouter.of(context);
+                            Navigator.of(context).pop();
+                            router.push('/gita/summary/${ch.number}');
+                          },
+                          child: const Text('Summary'),
+                        ),
+                      ),
                     ],
                   ),
                 ),

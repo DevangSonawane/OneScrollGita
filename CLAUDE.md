@@ -11,9 +11,9 @@
 - Placeholder data must carry isPlaceholder: true and must never ship in a release build.
 
 ## Product constraints
-- Offline-first. No network calls, no accounts, no analytics, no ads, no notifications, no in-app purchases, no cloud sync.
+- Offline-first. No network calls, no accounts, no analytics, no ads, no push notifications, no in-app purchases, no cloud sync. (v2: local notifications only, see below.)
 - Fonts are bundled assets. Do not use runtime font downloads.
-- Out of scope: AI features, chat, social, streaks, search, sharing (until approved).
+- Out of scope: AI features, chat, social, leaderboards. (v2 allows a gentle streak, keyword/situation search and completion sharing.)
 
 ## Architecture
 - Layers: presentation, application (Riverpod), domain (pure Dart), data (repositories). Only the data layer touches assets, SQLite or preferences.
@@ -29,3 +29,10 @@
 - Write tests with each stage. Before saying a stage is done, run flutter analyze and flutter test and report the results.
 - Tick the completed boxes in docs/PRD.md.
 - Prefer small, reviewable commits. When blocked on content, legal wording or a visual decision, ask the user instead of guessing.
+
+## v2 additions
+- v2 spec is in docs/PRD_v2.md. It overrides v1 for notifications, streaks, search, summaries and sharing only.
+- Still no backend, no network calls, no analytics. Scripture text is never generated or edited.
+- Written content (messages, summaries, theme map) carries reviewed:false until the owner reviews it. List everything needing review in docs/review-needed.md.
+- Never invent a helpline number. Never map a verse to a theme from memory; use the dataset text.
+- Do not build audio. When all other v2 stages are finished, tell the owner: "All v2 features except audio are complete. Only audio remains."
