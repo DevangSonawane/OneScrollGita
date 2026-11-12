@@ -16,7 +16,10 @@ double contrast(Color a, Color b) {
 }
 
 void main() {
-  for (final (name, c) in [('light', AppColors.light), ('dark', AppColors.dark)]) {
+  for (final (name, c) in [
+    ('light', AppColors.light),
+    ('dark', AppColors.dark),
+  ]) {
     group('$name theme', () {
       final text = {
         'textPrimary': c.textPrimary,
@@ -35,7 +38,11 @@ void main() {
           });
         }
       }
-      for (final b in {'bg': c.bg, 'surface': c.surface, 'accentSoft': c.accentSoft}.entries) {
+      for (final b in {
+        'bg': c.bg,
+        'surface': c.surface,
+        'accentSoft': c.accentSoft,
+      }.entries) {
         test('accentText on ${b.key} >= 4.5', () {
           expect(contrast(c.accentText, b.value), greaterThanOrEqualTo(4.5));
         });
@@ -55,6 +62,28 @@ void main() {
       });
       test('snackbar text (bg on textPrimary) >= 4.5', () {
         expect(contrast(c.bg, c.textPrimary), greaterThanOrEqualTo(4.5));
+      });
+    });
+  }
+
+  for (final (name, c, h, p) in [
+    ('light', AppColors.light, HighlightColors.light, PremiumColors.light),
+    ('dark', AppColors.dark, HighlightColors.dark, PremiumColors.dark),
+  ]) {
+    group('$name v3', () {
+      for (final (i, band) in h.bands.indexed) {
+        test('reading text on highlight band $i >= 4.5', () {
+          expect(contrast(c.textPrimary, band), greaterThanOrEqualTo(4.5));
+          expect(contrast(c.textSecondary, band), greaterThanOrEqualTo(4.5));
+        });
+      }
+      for (final (i, swatch) in h.swatches.indexed) {
+        test('highlight swatch $i visible on bg >= 3', () {
+          expect(contrast(swatch, c.bg), greaterThanOrEqualTo(3));
+        });
+      }
+      test('paywall: onAccent readable on the gold end of the button', () {
+        expect(contrast(c.onAccent, p.gold), greaterThanOrEqualTo(4.5));
       });
     });
   }

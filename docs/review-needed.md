@@ -13,6 +13,21 @@ all of it must be checked **before release**.
 | Real-device notifications | — | Not tested on a phone. Check on at least one Android and one iPhone: a reminder arrives at the chosen time, tapping opens the app (verse notifications open that verse), reading a verse cancels the evening nudge, reminders survive a restart. |
 | Release manifest | `android/app/src/main/AndroidManifest.xml` | After the first release build, confirm the **merged** release manifest has no `INTERNET` permission (main manifest has none; only debug/profile do). |
 
+## v3: source data notes
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Hindi word meanings, 2.4 | vedabase.cc source (`tool/.cache/vedabase_cc/hi/bg/2/4.json`) | A comma separates two pairs where a semicolon belongs. The app shows the English list for this verse. If vedabase.cc fixes it, re-run the importer. |
+| Hindi word meanings, 13.8-12 | `tool/.cache/vedabase_cc/hi/bg/13/8-12.json` | One word has no meaning. Same fallback to English. |
+| v3 paywall, stores, copy | `docs/PRD_v3.md` section 10 | Create `sadhak_yearly` and `sadhak_lifetime` in Play Console and App Store Connect, set prices, add testers. |
+| Terms and privacy URLs | `lib/core/config/app_links.dart` | Empty, so the paywall hides those links. The App Store requires both for subscriptions. |
+| Paywall wording | `lib/features/premium/paywall_screen.dart`, `lib/domain/premium.dart` (reason lines) | Headline, benefits, badges ("Recommended", "One-time"), terms line, welcome text. |
+| `INTERNET` permission from Play Billing | Play Console data-safety form | Kept by owner decision. Declare Google Play Billing's diagnostic data in the data-safety form. |
+| Real purchase test | phone + test track | Buy, cancel, pending, restore, and a lapsed yearly plan on Android. |
+| Trainer and study wording | `lib/features/trainer/`, `lib/features/study/` | Step prompts, empty states, "Learned" text, notebook cover and footer. |
+| Free limits | `lib/domain/premium.dart` (`FreeLimits`) | 10 notes; trainer verses 2.47, 4.7, 18.66. |
+| PDF on a phone | Profile → Export my Gita notebook | Create and share a PDF; open it in a PDF viewer. Text in it is an image, so not selectable. |
+
 ## Written content (wording)
 
 | Item | Where | Notes |

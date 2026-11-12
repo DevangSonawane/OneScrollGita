@@ -23,7 +23,9 @@ void main() {
 
     test('favourites and bookmarks are separate', () async {
       await repo.setFavourite('bg-02-047', true);
-      expect((await repo.watchFavourites().first).map((e) => e.verseId), ['bg-02-047']);
+      expect((await repo.watchFavourites().first).map((e) => e.verseId), [
+        'bg-02-047',
+      ]);
       expect(await repo.watchBookmarks().first, isEmpty);
       await repo.setBookmark('bg-02-047', true);
       await repo.setFavourite('bg-02-047', false);
@@ -40,20 +42,23 @@ void main() {
       expect(list.last.at, DateTime(2026, 10, 28, 9));
     });
 
-    test('history dedupes, orders newest first, and is capped at 200', () async {
-      for (var i = 1; i <= 205; i++) {
+    test(
+      'history dedupes, orders newest first, and is capped at 200',
+      () async {
+        for (var i = 1; i <= 205; i++) {
+          now = now.add(const Duration(seconds: 1));
+          await repo.recordHistory('bg-18-${i.toString().padLeft(3, '0')}');
+        }
         now = now.add(const Duration(seconds: 1));
-        await repo.recordHistory('bg-18-${i.toString().padLeft(3, '0')}');
-      }
-      now = now.add(const Duration(seconds: 1));
-      await repo.recordHistory('bg-18-010'); // revisit
-      final list = await repo.watchHistory().first;
-      expect(list.length, 200);
-      expect(list.first.verseId, 'bg-18-010');
-      expect(list.where((e) => e.verseId == 'bg-18-010').length, 1);
-      // The oldest ones were dropped.
-      expect(list.any((e) => e.verseId == 'bg-18-001'), isFalse);
-    });
+        await repo.recordHistory('bg-18-010'); // revisit
+        final list = await repo.watchHistory().first;
+        expect(list.length, 200);
+        expect(list.first.verseId, 'bg-18-010');
+        expect(list.where((e) => e.verseId == 'bg-18-010').length, 1);
+        // The oldest ones were dropped.
+        expect(list.any((e) => e.verseId == 'bg-18-001'), isFalse);
+      },
+    );
 
     test('clear history keeps favourites; reset clears everything', () async {
       await repo.setFavourite('a', true);
@@ -75,8 +80,8 @@ void main() {
       expect(await repo.allReferencedIds(), {'bg-01-001'});
     });
 
-    test('schema version 2 creates all tables', () async {
-      expect(db.schemaVersion, 2);
+    test('schema version 3 creates all tables', () async {
+      expect(db.schemaVersion, 3);
       expect(db.allTables.map((t) => t.actualTableName).toSet(), {
         'favourites',
         'bookmarks',
@@ -85,6 +90,10 @@ void main() {
         'read_day_verses',
         'notif_assignments',
         'search_history',
+        'verse_highlights',
+        'verse_notes',
+        'journal_entries',
+        'shloka_progress',
       });
     });
   });
@@ -92,7 +101,8 @@ void main() {
   group('SettingsRepository', () {
     test('defaults', () async {
       SharedPreferences.setMockInitialValues({});
-      final s = SettingsRepository(await SharedPreferences.getInstance()).load();
+      final s = SettingsRepository(await SharedPreferences.getInstance())
+          .load();
       expect(s.languageCode, 'en');
       expect(s.themeMode, AppThemeMode.system);
       expect(s.textScaleStep, 2);
@@ -108,7 +118,8 @@ void main() {
         SettingsRepository.kLastVerse: 'not-an-id',
         SettingsRepository.kFirstLaunch: 'yes',
       });
-      final s = SettingsRepository(await SharedPreferences.getInstance()).load();
+      final s = SettingsRepository(await SharedPreferences.getInstance())
+          .load();
       expect(s.languageCode, 'en');
       expect(s.themeMode, AppThemeMode.system);
       expect(s.textScaleStep, 2);

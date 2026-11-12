@@ -27,7 +27,9 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
         child: ContentWidth(
           child: LayoutBuilder(
             builder: (context, constraints) => SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: Space.readingSide),
+              padding: const EdgeInsets.symmetric(
+                horizontal: Space.readingSide,
+              ),
               child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: Column(
@@ -133,7 +135,9 @@ class _LanguageOption extends StatelessWidget {
                 label,
                 style: ui.title.copyWith(
                   fontSize: 22,
-                  fontFamily: label == 'English' ? Fonts.literata : Fonts.devanagari,
+                  fontFamily: label == 'English'
+                      ? Fonts.literata
+                      : Fonts.devanagari,
                 ),
               ),
             ),

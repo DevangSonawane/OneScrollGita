@@ -217,6 +217,11 @@ Map<String, dynamic> _entry(int c, int start, int end) {
                   ]
                 : null,
           },
-    'synonyms': null,
+    'synonyms': {
+      'en': [
+        {'word': 'placeholder', 'meaning': 'not scripture text'},
+      ],
+      'hi': null,
+    },
   };
 }

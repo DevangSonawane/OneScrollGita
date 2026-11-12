@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../domain/local_date.dart';
 import '../../domain/models/app_settings.dart';
 import '../../domain/models/reminder_settings.dart';
+import '../../domain/premium.dart';
 import '../../domain/verse_navigation.dart';
 
 /// Small settings in shared_preferences. Invalid or unknown stored values
@@ -32,6 +33,17 @@ class SettingsRepository {
   /// Last local date the app was opened (for the notification back-off).
   static const kLastOpenedDate = 'lastOpenedDate';
 
+  // v3 (PRD_v3 section 4). Not cleared by "Reset all saved data": the store
+  // holds the purchase, and "Restore purchase" always brings it back.
+  static const kEntitlementCache = 'entitlementCache';
+  static const kEntitlementCheckedAt = 'entitlementCheckedAt';
+
+  /// Shloka trainer script: `latin` (default) or `devanagari`.
+  static const kTrainerScript = 'trainerScript';
+
+  /// Debug builds only ("Pretend premium"); ignored in release.
+  static const kPretendPremium = 'debugPretendPremium';
+
   static const _v2Keys = [
     kRemindersEnabled,
     kReminderTime,
@@ -42,6 +54,7 @@ class SettingsRepository {
     kStreakPopupShownDate,
     kMilestonesShown,
     kLastOpenedDate,
+    kTrainerScript,
   ];
 
   AppSettings load() {
@@ -121,6 +134,28 @@ class SettingsRepository {
 
   Future<void> setLastScheduleRebuildAt(DateTime at) =>
       _prefs.setString(kLastScheduleRebuildAt, at.toIso8601String());
+
+  Entitlement get entitlementCache =>
+      _get<String>(kEntitlementCache) == Entitlement.premium.name
+      ? Entitlement.premium
+      : Entitlement.free;
+
+  DateTime? get entitlementCheckedAt =>
+      DateTime.tryParse(_get<String>(kEntitlementCheckedAt) ?? '');
+
+  Future<void> setEntitlementCache(Entitlement e, DateTime at) async {
+    await _prefs.setString(kEntitlementCache, e.name);
+    await _prefs.setString(kEntitlementCheckedAt, at.toIso8601String());
+  }
+
+  bool get trainerDevanagari => _get<String>(kTrainerScript) == 'devanagari';
+
+  Future<void> setTrainerDevanagari(bool v) =>
+      _prefs.setString(kTrainerScript, v ? 'devanagari' : 'latin');
+
+  bool get pretendPremium => _get<bool>(kPretendPremium) ?? false;
+
+  Future<void> setPretendPremium(bool v) => _prefs.setBool(kPretendPremium, v);
 
   T? _get<T>(String key) {
     final v = _prefs.get(key);

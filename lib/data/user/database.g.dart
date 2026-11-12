@@ -1686,6 +1686,1505 @@ class SearchHistoryCompanion extends UpdateCompanion<SearchHistoryRow> {
   }
 }
 
+class $VerseHighlightsTable extends VerseHighlights
+    with TableInfo<$VerseHighlightsTable, HighlightRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $VerseHighlightsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _verseIdMeta = const VerificationMeta(
+    'verseId',
+  );
+  @override
+  late final GeneratedColumn<String> verseId = GeneratedColumn<String>(
+    'verse_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _colorMeta = const VerificationMeta('color');
+  @override
+  late final GeneratedColumn<String> color = GeneratedColumn<String>(
+    'color',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMsMeta = const VerificationMeta(
+    'updatedAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> updatedAtMs = GeneratedColumn<int>(
+    'updated_at_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [verseId, color, updatedAtMs];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'verse_highlights';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<HighlightRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('verse_id')) {
+      context.handle(
+        _verseIdMeta,
+        verseId.isAcceptableOrUnknown(data['verse_id']!, _verseIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_verseIdMeta);
+    }
+    if (data.containsKey('color')) {
+      context.handle(
+        _colorMeta,
+        color.isAcceptableOrUnknown(data['color']!, _colorMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_colorMeta);
+    }
+    if (data.containsKey('updated_at_ms')) {
+      context.handle(
+        _updatedAtMsMeta,
+        updatedAtMs.isAcceptableOrUnknown(
+          data['updated_at_ms']!,
+          _updatedAtMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {verseId};
+  @override
+  HighlightRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return HighlightRow(
+      verseId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}verse_id'],
+      )!,
+      color: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}color'],
+      )!,
+      updatedAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}updated_at_ms'],
+      )!,
+    );
+  }
+
+  @override
+  $VerseHighlightsTable createAlias(String alias) {
+    return $VerseHighlightsTable(attachedDatabase, alias);
+  }
+}
+
+class HighlightRow extends DataClass implements Insertable<HighlightRow> {
+  final String verseId;
+  final String color;
+  final int updatedAtMs;
+  const HighlightRow({
+    required this.verseId,
+    required this.color,
+    required this.updatedAtMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['verse_id'] = Variable<String>(verseId);
+    map['color'] = Variable<String>(color);
+    map['updated_at_ms'] = Variable<int>(updatedAtMs);
+    return map;
+  }
+
+  VerseHighlightsCompanion toCompanion(bool nullToAbsent) {
+    return VerseHighlightsCompanion(
+      verseId: Value(verseId),
+      color: Value(color),
+      updatedAtMs: Value(updatedAtMs),
+    );
+  }
+
+  factory HighlightRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return HighlightRow(
+      verseId: serializer.fromJson<String>(json['verseId']),
+      color: serializer.fromJson<String>(json['color']),
+      updatedAtMs: serializer.fromJson<int>(json['updatedAtMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'verseId': serializer.toJson<String>(verseId),
+      'color': serializer.toJson<String>(color),
+      'updatedAtMs': serializer.toJson<int>(updatedAtMs),
+    };
+  }
+
+  HighlightRow copyWith({String? verseId, String? color, int? updatedAtMs}) =>
+      HighlightRow(
+        verseId: verseId ?? this.verseId,
+        color: color ?? this.color,
+        updatedAtMs: updatedAtMs ?? this.updatedAtMs,
+      );
+  HighlightRow copyWithCompanion(VerseHighlightsCompanion data) {
+    return HighlightRow(
+      verseId: data.verseId.present ? data.verseId.value : this.verseId,
+      color: data.color.present ? data.color.value : this.color,
+      updatedAtMs: data.updatedAtMs.present
+          ? data.updatedAtMs.value
+          : this.updatedAtMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('HighlightRow(')
+          ..write('verseId: $verseId, ')
+          ..write('color: $color, ')
+          ..write('updatedAtMs: $updatedAtMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(verseId, color, updatedAtMs);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is HighlightRow &&
+          other.verseId == this.verseId &&
+          other.color == this.color &&
+          other.updatedAtMs == this.updatedAtMs);
+}
+
+class VerseHighlightsCompanion extends UpdateCompanion<HighlightRow> {
+  final Value<String> verseId;
+  final Value<String> color;
+  final Value<int> updatedAtMs;
+  final Value<int> rowid;
+  const VerseHighlightsCompanion({
+    this.verseId = const Value.absent(),
+    this.color = const Value.absent(),
+    this.updatedAtMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  VerseHighlightsCompanion.insert({
+    required String verseId,
+    required String color,
+    required int updatedAtMs,
+    this.rowid = const Value.absent(),
+  }) : verseId = Value(verseId),
+       color = Value(color),
+       updatedAtMs = Value(updatedAtMs);
+  static Insertable<HighlightRow> custom({
+    Expression<String>? verseId,
+    Expression<String>? color,
+    Expression<int>? updatedAtMs,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (verseId != null) 'verse_id': verseId,
+      if (color != null) 'color': color,
+      if (updatedAtMs != null) 'updated_at_ms': updatedAtMs,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  VerseHighlightsCompanion copyWith({
+    Value<String>? verseId,
+    Value<String>? color,
+    Value<int>? updatedAtMs,
+    Value<int>? rowid,
+  }) {
+    return VerseHighlightsCompanion(
+      verseId: verseId ?? this.verseId,
+      color: color ?? this.color,
+      updatedAtMs: updatedAtMs ?? this.updatedAtMs,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (verseId.present) {
+      map['verse_id'] = Variable<String>(verseId.value);
+    }
+    if (color.present) {
+      map['color'] = Variable<String>(color.value);
+    }
+    if (updatedAtMs.present) {
+      map['updated_at_ms'] = Variable<int>(updatedAtMs.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('VerseHighlightsCompanion(')
+          ..write('verseId: $verseId, ')
+          ..write('color: $color, ')
+          ..write('updatedAtMs: $updatedAtMs, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $VerseNotesTable extends VerseNotes
+    with TableInfo<$VerseNotesTable, NoteRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $VerseNotesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _verseIdMeta = const VerificationMeta(
+    'verseId',
+  );
+  @override
+  late final GeneratedColumn<String> verseId = GeneratedColumn<String>(
+    'verse_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _bodyMeta = const VerificationMeta('body');
+  @override
+  late final GeneratedColumn<String> body = GeneratedColumn<String>(
+    'body',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMsMeta = const VerificationMeta(
+    'createdAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> createdAtMs = GeneratedColumn<int>(
+    'created_at_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMsMeta = const VerificationMeta(
+    'updatedAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> updatedAtMs = GeneratedColumn<int>(
+    'updated_at_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    verseId,
+    body,
+    createdAtMs,
+    updatedAtMs,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'verse_notes';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<NoteRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('verse_id')) {
+      context.handle(
+        _verseIdMeta,
+        verseId.isAcceptableOrUnknown(data['verse_id']!, _verseIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_verseIdMeta);
+    }
+    if (data.containsKey('body')) {
+      context.handle(
+        _bodyMeta,
+        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_bodyMeta);
+    }
+    if (data.containsKey('created_at_ms')) {
+      context.handle(
+        _createdAtMsMeta,
+        createdAtMs.isAcceptableOrUnknown(
+          data['created_at_ms']!,
+          _createdAtMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMsMeta);
+    }
+    if (data.containsKey('updated_at_ms')) {
+      context.handle(
+        _updatedAtMsMeta,
+        updatedAtMs.isAcceptableOrUnknown(
+          data['updated_at_ms']!,
+          _updatedAtMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {verseId};
+  @override
+  NoteRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return NoteRow(
+      verseId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}verse_id'],
+      )!,
+      body: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}body'],
+      )!,
+      createdAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}created_at_ms'],
+      )!,
+      updatedAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}updated_at_ms'],
+      )!,
+    );
+  }
+
+  @override
+  $VerseNotesTable createAlias(String alias) {
+    return $VerseNotesTable(attachedDatabase, alias);
+  }
+}
+
+class NoteRow extends DataClass implements Insertable<NoteRow> {
+  final String verseId;
+  final String body;
+  final int createdAtMs;
+  final int updatedAtMs;
+  const NoteRow({
+    required this.verseId,
+    required this.body,
+    required this.createdAtMs,
+    required this.updatedAtMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['verse_id'] = Variable<String>(verseId);
+    map['body'] = Variable<String>(body);
+    map['created_at_ms'] = Variable<int>(createdAtMs);
+    map['updated_at_ms'] = Variable<int>(updatedAtMs);
+    return map;
+  }
+
+  VerseNotesCompanion toCompanion(bool nullToAbsent) {
+    return VerseNotesCompanion(
+      verseId: Value(verseId),
+      body: Value(body),
+      createdAtMs: Value(createdAtMs),
+      updatedAtMs: Value(updatedAtMs),
+    );
+  }
+
+  factory NoteRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return NoteRow(
+      verseId: serializer.fromJson<String>(json['verseId']),
+      body: serializer.fromJson<String>(json['body']),
+      createdAtMs: serializer.fromJson<int>(json['createdAtMs']),
+      updatedAtMs: serializer.fromJson<int>(json['updatedAtMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'verseId': serializer.toJson<String>(verseId),
+      'body': serializer.toJson<String>(body),
+      'createdAtMs': serializer.toJson<int>(createdAtMs),
+      'updatedAtMs': serializer.toJson<int>(updatedAtMs),
+    };
+  }
+
+  NoteRow copyWith({
+    String? verseId,
+    String? body,
+    int? createdAtMs,
+    int? updatedAtMs,
+  }) => NoteRow(
+    verseId: verseId ?? this.verseId,
+    body: body ?? this.body,
+    createdAtMs: createdAtMs ?? this.createdAtMs,
+    updatedAtMs: updatedAtMs ?? this.updatedAtMs,
+  );
+  NoteRow copyWithCompanion(VerseNotesCompanion data) {
+    return NoteRow(
+      verseId: data.verseId.present ? data.verseId.value : this.verseId,
+      body: data.body.present ? data.body.value : this.body,
+      createdAtMs: data.createdAtMs.present
+          ? data.createdAtMs.value
+          : this.createdAtMs,
+      updatedAtMs: data.updatedAtMs.present
+          ? data.updatedAtMs.value
+          : this.updatedAtMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('NoteRow(')
+          ..write('verseId: $verseId, ')
+          ..write('body: $body, ')
+          ..write('createdAtMs: $createdAtMs, ')
+          ..write('updatedAtMs: $updatedAtMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(verseId, body, createdAtMs, updatedAtMs);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is NoteRow &&
+          other.verseId == this.verseId &&
+          other.body == this.body &&
+          other.createdAtMs == this.createdAtMs &&
+          other.updatedAtMs == this.updatedAtMs);
+}
+
+class VerseNotesCompanion extends UpdateCompanion<NoteRow> {
+  final Value<String> verseId;
+  final Value<String> body;
+  final Value<int> createdAtMs;
+  final Value<int> updatedAtMs;
+  final Value<int> rowid;
+  const VerseNotesCompanion({
+    this.verseId = const Value.absent(),
+    this.body = const Value.absent(),
+    this.createdAtMs = const Value.absent(),
+    this.updatedAtMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  VerseNotesCompanion.insert({
+    required String verseId,
+    required String body,
+    required int createdAtMs,
+    required int updatedAtMs,
+    this.rowid = const Value.absent(),
+  }) : verseId = Value(verseId),
+       body = Value(body),
+       createdAtMs = Value(createdAtMs),
+       updatedAtMs = Value(updatedAtMs);
+  static Insertable<NoteRow> custom({
+    Expression<String>? verseId,
+    Expression<String>? body,
+    Expression<int>? createdAtMs,
+    Expression<int>? updatedAtMs,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (verseId != null) 'verse_id': verseId,
+      if (body != null) 'body': body,
+      if (createdAtMs != null) 'created_at_ms': createdAtMs,
+      if (updatedAtMs != null) 'updated_at_ms': updatedAtMs,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  VerseNotesCompanion copyWith({
+    Value<String>? verseId,
+    Value<String>? body,
+    Value<int>? createdAtMs,
+    Value<int>? updatedAtMs,
+    Value<int>? rowid,
+  }) {
+    return VerseNotesCompanion(
+      verseId: verseId ?? this.verseId,
+      body: body ?? this.body,
+      createdAtMs: createdAtMs ?? this.createdAtMs,
+      updatedAtMs: updatedAtMs ?? this.updatedAtMs,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (verseId.present) {
+      map['verse_id'] = Variable<String>(verseId.value);
+    }
+    if (body.present) {
+      map['body'] = Variable<String>(body.value);
+    }
+    if (createdAtMs.present) {
+      map['created_at_ms'] = Variable<int>(createdAtMs.value);
+    }
+    if (updatedAtMs.present) {
+      map['updated_at_ms'] = Variable<int>(updatedAtMs.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('VerseNotesCompanion(')
+          ..write('verseId: $verseId, ')
+          ..write('body: $body, ')
+          ..write('createdAtMs: $createdAtMs, ')
+          ..write('updatedAtMs: $updatedAtMs, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $JournalEntriesTable extends JournalEntries
+    with TableInfo<$JournalEntriesTable, JournalRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $JournalEntriesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _verseIdMeta = const VerificationMeta(
+    'verseId',
+  );
+  @override
+  late final GeneratedColumn<String> verseId = GeneratedColumn<String>(
+    'verse_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _bodyMeta = const VerificationMeta('body');
+  @override
+  late final GeneratedColumn<String> body = GeneratedColumn<String>(
+    'body',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMsMeta = const VerificationMeta(
+    'createdAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> createdAtMs = GeneratedColumn<int>(
+    'created_at_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMsMeta = const VerificationMeta(
+    'updatedAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> updatedAtMs = GeneratedColumn<int>(
+    'updated_at_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    verseId,
+    body,
+    createdAtMs,
+    updatedAtMs,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'journal_entries';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<JournalRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('verse_id')) {
+      context.handle(
+        _verseIdMeta,
+        verseId.isAcceptableOrUnknown(data['verse_id']!, _verseIdMeta),
+      );
+    }
+    if (data.containsKey('body')) {
+      context.handle(
+        _bodyMeta,
+        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_bodyMeta);
+    }
+    if (data.containsKey('created_at_ms')) {
+      context.handle(
+        _createdAtMsMeta,
+        createdAtMs.isAcceptableOrUnknown(
+          data['created_at_ms']!,
+          _createdAtMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMsMeta);
+    }
+    if (data.containsKey('updated_at_ms')) {
+      context.handle(
+        _updatedAtMsMeta,
+        updatedAtMs.isAcceptableOrUnknown(
+          data['updated_at_ms']!,
+          _updatedAtMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMsMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  JournalRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return JournalRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      verseId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}verse_id'],
+      ),
+      body: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}body'],
+      )!,
+      createdAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}created_at_ms'],
+      )!,
+      updatedAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}updated_at_ms'],
+      )!,
+    );
+  }
+
+  @override
+  $JournalEntriesTable createAlias(String alias) {
+    return $JournalEntriesTable(attachedDatabase, alias);
+  }
+}
+
+class JournalRow extends DataClass implements Insertable<JournalRow> {
+  final int id;
+  final String? verseId;
+  final String body;
+  final int createdAtMs;
+  final int updatedAtMs;
+  const JournalRow({
+    required this.id,
+    this.verseId,
+    required this.body,
+    required this.createdAtMs,
+    required this.updatedAtMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    if (!nullToAbsent || verseId != null) {
+      map['verse_id'] = Variable<String>(verseId);
+    }
+    map['body'] = Variable<String>(body);
+    map['created_at_ms'] = Variable<int>(createdAtMs);
+    map['updated_at_ms'] = Variable<int>(updatedAtMs);
+    return map;
+  }
+
+  JournalEntriesCompanion toCompanion(bool nullToAbsent) {
+    return JournalEntriesCompanion(
+      id: Value(id),
+      verseId: verseId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(verseId),
+      body: Value(body),
+      createdAtMs: Value(createdAtMs),
+      updatedAtMs: Value(updatedAtMs),
+    );
+  }
+
+  factory JournalRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return JournalRow(
+      id: serializer.fromJson<int>(json['id']),
+      verseId: serializer.fromJson<String?>(json['verseId']),
+      body: serializer.fromJson<String>(json['body']),
+      createdAtMs: serializer.fromJson<int>(json['createdAtMs']),
+      updatedAtMs: serializer.fromJson<int>(json['updatedAtMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'verseId': serializer.toJson<String?>(verseId),
+      'body': serializer.toJson<String>(body),
+      'createdAtMs': serializer.toJson<int>(createdAtMs),
+      'updatedAtMs': serializer.toJson<int>(updatedAtMs),
+    };
+  }
+
+  JournalRow copyWith({
+    int? id,
+    Value<String?> verseId = const Value.absent(),
+    String? body,
+    int? createdAtMs,
+    int? updatedAtMs,
+  }) => JournalRow(
+    id: id ?? this.id,
+    verseId: verseId.present ? verseId.value : this.verseId,
+    body: body ?? this.body,
+    createdAtMs: createdAtMs ?? this.createdAtMs,
+    updatedAtMs: updatedAtMs ?? this.updatedAtMs,
+  );
+  JournalRow copyWithCompanion(JournalEntriesCompanion data) {
+    return JournalRow(
+      id: data.id.present ? data.id.value : this.id,
+      verseId: data.verseId.present ? data.verseId.value : this.verseId,
+      body: data.body.present ? data.body.value : this.body,
+      createdAtMs: data.createdAtMs.present
+          ? data.createdAtMs.value
+          : this.createdAtMs,
+      updatedAtMs: data.updatedAtMs.present
+          ? data.updatedAtMs.value
+          : this.updatedAtMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JournalRow(')
+          ..write('id: $id, ')
+          ..write('verseId: $verseId, ')
+          ..write('body: $body, ')
+          ..write('createdAtMs: $createdAtMs, ')
+          ..write('updatedAtMs: $updatedAtMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, verseId, body, createdAtMs, updatedAtMs);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is JournalRow &&
+          other.id == this.id &&
+          other.verseId == this.verseId &&
+          other.body == this.body &&
+          other.createdAtMs == this.createdAtMs &&
+          other.updatedAtMs == this.updatedAtMs);
+}
+
+class JournalEntriesCompanion extends UpdateCompanion<JournalRow> {
+  final Value<int> id;
+  final Value<String?> verseId;
+  final Value<String> body;
+  final Value<int> createdAtMs;
+  final Value<int> updatedAtMs;
+  const JournalEntriesCompanion({
+    this.id = const Value.absent(),
+    this.verseId = const Value.absent(),
+    this.body = const Value.absent(),
+    this.createdAtMs = const Value.absent(),
+    this.updatedAtMs = const Value.absent(),
+  });
+  JournalEntriesCompanion.insert({
+    this.id = const Value.absent(),
+    this.verseId = const Value.absent(),
+    required String body,
+    required int createdAtMs,
+    required int updatedAtMs,
+  }) : body = Value(body),
+       createdAtMs = Value(createdAtMs),
+       updatedAtMs = Value(updatedAtMs);
+  static Insertable<JournalRow> custom({
+    Expression<int>? id,
+    Expression<String>? verseId,
+    Expression<String>? body,
+    Expression<int>? createdAtMs,
+    Expression<int>? updatedAtMs,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (verseId != null) 'verse_id': verseId,
+      if (body != null) 'body': body,
+      if (createdAtMs != null) 'created_at_ms': createdAtMs,
+      if (updatedAtMs != null) 'updated_at_ms': updatedAtMs,
+    });
+  }
+
+  JournalEntriesCompanion copyWith({
+    Value<int>? id,
+    Value<String?>? verseId,
+    Value<String>? body,
+    Value<int>? createdAtMs,
+    Value<int>? updatedAtMs,
+  }) {
+    return JournalEntriesCompanion(
+      id: id ?? this.id,
+      verseId: verseId ?? this.verseId,
+      body: body ?? this.body,
+      createdAtMs: createdAtMs ?? this.createdAtMs,
+      updatedAtMs: updatedAtMs ?? this.updatedAtMs,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (verseId.present) {
+      map['verse_id'] = Variable<String>(verseId.value);
+    }
+    if (body.present) {
+      map['body'] = Variable<String>(body.value);
+    }
+    if (createdAtMs.present) {
+      map['created_at_ms'] = Variable<int>(createdAtMs.value);
+    }
+    if (updatedAtMs.present) {
+      map['updated_at_ms'] = Variable<int>(updatedAtMs.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JournalEntriesCompanion(')
+          ..write('id: $id, ')
+          ..write('verseId: $verseId, ')
+          ..write('body: $body, ')
+          ..write('createdAtMs: $createdAtMs, ')
+          ..write('updatedAtMs: $updatedAtMs')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ShlokaProgressTable extends ShlokaProgress
+    with TableInfo<$ShlokaProgressTable, ShlokaProgressRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ShlokaProgressTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _verseIdMeta = const VerificationMeta(
+    'verseId',
+  );
+  @override
+  late final GeneratedColumn<String> verseId = GeneratedColumn<String>(
+    'verse_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _stepMeta = const VerificationMeta('step');
+  @override
+  late final GeneratedColumn<int> step = GeneratedColumn<int>(
+    'step',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _statusMeta = const VerificationMeta('status');
+  @override
+  late final GeneratedColumn<String> status = GeneratedColumn<String>(
+    'status',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _reviewIndexMeta = const VerificationMeta(
+    'reviewIndex',
+  );
+  @override
+  late final GeneratedColumn<int> reviewIndex = GeneratedColumn<int>(
+    'review_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _nextReviewMeta = const VerificationMeta(
+    'nextReview',
+  );
+  @override
+  late final GeneratedColumn<String> nextReview = GeneratedColumn<String>(
+    'next_review',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _startedAtMsMeta = const VerificationMeta(
+    'startedAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> startedAtMs = GeneratedColumn<int>(
+    'started_at_ms',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _learnedAtMsMeta = const VerificationMeta(
+    'learnedAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> learnedAtMs = GeneratedColumn<int>(
+    'learned_at_ms',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lastReviewedAtMsMeta = const VerificationMeta(
+    'lastReviewedAtMs',
+  );
+  @override
+  late final GeneratedColumn<int> lastReviewedAtMs = GeneratedColumn<int>(
+    'last_reviewed_at_ms',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    verseId,
+    step,
+    status,
+    reviewIndex,
+    nextReview,
+    startedAtMs,
+    learnedAtMs,
+    lastReviewedAtMs,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'shloka_progress';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ShlokaProgressRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('verse_id')) {
+      context.handle(
+        _verseIdMeta,
+        verseId.isAcceptableOrUnknown(data['verse_id']!, _verseIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_verseIdMeta);
+    }
+    if (data.containsKey('step')) {
+      context.handle(
+        _stepMeta,
+        step.isAcceptableOrUnknown(data['step']!, _stepMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_stepMeta);
+    }
+    if (data.containsKey('status')) {
+      context.handle(
+        _statusMeta,
+        status.isAcceptableOrUnknown(data['status']!, _statusMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_statusMeta);
+    }
+    if (data.containsKey('review_index')) {
+      context.handle(
+        _reviewIndexMeta,
+        reviewIndex.isAcceptableOrUnknown(
+          data['review_index']!,
+          _reviewIndexMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_reviewIndexMeta);
+    }
+    if (data.containsKey('next_review')) {
+      context.handle(
+        _nextReviewMeta,
+        nextReview.isAcceptableOrUnknown(data['next_review']!, _nextReviewMeta),
+      );
+    }
+    if (data.containsKey('started_at_ms')) {
+      context.handle(
+        _startedAtMsMeta,
+        startedAtMs.isAcceptableOrUnknown(
+          data['started_at_ms']!,
+          _startedAtMsMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_startedAtMsMeta);
+    }
+    if (data.containsKey('learned_at_ms')) {
+      context.handle(
+        _learnedAtMsMeta,
+        learnedAtMs.isAcceptableOrUnknown(
+          data['learned_at_ms']!,
+          _learnedAtMsMeta,
+        ),
+      );
+    }
+    if (data.containsKey('last_reviewed_at_ms')) {
+      context.handle(
+        _lastReviewedAtMsMeta,
+        lastReviewedAtMs.isAcceptableOrUnknown(
+          data['last_reviewed_at_ms']!,
+          _lastReviewedAtMsMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {verseId};
+  @override
+  ShlokaProgressRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ShlokaProgressRow(
+      verseId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}verse_id'],
+      )!,
+      step: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}step'],
+      )!,
+      status: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}status'],
+      )!,
+      reviewIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}review_index'],
+      )!,
+      nextReview: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}next_review'],
+      ),
+      startedAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}started_at_ms'],
+      )!,
+      learnedAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}learned_at_ms'],
+      ),
+      lastReviewedAtMs: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}last_reviewed_at_ms'],
+      ),
+    );
+  }
+
+  @override
+  $ShlokaProgressTable createAlias(String alias) {
+    return $ShlokaProgressTable(attachedDatabase, alias);
+  }
+}
+
+class ShlokaProgressRow extends DataClass
+    implements Insertable<ShlokaProgressRow> {
+  final String verseId;
+  final int step;
+  final String status;
+  final int reviewIndex;
+  final String? nextReview;
+  final int startedAtMs;
+  final int? learnedAtMs;
+  final int? lastReviewedAtMs;
+  const ShlokaProgressRow({
+    required this.verseId,
+    required this.step,
+    required this.status,
+    required this.reviewIndex,
+    this.nextReview,
+    required this.startedAtMs,
+    this.learnedAtMs,
+    this.lastReviewedAtMs,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['verse_id'] = Variable<String>(verseId);
+    map['step'] = Variable<int>(step);
+    map['status'] = Variable<String>(status);
+    map['review_index'] = Variable<int>(reviewIndex);
+    if (!nullToAbsent || nextReview != null) {
+      map['next_review'] = Variable<String>(nextReview);
+    }
+    map['started_at_ms'] = Variable<int>(startedAtMs);
+    if (!nullToAbsent || learnedAtMs != null) {
+      map['learned_at_ms'] = Variable<int>(learnedAtMs);
+    }
+    if (!nullToAbsent || lastReviewedAtMs != null) {
+      map['last_reviewed_at_ms'] = Variable<int>(lastReviewedAtMs);
+    }
+    return map;
+  }
+
+  ShlokaProgressCompanion toCompanion(bool nullToAbsent) {
+    return ShlokaProgressCompanion(
+      verseId: Value(verseId),
+      step: Value(step),
+      status: Value(status),
+      reviewIndex: Value(reviewIndex),
+      nextReview: nextReview == null && nullToAbsent
+          ? const Value.absent()
+          : Value(nextReview),
+      startedAtMs: Value(startedAtMs),
+      learnedAtMs: learnedAtMs == null && nullToAbsent
+          ? const Value.absent()
+          : Value(learnedAtMs),
+      lastReviewedAtMs: lastReviewedAtMs == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastReviewedAtMs),
+    );
+  }
+
+  factory ShlokaProgressRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ShlokaProgressRow(
+      verseId: serializer.fromJson<String>(json['verseId']),
+      step: serializer.fromJson<int>(json['step']),
+      status: serializer.fromJson<String>(json['status']),
+      reviewIndex: serializer.fromJson<int>(json['reviewIndex']),
+      nextReview: serializer.fromJson<String?>(json['nextReview']),
+      startedAtMs: serializer.fromJson<int>(json['startedAtMs']),
+      learnedAtMs: serializer.fromJson<int?>(json['learnedAtMs']),
+      lastReviewedAtMs: serializer.fromJson<int?>(json['lastReviewedAtMs']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'verseId': serializer.toJson<String>(verseId),
+      'step': serializer.toJson<int>(step),
+      'status': serializer.toJson<String>(status),
+      'reviewIndex': serializer.toJson<int>(reviewIndex),
+      'nextReview': serializer.toJson<String?>(nextReview),
+      'startedAtMs': serializer.toJson<int>(startedAtMs),
+      'learnedAtMs': serializer.toJson<int?>(learnedAtMs),
+      'lastReviewedAtMs': serializer.toJson<int?>(lastReviewedAtMs),
+    };
+  }
+
+  ShlokaProgressRow copyWith({
+    String? verseId,
+    int? step,
+    String? status,
+    int? reviewIndex,
+    Value<String?> nextReview = const Value.absent(),
+    int? startedAtMs,
+    Value<int?> learnedAtMs = const Value.absent(),
+    Value<int?> lastReviewedAtMs = const Value.absent(),
+  }) => ShlokaProgressRow(
+    verseId: verseId ?? this.verseId,
+    step: step ?? this.step,
+    status: status ?? this.status,
+    reviewIndex: reviewIndex ?? this.reviewIndex,
+    nextReview: nextReview.present ? nextReview.value : this.nextReview,
+    startedAtMs: startedAtMs ?? this.startedAtMs,
+    learnedAtMs: learnedAtMs.present ? learnedAtMs.value : this.learnedAtMs,
+    lastReviewedAtMs: lastReviewedAtMs.present
+        ? lastReviewedAtMs.value
+        : this.lastReviewedAtMs,
+  );
+  ShlokaProgressRow copyWithCompanion(ShlokaProgressCompanion data) {
+    return ShlokaProgressRow(
+      verseId: data.verseId.present ? data.verseId.value : this.verseId,
+      step: data.step.present ? data.step.value : this.step,
+      status: data.status.present ? data.status.value : this.status,
+      reviewIndex: data.reviewIndex.present
+          ? data.reviewIndex.value
+          : this.reviewIndex,
+      nextReview: data.nextReview.present
+          ? data.nextReview.value
+          : this.nextReview,
+      startedAtMs: data.startedAtMs.present
+          ? data.startedAtMs.value
+          : this.startedAtMs,
+      learnedAtMs: data.learnedAtMs.present
+          ? data.learnedAtMs.value
+          : this.learnedAtMs,
+      lastReviewedAtMs: data.lastReviewedAtMs.present
+          ? data.lastReviewedAtMs.value
+          : this.lastReviewedAtMs,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ShlokaProgressRow(')
+          ..write('verseId: $verseId, ')
+          ..write('step: $step, ')
+          ..write('status: $status, ')
+          ..write('reviewIndex: $reviewIndex, ')
+          ..write('nextReview: $nextReview, ')
+          ..write('startedAtMs: $startedAtMs, ')
+          ..write('learnedAtMs: $learnedAtMs, ')
+          ..write('lastReviewedAtMs: $lastReviewedAtMs')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    verseId,
+    step,
+    status,
+    reviewIndex,
+    nextReview,
+    startedAtMs,
+    learnedAtMs,
+    lastReviewedAtMs,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ShlokaProgressRow &&
+          other.verseId == this.verseId &&
+          other.step == this.step &&
+          other.status == this.status &&
+          other.reviewIndex == this.reviewIndex &&
+          other.nextReview == this.nextReview &&
+          other.startedAtMs == this.startedAtMs &&
+          other.learnedAtMs == this.learnedAtMs &&
+          other.lastReviewedAtMs == this.lastReviewedAtMs);
+}
+
+class ShlokaProgressCompanion extends UpdateCompanion<ShlokaProgressRow> {
+  final Value<String> verseId;
+  final Value<int> step;
+  final Value<String> status;
+  final Value<int> reviewIndex;
+  final Value<String?> nextReview;
+  final Value<int> startedAtMs;
+  final Value<int?> learnedAtMs;
+  final Value<int?> lastReviewedAtMs;
+  final Value<int> rowid;
+  const ShlokaProgressCompanion({
+    this.verseId = const Value.absent(),
+    this.step = const Value.absent(),
+    this.status = const Value.absent(),
+    this.reviewIndex = const Value.absent(),
+    this.nextReview = const Value.absent(),
+    this.startedAtMs = const Value.absent(),
+    this.learnedAtMs = const Value.absent(),
+    this.lastReviewedAtMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ShlokaProgressCompanion.insert({
+    required String verseId,
+    required int step,
+    required String status,
+    required int reviewIndex,
+    this.nextReview = const Value.absent(),
+    required int startedAtMs,
+    this.learnedAtMs = const Value.absent(),
+    this.lastReviewedAtMs = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : verseId = Value(verseId),
+       step = Value(step),
+       status = Value(status),
+       reviewIndex = Value(reviewIndex),
+       startedAtMs = Value(startedAtMs);
+  static Insertable<ShlokaProgressRow> custom({
+    Expression<String>? verseId,
+    Expression<int>? step,
+    Expression<String>? status,
+    Expression<int>? reviewIndex,
+    Expression<String>? nextReview,
+    Expression<int>? startedAtMs,
+    Expression<int>? learnedAtMs,
+    Expression<int>? lastReviewedAtMs,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (verseId != null) 'verse_id': verseId,
+      if (step != null) 'step': step,
+      if (status != null) 'status': status,
+      if (reviewIndex != null) 'review_index': reviewIndex,
+      if (nextReview != null) 'next_review': nextReview,
+      if (startedAtMs != null) 'started_at_ms': startedAtMs,
+      if (learnedAtMs != null) 'learned_at_ms': learnedAtMs,
+      if (lastReviewedAtMs != null) 'last_reviewed_at_ms': lastReviewedAtMs,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ShlokaProgressCompanion copyWith({
+    Value<String>? verseId,
+    Value<int>? step,
+    Value<String>? status,
+    Value<int>? reviewIndex,
+    Value<String?>? nextReview,
+    Value<int>? startedAtMs,
+    Value<int?>? learnedAtMs,
+    Value<int?>? lastReviewedAtMs,
+    Value<int>? rowid,
+  }) {
+    return ShlokaProgressCompanion(
+      verseId: verseId ?? this.verseId,
+      step: step ?? this.step,
+      status: status ?? this.status,
+      reviewIndex: reviewIndex ?? this.reviewIndex,
+      nextReview: nextReview ?? this.nextReview,
+      startedAtMs: startedAtMs ?? this.startedAtMs,
+      learnedAtMs: learnedAtMs ?? this.learnedAtMs,
+      lastReviewedAtMs: lastReviewedAtMs ?? this.lastReviewedAtMs,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (verseId.present) {
+      map['verse_id'] = Variable<String>(verseId.value);
+    }
+    if (step.present) {
+      map['step'] = Variable<int>(step.value);
+    }
+    if (status.present) {
+      map['status'] = Variable<String>(status.value);
+    }
+    if (reviewIndex.present) {
+      map['review_index'] = Variable<int>(reviewIndex.value);
+    }
+    if (nextReview.present) {
+      map['next_review'] = Variable<String>(nextReview.value);
+    }
+    if (startedAtMs.present) {
+      map['started_at_ms'] = Variable<int>(startedAtMs.value);
+    }
+    if (learnedAtMs.present) {
+      map['learned_at_ms'] = Variable<int>(learnedAtMs.value);
+    }
+    if (lastReviewedAtMs.present) {
+      map['last_reviewed_at_ms'] = Variable<int>(lastReviewedAtMs.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ShlokaProgressCompanion(')
+          ..write('verseId: $verseId, ')
+          ..write('step: $step, ')
+          ..write('status: $status, ')
+          ..write('reviewIndex: $reviewIndex, ')
+          ..write('nextReview: $nextReview, ')
+          ..write('startedAtMs: $startedAtMs, ')
+          ..write('learnedAtMs: $learnedAtMs, ')
+          ..write('lastReviewedAtMs: $lastReviewedAtMs, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1698,6 +3197,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     this,
   );
   late final $SearchHistoryTable searchHistory = $SearchHistoryTable(this);
+  late final $VerseHighlightsTable verseHighlights = $VerseHighlightsTable(
+    this,
+  );
+  late final $VerseNotesTable verseNotes = $VerseNotesTable(this);
+  late final $JournalEntriesTable journalEntries = $JournalEntriesTable(this);
+  late final $ShlokaProgressTable shlokaProgress = $ShlokaProgressTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1710,6 +3215,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     readDayVerses,
     notifAssignments,
     searchHistory,
+    verseHighlights,
+    verseNotes,
+    journalEntries,
+    shlokaProgress,
   ];
 }
 
@@ -2848,6 +4357,858 @@ typedef $$SearchHistoryTableProcessedTableManager =
       SearchHistoryRow,
       PrefetchHooks Function()
     >;
+typedef $$VerseHighlightsTableCreateCompanionBuilder =
+    VerseHighlightsCompanion Function({
+      required String verseId,
+      required String color,
+      required int updatedAtMs,
+      Value<int> rowid,
+    });
+typedef $$VerseHighlightsTableUpdateCompanionBuilder =
+    VerseHighlightsCompanion Function({
+      Value<String> verseId,
+      Value<String> color,
+      Value<int> updatedAtMs,
+      Value<int> rowid,
+    });
+
+class $$VerseHighlightsTableFilterComposer
+    extends Composer<_$AppDatabase, $VerseHighlightsTable> {
+  $$VerseHighlightsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get color => $composableBuilder(
+    column: $table.color,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$VerseHighlightsTableOrderingComposer
+    extends Composer<_$AppDatabase, $VerseHighlightsTable> {
+  $$VerseHighlightsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get color => $composableBuilder(
+    column: $table.color,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$VerseHighlightsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $VerseHighlightsTable> {
+  $$VerseHighlightsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get verseId =>
+      $composableBuilder(column: $table.verseId, builder: (column) => column);
+
+  GeneratedColumn<String> get color =>
+      $composableBuilder(column: $table.color, builder: (column) => column);
+
+  GeneratedColumn<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => column,
+  );
+}
+
+class $$VerseHighlightsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $VerseHighlightsTable,
+          HighlightRow,
+          $$VerseHighlightsTableFilterComposer,
+          $$VerseHighlightsTableOrderingComposer,
+          $$VerseHighlightsTableAnnotationComposer,
+          $$VerseHighlightsTableCreateCompanionBuilder,
+          $$VerseHighlightsTableUpdateCompanionBuilder,
+          (
+            HighlightRow,
+            BaseReferences<_$AppDatabase, $VerseHighlightsTable, HighlightRow>,
+          ),
+          HighlightRow,
+          PrefetchHooks Function()
+        > {
+  $$VerseHighlightsTableTableManager(
+    _$AppDatabase db,
+    $VerseHighlightsTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$VerseHighlightsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$VerseHighlightsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$VerseHighlightsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> verseId = const Value.absent(),
+                Value<String> color = const Value.absent(),
+                Value<int> updatedAtMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => VerseHighlightsCompanion(
+                verseId: verseId,
+                color: color,
+                updatedAtMs: updatedAtMs,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String verseId,
+                required String color,
+                required int updatedAtMs,
+                Value<int> rowid = const Value.absent(),
+              }) => VerseHighlightsCompanion.insert(
+                verseId: verseId,
+                color: color,
+                updatedAtMs: updatedAtMs,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$VerseHighlightsTable, HighlightRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $VerseHighlightsTable,
+                    HighlightRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$VerseHighlightsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $VerseHighlightsTable,
+      HighlightRow,
+      $$VerseHighlightsTableFilterComposer,
+      $$VerseHighlightsTableOrderingComposer,
+      $$VerseHighlightsTableAnnotationComposer,
+      $$VerseHighlightsTableCreateCompanionBuilder,
+      $$VerseHighlightsTableUpdateCompanionBuilder,
+      (
+        HighlightRow,
+        BaseReferences<_$AppDatabase, $VerseHighlightsTable, HighlightRow>,
+      ),
+      HighlightRow,
+      PrefetchHooks Function()
+    >;
+typedef $$VerseNotesTableCreateCompanionBuilder = VerseNotesCompanion Function({
+  required String verseId,
+  required String body,
+  required int createdAtMs,
+  required int updatedAtMs,
+  Value<int> rowid,
+});
+typedef $$VerseNotesTableUpdateCompanionBuilder = VerseNotesCompanion Function({
+  Value<String> verseId,
+  Value<String> body,
+  Value<int> createdAtMs,
+  Value<int> updatedAtMs,
+  Value<int> rowid,
+});
+
+class $$VerseNotesTableFilterComposer
+    extends Composer<_$AppDatabase, $VerseNotesTable> {
+  $$VerseNotesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get createdAtMs => $composableBuilder(
+    column: $table.createdAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$VerseNotesTableOrderingComposer
+    extends Composer<_$AppDatabase, $VerseNotesTable> {
+  $$VerseNotesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get createdAtMs => $composableBuilder(
+    column: $table.createdAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$VerseNotesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $VerseNotesTable> {
+  $$VerseNotesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get verseId =>
+      $composableBuilder(column: $table.verseId, builder: (column) => column);
+
+  GeneratedColumn<String> get body =>
+      $composableBuilder(column: $table.body, builder: (column) => column);
+
+  GeneratedColumn<int> get createdAtMs => $composableBuilder(
+    column: $table.createdAtMs,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => column,
+  );
+}
+
+class $$VerseNotesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $VerseNotesTable,
+          NoteRow,
+          $$VerseNotesTableFilterComposer,
+          $$VerseNotesTableOrderingComposer,
+          $$VerseNotesTableAnnotationComposer,
+          $$VerseNotesTableCreateCompanionBuilder,
+          $$VerseNotesTableUpdateCompanionBuilder,
+          (NoteRow, BaseReferences<_$AppDatabase, $VerseNotesTable, NoteRow>),
+          NoteRow,
+          PrefetchHooks Function()
+        > {
+  $$VerseNotesTableTableManager(_$AppDatabase db, $VerseNotesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$VerseNotesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$VerseNotesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$VerseNotesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> verseId = const Value.absent(),
+                Value<String> body = const Value.absent(),
+                Value<int> createdAtMs = const Value.absent(),
+                Value<int> updatedAtMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => VerseNotesCompanion(
+                verseId: verseId,
+                body: body,
+                createdAtMs: createdAtMs,
+                updatedAtMs: updatedAtMs,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String verseId,
+                required String body,
+                required int createdAtMs,
+                required int updatedAtMs,
+                Value<int> rowid = const Value.absent(),
+              }) => VerseNotesCompanion.insert(
+                verseId: verseId,
+                body: body,
+                createdAtMs: createdAtMs,
+                updatedAtMs: updatedAtMs,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$VerseNotesTable, NoteRow>(table),
+                  BaseReferences<_$AppDatabase, $VerseNotesTable, NoteRow>(
+                    db,
+                    table,
+                    e,
+                  ),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$VerseNotesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $VerseNotesTable,
+      NoteRow,
+      $$VerseNotesTableFilterComposer,
+      $$VerseNotesTableOrderingComposer,
+      $$VerseNotesTableAnnotationComposer,
+      $$VerseNotesTableCreateCompanionBuilder,
+      $$VerseNotesTableUpdateCompanionBuilder,
+      (NoteRow, BaseReferences<_$AppDatabase, $VerseNotesTable, NoteRow>),
+      NoteRow,
+      PrefetchHooks Function()
+    >;
+typedef $$JournalEntriesTableCreateCompanionBuilder =
+    JournalEntriesCompanion Function({
+      Value<int> id,
+      Value<String?> verseId,
+      required String body,
+      required int createdAtMs,
+      required int updatedAtMs,
+    });
+typedef $$JournalEntriesTableUpdateCompanionBuilder =
+    JournalEntriesCompanion Function({
+      Value<int> id,
+      Value<String?> verseId,
+      Value<String> body,
+      Value<int> createdAtMs,
+      Value<int> updatedAtMs,
+    });
+
+class $$JournalEntriesTableFilterComposer
+    extends Composer<_$AppDatabase, $JournalEntriesTable> {
+  $$JournalEntriesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get createdAtMs => $composableBuilder(
+    column: $table.createdAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$JournalEntriesTableOrderingComposer
+    extends Composer<_$AppDatabase, $JournalEntriesTable> {
+  $$JournalEntriesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get createdAtMs => $composableBuilder(
+    column: $table.createdAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$JournalEntriesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $JournalEntriesTable> {
+  $$JournalEntriesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get verseId =>
+      $composableBuilder(column: $table.verseId, builder: (column) => column);
+
+  GeneratedColumn<String> get body =>
+      $composableBuilder(column: $table.body, builder: (column) => column);
+
+  GeneratedColumn<int> get createdAtMs => $composableBuilder(
+    column: $table.createdAtMs,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get updatedAtMs => $composableBuilder(
+    column: $table.updatedAtMs,
+    builder: (column) => column,
+  );
+}
+
+class $$JournalEntriesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $JournalEntriesTable,
+          JournalRow,
+          $$JournalEntriesTableFilterComposer,
+          $$JournalEntriesTableOrderingComposer,
+          $$JournalEntriesTableAnnotationComposer,
+          $$JournalEntriesTableCreateCompanionBuilder,
+          $$JournalEntriesTableUpdateCompanionBuilder,
+          (
+            JournalRow,
+            BaseReferences<_$AppDatabase, $JournalEntriesTable, JournalRow>,
+          ),
+          JournalRow,
+          PrefetchHooks Function()
+        > {
+  $$JournalEntriesTableTableManager(
+    _$AppDatabase db,
+    $JournalEntriesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$JournalEntriesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$JournalEntriesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$JournalEntriesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String?> verseId = const Value.absent(),
+                Value<String> body = const Value.absent(),
+                Value<int> createdAtMs = const Value.absent(),
+                Value<int> updatedAtMs = const Value.absent(),
+              }) => JournalEntriesCompanion(
+                id: id,
+                verseId: verseId,
+                body: body,
+                createdAtMs: createdAtMs,
+                updatedAtMs: updatedAtMs,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String?> verseId = const Value.absent(),
+                required String body,
+                required int createdAtMs,
+                required int updatedAtMs,
+              }) => JournalEntriesCompanion.insert(
+                id: id,
+                verseId: verseId,
+                body: body,
+                createdAtMs: createdAtMs,
+                updatedAtMs: updatedAtMs,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$JournalEntriesTable, JournalRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $JournalEntriesTable,
+                    JournalRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$JournalEntriesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $JournalEntriesTable,
+      JournalRow,
+      $$JournalEntriesTableFilterComposer,
+      $$JournalEntriesTableOrderingComposer,
+      $$JournalEntriesTableAnnotationComposer,
+      $$JournalEntriesTableCreateCompanionBuilder,
+      $$JournalEntriesTableUpdateCompanionBuilder,
+      (
+        JournalRow,
+        BaseReferences<_$AppDatabase, $JournalEntriesTable, JournalRow>,
+      ),
+      JournalRow,
+      PrefetchHooks Function()
+    >;
+typedef $$ShlokaProgressTableCreateCompanionBuilder =
+    ShlokaProgressCompanion Function({
+      required String verseId,
+      required int step,
+      required String status,
+      required int reviewIndex,
+      Value<String?> nextReview,
+      required int startedAtMs,
+      Value<int?> learnedAtMs,
+      Value<int?> lastReviewedAtMs,
+      Value<int> rowid,
+    });
+typedef $$ShlokaProgressTableUpdateCompanionBuilder =
+    ShlokaProgressCompanion Function({
+      Value<String> verseId,
+      Value<int> step,
+      Value<String> status,
+      Value<int> reviewIndex,
+      Value<String?> nextReview,
+      Value<int> startedAtMs,
+      Value<int?> learnedAtMs,
+      Value<int?> lastReviewedAtMs,
+      Value<int> rowid,
+    });
+
+class $$ShlokaProgressTableFilterComposer
+    extends Composer<_$AppDatabase, $ShlokaProgressTable> {
+  $$ShlokaProgressTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get step => $composableBuilder(
+    column: $table.step,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get reviewIndex => $composableBuilder(
+    column: $table.reviewIndex,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get nextReview => $composableBuilder(
+    column: $table.nextReview,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get startedAtMs => $composableBuilder(
+    column: $table.startedAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get learnedAtMs => $composableBuilder(
+    column: $table.learnedAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get lastReviewedAtMs => $composableBuilder(
+    column: $table.lastReviewedAtMs,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$ShlokaProgressTableOrderingComposer
+    extends Composer<_$AppDatabase, $ShlokaProgressTable> {
+  $$ShlokaProgressTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get verseId => $composableBuilder(
+    column: $table.verseId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get step => $composableBuilder(
+    column: $table.step,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get status => $composableBuilder(
+    column: $table.status,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get reviewIndex => $composableBuilder(
+    column: $table.reviewIndex,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get nextReview => $composableBuilder(
+    column: $table.nextReview,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get startedAtMs => $composableBuilder(
+    column: $table.startedAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get learnedAtMs => $composableBuilder(
+    column: $table.learnedAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get lastReviewedAtMs => $composableBuilder(
+    column: $table.lastReviewedAtMs,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ShlokaProgressTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ShlokaProgressTable> {
+  $$ShlokaProgressTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get verseId =>
+      $composableBuilder(column: $table.verseId, builder: (column) => column);
+
+  GeneratedColumn<int> get step =>
+      $composableBuilder(column: $table.step, builder: (column) => column);
+
+  GeneratedColumn<String> get status =>
+      $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<int> get reviewIndex => $composableBuilder(
+    column: $table.reviewIndex,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get nextReview => $composableBuilder(
+    column: $table.nextReview,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get startedAtMs => $composableBuilder(
+    column: $table.startedAtMs,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get learnedAtMs => $composableBuilder(
+    column: $table.learnedAtMs,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get lastReviewedAtMs => $composableBuilder(
+    column: $table.lastReviewedAtMs,
+    builder: (column) => column,
+  );
+}
+
+class $$ShlokaProgressTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ShlokaProgressTable,
+          ShlokaProgressRow,
+          $$ShlokaProgressTableFilterComposer,
+          $$ShlokaProgressTableOrderingComposer,
+          $$ShlokaProgressTableAnnotationComposer,
+          $$ShlokaProgressTableCreateCompanionBuilder,
+          $$ShlokaProgressTableUpdateCompanionBuilder,
+          (
+            ShlokaProgressRow,
+            BaseReferences<
+              _$AppDatabase,
+              $ShlokaProgressTable,
+              ShlokaProgressRow
+            >,
+          ),
+          ShlokaProgressRow,
+          PrefetchHooks Function()
+        > {
+  $$ShlokaProgressTableTableManager(
+    _$AppDatabase db,
+    $ShlokaProgressTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ShlokaProgressTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ShlokaProgressTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ShlokaProgressTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> verseId = const Value.absent(),
+                Value<int> step = const Value.absent(),
+                Value<String> status = const Value.absent(),
+                Value<int> reviewIndex = const Value.absent(),
+                Value<String?> nextReview = const Value.absent(),
+                Value<int> startedAtMs = const Value.absent(),
+                Value<int?> learnedAtMs = const Value.absent(),
+                Value<int?> lastReviewedAtMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ShlokaProgressCompanion(
+                verseId: verseId,
+                step: step,
+                status: status,
+                reviewIndex: reviewIndex,
+                nextReview: nextReview,
+                startedAtMs: startedAtMs,
+                learnedAtMs: learnedAtMs,
+                lastReviewedAtMs: lastReviewedAtMs,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String verseId,
+                required int step,
+                required String status,
+                required int reviewIndex,
+                Value<String?> nextReview = const Value.absent(),
+                required int startedAtMs,
+                Value<int?> learnedAtMs = const Value.absent(),
+                Value<int?> lastReviewedAtMs = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ShlokaProgressCompanion.insert(
+                verseId: verseId,
+                step: step,
+                status: status,
+                reviewIndex: reviewIndex,
+                nextReview: nextReview,
+                startedAtMs: startedAtMs,
+                learnedAtMs: learnedAtMs,
+                lastReviewedAtMs: lastReviewedAtMs,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$ShlokaProgressTable, ShlokaProgressRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $ShlokaProgressTable,
+                    ShlokaProgressRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$ShlokaProgressTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ShlokaProgressTable,
+      ShlokaProgressRow,
+      $$ShlokaProgressTableFilterComposer,
+      $$ShlokaProgressTableOrderingComposer,
+      $$ShlokaProgressTableAnnotationComposer,
+      $$ShlokaProgressTableCreateCompanionBuilder,
+      $$ShlokaProgressTableUpdateCompanionBuilder,
+      (
+        ShlokaProgressRow,
+        BaseReferences<_$AppDatabase, $ShlokaProgressTable, ShlokaProgressRow>,
+      ),
+      ShlokaProgressRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -2866,4 +5227,12 @@ class $AppDatabaseManager {
       $$NotifAssignmentsTableTableManager(_db, _db.notifAssignments);
   $$SearchHistoryTableTableManager get searchHistory =>
       $$SearchHistoryTableTableManager(_db, _db.searchHistory);
+  $$VerseHighlightsTableTableManager get verseHighlights =>
+      $$VerseHighlightsTableTableManager(_db, _db.verseHighlights);
+  $$VerseNotesTableTableManager get verseNotes =>
+      $$VerseNotesTableTableManager(_db, _db.verseNotes);
+  $$JournalEntriesTableTableManager get journalEntries =>
+      $$JournalEntriesTableTableManager(_db, _db.journalEntries);
+  $$ShlokaProgressTableTableManager get shlokaProgress =>
+      $$ShlokaProgressTableTableManager(_db, _db.shlokaProgress);
 }

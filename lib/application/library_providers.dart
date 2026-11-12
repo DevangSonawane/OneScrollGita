@@ -4,6 +4,7 @@ import '../domain/models/user_items.dart';
 import 'core_providers.dart';
 import 'reminder_providers.dart';
 import 'streak_providers.dart';
+import 'study_providers.dart';
 import 'ui_providers.dart';
 
 final favouritesProvider = StreamProvider<List<SavedItem>>(
@@ -128,6 +129,7 @@ class LibraryController extends Notifier<PendingSaves> {
   Future<void> resetAll() async {
     await ref.read(userDataRepositoryProvider).resetAll();
     await ref.read(activityRepositoryProvider).resetAll();
+    await ref.read(studyRepositoryProvider).resetAll();
     await ref.read(settingsProvider.notifier).resetAll();
     await ref.read(reminderControllerProvider.notifier).reset();
     ref.read(readTrackerProvider.notifier).forget();

@@ -13,8 +13,7 @@ class HomeWidgetRepository {
   static const _historyProvider = 'com.example.versescroll.RecentWidget';
 
   /// What the daily list was built for (`firstDate|lang|count`).
-  Future<String?> dailyStamp() =>
-      HomeWidget.getWidgetData<String>(kDailyStamp);
+  Future<String?> dailyStamp() => HomeWidget.getWidgetData<String>(kDailyStamp);
 
   /// [items]: one per day, `{date: yyyy-MM-dd, id, label, text}`.
   Future<void> saveDaily(List<Map<String, String>> items, String stamp) async {

@@ -68,7 +68,12 @@ class Fixture {
         ],
         'hi': null,
       },
-      'synonyms': null,
+      'synonyms': <String, Object?>{
+        'en': <Object>[
+          {'word': 'dharma', 'meaning': 'duty'},
+        ],
+        'hi': null,
+      },
     };
   }
 
@@ -104,7 +109,8 @@ void main() {
     final dir = Directory('assets/scripture');
     final files = {
       for (final f in dir.listSync().whereType<File>())
-        if (f.path.contains('chapter_')) f.uri.pathSegments.last: f.readAsStringSync(),
+        if (f.path.contains('chapter_'))
+          f.uri.pathSegments.last: f.readAsStringSync(),
     };
     String read(String p) => File(p).readAsStringSync();
     final dev = validateScripture(
@@ -198,8 +204,14 @@ void main() {
 
   test('bad purport block type and unbalanced markup', () {
     final f = Fixture();
-    ((f.e(7, 0)['purport'] as Map)['en'] as List)[0] = {'type': 'h1', 'text': 'x'};
-    ((f.e(7, 1)['purport'] as Map)['en'] as List)[0] = {'type': 'p', 'text': '<i>x'};
+    ((f.e(7, 0)['purport'] as Map)['en'] as List)[0] = {
+      'type': 'h1',
+      'text': 'x',
+    };
+    ((f.e(7, 1)['purport'] as Map)['en'] as List)[0] = {
+      'type': 'p',
+      'text': '<i>x',
+    };
     expectError(f, 'block type "h1"');
     expectError(f, 'Unclosed <i>');
   });
@@ -232,5 +244,32 @@ void main() {
     expect(w, contains('hidden characters'));
     expect(w, contains('doubled spaces'));
     expect(w, contains('unmatched quotes'));
+  });
+
+  test('word meanings: English required, Hindi null or non-empty', () {
+    final f = Fixture();
+    f.e(10, 0)['synonyms'] = null;
+    (f.e(10, 1)['synonyms'] as Map)['en'] = null;
+    (f.e(11, 0)['synonyms'] as Map)['hi'] = <Object>[];
+    (f.e(11, 1)['synonyms'] as Map)['en'] = [
+      {'word': 'dharma', 'meaning': ' '},
+    ];
+    (f.e(12, 0)['synonyms'] as Map)['en'] = [
+      {'word': 'धर्म', 'meaning': 'duty'},
+    ];
+    expectError(f, 'synonyms must be an object');
+    expectError(f, 'synonyms.en is missing');
+    expectError(f, 'synonyms.hi must be a non-empty list or null');
+    expectError(f, 'empty word or meaning');
+    expectError(f, 'synonyms.en word contains Devanagari');
+  });
+
+  test('Hindi word meanings may use IAST words, as the source does', () {
+    final f = Fixture();
+    (f.e(12, 1)['synonyms'] as Map)['hi'] = [
+      {'word': 'ca', 'meaning': 'भी'},
+      {'word': 'धर्म', 'meaning': 'कर्तव्य'},
+    ];
+    expect(f.run().ok, isTrue);
   });
 }

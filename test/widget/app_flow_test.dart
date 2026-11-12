@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:versescroll/application/core_providers.dart';
 import 'package:versescroll/application/ui_providers.dart';
+import 'package:versescroll/core/design/components.dart';
 import 'package:versescroll/data/settings/settings_repository.dart';
 import 'package:versescroll/features/gita/reader_screen.dart';
 import 'package:versescroll/features/purport/purport_screen.dart';
@@ -26,10 +27,17 @@ Future<void> tapVisible(WidgetTester tester, Finder f) async {
 final _chip = find.textContaining(RegExp(r'^Bhagavad-gītā \d'));
 
 void main() {
-  testWidgets('first launch: choose Hindi, Begin, land on Home', (tester) async {
+  testWidgets('first launch: choose Hindi, Begin, land on Home', (
+    tester,
+  ) async {
     final app = await pumpApp(tester, prefs: const {});
     expect(find.text('Begin'), findsOneWidget);
-    expect(find.text('Read the Bhagavad-gita As It Is. No account. No internet needed.'), findsOneWidget);
+    expect(
+      find.text(
+        'Read the Bhagavad-gita As It Is. No account. No internet needed.',
+      ),
+      findsOneWidget,
+    );
     await tester.tap(find.text('हिन्दी'));
     await tester.pump();
     await tester.tap(find.text('Begin'));
@@ -41,7 +49,9 @@ void main() {
     expect(app.prefs.getBool(SettingsRepository.kFirstLaunch), isTrue);
   });
 
-  testWidgets('home shows today\'s verse; same all day, changes next day', (tester) async {
+  testWidgets('home shows today\'s verse; same all day, changes next day', (
+    tester,
+  ) async {
     await pumpApp(tester, now: DateTime(2026, 10, 28, 8));
     expect(find.text('Wednesday, 28 October'), findsOneWidget);
     expect(find.text("TODAY'S VERSE"), findsOneWidget);
@@ -53,11 +63,15 @@ void main() {
     await tapVisible(tester, find.bySemanticsLabel('Add to favourites'));
     expect(find.bySemanticsLabel('Remove from favourites'), findsOneWidget);
     await tapTab(tester, 'Profile');
-    final row = find.ancestor(of: find.text('Favourites'), matching: find.byType(Row)).first;
+    final row = find
+        .ancestor(of: find.text('Favourites'), matching: find.byType(Row))
+        .first;
     expect(find.descendant(of: row, matching: find.text('1')), findsOneWidget);
   });
 
-  testWidgets('Read in Gita opens the reader at the daily verse', (tester) async {
+  testWidgets('Read in Gita opens the reader at the daily verse', (
+    tester,
+  ) async {
     final app = await pumpApp(tester, now: DateTime(2026, 10, 28));
     final chip = tester.widget<Text>(_chip).data!;
     final label = chip.replaceFirst('Bhagavad-gītā ', '');
@@ -66,10 +80,15 @@ void main() {
     expect(reader.current!.label, label);
     // Position is saved (debounced).
     await tester.pump(const Duration(seconds: 1));
-    expect(app.container.read(settingsProvider).lastVerseId, reader.current!.id);
+    expect(
+      app.container.read(settingsProvider).lastVerseId,
+      reader.current!.id,
+    );
   });
 
-  testWidgets('reader: swipe, language switch keeps entry, history after 2 s', (tester) async {
+  testWidgets('reader: swipe, language switch keeps entry, history after 2 s', (
+    tester,
+  ) async {
     final app = await pumpApp(tester);
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
@@ -88,11 +107,15 @@ void main() {
 
     await tester.pump(const Duration(seconds: 3));
     await settle(tester);
-    final history = await tester.runAsync(() => app.userData.watchHistory().first);
+    final history = await tester.runAsync(
+      () => app.userData.watchHistory().first,
+    );
     expect(history!.map((e) => e.verseId), contains('bg-01-002'));
   });
 
-  testWidgets('reader: first entry has no previous; range entry; chapter end', (tester) async {
+  testWidgets('reader: first entry has no previous; range entry; chapter end', (
+    tester,
+  ) async {
     final app = await pumpApp(tester);
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
@@ -122,24 +145,34 @@ void main() {
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
 
-    await tester.tap(find.bySemanticsLabel(RegExp(r'^Chapter 1, .*Choose chapter')));
+    await tester.tap(
+      find.bySemanticsLabel(RegExp(r'^Chapter 1, .*Choose chapter')),
+    );
     await settle(tester);
     expect(find.text('Chapters'), findsOneWidget);
     await tester.tap(find.bySemanticsLabel(RegExp(r'^Chapter 2, .*72 verses')));
     await settle(tester);
     expect(reader.current!.id, 'bg-02-001');
 
-    await tester.tap(find.bySemanticsLabel(RegExp(r'^Verse 2.1\. Choose verse')));
+    await tester.tap(
+      find.bySemanticsLabel(RegExp(r'^Verse 2.1\. Choose verse')),
+    );
     await settle(tester);
     expect(find.text('Chapter 2 - 72 verses'), findsOneWidget);
     final v = find.bySemanticsLabel(RegExp(r'^Verse 2\.47'));
-    await tester.scrollUntilVisible(v, 200, scrollable: find.byType(Scrollable).last);
+    await tester.scrollUntilVisible(
+      v,
+      200,
+      scrollable: find.byType(Scrollable).last,
+    );
     await tester.tap(v);
     await settle(tester);
     expect(reader.current!.id, 'bg-02-047');
   });
 
-  testWidgets('purport: opens, long text, back returns to the same entry', (tester) async {
+  testWidgets('purport: opens, long text, back returns to the same entry', (
+    tester,
+  ) async {
     await pumpApp(tester);
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
@@ -147,7 +180,11 @@ void main() {
     expect(find.byType(PurportScreen), findsOneWidget);
     expect(find.textContaining('BHAGAVAD-GITA'), findsOneWidget);
     // A long purport scrolls without overflow.
-    await tester.fling(find.byType(CustomScrollView), const Offset(0, -20000), 8000);
+    await tester.fling(
+      find.byType(CustomScrollView),
+      const Offset(0, -20000),
+      8000,
+    );
     await settle(tester);
     await tester.tap(find.bySemanticsLabel('Back'));
     await settle(tester);
@@ -155,7 +192,9 @@ void main() {
     expect(reader.current!.id, 'bg-01-001');
   });
 
-  testWidgets('purport: Hindi purport shows without the English note', (tester) async {
+  testWidgets('purport: Hindi purport shows without the English note', (
+    tester,
+  ) async {
     final app = await pumpApp(tester);
     await app.container.read(settingsProvider.notifier).setLanguage('hi');
     app.container.read(readerJumpProvider.notifier).request('bg-02-001');
@@ -211,7 +250,7 @@ void main() {
     await settle(tester);
     expect(find.text('2.47'), findsOneWidget);
 
-    await tester.tap(find.byType(BackButton));
+    await tester.tap(find.byType(LucideBackButton));
     await settle(tester);
     await tester.tap(find.text('History'));
     await settle(tester);
@@ -223,9 +262,18 @@ void main() {
     final app = await pumpApp(tester);
     await tester.runAsync(() => app.userData.setFavourite('bg-01-001', true));
     await tapTab(tester, 'Profile');
-    await tester.scrollUntilVisible(find.text('Reset all saved data'), 200);
-    await tester.tap(find.text('Reset all saved data'));
-    await settle(tester);
+    // Profile is taller since v2 (streak card); scroll its vertical list,
+    // not the first Scrollable in the tree.
+    await tester.scrollUntilVisible(
+      find.text('Reset all saved data'),
+      200,
+      scrollable: find
+          .byWidgetPredicate(
+            (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
+          )
+          .first,
+    );
+    await tapVisible(tester, find.text('Reset all saved data'));
     await tester.tap(find.text('Reset'));
     await settle(tester);
     expect(find.text('Begin'), findsOneWidget);
@@ -235,13 +283,27 @@ void main() {
   testWidgets('theme setting switches to dark', (tester) async {
     final app = await pumpApp(tester);
     await tapTab(tester, 'Profile');
-    await tester.tap(find.text('Dark'));
-    await settle(tester);
-    expect(Theme.of(tester.element(find.text('Your library'))).brightness, Brightness.dark);
+    // The Study section pushes Theme below the fold.
+    await tester.scrollUntilVisible(
+      find.text('Dark'),
+      200,
+      scrollable: find
+          .byWidgetPredicate(
+            (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
+          )
+          .first,
+    );
+    await tapVisible(tester, find.text('Dark'));
+    expect(
+      Theme.of(tester.element(find.text('Dark'))).brightness,
+      Brightness.dark,
+    );
     expect(app.prefs.getString(SettingsRepository.kTheme), 'dark');
   });
 
-  testWidgets('reader three-dot glass menu opens summary and search', (tester) async {
+  testWidgets('reader three-dot glass menu opens summary and search', (
+    tester,
+  ) async {
     await pumpApp(tester);
     await tapTab(tester, 'Gita');
     await tester.tap(find.bySemanticsLabel('More'));

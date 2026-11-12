@@ -49,6 +49,10 @@ dependencies:
   flutter_timezone: ^5.1.1
   url_launcher: ^6.3.3
   flutter_lucide: ^1.62.0
+  in_app_purchase: ^3.3.1
+  in_app_purchase_android: ^0.5.5
+  characters: ^1.4.1
+  pdf: ^3.13.1
 
 dev_dependencies:
   flutter_test:

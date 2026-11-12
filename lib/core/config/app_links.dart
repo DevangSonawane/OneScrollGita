@@ -29,4 +29,10 @@ abstract final class AppLinks {
   /// Store link appended to the streak share caption. Empty for now; set it
   /// before release (docs/review-needed.md). Omitted while empty.
   static const shareLink = '';
+
+  /// Terms of use (EULA) and privacy policy, shown on the Sadhak paywall.
+  /// The App Store requires both for subscriptions. Empty until the owner
+  /// supplies them (docs/review-needed.md); the links are hidden while empty.
+  static const termsUrl = '';
+  static const privacyUrl = '';
 }

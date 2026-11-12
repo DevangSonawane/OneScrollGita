@@ -10,7 +10,15 @@ import '../core/design/tokens.dart';
 import '../domain/verse_navigation.dart';
 import '../features/first_launch/welcome_screen.dart';
 import '../features/gita/reader_screen.dart';
+import '../domain/premium.dart';
 import '../features/home/home_screen.dart';
+import '../features/premium/paywall_screen.dart';
+import '../features/study/journal_screens.dart';
+import '../features/study/note_editor_screen.dart';
+import '../features/study/notebook_export.dart';
+import '../features/study/study_lists.dart';
+import '../features/trainer/trainer_home_screen.dart';
+import '../features/trainer/trainer_session_screen.dart';
 import '../features/profile/about_screen.dart';
 import '../features/profile/library_list_screen.dart';
 import '../features/profile/profile_screen.dart';
@@ -125,6 +133,14 @@ final routerProvider = Provider<GoRouter>((ref) {
                           LibraryListScreen(kind: kind),
                     ),
                   GoRoute(
+                    path: 'highlights',
+                    builder: (context, state) => const HighlightsScreen(),
+                  ),
+                  GoRoute(
+                    path: 'notes',
+                    builder: (context, state) => const NotesScreen(),
+                  ),
+                  GoRoute(
                     path: 'reminders',
                     builder: (context, state) => const RemindersScreen(),
                   ),
@@ -149,6 +165,69 @@ final routerProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => _risePage(
           state,
           PurportScreen(verseId: state.pathParameters['verseId']!),
+        ),
+      ),
+      GoRoute(
+        path: '/note/:verseId',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) => _risePage(
+          state,
+          NoteEditorScreen(verseId: state.pathParameters['verseId']!),
+        ),
+      ),
+      GoRoute(
+        path: '/trainer',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) =>
+            _risePage(state, const TrainerHomeScreen()),
+      ),
+      GoRoute(
+        path: '/trainer-learn/:verseId',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) => _risePage(
+          state,
+          TrainerLearnScreen(verseId: state.pathParameters['verseId']!),
+        ),
+      ),
+      GoRoute(
+        path: '/trainer-review',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) =>
+            _risePage(state, const TrainerReviewScreen()),
+      ),
+      GoRoute(
+        path: '/journal',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) =>
+            _risePage(state, const JournalScreen()),
+      ),
+      GoRoute(
+        path: '/journal-edit',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) => _risePage(
+          state,
+          JournalEditorScreen(
+            id: int.tryParse(state.uri.queryParameters['id'] ?? ''),
+            verseId: state.uri.queryParameters['verse'],
+          ),
+        ),
+      ),
+      GoRoute(
+        path: '/notebook',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) =>
+            _risePage(state, const NotebookExportScreen()),
+      ),
+      GoRoute(
+        path: '/sadhak',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) => _risePage(
+          state,
+          PaywallScreen(
+            reason: PremiumFeature.values
+                .where((f) => f.name == state.uri.queryParameters['reason'])
+                .firstOrNull,
+          ),
         ),
       ),
       GoRoute(

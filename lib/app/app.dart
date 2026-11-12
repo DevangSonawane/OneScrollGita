@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../application/core_providers.dart';
+import '../application/premium_providers.dart';
 import '../application/reminder_providers.dart';
 import '../application/scripture_providers.dart';
 import '../application/widget_sync.dart';
@@ -30,6 +31,9 @@ class _GitaAppState extends ConsumerState<GitaApp> with WidgetsBindingObserver {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(widgetSyncProvider);
       _startReminders().ignore();
+      // Starts listening to the store (pending purchases complete here) and
+      // re-checks the Sadhak plan. Offline keeps the cached state.
+      ref.read(entitlementProvider.notifier).refresh().ignore();
     });
   }
 
@@ -72,6 +76,7 @@ class _GitaAppState extends ConsumerState<GitaApp> with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed) {
       ref.read(todayProvider.notifier).refresh();
       ref.read(reminderControllerProvider.notifier).onAppOpened().ignore();
+      ref.read(entitlementProvider.notifier).refresh().ignore();
     }
   }
 

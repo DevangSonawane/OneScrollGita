@@ -31,8 +31,14 @@ void main() {
 
   test('a DST change does not shift the day number', () {
     // Europe and US DST transitions; local midnight-to-midnight still +1.
-    expect(dayNumber(DateTime(2026, 3, 29)) - dayNumber(DateTime(2026, 3, 28)), 1);
-    expect(dayNumber(DateTime(2026, 11, 1)) - dayNumber(DateTime(2026, 10, 31)), 1);
+    expect(
+      dayNumber(DateTime(2026, 3, 29)) - dayNumber(DateTime(2026, 3, 28)),
+      1,
+    );
+    expect(
+      dayNumber(DateTime(2026, 11, 1)) - dayNumber(DateTime(2026, 10, 31)),
+      1,
+    );
     expect(
       dailyEntryIndex(DateTime(2026, 3, 29, 1), n),
       dailyEntryIndex(DateTime(2026, 3, 29, 23), n),
@@ -55,7 +61,9 @@ void main() {
     expect(dayNumber(DateTime(2024, 1, 1)), 0);
     expect(dayNumber(DateTime(2025, 1, 1)), 366);
     // Pin a value so a PRNG change is noticed.
-    final pinned = [for (var d = 0; d < 5; d++) dailyEntryIndex(DateTime(2024, 1, 1 + d), 10)];
+    final pinned = [
+      for (var d = 0; d < 5; d++) dailyEntryIndex(DateTime(2024, 1, 1 + d), 10),
+    ];
     expect(pinned, [for (var d = 0; d < 5; d++) cyclePermutation(0, 10)[d]]);
   });
 
@@ -67,6 +75,9 @@ void main() {
   });
 
   test('dates before the epoch work', () {
-    expect(dailyEntryIndex(DateTime(2023, 12, 31), n), inInclusiveRange(0, n - 1));
+    expect(
+      dailyEntryIndex(DateTime(2023, 12, 31), n),
+      inInclusiveRange(0, n - 1),
+    );
   });
 }

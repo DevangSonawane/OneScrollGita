@@ -16,15 +16,30 @@ void main() {
   });
 
   test('strict mode rejects unknown and unbalanced tags', () {
-    expect(() => parseMarkup('<u>x</u>', strict: true), throwsA(isA<MarkupException>()));
-    expect(() => parseMarkup('<i>x', strict: true), throwsA(isA<MarkupException>()));
-    expect(() => parseMarkup('x</b>', strict: true), throwsA(isA<MarkupException>()));
-    expect(() => parseMarkup('<i><b>x</i></b>', strict: true), throwsA(isA<MarkupException>()));
+    expect(
+      () => parseMarkup('<u>x</u>', strict: true),
+      throwsA(isA<MarkupException>()),
+    );
+    expect(
+      () => parseMarkup('<i>x', strict: true),
+      throwsA(isA<MarkupException>()),
+    );
+    expect(
+      () => parseMarkup('x</b>', strict: true),
+      throwsA(isA<MarkupException>()),
+    );
+    expect(
+      () => parseMarkup('<i><b>x</i></b>', strict: true),
+      throwsA(isA<MarkupException>()),
+    );
   });
 
   test('lenient mode never throws and keeps text', () {
     expect(stripMarkup('<i>x'), 'x');
     expect(stripMarkup('a</b>b'), 'ab');
-    expect(stripMarkup('<script>a</script>'), '<script>a</script>'); // not a tag we know: stays text
+    expect(
+      stripMarkup('<script>a</script>'),
+      '<script>a</script>',
+    ); // not a tag we know: stays text
   });
 }

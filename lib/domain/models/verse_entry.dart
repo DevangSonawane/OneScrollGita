@@ -1,3 +1,5 @@
+import '../word_meanings.dart';
+
 /// One swipe page in the reader: a single verse or a range of verses that
 /// share one translation and purport in the source edition.
 class VerseEntry {
@@ -13,6 +15,8 @@ class VerseEntry {
     required this.translationHi,
     this.purportEn,
     this.purportHi,
+    this.wordMeaningsEn = const [],
+    this.wordMeaningsHi,
   });
 
   final String id;
@@ -23,10 +27,17 @@ class VerseEntry {
   final List<String> sanskrit;
   final List<String> transliteration;
   final String translationEn;
+
   /// Null when the source has no Hindi translation (shown in English).
   final String? translationHi;
   final List<PurportBlock>? purportEn;
   final List<PurportBlock>? purportHi;
+
+  /// Word-for-word meanings from the source; English is always present.
+  final List<WordMeaning> wordMeaningsEn;
+
+  /// Null when the source has no usable Hindi list (shown in English).
+  final List<WordMeaning>? wordMeaningsHi;
 
   bool get isRange => verseEnd != verseStart;
   bool get hasPurport =>
@@ -61,9 +72,23 @@ class VerseEntry {
     return null;
   }
 
+  bool get hasWordMeanings => wordMeaningsEn.isNotEmpty;
+
+  /// The word meanings to show for [languageCode], and whether they are an
+  /// English fallback because the Hindi list does not exist.
+  ({List<WordMeaning> pairs, bool isEnglishFallback}) wordMeaningsFor(
+    String languageCode,
+  ) {
+    if (languageCode == 'hi' && (wordMeaningsHi?.isNotEmpty ?? false)) {
+      return (pairs: wordMeaningsHi!, isEnglishFallback: false);
+    }
+    return (pairs: wordMeaningsEn, isEnglishFallback: languageCode == 'hi');
+  }
+
   factory VerseEntry.fromJson(Map<String, dynamic> json) {
     final translation = json['translation'] as Map<String, dynamic>;
     final purport = json['purport'] as Map<String, dynamic>?;
+    final synonyms = json['synonyms'] as Map<String, dynamic>?;
     return VerseEntry(
       id: json['id'] as String,
       chapter: json['chapter'] as int,
@@ -76,7 +101,16 @@ class VerseEntry {
       translationHi: translation['hi'] as String?,
       purportEn: _blocks(purport?['en']),
       purportHi: _blocks(purport?['hi']),
+      wordMeaningsEn: _meanings(synonyms?['en']) ?? const [],
+      wordMeaningsHi: _meanings(synonyms?['hi']),
     );
+  }
+
+  static List<WordMeaning>? _meanings(Object? raw) {
+    if (raw is! List) return null;
+    return raw
+        .map((m) => WordMeaning.fromJson(m as Map<String, dynamic>))
+        .toList(growable: false);
   }
 
   static List<PurportBlock>? _blocks(Object? raw) {

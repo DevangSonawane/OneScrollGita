@@ -1,10 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../application/core_providers.dart';
 import '../../application/library_providers.dart';
+import '../../application/premium_providers.dart';
+import '../../application/study_providers.dart';
 import '../../application/reminder_providers.dart';
 import '../../application/scripture_providers.dart';
 import '../../application/ui_providers.dart';
@@ -13,8 +16,13 @@ import '../../core/design/glass_nav_bar.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/models/app_settings.dart';
+import '../../domain/trainer/trainer.dart';
 import '../../application/streak_providers.dart';
 import '../common/common_widgets.dart';
+import '../premium/sadhak_card.dart';
+import '../study/journal_screens.dart';
+import '../study/notebook_export.dart';
+import '../trainer/trainer_entry.dart';
 import '../streak/streak_card.dart';
 import '../purport/purport_screen.dart' show TextSizeSlider;
 
@@ -69,14 +77,34 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     if (ok) await ref.read(activityRepositoryProvider).clearSearchHistory();
   }
 
+  String _trainerSubtitle(WidgetRef ref) {
+    final due = ref.watch(dueReviewsProvider).length;
+    final learned = (ref.watch(shlokaProgressProvider).value ?? const [])
+        .where((s) => s.status != ShlokaStatus.learning)
+        .length;
+    if (due > 0) return due == 1 ? '1 review due' : '$due reviews due';
+    if (learned > 0) {
+      return learned == 1 ? '1 verse learned' : '$learned verses learned';
+    }
+    return 'Learn verses by heart';
+  }
+
+  Widget? _lockIf(bool locked, AppColors c) => locked
+      ? Icon(LucideIcons.lock, size: IconSizes.small - 2, color: c.textTertiary)
+      : null;
+
+  Future<void> _setPretend(bool v) =>
+      ref.read(entitlementProvider.notifier).setPretendPremium(v);
+
   Future<void> _resetAll() async {
     final ok = await showConfirmDialog(
       context,
       title: 'Reset all saved data?',
       message:
           'This removes your favourites, bookmarks, reading history, '
-          'reading streak, reminders, search history, settings and resume '
-          'position from this phone. It cannot be undone.',
+          'reading streak, reminders, search history, notes, highlights, '
+          'journal, learning progress, settings and resume position from '
+          'this phone. It cannot be undone. A Sadhak purchase is kept.',
       confirmLabel: 'Reset',
       destructive: true,
     );
@@ -90,6 +118,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final settings = ref.watch(settingsProvider);
     final notifier = ref.read(settingsProvider.notifier);
     int count(AsyncValue<List<Object>> v) => v.value?.length ?? 0;
+    // Rebuilds when the entitlement changes, so the debug switch follows it.
+    ref.watch(entitlementProvider);
+    final isPremium = ref.watch(isPremiumProvider);
+    final pretendPremium =
+        kDebugMode && ref.read(settingsRepositoryProvider).pretendPremium;
 
     return Scaffold(
       body: SafeArea(
@@ -126,6 +159,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 const SizedBox(height: Space.s12),
                 const StreakCard(),
+                const SizedBox(height: Space.s12),
+                const SadhakCard(),
                 const SizedBox(height: Space.s8),
                 const ContinueRow(),
                 const SizedBox(height: Space.s8),
@@ -150,6 +185,40 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ),
                     onTap: () => context.go('/profile/$path'),
                   ),
+                const _ProfileSectionHeader('STUDY'),
+                SettingsRow(
+                  title: 'Shloka trainer',
+                  subtitle: _trainerSubtitle(ref),
+                  onTap: () => openTrainerHome(context),
+                ),
+                SettingsRow(
+                  title: 'Highlights',
+                  trailing: Text(
+                    '${count(ref.watch(highlightsProvider))}',
+                    style: ui.label(color: c.textSecondary),
+                  ),
+                  onTap: () => context.go('/profile/highlights'),
+                ),
+                SettingsRow(
+                  title: 'My notes',
+                  trailing: Text(
+                    '${count(ref.watch(notesProvider))}',
+                    style: ui.label(color: c.textSecondary),
+                  ),
+                  onTap: () => context.go('/profile/notes'),
+                ),
+                SettingsRow(
+                  title: 'Journal',
+                  trailing: _lockIf(!isPremium, c),
+                  onTap: () => openJournal(context, ref),
+                ),
+                SettingsRow(
+                  title: 'Export my Gita notebook',
+                  subtitle: 'Notes, highlights and journal as a PDF',
+                  trailing: _lockIf(!isPremium, c),
+                  onTap: () => openNotebookExport(context, ref),
+                  divider: false,
+                ),
                 const _ProfileSectionHeader('READING'),
                 SettingsRow(
                   title: 'Translation',
@@ -223,12 +292,23 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   onTap: () => context.go('/profile/about'),
                   divider: kDebugMode,
                 ),
-                if (kDebugMode)
+                if (kDebugMode) ...[
                   SettingsRow(
                     title: 'Typography specimen (debug)',
                     onTap: () => context.go('/profile/specimen'),
+                  ),
+                  SettingsRow(
+                    title: 'Pretend premium (debug)',
+                    subtitle: 'Debug builds only. Never in release.',
+                    trailing: Switch(
+                      value: pretendPremium,
+                      onChanged: _setPretend,
+                    ),
+                    onTap: () => _setPretend(!pretendPremium),
+                    showChevron: false,
                     divider: false,
                   ),
+                ],
                 const _ProfileSectionHeader('YOUR DATA'),
                 SettingsRow(
                   title: 'Clear reading history',

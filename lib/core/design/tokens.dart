@@ -152,6 +152,19 @@ abstract final class AppDurations {
 
   /// Search typing debounce (PRD_v2 section 10).
   static const searchDebounce = Duration(milliseconds: 250);
+
+  // Sadhak paywall (all ambient loops stop under reduced motion).
+  static const paywallEntrance = Duration(milliseconds: 1400);
+  static const auraCycle = Duration(seconds: 24);
+  static const mandalaTurn = Duration(seconds: 120);
+  static const sparkRise = Duration(seconds: 11);
+  static const shimmer = Duration(milliseconds: 3200);
+  static const bloom = Duration(milliseconds: 1600);
+  static const planSelect = Duration(milliseconds: 280);
+
+  // Study layer and trainer.
+  static const noteAutosave = Duration(milliseconds: 600);
+  static const wordReveal = Duration(milliseconds: 220);
 }
 
 abstract final class AppCurves {
@@ -250,4 +263,126 @@ class GlassTokens {
 
   static GlassTokens of(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark ? dark : light;
+}
+
+/// Sadhak (premium) look: warm gold on the existing saffron palette.
+/// Decorative colours only; text keeps the AppColors text tokens.
+@immutable
+class PremiumColors {
+  const PremiumColors({
+    required this.gold,
+    required this.goldSoft,
+    required this.glow,
+    required this.auraA,
+    required this.auraB,
+    required this.cardTop,
+    required this.cardBottom,
+  });
+
+  final Color gold;
+  final Color goldSoft;
+
+  /// Soft saffron glow behind the selected plan and the lotus.
+  final Color glow;
+
+  /// The two drifting light sources of the hero aura.
+  final Color auraA;
+  final Color auraB;
+
+  /// The Profile "Sadhak" card gradient.
+  final Color cardTop;
+  final Color cardBottom;
+
+  static const light = PremiumColors(
+    gold: Color(0xFFC08A2C),
+    goldSoft: Color(0xFFF3E3BF),
+    glow: Color(0x40E58A3C),
+    auraA: Color(0x66F2B26B),
+    auraB: Color(0x4DE9C78A),
+    cardTop: Color(0xFFF8E7D2),
+    cardBottom: Color(0xFFF2D9BC),
+  );
+
+  static const dark = PremiumColors(
+    gold: Color(0xFFE2B866),
+    goldSoft: Color(0xFF3A2D18),
+    glow: Color(0x40E39A5E),
+    auraA: Color(0x40E39A5E),
+    auraB: Color(0x33D9B26A),
+    cardTop: Color(0xFF2E2219),
+    cardBottom: Color(0xFF221A14),
+  );
+
+  static PremiumColors of(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? dark : light;
+}
+
+/// Sadhak paywall geometry.
+abstract final class PaywallMetrics {
+  static const heroHeight = 280.0;
+  static const mandalaSize = 260.0;
+  static const lotusIcon = 44.0;
+  static const titleSize = 52.0;
+  static const ctaHeight = 56.0;
+  static const benefitIcon = 40.0;
+  static const radioSize = 22.0;
+  static const sparkCount = 22;
+  static const selectedBorder = 2.0;
+  static const glowBlur = 28.0;
+  static const entranceRise = 18.0;
+  static const bloomPetals = 8;
+  static const bloomSize = 180.0;
+}
+
+/// Highlight colours: a soft band behind the translation (text keeps
+/// `textPrimary`, at least 4.5:1, see test/design/contrast_test.dart) and a
+/// stronger swatch for pickers and list markers.
+@immutable
+class HighlightColors {
+  const HighlightColors(this.bands, this.swatches);
+
+  /// saffron, leaf, sky, lotus (in `HighlightColor` order).
+  final List<Color> bands;
+  final List<Color> swatches;
+
+  static const light = HighlightColors(
+    [
+      Color(0xFFFBE3CC),
+      Color(0xFFDDEFD9),
+      Color(0xFFDCE9F7),
+      Color(0xFFF6DDE8),
+    ],
+    [
+      Color(0xFFD2691E),
+      Color(0xFF4F8A4B),
+      Color(0xFF3D7CC0),
+      Color(0xFFC0577F),
+    ],
+  );
+
+  static const dark = HighlightColors(
+    [
+      Color(0xFF43301F),
+      Color(0xFF26372A),
+      Color(0xFF22313F),
+      Color(0xFF3E2633),
+    ],
+    [
+      Color(0xFFE39A5E),
+      Color(0xFF8CC487),
+      Color(0xFF86B4E8),
+      Color(0xFFE59AB8),
+    ],
+  );
+
+  static HighlightColors of(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? dark : light;
+}
+
+/// Shloka trainer geometry.
+abstract final class TrainerMetrics {
+  static const blankMinWidth = 36.0;
+  static const blankHeight = 30.0;
+  static const stepDot = 8.0;
+  static const stepDotActive = 22.0;
 }

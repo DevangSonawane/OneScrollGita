@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../application/core_providers.dart';
 import '../../application/library_providers.dart';
 import '../../application/scripture_providers.dart';
+import '../../application/study_providers.dart';
 import '../../application/ui_providers.dart';
 import '../../core/design/glass.dart';
 import '../../core/design/glass_nav_bar.dart';
@@ -26,6 +27,8 @@ import '../../core/design/copy_on_tap.dart';
 import '../summary/summary_screen.dart' show openSummary;
 import 'chapter_sheet.dart';
 import 'heart_burst.dart';
+import '../study/study_actions.dart';
+import '../trainer/trainer_entry.dart';
 import 'share_card.dart';
 import 'verse_selector_sheet.dart';
 
@@ -624,7 +627,12 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              VerseTextBlock(entry: entry, copyable: true),
+              VerseTextBlock(
+                entry: entry,
+                copyable: true,
+                showWordMeanings: true,
+                highlight: ref.watch(highlightForProvider(entry.id)),
+              ),
               const SizedBox(height: Space.s24),
               // Wraps at large text sizes so the Purport button never
               // overflows.
@@ -644,6 +652,8 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
                         verseId: entry.id,
                         kind: SaveKind.bookmark,
                       ),
+                      HighlightButton(verseId: entry.id),
+                      NoteButton(verseId: entry.id),
                       Builder(
                         builder: (buttonContext) => Pressable(
                           onTap: _sharing ? null : () => _share(buttonContext),
@@ -668,6 +678,11 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
                       child: const Text('Purport'),
                     ),
                 ],
+              ),
+              const SizedBox(height: Space.s8),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: LearnByHeartButton(verseId: entry.id),
               ),
               if (widget.isLast) ...[
                 const SizedBox(height: Space.s32),

@@ -45,7 +45,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "śrī bhagavān uvāca",
+      "meaning": "the Supreme Personality of Godhead said"
+     },
+     {
+      "word": "bhūyaḥ",
+      "meaning": "again"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "mahā-bāho",
+      "meaning": "O mighty-armed"
+     },
+     {
+      "word": "śṛṇu",
+      "meaning": "just hear"
+     },
+     {
+      "word": "me",
+      "meaning": "My"
+     },
+     {
+      "word": "paramaṁ",
+      "meaning": "supreme"
+     },
+     {
+      "word": "vacaḥ",
+      "meaning": "information"
+     },
+     {
+      "word": "yat",
+      "meaning": "that which"
+     },
+     {
+      "word": "te",
+      "meaning": "to you"
+     },
+     {
+      "word": "aham",
+      "meaning": "I"
+     },
+     {
+      "word": "prīyamāṇāya",
+      "meaning": "thinking you dear to Me"
+     },
+     {
+      "word": "vakṣyāmi",
+      "meaning": "say"
+     },
+     {
+      "word": "hita-kāmyayā",
+      "meaning": "for your benefit."
+     }
+    ],
+    "hi": [
+     {
+      "word": "श्री-भगवान् उवाच",
+      "meaning": "पूर्ण पुरुषोत्तम भगवान् ने कहा"
+     },
+     {
+      "word": "भूयः",
+      "meaning": "पुनः"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "महा-बाहो",
+      "meaning": "हे महाबाहु"
+     },
+     {
+      "word": "शृणु",
+      "meaning": "सुनो"
+     },
+     {
+      "word": "मे",
+      "meaning": "मेरा"
+     },
+     {
+      "word": "परमम्",
+      "meaning": "परम"
+     },
+     {
+      "word": "वचः",
+      "meaning": "वचन"
+     },
+     {
+      "word": "यत्",
+      "meaning": "जो"
+     },
+     {
+      "word": "ते",
+      "meaning": "तुम्हें"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं"
+     },
+     {
+      "word": "प्रीयमाणाय",
+      "meaning": "तुम्हें अपना प्रिय मानते हुए"
+     },
+     {
+      "word": "वक्ष्यामि",
+      "meaning": "कहूँगा"
+     },
+     {
+      "word": "हित-काम्यया",
+      "meaning": "तुम्हारे हित हेतु।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/1/"
   },
   {
@@ -98,7 +215,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "me",
+      "meaning": "My"
+     },
+     {
+      "word": "viduḥ",
+      "meaning": "knows"
+     },
+     {
+      "word": "sura-gaṇāḥ",
+      "meaning": "demigods"
+     },
+     {
+      "word": "prabhavam",
+      "meaning": "opulences"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "maharṣayaḥ",
+      "meaning": "great sages"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "ādiḥ",
+      "meaning": "the origin"
+     },
+     {
+      "word": "hi",
+      "meaning": "certainly"
+     },
+     {
+      "word": "devānām",
+      "meaning": "of the demigods"
+     },
+     {
+      "word": "maharṣīṇām",
+      "meaning": "of the great sages"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "sarvaśaḥ",
+      "meaning": "in all respects."
+     }
+    ],
+    "hi": [
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "मे",
+      "meaning": "मेरा"
+     },
+     {
+      "word": "विदुः",
+      "meaning": "जानते हैं"
+     },
+     {
+      "word": "सुर-गणाः",
+      "meaning": "देवतागण"
+     },
+     {
+      "word": "प्रभवम्",
+      "meaning": "ऐश्वर्य"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "महर्षयः",
+      "meaning": "महान् ऋषिगण"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "आदिः",
+      "meaning": "उद्गम"
+     },
+     {
+      "word": "हि",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "देवानाम्",
+      "meaning": "देवताओं का"
+     },
+     {
+      "word": "महर्षीणाम्",
+      "meaning": "महान् ऋषियों का"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "सर्वशः",
+      "meaning": "सब प्रकार से।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/2/"
   },
   {
@@ -183,7 +417,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "yaḥ",
+      "meaning": "anyone"
+     },
+     {
+      "word": "mām",
+      "meaning": "unto Me"
+     },
+     {
+      "word": "ajam",
+      "meaning": "unborn"
+     },
+     {
+      "word": "anādim",
+      "meaning": "without beginning"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "vetti",
+      "meaning": "knows"
+     },
+     {
+      "word": "loka",
+      "meaning": "the planets"
+     },
+     {
+      "word": "maheśvaram",
+      "meaning": "supreme master"
+     },
+     {
+      "word": "asaṁmūḍhaḥ",
+      "meaning": "without doubt"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he"
+     },
+     {
+      "word": "martyeṣu",
+      "meaning": "among those subject to death"
+     },
+     {
+      "word": "sarva-pāpaiḥ",
+      "meaning": "from all sinful reactions"
+     },
+     {
+      "word": "pramucyate",
+      "meaning": "is delivered."
+     }
+    ],
+    "hi": [
+     {
+      "word": "यः",
+      "meaning": "जो कोई"
+     },
+     {
+      "word": "माम्",
+      "meaning": "मुझको"
+     },
+     {
+      "word": "अजम्",
+      "meaning": "अजन्मा"
+     },
+     {
+      "word": "अनादिम्",
+      "meaning": "अनादि"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "वेत्ति",
+      "meaning": "जानता है"
+     },
+     {
+      "word": "लोक",
+      "meaning": "लोकों का"
+     },
+     {
+      "word": "महेश्वरम्",
+      "meaning": "परम स्वामी"
+     },
+     {
+      "word": "असम्मूढः",
+      "meaning": "सन्देह रहित"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "मर्त्येषु",
+      "meaning": "मृत्यु के अधीन प्राणियों में"
+     },
+     {
+      "word": "सर्व-पापैः",
+      "meaning": "समस्त पापकर्मों से"
+     },
+     {
+      "word": "प्रमुच्यते",
+      "meaning": "मुक्त हो जाता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/3/"
   },
   {
@@ -314,7 +657,244 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "buddhiḥ",
+      "meaning": "intelligence"
+     },
+     {
+      "word": "jñānam",
+      "meaning": "knowledge"
+     },
+     {
+      "word": "asam-mohaḥ",
+      "meaning": "freedom from doubt"
+     },
+     {
+      "word": "kṣamā",
+      "meaning": "forgiveness"
+     },
+     {
+      "word": "satyam",
+      "meaning": "truthfulness"
+     },
+     {
+      "word": "damaḥ",
+      "meaning": "control of the senses"
+     },
+     {
+      "word": "śamaḥ",
+      "meaning": "control of the mind"
+     },
+     {
+      "word": "sukham",
+      "meaning": "happiness"
+     },
+     {
+      "word": "duḥkham",
+      "meaning": "distress"
+     },
+     {
+      "word": "bhavaḥ",
+      "meaning": "birth"
+     },
+     {
+      "word": "abhāvaḥ",
+      "meaning": "death"
+     },
+     {
+      "word": "bhayam",
+      "meaning": "fear"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "abhayam",
+      "meaning": "without fear"
+     },
+     {
+      "word": "eva",
+      "meaning": "also"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "ahiṁsā",
+      "meaning": "nonviolence"
+     },
+     {
+      "word": "samatā",
+      "meaning": "equilibrium"
+     },
+     {
+      "word": "tuṣṭiḥ",
+      "meaning": "satisfaction"
+     },
+     {
+      "word": "tapaḥ",
+      "meaning": "penance"
+     },
+     {
+      "word": "dānam",
+      "meaning": "charity"
+     },
+     {
+      "word": "yaśaḥ",
+      "meaning": "fame"
+     },
+     {
+      "word": "ayaśaḥ",
+      "meaning": "infamy"
+     },
+     {
+      "word": "bhavanti",
+      "meaning": "become"
+     },
+     {
+      "word": "bhāvāḥ",
+      "meaning": "natures"
+     },
+     {
+      "word": "bhūtānām",
+      "meaning": "of living entities"
+     },
+     {
+      "word": "mattaḥ",
+      "meaning": "from Me"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "pṛthak-vidhāḥ",
+      "meaning": "differently arranged."
+     }
+    ],
+    "hi": [
+     {
+      "word": "बुद्धिः",
+      "meaning": "बुद्धि"
+     },
+     {
+      "word": "ज्ञानम्",
+      "meaning": "ज्ञान"
+     },
+     {
+      "word": "असम्मोहः",
+      "meaning": "सन्देह से मुक्ति"
+     },
+     {
+      "word": "क्षमा",
+      "meaning": "क्षमा"
+     },
+     {
+      "word": "सत्यम्",
+      "meaning": "सत्यता"
+     },
+     {
+      "word": "दमः",
+      "meaning": "इन्द्रियों का संयम"
+     },
+     {
+      "word": "शमः",
+      "meaning": "मन का संयम"
+     },
+     {
+      "word": "सुखम्",
+      "meaning": "सुख"
+     },
+     {
+      "word": "दुःखम्",
+      "meaning": "दुःख"
+     },
+     {
+      "word": "भवः",
+      "meaning": "जन्म"
+     },
+     {
+      "word": "अभावः",
+      "meaning": "मृत्यु"
+     },
+     {
+      "word": "भयम्",
+      "meaning": "भय"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अभयम्",
+      "meaning": "भयरहित"
+     },
+     {
+      "word": "एव",
+      "meaning": "भी"
+     },
+     {
+      "word": "च",
+      "meaning": "तथा"
+     },
+     {
+      "word": "अहिंसा",
+      "meaning": "अहिंसा"
+     },
+     {
+      "word": "समता",
+      "meaning": "समता"
+     },
+     {
+      "word": "तुष्टिः",
+      "meaning": "सन्तोष"
+     },
+     {
+      "word": "तपः",
+      "meaning": "तपस्या"
+     },
+     {
+      "word": "दानम्",
+      "meaning": "दान"
+     },
+     {
+      "word": "यशः",
+      "meaning": "यश"
+     },
+     {
+      "word": "अयशः",
+      "meaning": "अपयश"
+     },
+     {
+      "word": "भवन्ति",
+      "meaning": "होते हैं"
+     },
+     {
+      "word": "भावाः",
+      "meaning": "स्वभाव"
+     },
+     {
+      "word": "भूतानाम्",
+      "meaning": "जीवों के"
+     },
+     {
+      "word": "मत्तः",
+      "meaning": "मुझसे"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "पृथक्-विधाः",
+      "meaning": "भिन्न-भिन्न प्रकार से व्यवस्थित।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/4-5/"
   },
   {
@@ -351,7 +931,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "maharṣayaḥ",
+      "meaning": "the great sages"
+     },
+     {
+      "word": "sapta",
+      "meaning": "seven"
+     },
+     {
+      "word": "pūrve",
+      "meaning": "before"
+     },
+     {
+      "word": "catvāraḥ",
+      "meaning": "four"
+     },
+     {
+      "word": "manavaḥ",
+      "meaning": "Manus"
+     },
+     {
+      "word": "tathā",
+      "meaning": "also"
+     },
+     {
+      "word": "mat-bhāvāḥ",
+      "meaning": "born of Me"
+     },
+     {
+      "word": "mānasāḥ",
+      "meaning": "from the mind"
+     },
+     {
+      "word": "jātāḥ",
+      "meaning": "born"
+     },
+     {
+      "word": "yeṣām",
+      "meaning": "of them"
+     },
+     {
+      "word": "loke",
+      "meaning": "the planets"
+     },
+     {
+      "word": "imāḥ",
+      "meaning": "all this"
+     },
+     {
+      "word": "prajāḥ",
+      "meaning": "population."
+     }
+    ],
+    "hi": [
+     {
+      "word": "महर्षयः",
+      "meaning": "महान् ऋषि"
+     },
+     {
+      "word": "सप्त",
+      "meaning": "सात"
+     },
+     {
+      "word": "पूर्वे",
+      "meaning": "पूर्व"
+     },
+     {
+      "word": "चत्वारः",
+      "meaning": "चार"
+     },
+     {
+      "word": "मनवः",
+      "meaning": "मनु"
+     },
+     {
+      "word": "तथा",
+      "meaning": "भी"
+     },
+     {
+      "word": "मत्-भावाः",
+      "meaning": "मुझसे उत्पन्न"
+     },
+     {
+      "word": "मानसाः",
+      "meaning": "मन से"
+     },
+     {
+      "word": "जाताः",
+      "meaning": "उत्पन्न"
+     },
+     {
+      "word": "येषाम्",
+      "meaning": "उनके"
+     },
+     {
+      "word": "लोके",
+      "meaning": "लोकों में"
+     },
+     {
+      "word": "इमाः",
+      "meaning": "यह सब"
+     },
+     {
+      "word": "प्रजाः",
+      "meaning": "जनसंख्या।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/6/"
   },
   {
@@ -404,7 +1093,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "etām",
+      "meaning": "all this"
+     },
+     {
+      "word": "vibhūtiṁ",
+      "meaning": "opulence"
+     },
+     {
+      "word": "yogam ca",
+      "meaning": "also mystic power"
+     },
+     {
+      "word": "mama",
+      "meaning": "of Mine"
+     },
+     {
+      "word": "yaḥ",
+      "meaning": "anyone"
+     },
+     {
+      "word": "vetti",
+      "meaning": "knows"
+     },
+     {
+      "word": "tattvataḥ",
+      "meaning": "factually"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he"
+     },
+     {
+      "word": "avikalpena",
+      "meaning": "without division"
+     },
+     {
+      "word": "yogena",
+      "meaning": "in devotional service"
+     },
+     {
+      "word": "yujyate",
+      "meaning": "engaged"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "atra",
+      "meaning": "here"
+     },
+     {
+      "word": "saṁśayaḥ",
+      "meaning": "doubt."
+     }
+    ],
+    "hi": [
+     {
+      "word": "एताम्",
+      "meaning": "यह सब"
+     },
+     {
+      "word": "विभूतिम्",
+      "meaning": "ऐश्वर्य"
+     },
+     {
+      "word": "योगम् च",
+      "meaning": "तथा योगशक्ति"
+     },
+     {
+      "word": "मम",
+      "meaning": "मेरी"
+     },
+     {
+      "word": "यः",
+      "meaning": "जो कोई"
+     },
+     {
+      "word": "वेत्ति",
+      "meaning": "जानता है"
+     },
+     {
+      "word": "तत्त्वतः",
+      "meaning": "तथ्यतः"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "अविकम्पेन",
+      "meaning": "अविचलित"
+     },
+     {
+      "word": "योगेन",
+      "meaning": "भक्ति में"
+     },
+     {
+      "word": "युज्यते",
+      "meaning": "संलग्न होता है"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "अत्र",
+      "meaning": "यहाँ"
+     },
+     {
+      "word": "संशयः",
+      "meaning": "सन्देह।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/7/"
   },
   {
@@ -509,7 +1315,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "aham",
+      "meaning": "I"
+     },
+     {
+      "word": "sarvasya",
+      "meaning": "of all"
+     },
+     {
+      "word": "prabhavaḥ",
+      "meaning": "source of generation"
+     },
+     {
+      "word": "mattaḥ",
+      "meaning": "from Me"
+     },
+     {
+      "word": "sarvam",
+      "meaning": "everything"
+     },
+     {
+      "word": "pravartate",
+      "meaning": "emanates"
+     },
+     {
+      "word": "iti",
+      "meaning": "thus"
+     },
+     {
+      "word": "matvā",
+      "meaning": "knowing"
+     },
+     {
+      "word": "bhajante",
+      "meaning": "becomes devoted"
+     },
+     {
+      "word": "mām",
+      "meaning": "unto Me"
+     },
+     {
+      "word": "budhāḥ",
+      "meaning": "learned"
+     },
+     {
+      "word": "bhāva-samanvitāḥ",
+      "meaning": "with great attention."
+     }
+    ],
+    "hi": [
+     {
+      "word": "अहम्",
+      "meaning": "मैं"
+     },
+     {
+      "word": "सर्वस्य",
+      "meaning": "समस्त का"
+     },
+     {
+      "word": "प्रभवः",
+      "meaning": "उत्पत्ति का स्रोत"
+     },
+     {
+      "word": "मत्तः",
+      "meaning": "मुझसे"
+     },
+     {
+      "word": "सर्वम्",
+      "meaning": "सब कुछ"
+     },
+     {
+      "word": "प्रवर्तते",
+      "meaning": "उद्भूत होता है"
+     },
+     {
+      "word": "इति",
+      "meaning": "इस प्रकार"
+     },
+     {
+      "word": "मत्वा",
+      "meaning": "जानकर"
+     },
+     {
+      "word": "भजन्ते",
+      "meaning": "भक्त बन जाते हैं"
+     },
+     {
+      "word": "माम्",
+      "meaning": "मुझको"
+     },
+     {
+      "word": "बुधाः",
+      "meaning": "विद्वान्"
+     },
+     {
+      "word": "भाव-समन्विताः",
+      "meaning": "महान् भाव सहित।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/8/"
   },
   {
@@ -562,7 +1469,100 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "mat-cittāḥ",
+      "meaning": "minds fully engaged in Me"
+     },
+     {
+      "word": "mat-gata-prāṇāḥ",
+      "meaning": "lives devoted to the service of Kṛṣṇa"
+     },
+     {
+      "word": "bodhayantaḥ",
+      "meaning": "preaching"
+     },
+     {
+      "word": "parasparam",
+      "meaning": "among themselves"
+     },
+     {
+      "word": "kathayantaḥ ca",
+      "meaning": "talking also"
+     },
+     {
+      "word": "mām",
+      "meaning": "about Me"
+     },
+     {
+      "word": "nityam",
+      "meaning": "perpetually"
+     },
+     {
+      "word": "tuṣyanti",
+      "meaning": "are pleased"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "ramanti",
+      "meaning": "enjoy transcendental bliss"
+     },
+     {
+      "word": "ca",
+      "meaning": "also."
+     }
+    ],
+    "hi": [
+     {
+      "word": "मत्-चित्ताः",
+      "meaning": "मन में पूर्णतः मुझमें संलग्न"
+     },
+     {
+      "word": "मत्-गत-प्राणाः",
+      "meaning": "श्रीकृष्ण की सेवा में अर्पित जीवन वाले"
+     },
+     {
+      "word": "बोधयन्तः",
+      "meaning": "प्रचार करते हुए"
+     },
+     {
+      "word": "परस्परम्",
+      "meaning": "आपस में"
+     },
+     {
+      "word": "कथयन्तः च",
+      "meaning": "बातें भी करते हुए"
+     },
+     {
+      "word": "माम्",
+      "meaning": "मेरे विषय में"
+     },
+     {
+      "word": "नित्यम्",
+      "meaning": "निरन्तर"
+     },
+     {
+      "word": "तुष्यन्ति",
+      "meaning": "प्रसन्न होते हैं"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "रमन्ति",
+      "meaning": "दिव्य आनन्द भोगते हैं"
+     },
+     {
+      "word": "च",
+      "meaning": "भी।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/9/"
   },
   {
@@ -615,7 +1615,100 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "teṣām",
+      "meaning": "unto them"
+     },
+     {
+      "word": "satata-yuktānām",
+      "meaning": "always engaged"
+     },
+     {
+      "word": "bhajatām",
+      "meaning": "in devotional service"
+     },
+     {
+      "word": "prīti-pūrvakam",
+      "meaning": "in loving ecstasy"
+     },
+     {
+      "word": "dadāmi",
+      "meaning": "I give"
+     },
+     {
+      "word": "buddhi-yogam",
+      "meaning": "real intelligence"
+     },
+     {
+      "word": "tam",
+      "meaning": "that"
+     },
+     {
+      "word": "yena",
+      "meaning": "by which"
+     },
+     {
+      "word": "mām",
+      "meaning": "unto Me"
+     },
+     {
+      "word": "upayānti",
+      "meaning": "come"
+     },
+     {
+      "word": "te",
+      "meaning": "they."
+     }
+    ],
+    "hi": [
+     {
+      "word": "तेषाम्",
+      "meaning": "उनको"
+     },
+     {
+      "word": "सतत-युक्तानाम्",
+      "meaning": "सदा संलग्न"
+     },
+     {
+      "word": "भजताम्",
+      "meaning": "भक्ति में"
+     },
+     {
+      "word": "प्रीति-पूर्वकम्",
+      "meaning": "प्रेम-आवेश में"
+     },
+     {
+      "word": "ददामि",
+      "meaning": "मैं देता हूँ"
+     },
+     {
+      "word": "बुद्धि-योगम्",
+      "meaning": "वास्तविक बुद्धि"
+     },
+     {
+      "word": "तम्",
+      "meaning": "वह"
+     },
+     {
+      "word": "येन",
+      "meaning": "जिससे"
+     },
+     {
+      "word": "माम्",
+      "meaning": "मुझको"
+     },
+     {
+      "word": "उपयान्ति",
+      "meaning": "आते हैं"
+     },
+     {
+      "word": "ते",
+      "meaning": "वे।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/10/"
   },
   {
@@ -676,7 +1769,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "teṣām",
+      "meaning": "for them"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "anukampā-artham",
+      "meaning": "to show special mercy"
+     },
+     {
+      "word": "aham",
+      "meaning": "I"
+     },
+     {
+      "word": "ajñāna-jam",
+      "meaning": "due to ignorance"
+     },
+     {
+      "word": "tamaḥ",
+      "meaning": "darkness"
+     },
+     {
+      "word": "nāśayāmi",
+      "meaning": "dispel"
+     },
+     {
+      "word": "ātma",
+      "meaning": "within"
+     },
+     {
+      "word": "bhāvasthaḥ",
+      "meaning": "themselves"
+     },
+     {
+      "word": "jñāna",
+      "meaning": "of knowledge"
+     },
+     {
+      "word": "dīpena",
+      "meaning": "with the lamp"
+     },
+     {
+      "word": "bhāsvatā",
+      "meaning": "glowing."
+     }
+    ],
+    "hi": [
+     {
+      "word": "तेषाम्",
+      "meaning": "उनके लिए"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "अनुकम्पा-अर्थम्",
+      "meaning": "विशेष कृपा दर्शाने हेतु"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं"
+     },
+     {
+      "word": "अज्ञान-जम्",
+      "meaning": "अज्ञान के कारण"
+     },
+     {
+      "word": "तमः",
+      "meaning": "अन्धकार"
+     },
+     {
+      "word": "नाशयामि",
+      "meaning": "दूर करता हूँ"
+     },
+     {
+      "word": "आत्म",
+      "meaning": "भीतर"
+     },
+     {
+      "word": "भाव-स्थः",
+      "meaning": "उनके भीतर स्थित"
+     },
+     {
+      "word": "ज्ञान",
+      "meaning": "ज्ञान का"
+     },
+     {
+      "word": "दीपेन",
+      "meaning": "दीपक से"
+     },
+     {
+      "word": "भास्वता",
+      "meaning": "प्रकाशमान।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/11/"
   },
   {
@@ -753,7 +1947,244 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "arjunaḥ uvāca",
+      "meaning": "Arjuna said"
+     },
+     {
+      "word": "param",
+      "meaning": "supreme"
+     },
+     {
+      "word": "brahma",
+      "meaning": "truth"
+     },
+     {
+      "word": "param",
+      "meaning": "supreme"
+     },
+     {
+      "word": "dhāma",
+      "meaning": "sustenance"
+     },
+     {
+      "word": "pavitram",
+      "meaning": "purest"
+     },
+     {
+      "word": "paramam",
+      "meaning": "supreme"
+     },
+     {
+      "word": "bhavān",
+      "meaning": "Yourself"
+     },
+     {
+      "word": "puruṣam",
+      "meaning": "personality"
+     },
+     {
+      "word": "śāśvatam",
+      "meaning": "original"
+     },
+     {
+      "word": "divyam",
+      "meaning": "transcendental"
+     },
+     {
+      "word": "ādi-devam",
+      "meaning": "original Lord"
+     },
+     {
+      "word": "ajam",
+      "meaning": "unborn"
+     },
+     {
+      "word": "vibhum",
+      "meaning": "greatest"
+     },
+     {
+      "word": "āhuḥ",
+      "meaning": "say"
+     },
+     {
+      "word": "tvām",
+      "meaning": "unto You"
+     },
+     {
+      "word": "ṛṣayaḥ",
+      "meaning": "sages"
+     },
+     {
+      "word": "sarve",
+      "meaning": "all"
+     },
+     {
+      "word": "devarṣiḥ",
+      "meaning": "the sage among the demigods"
+     },
+     {
+      "word": "nāradaḥ",
+      "meaning": "Nārada"
+     },
+     {
+      "word": "tathā",
+      "meaning": "also"
+     },
+     {
+      "word": "asitaḥ",
+      "meaning": "Asita"
+     },
+     {
+      "word": "devalaḥ",
+      "meaning": "Devala"
+     },
+     {
+      "word": "vyāsaḥ",
+      "meaning": "Vyāsa"
+     },
+     {
+      "word": "svayam",
+      "meaning": "personally"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "bravīṣi",
+      "meaning": "explaining"
+     },
+     {
+      "word": "me",
+      "meaning": "unto me."
+     }
+    ],
+    "hi": [
+     {
+      "word": "अर्जुनः उवाच",
+      "meaning": "अर्जुन ने कहा"
+     },
+     {
+      "word": "परम्",
+      "meaning": "परम"
+     },
+     {
+      "word": "ब्रह्म",
+      "meaning": "सत्य"
+     },
+     {
+      "word": "परम्",
+      "meaning": "परम"
+     },
+     {
+      "word": "धाम",
+      "meaning": "आश्रय"
+     },
+     {
+      "word": "पवित्रम्",
+      "meaning": "परम पवित्र"
+     },
+     {
+      "word": "परमम्",
+      "meaning": "परम"
+     },
+     {
+      "word": "भवान्",
+      "meaning": "आप"
+     },
+     {
+      "word": "पुरुषम्",
+      "meaning": "पुरुष"
+     },
+     {
+      "word": "शाश्वतम्",
+      "meaning": "आदि"
+     },
+     {
+      "word": "दिव्यम्",
+      "meaning": "दिव्य"
+     },
+     {
+      "word": "आदि-देवम्",
+      "meaning": "आदि भगवान्"
+     },
+     {
+      "word": "अजम्",
+      "meaning": "अजन्मा"
+     },
+     {
+      "word": "विभुम्",
+      "meaning": "महानतम"
+     },
+     {
+      "word": "आहुः",
+      "meaning": "कहते हैं"
+     },
+     {
+      "word": "त्वाम्",
+      "meaning": "आपको"
+     },
+     {
+      "word": "ऋषयः",
+      "meaning": "ऋषिगण"
+     },
+     {
+      "word": "सर्वे",
+      "meaning": "समस्त"
+     },
+     {
+      "word": "देवर्षिः",
+      "meaning": "देवताओं में ऋषि"
+     },
+     {
+      "word": "नारदः",
+      "meaning": "नारद"
+     },
+     {
+      "word": "तथा",
+      "meaning": "भी"
+     },
+     {
+      "word": "असितः",
+      "meaning": "असित"
+     },
+     {
+      "word": "देवलः",
+      "meaning": "देवल"
+     },
+     {
+      "word": "व्यासः",
+      "meaning": "व्यास"
+     },
+     {
+      "word": "स्वयम्",
+      "meaning": "स्वयं"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "ब्रवीषि",
+      "meaning": "समझा रहे हैं"
+     },
+     {
+      "word": "मे",
+      "meaning": "मुझे।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/12-13/"
   },
   {
@@ -790,7 +2221,148 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "sarvam",
+      "meaning": "all"
+     },
+     {
+      "word": "etat",
+      "meaning": "these"
+     },
+     {
+      "word": "ṛtam",
+      "meaning": "truths"
+     },
+     {
+      "word": "manye",
+      "meaning": "accept"
+     },
+     {
+      "word": "yat",
+      "meaning": "which"
+     },
+     {
+      "word": "mām",
+      "meaning": "unto me"
+     },
+     {
+      "word": "vadasi",
+      "meaning": "You tell"
+     },
+     {
+      "word": "keśava",
+      "meaning": "O Kṛṣṇa"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "hi",
+      "meaning": "certainly"
+     },
+     {
+      "word": "te",
+      "meaning": "Your"
+     },
+     {
+      "word": "bhagavan",
+      "meaning": "O Personality of Godhead"
+     },
+     {
+      "word": "vyaktim",
+      "meaning": "revelation"
+     },
+     {
+      "word": "viduḥ",
+      "meaning": "can know"
+     },
+     {
+      "word": "devaḥ",
+      "meaning": "the demigods"
+     },
+     {
+      "word": "na",
+      "meaning": "nor"
+     },
+     {
+      "word": "dānavāḥ",
+      "meaning": "the demons."
+     }
+    ],
+    "hi": [
+     {
+      "word": "सर्वम्",
+      "meaning": "समस्त"
+     },
+     {
+      "word": "एतत्",
+      "meaning": "ये"
+     },
+     {
+      "word": "ऋतम्",
+      "meaning": "सत्य"
+     },
+     {
+      "word": "मन्ये",
+      "meaning": "स्वीकार करता हूँ"
+     },
+     {
+      "word": "यत्",
+      "meaning": "जो"
+     },
+     {
+      "word": "माम्",
+      "meaning": "मुझसे"
+     },
+     {
+      "word": "वदसि",
+      "meaning": "आप कहते हैं"
+     },
+     {
+      "word": "केशव",
+      "meaning": "हे श्रीकृष्ण"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "हि",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "ते",
+      "meaning": "आपका"
+     },
+     {
+      "word": "भगवन्",
+      "meaning": "हे भगवन्"
+     },
+     {
+      "word": "व्यक्तिम्",
+      "meaning": "प्राकट्य"
+     },
+     {
+      "word": "विदुः",
+      "meaning": "जान सकते हैं"
+     },
+     {
+      "word": "देवाः",
+      "meaning": "देवता"
+     },
+     {
+      "word": "न",
+      "meaning": "न ही"
+     },
+     {
+      "word": "दानवाः",
+      "meaning": "असुर।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/14/"
   },
   {
@@ -835,7 +2407,100 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "svayam",
+      "meaning": "personality"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "ātmanā",
+      "meaning": "by Yourself"
+     },
+     {
+      "word": "ātmānam",
+      "meaning": "Yourself"
+     },
+     {
+      "word": "vettha",
+      "meaning": "know"
+     },
+     {
+      "word": "tvam",
+      "meaning": "You"
+     },
+     {
+      "word": "puruṣottama",
+      "meaning": "O greatest of all persons"
+     },
+     {
+      "word": "bhūta-bhāvana",
+      "meaning": "O origin of everything"
+     },
+     {
+      "word": "bhūteśa",
+      "meaning": "O Lord of everything"
+     },
+     {
+      "word": "deva-deva",
+      "meaning": "O Lord of all demigods"
+     },
+     {
+      "word": "jagat-pate",
+      "meaning": "O Lord of the entire universe."
+     }
+    ],
+    "hi": [
+     {
+      "word": "स्वयम्",
+      "meaning": "व्यक्तित्व"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "आत्मना",
+      "meaning": "स्वयं अपने द्वारा"
+     },
+     {
+      "word": "आत्मानम्",
+      "meaning": "स्वयं को"
+     },
+     {
+      "word": "वेत्थ",
+      "meaning": "जानते हैं"
+     },
+     {
+      "word": "त्वम्",
+      "meaning": "आप"
+     },
+     {
+      "word": "पुरुषोत्तम",
+      "meaning": "हे समस्त पुरुषों में श्रेष्ठ"
+     },
+     {
+      "word": "भूत-भावन",
+      "meaning": "हे समस्त के उद्गम"
+     },
+     {
+      "word": "भूतेश",
+      "meaning": "हे समस्त के स्वामी"
+     },
+     {
+      "word": "देव-देव",
+      "meaning": "हे समस्त देवताओं के स्वामी"
+     },
+     {
+      "word": "जगत्-पते",
+      "meaning": "हे सम्पूर्ण ब्रह्माण्ड के स्वामी।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/15/"
   },
   {
@@ -872,7 +2537,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "vaktum",
+      "meaning": "to say"
+     },
+     {
+      "word": "arhasi",
+      "meaning": "deserve"
+     },
+     {
+      "word": "aśeṣeṇa",
+      "meaning": "in detail"
+     },
+     {
+      "word": "divyā",
+      "meaning": "divine"
+     },
+     {
+      "word": "hi",
+      "meaning": "certainly"
+     },
+     {
+      "word": "ātma",
+      "meaning": "Yourself"
+     },
+     {
+      "word": "vibhūtayaḥ",
+      "meaning": "opulences"
+     },
+     {
+      "word": "yābhiḥ",
+      "meaning": "by which"
+     },
+     {
+      "word": "vibhūtibhiḥ",
+      "meaning": "opulences"
+     },
+     {
+      "word": "lokān",
+      "meaning": "all the planets"
+     },
+     {
+      "word": "imān",
+      "meaning": "these"
+     },
+     {
+      "word": "tvam",
+      "meaning": "You"
+     },
+     {
+      "word": "vyāpya",
+      "meaning": "pervading"
+     },
+     {
+      "word": "tiṣṭhasi",
+      "meaning": "remain."
+     }
+    ],
+    "hi": [
+     {
+      "word": "वक्तुम्",
+      "meaning": "कहने योग्य"
+     },
+     {
+      "word": "अर्हसि",
+      "meaning": "आप समर्थ हैं"
+     },
+     {
+      "word": "अशेषेण",
+      "meaning": "विस्तारपूर्वक"
+     },
+     {
+      "word": "दिव्या",
+      "meaning": "दिव्य"
+     },
+     {
+      "word": "हि",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "आत्म",
+      "meaning": "अपने"
+     },
+     {
+      "word": "विभूतयः",
+      "meaning": "ऐश्वर्य"
+     },
+     {
+      "word": "याभिः",
+      "meaning": "जिनसे"
+     },
+     {
+      "word": "विभूतिभिः",
+      "meaning": "ऐश्वर्यों से"
+     },
+     {
+      "word": "लोकान्",
+      "meaning": "समस्त लोकों में"
+     },
+     {
+      "word": "इमान्",
+      "meaning": "इन"
+     },
+     {
+      "word": "त्वम्",
+      "meaning": "आप"
+     },
+     {
+      "word": "व्याप्य",
+      "meaning": "व्याप्त होकर"
+     },
+     {
+      "word": "तिष्ठसि",
+      "meaning": "रहते हैं।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/16/"
   },
   {
@@ -909,7 +2691,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "katham",
+      "meaning": "how"
+     },
+     {
+      "word": "vidyām aham",
+      "meaning": "shall I know"
+     },
+     {
+      "word": "yogin",
+      "meaning": "O supreme mystic"
+     },
+     {
+      "word": "tvām",
+      "meaning": "You"
+     },
+     {
+      "word": "sadā",
+      "meaning": "always"
+     },
+     {
+      "word": "paricintayan",
+      "meaning": "thinking"
+     },
+     {
+      "word": "keṣu",
+      "meaning": "in which"
+     },
+     {
+      "word": "keṣu",
+      "meaning": "in which"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "bhāveṣu",
+      "meaning": "nature"
+     },
+     {
+      "word": "cintyaḥ asi",
+      "meaning": "You are remembered"
+     },
+     {
+      "word": "bhagavan",
+      "meaning": "O Supreme"
+     },
+     {
+      "word": "mayā",
+      "meaning": "by me."
+     }
+    ],
+    "hi": [
+     {
+      "word": "कथम्",
+      "meaning": "कैसे"
+     },
+     {
+      "word": "विद्याम् अहम्",
+      "meaning": "मैं जानूँ"
+     },
+     {
+      "word": "योगिन्",
+      "meaning": "हे परम योगी"
+     },
+     {
+      "word": "त्वाम्",
+      "meaning": "आपको"
+     },
+     {
+      "word": "सदा",
+      "meaning": "सदा"
+     },
+     {
+      "word": "परिचिन्तयन्",
+      "meaning": "चिन्तन करते हुए"
+     },
+     {
+      "word": "केषु",
+      "meaning": "किन"
+     },
+     {
+      "word": "केषु",
+      "meaning": "किन"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "भावेषु",
+      "meaning": "रूपों में"
+     },
+     {
+      "word": "चिन्त्यः असि",
+      "meaning": "आपका स्मरण किया जाता है"
+     },
+     {
+      "word": "भगवन्",
+      "meaning": "हे परमेश्वर"
+     },
+     {
+      "word": "मया",
+      "meaning": "मेरे द्वारा।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/17/"
   },
   {
@@ -974,7 +2865,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "vistareṇa",
+      "meaning": "in description"
+     },
+     {
+      "word": "ātmanaḥ",
+      "meaning": "of Yourself"
+     },
+     {
+      "word": "yogam",
+      "meaning": "mystic power"
+     },
+     {
+      "word": "vibhūtim",
+      "meaning": "opulences"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "janārdana",
+      "meaning": "O killer of the atheists"
+     },
+     {
+      "word": "bhūyaḥ",
+      "meaning": "again"
+     },
+     {
+      "word": "kathaya",
+      "meaning": "describe"
+     },
+     {
+      "word": "tṛptiḥ",
+      "meaning": "satisfaction"
+     },
+     {
+      "word": "hi",
+      "meaning": "certainly"
+     },
+     {
+      "word": "śṛṇvataḥ",
+      "meaning": "hearing"
+     },
+     {
+      "word": "na asti",
+      "meaning": "there is no"
+     },
+     {
+      "word": "me",
+      "meaning": "my"
+     },
+     {
+      "word": "amṛtam",
+      "meaning": "nectar."
+     }
+    ],
+    "hi": [
+     {
+      "word": "विस्तरेण",
+      "meaning": "वर्णन में"
+     },
+     {
+      "word": "आत्मनः",
+      "meaning": "अपने"
+     },
+     {
+      "word": "योगम्",
+      "meaning": "योगशक्ति"
+     },
+     {
+      "word": "विभूतिम्",
+      "meaning": "ऐश्वर्य"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "जनार्दन",
+      "meaning": "हे नास्तिकों के संहारक"
+     },
+     {
+      "word": "भूयः",
+      "meaning": "पुनः"
+     },
+     {
+      "word": "कथय",
+      "meaning": "वर्णन करें"
+     },
+     {
+      "word": "तृप्तिः",
+      "meaning": "तृप्ति"
+     },
+     {
+      "word": "हि",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "शृण्वतः",
+      "meaning": "सुनते हुए"
+     },
+     {
+      "word": "न अस्ति",
+      "meaning": "नहीं है"
+     },
+     {
+      "word": "मे",
+      "meaning": "मेरी"
+     },
+     {
+      "word": "अमृतम्",
+      "meaning": "अमृत।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/18/"
   },
   {
@@ -1021,7 +3029,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "śrī bhagavān uvāca",
+      "meaning": "the Supreme Personality of Godhead said"
+     },
+     {
+      "word": "hanta",
+      "meaning": "yes"
+     },
+     {
+      "word": "te",
+      "meaning": "unto you"
+     },
+     {
+      "word": "kathayiṣyāmi",
+      "meaning": "I shall speak"
+     },
+     {
+      "word": "divyāḥ",
+      "meaning": "divine"
+     },
+     {
+      "word": "hi",
+      "meaning": "certainly"
+     },
+     {
+      "word": "ātma-vibhūtayaḥ",
+      "meaning": "personal opulences"
+     },
+     {
+      "word": "prādhānyataḥ",
+      "meaning": "principally"
+     },
+     {
+      "word": "kuruśreṣṭha",
+      "meaning": "O best of the Kurus"
+     },
+     {
+      "word": "na asti",
+      "meaning": "there is no"
+     },
+     {
+      "word": "antaḥ",
+      "meaning": "limit"
+     },
+     {
+      "word": "vistarasya",
+      "meaning": "to the extent"
+     },
+     {
+      "word": "me",
+      "meaning": "My."
+     }
+    ],
+    "hi": [
+     {
+      "word": "श्री भगवान् उवाच",
+      "meaning": "पूर्ण पुरुषोत्तम भगवान् ने कहा"
+     },
+     {
+      "word": "हन्त",
+      "meaning": "हाँ"
+     },
+     {
+      "word": "ते",
+      "meaning": "तुमसे"
+     },
+     {
+      "word": "कथयिष्यामि",
+      "meaning": "मैं कहूँगा"
+     },
+     {
+      "word": "दिव्याः",
+      "meaning": "दिव्य"
+     },
+     {
+      "word": "हि",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "आत्म-विभूतयः",
+      "meaning": "अपने ऐश्वर्य"
+     },
+     {
+      "word": "प्राधान्यतः",
+      "meaning": "प्रमुख रूप से"
+     },
+     {
+      "word": "कुरुश्रेष्ठ",
+      "meaning": "हे कुरुश्रेष्ठ"
+     },
+     {
+      "word": "न अस्ति",
+      "meaning": "नहीं है"
+     },
+     {
+      "word": "अन्तः",
+      "meaning": "सीमा"
+     },
+     {
+      "word": "विस्तरस्य",
+      "meaning": "विस्तार की"
+     },
+     {
+      "word": "मे",
+      "meaning": "मेरे।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/19/"
   },
   {
@@ -1074,7 +3191,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "aham",
+      "meaning": "I"
+     },
+     {
+      "word": "ātmā",
+      "meaning": "soul"
+     },
+     {
+      "word": "guḍākeśa",
+      "meaning": "O Arjuna"
+     },
+     {
+      "word": "sarva-bhūta",
+      "meaning": "all living entities"
+     },
+     {
+      "word": "āśaya-sthitaḥ",
+      "meaning": "situated within"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "ādiḥ",
+      "meaning": "origin"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "madhyam",
+      "meaning": "middle"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "bhūtānām",
+      "meaning": "all living entities"
+     },
+     {
+      "word": "antaḥ",
+      "meaning": "end"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "ca",
+      "meaning": "and."
+     }
+    ],
+    "hi": [
+     {
+      "word": "अहम्",
+      "meaning": "मैं"
+     },
+     {
+      "word": "आत्मा",
+      "meaning": "आत्मा"
+     },
+     {
+      "word": "गुडाकेश",
+      "meaning": "हे अर्जुन"
+     },
+     {
+      "word": "सर्व-भूत",
+      "meaning": "समस्त जीवों के"
+     },
+     {
+      "word": "आशय-स्थितः",
+      "meaning": "हृदय में स्थित"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "आदिः",
+      "meaning": "उद्गम"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "मध्यम्",
+      "meaning": "मध्य"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "भूतानाम्",
+      "meaning": "समस्त जीवों का"
+     },
+     {
+      "word": "अन्तः",
+      "meaning": "अन्त"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "च",
+      "meaning": "और।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/20/"
   },
   {
@@ -1111,7 +3345,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "ādityānām",
+      "meaning": "of the Ādityas"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "viṣṇuḥ",
+      "meaning": "the Supreme Lord"
+     },
+     {
+      "word": "jyotiṣām",
+      "meaning": "of all luminaries"
+     },
+     {
+      "word": "raviḥ",
+      "meaning": "the sun"
+     },
+     {
+      "word": "aṁśumān",
+      "meaning": "radiant"
+     },
+     {
+      "word": "marīciḥ",
+      "meaning": "Marīci"
+     },
+     {
+      "word": "marutām",
+      "meaning": "of the Marutas"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "nakṣatrāṇām",
+      "meaning": "of stars"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "śaśī",
+      "meaning": "the moon."
+     }
+    ],
+    "hi": [
+     {
+      "word": "आदित्यानाम्",
+      "meaning": "आदित्यों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "विष्णुः",
+      "meaning": "परमेश्वर"
+     },
+     {
+      "word": "ज्योतिषाम्",
+      "meaning": "समस्त ज्योतियों में"
+     },
+     {
+      "word": "रविः",
+      "meaning": "सूर्य"
+     },
+     {
+      "word": "अंशुमान्",
+      "meaning": "देदीप्यमान"
+     },
+     {
+      "word": "मरीचिः",
+      "meaning": "मरीचि"
+     },
+     {
+      "word": "मरुताम्",
+      "meaning": "मरुतों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "नक्षत्राणाम्",
+      "meaning": "नक्षत्रों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "शशी",
+      "meaning": "चन्द्रमा।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/21/"
   },
   {
@@ -1148,7 +3483,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "vedānām",
+      "meaning": "of all the Vedas"
+     },
+     {
+      "word": "sāma-vedaḥ",
+      "meaning": "the Sāma-veda"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "devānām",
+      "meaning": "of all the demigods"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "vāsavaḥ",
+      "meaning": "heavenly king"
+     },
+     {
+      "word": "indriyāṇām",
+      "meaning": "of all the senses"
+     },
+     {
+      "word": "manaḥ",
+      "meaning": "the mind"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "bhūtānām",
+      "meaning": "of all living entities"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "cetanā",
+      "meaning": "the living force."
+     }
+    ],
+    "hi": [
+     {
+      "word": "वेदानाम्",
+      "meaning": "समस्त वेदों में"
+     },
+     {
+      "word": "साम-वेदः",
+      "meaning": "सामवेद"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "देवानाम्",
+      "meaning": "समस्त देवताओं में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "वासवः",
+      "meaning": "स्वर्ग का राजा"
+     },
+     {
+      "word": "इन्द्रियाणाम्",
+      "meaning": "समस्त इन्द्रियों में"
+     },
+     {
+      "word": "मनः",
+      "meaning": "मन"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "भूतानाम्",
+      "meaning": "समस्त जीवों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "चेतना",
+      "meaning": "जीवनी शक्ति।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/22/"
   },
   {
@@ -1185,7 +3629,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "rudrāṇām",
+      "meaning": "of all the Rudras"
+     },
+     {
+      "word": "śaṅkaraḥ",
+      "meaning": "Lord Śiva"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "vitteśaḥ",
+      "meaning": "the lord of the treasury"
+     },
+     {
+      "word": "yakṣa-rakṣasām",
+      "meaning": "of the Yakṣas and Rākṣasas"
+     },
+     {
+      "word": "vasūnām",
+      "meaning": "of the Vasus"
+     },
+     {
+      "word": "pāvakaḥ",
+      "meaning": "fire"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "meruḥ",
+      "meaning": "Meru"
+     },
+     {
+      "word": "śikhariṇām",
+      "meaning": "of all mountains"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am."
+     }
+    ],
+    "hi": [
+     {
+      "word": "रुद्राणाम्",
+      "meaning": "समस्त रुद्रों में"
+     },
+     {
+      "word": "शङ्करः",
+      "meaning": "शिवजी"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "वित्तेशः",
+      "meaning": "कोश का स्वामी"
+     },
+     {
+      "word": "यक्ष-रक्षसाम्",
+      "meaning": "यक्षों तथा राक्षसों में"
+     },
+     {
+      "word": "वसूनाम्",
+      "meaning": "वसुओं में"
+     },
+     {
+      "word": "पावकः",
+      "meaning": "अग्नि"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "मेरुः",
+      "meaning": "मेरु"
+     },
+     {
+      "word": "शिखरिणाम्",
+      "meaning": "समस्त पर्वतों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/23/"
   },
   {
@@ -1222,7 +3775,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "purodhasām",
+      "meaning": "of all priests"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "mukhyam",
+      "meaning": "chief"
+     },
+     {
+      "word": "mām",
+      "meaning": "Me"
+     },
+     {
+      "word": "viddhi",
+      "meaning": "understand"
+     },
+     {
+      "word": "pārtha",
+      "meaning": "O son of Pṛthā"
+     },
+     {
+      "word": "bṛhaspatim",
+      "meaning": "Bṛhaspati"
+     },
+     {
+      "word": "senānīnām",
+      "meaning": "of all commanders"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "skandaḥ",
+      "meaning": "Kārtikeya"
+     },
+     {
+      "word": "sarasām",
+      "meaning": "of all reservoirs of water"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "sāgaraḥ",
+      "meaning": "the ocean."
+     }
+    ],
+    "hi": [
+     {
+      "word": "पुरोधसाम्",
+      "meaning": "समस्त पुरोहितों में"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "मुख्यम्",
+      "meaning": "प्रमुख"
+     },
+     {
+      "word": "माम्",
+      "meaning": "मुझे"
+     },
+     {
+      "word": "विद्धि",
+      "meaning": "जानो"
+     },
+     {
+      "word": "पार्थ",
+      "meaning": "हे पृथापुत्र"
+     },
+     {
+      "word": "बृहस्पतिम्",
+      "meaning": "बृहस्पति"
+     },
+     {
+      "word": "सेनानीनाम्",
+      "meaning": "समस्त सेनापतियों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "स्कन्दः",
+      "meaning": "कार्तिकेय"
+     },
+     {
+      "word": "सरसाम्",
+      "meaning": "समस्त जलाशयों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "सागरः",
+      "meaning": "समुद्र।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/24/"
   },
   {
@@ -1259,7 +3921,100 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "maharṣīṇām",
+      "meaning": "among the great sages"
+     },
+     {
+      "word": "bhṛguḥ",
+      "meaning": "Bhṛgu"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "girām",
+      "meaning": "of vibrations"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "ekam akṣaram",
+      "meaning": "praṇava"
+     },
+     {
+      "word": "yajñānām",
+      "meaning": "of sacrifices"
+     },
+     {
+      "word": "japa-yajñaḥ",
+      "meaning": "chanting"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "sthāvarāṇām",
+      "meaning": "of immovable things"
+     },
+     {
+      "word": "himālayaḥ",
+      "meaning": "the Himalayan mountains."
+     }
+    ],
+    "hi": [
+     {
+      "word": "महर्षीणाम्",
+      "meaning": "महान् ऋषियों में"
+     },
+     {
+      "word": "भृगुः",
+      "meaning": "भृगु"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "गिराम्",
+      "meaning": "ध्वनि-कम्पनों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "एकम् अक्षरम्",
+      "meaning": "प्रणव"
+     },
+     {
+      "word": "यज्ञानाम्",
+      "meaning": "यज्ञों में"
+     },
+     {
+      "word": "जप-यज्ञः",
+      "meaning": "जप"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "स्थावराणाम्",
+      "meaning": "अचल वस्तुओं में"
+     },
+     {
+      "word": "हिमालयः",
+      "meaning": "हिमालय पर्वत।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/25/"
   },
   {
@@ -1296,7 +4051,84 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "aśvatthaḥ",
+      "meaning": "the banyan tree"
+     },
+     {
+      "word": "sarva-vṛkṣāṇām",
+      "meaning": "of all trees"
+     },
+     {
+      "word": "devarṣīṇām",
+      "meaning": "of all the sages amongst the demigods"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "nāradaḥ",
+      "meaning": "Nārada"
+     },
+     {
+      "word": "gandharvāṇām",
+      "meaning": "the citizens of the Gandharva planet"
+     },
+     {
+      "word": "citrarathaḥ",
+      "meaning": "Citraratha"
+     },
+     {
+      "word": "siddhānām",
+      "meaning": "of all those who are perfected"
+     },
+     {
+      "word": "kapilaḥ muniḥ",
+      "meaning": "Kapila Muni."
+     }
+    ],
+    "hi": [
+     {
+      "word": "अश्वत्थः",
+      "meaning": "वटवृक्ष"
+     },
+     {
+      "word": "सर्व-वृक्षाणाम्",
+      "meaning": "समस्त वृक्षों में"
+     },
+     {
+      "word": "देवर्षीणाम्",
+      "meaning": "देवताओं में जो ऋषि हैं उनमें"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "नारदः",
+      "meaning": "नारद"
+     },
+     {
+      "word": "गन्धर्वाणाम्",
+      "meaning": "गन्धर्वलोक के निवासियों में"
+     },
+     {
+      "word": "चित्ररथः",
+      "meaning": "चित्ररथ"
+     },
+     {
+      "word": "सिद्धानाम्",
+      "meaning": "समस्त सिद्धों में"
+     },
+     {
+      "word": "कपिलः मुनिः",
+      "meaning": "कपिल मुनि।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/26/"
   },
   {
@@ -1341,7 +4173,92 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "uccaiḥśravasam",
+      "meaning": "Uccaiḥśravā"
+     },
+     {
+      "word": "aśvānām",
+      "meaning": "among horses"
+     },
+     {
+      "word": "viddhi",
+      "meaning": "know"
+     },
+     {
+      "word": "mām",
+      "meaning": "Me"
+     },
+     {
+      "word": "amṛta-udbhavam",
+      "meaning": "produced from the churning of the ocean"
+     },
+     {
+      "word": "airāvatam",
+      "meaning": "Airāvata"
+     },
+     {
+      "word": "gajendrāṇām",
+      "meaning": "of elephants"
+     },
+     {
+      "word": "narāṇām",
+      "meaning": "among human beings"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "narādhipam",
+      "meaning": "the king."
+     }
+    ],
+    "hi": [
+     {
+      "word": "उच्चैःश्रवसम्",
+      "meaning": "उच्चैःश्रवा"
+     },
+     {
+      "word": "अश्वानाम्",
+      "meaning": "घोड़ों में"
+     },
+     {
+      "word": "विद्धि",
+      "meaning": "जानो"
+     },
+     {
+      "word": "माम्",
+      "meaning": "मुझे"
+     },
+     {
+      "word": "अमृत-उद्भवम्",
+      "meaning": "समुद्र-मन्थन से उत्पन्न"
+     },
+     {
+      "word": "ऐरावतम्",
+      "meaning": "ऐरावत"
+     },
+     {
+      "word": "गजेन्द्राणाम्",
+      "meaning": "हाथियों में"
+     },
+     {
+      "word": "नराणाम्",
+      "meaning": "मनुष्यों में"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "नराधिपम्",
+      "meaning": "राजा।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/27/"
   },
   {
@@ -1378,7 +4295,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "āyudhānām",
+      "meaning": "of all weapons"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "vajram",
+      "meaning": "the thunderbolt"
+     },
+     {
+      "word": "dhenūnām",
+      "meaning": "of cows"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "kāmadhuk",
+      "meaning": "the surabhi cows"
+     },
+     {
+      "word": "prajanaḥ",
+      "meaning": "for begetting children"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "kandarpaḥ",
+      "meaning": "Cupid"
+     },
+     {
+      "word": "sarpāṇām",
+      "meaning": "of all snakes"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "vāsukiḥ",
+      "meaning": "Vāsuki."
+     }
+    ],
+    "hi": [
+     {
+      "word": "आयुधानाम्",
+      "meaning": "समस्त अस्त्रों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "वज्रम्",
+      "meaning": "वज्र"
+     },
+     {
+      "word": "धेनूनाम्",
+      "meaning": "गौओं में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "कामधुक्",
+      "meaning": "सुरभि गौएँ"
+     },
+     {
+      "word": "प्रजनः",
+      "meaning": "सन्तानोत्पत्ति हेतु"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "कन्दर्पः",
+      "meaning": "कामदेव"
+     },
+     {
+      "word": "सर्पाणाम्",
+      "meaning": "समस्त सर्पों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "वासुकिः",
+      "meaning": "वासुकि।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/28/"
   },
   {
@@ -1415,7 +4441,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "anantaḥ",
+      "meaning": "Ananta"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "nāgānām",
+      "meaning": "of all serpents"
+     },
+     {
+      "word": "varuṇaḥ",
+      "meaning": "the demigod controlling the water"
+     },
+     {
+      "word": "yādasām",
+      "meaning": "of all aquatics"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "piṭṝnām",
+      "meaning": "of the ancestors"
+     },
+     {
+      "word": "aryamā",
+      "meaning": "Aryāma"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "yamaḥ",
+      "meaning": "the controller of death"
+     },
+     {
+      "word": "saṁyamatām",
+      "meaning": "of all regulators"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am."
+     }
+    ],
+    "hi": [
+     {
+      "word": "अनन्तः",
+      "meaning": "अनन्त"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "नागानाम्",
+      "meaning": "समस्त सर्पों में"
+     },
+     {
+      "word": "वरुणः",
+      "meaning": "जल को नियन्त्रित करने वाले देवता"
+     },
+     {
+      "word": "यादसाम्",
+      "meaning": "समस्त जलचरों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "पितॄणाम्",
+      "meaning": "पितरों में"
+     },
+     {
+      "word": "अर्यमा",
+      "meaning": "अर्यमा"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "यमः",
+      "meaning": "मृत्यु के नियन्ता"
+     },
+     {
+      "word": "संयमताम्",
+      "meaning": "समस्त नियामकों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/29/"
   },
   {
@@ -1460,7 +4603,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "prahlādaḥ",
+      "meaning": "Prahlāda"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "daityānām",
+      "meaning": "of the demons"
+     },
+     {
+      "word": "kālaḥ",
+      "meaning": "time"
+     },
+     {
+      "word": "kalayatām",
+      "meaning": "of subduers"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "mṛgāṇām",
+      "meaning": "of animals"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "mṛgendraḥ",
+      "meaning": "the lion"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "vainateyaḥ",
+      "meaning": "Garuḍa"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "pakṣiṇām",
+      "meaning": "of birds."
+     }
+    ],
+    "hi": [
+     {
+      "word": "प्रह्लादः",
+      "meaning": "प्रह्लाद"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "दैत्यानाम्",
+      "meaning": "असुरों में"
+     },
+     {
+      "word": "कालः",
+      "meaning": "समय"
+     },
+     {
+      "word": "कलयताम्",
+      "meaning": "दमन करने वालों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "मृगाणाम्",
+      "meaning": "पशुओं में"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "मृगेन्द्रः",
+      "meaning": "सिंह"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "वैनतेयः",
+      "meaning": "गरुड़"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "पक्षिणाम्",
+      "meaning": "पक्षियों में।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/30/"
   },
   {
@@ -1497,7 +4757,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "pavanaḥ",
+      "meaning": "the wind"
+     },
+     {
+      "word": "pavatām",
+      "meaning": "of all that purifies"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "rāmaḥ",
+      "meaning": "Rāma"
+     },
+     {
+      "word": "śastra-bhṛtām",
+      "meaning": "of the carriers of weapons"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "jhaṣāṇām",
+      "meaning": "of all aquatics"
+     },
+     {
+      "word": "makaraḥ",
+      "meaning": "shark"
+     },
+     {
+      "word": "ca asmi",
+      "meaning": "I am also"
+     },
+     {
+      "word": "srotasām",
+      "meaning": "of flowing rivers"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "jāhnavī",
+      "meaning": "the River Ganges."
+     }
+    ],
+    "hi": [
+     {
+      "word": "पवनः",
+      "meaning": "वायु"
+     },
+     {
+      "word": "पवताम्",
+      "meaning": "समस्त पवित्र करने वालों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "रामः",
+      "meaning": "राम"
+     },
+     {
+      "word": "शस्त्र-भृताम्",
+      "meaning": "शस्त्रधारियों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "झषाणाम्",
+      "meaning": "समस्त जलचरों में"
+     },
+     {
+      "word": "मकरः",
+      "meaning": "मगर"
+     },
+     {
+      "word": "च अस्मि",
+      "meaning": "मैं भी हूँ"
+     },
+     {
+      "word": "स्रोतसाम्",
+      "meaning": "प्रवाहित नदियों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "जाह्नवी",
+      "meaning": "गंगा नदी।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/31/"
   },
   {
@@ -1542,7 +4903,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "sargāṇām",
+      "meaning": "of all creations"
+     },
+     {
+      "word": "ādiḥ",
+      "meaning": "beginning"
+     },
+     {
+      "word": "antaḥ",
+      "meaning": "end"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "madhyam",
+      "meaning": "middle"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "arjuna",
+      "meaning": "O Arjuna"
+     },
+     {
+      "word": "adhyātma-vidyā",
+      "meaning": "spiritual knowledge"
+     },
+     {
+      "word": "vidyānām",
+      "meaning": "of all education"
+     },
+     {
+      "word": "vādaḥ",
+      "meaning": "natural conclusion"
+     },
+     {
+      "word": "pravadatām",
+      "meaning": "of arguments"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am."
+     }
+    ],
+    "hi": [
+     {
+      "word": "सर्गाणाम्",
+      "meaning": "समस्त सृष्टियों में"
+     },
+     {
+      "word": "आदिः",
+      "meaning": "आदि"
+     },
+     {
+      "word": "अन्तः",
+      "meaning": "अन्त"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "मध्यम्",
+      "meaning": "मध्य"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "अर्जुन",
+      "meaning": "हे अर्जुन"
+     },
+     {
+      "word": "अध्यात्म-विद्या",
+      "meaning": "आध्यात्मिक ज्ञान"
+     },
+     {
+      "word": "विद्यानाम्",
+      "meaning": "समस्त विद्याओं में"
+     },
+     {
+      "word": "वादः",
+      "meaning": "स्वाभाविक निष्कर्ष"
+     },
+     {
+      "word": "प्रवदताम्",
+      "meaning": "तर्कों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/32/"
   },
   {
@@ -1595,7 +5073,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "akṣarāṇām",
+      "meaning": "of letters"
+     },
+     {
+      "word": "akāraḥ",
+      "meaning": "the first"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "dvandvaḥ",
+      "meaning": "dual"
+     },
+     {
+      "word": "sāmāsikāsya",
+      "meaning": "compounds"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "akṣayaḥ",
+      "meaning": "eternal"
+     },
+     {
+      "word": "kālaḥ",
+      "meaning": "time"
+     },
+     {
+      "word": "dhātā",
+      "meaning": "creator"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "viśvato-mukhaḥ",
+      "meaning": "Brahmā."
+     }
+    ],
+    "hi": [
+     {
+      "word": "अक्षराणाम्",
+      "meaning": "अक्षरों में"
+     },
+     {
+      "word": "अकारः",
+      "meaning": "प्रथम अक्षर"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "द्वन्द्वः",
+      "meaning": "द्वन्द्व"
+     },
+     {
+      "word": "सामासिकस्य",
+      "meaning": "समासों में"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "अक्षयः",
+      "meaning": "नित्य"
+     },
+     {
+      "word": "कालः",
+      "meaning": "काल"
+     },
+     {
+      "word": "धाता",
+      "meaning": "स्रष्टा"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "विश्वतो-मुखः",
+      "meaning": "ब्रह्मा।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/33/"
   },
   {
@@ -1640,7 +5227,132 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "mṛtyuḥ",
+      "meaning": "death"
+     },
+     {
+      "word": "sarva-haraḥ",
+      "meaning": "all-devouring"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "udbhavaḥ",
+      "meaning": "generation"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "bhaviṣyatām",
+      "meaning": "of the future"
+     },
+     {
+      "word": "kīrtiḥ",
+      "meaning": "fame"
+     },
+     {
+      "word": "śrīḥ vāk",
+      "meaning": "beautiful speech"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "nārīṇāṁ",
+      "meaning": "of women"
+     },
+     {
+      "word": "smṛtiḥ",
+      "meaning": "memory"
+     },
+     {
+      "word": "medhā",
+      "meaning": "intelligence"
+     },
+     {
+      "word": "dhṛtiḥ",
+      "meaning": "faithfulness"
+     },
+     {
+      "word": "kṣamā",
+      "meaning": "patience."
+     }
+    ],
+    "hi": [
+     {
+      "word": "मृत्युः",
+      "meaning": "मृत्यु"
+     },
+     {
+      "word": "सर्व-हरः",
+      "meaning": "सर्वग्रासी"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "उद्भवः",
+      "meaning": "उत्पत्ति"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "भविष्यताम्",
+      "meaning": "भविष्य की"
+     },
+     {
+      "word": "कीर्तिः",
+      "meaning": "कीर्ति"
+     },
+     {
+      "word": "श्रीः वाक्",
+      "meaning": "सुन्दर वाणी"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "नारीणाम्",
+      "meaning": "स्त्रियों में"
+     },
+     {
+      "word": "स्मृतिः",
+      "meaning": "स्मृति"
+     },
+     {
+      "word": "मेधा",
+      "meaning": "बुद्धि"
+     },
+     {
+      "word": "धृतिः",
+      "meaning": "निष्ठा"
+     },
+     {
+      "word": "क्षमा",
+      "meaning": "क्षमा।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/34/"
   },
   {
@@ -1701,7 +5413,100 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "bṛhat-sāma",
+      "meaning": "the Bṛhat-sāma"
+     },
+     {
+      "word": "tathā",
+      "meaning": "also"
+     },
+     {
+      "word": "sāmnām",
+      "meaning": "of the Sāma-veda song"
+     },
+     {
+      "word": "gāyatrī",
+      "meaning": "the Gāyatrī hymns"
+     },
+     {
+      "word": "chandasām",
+      "meaning": "of all poetry"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "māsānām",
+      "meaning": "of months"
+     },
+     {
+      "word": "mārga-śīrṣo 'ham",
+      "meaning": "the month of November-December"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "ṛtūnām",
+      "meaning": "of all seasons"
+     },
+     {
+      "word": "kusumākaraḥ",
+      "meaning": "spring."
+     }
+    ],
+    "hi": [
+     {
+      "word": "बृहत्-साम",
+      "meaning": "बृहत्-साम"
+     },
+     {
+      "word": "तथा",
+      "meaning": "भी"
+     },
+     {
+      "word": "साम्नाम्",
+      "meaning": "साम-वेद के गीतों में"
+     },
+     {
+      "word": "गायत्री",
+      "meaning": "गायत्री छन्द"
+     },
+     {
+      "word": "छन्दसाम्",
+      "meaning": "समस्त छन्दों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "मासानाम्",
+      "meaning": "महीनों में"
+     },
+     {
+      "word": "मार्ग-शीर्षः अहम्",
+      "meaning": "नवम्बर-दिसम्बर का मास"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "ऋतूनाम्",
+      "meaning": "समस्त ऋतुओं में"
+     },
+     {
+      "word": "कुसुमाकरः",
+      "meaning": "वसन्त।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/35/"
   },
   {
@@ -1746,7 +5551,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "dyūtam",
+      "meaning": "gambling"
+     },
+     {
+      "word": "chalayatām",
+      "meaning": "of all cheats"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "tejaḥ",
+      "meaning": "splendid"
+     },
+     {
+      "word": "tejasvinām",
+      "meaning": "of everything splendid"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "jayaḥ",
+      "meaning": "victory"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "vyavasāyaḥ",
+      "meaning": "adventure"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "sattvam",
+      "meaning": "strength"
+     },
+     {
+      "word": "sattvavatām",
+      "meaning": "of all the strong"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am."
+     }
+    ],
+    "hi": [
+     {
+      "word": "द्यूतम्",
+      "meaning": "द्यूत"
+     },
+     {
+      "word": "छलयताम्",
+      "meaning": "समस्त छलियों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "तेजः",
+      "meaning": "तेज"
+     },
+     {
+      "word": "तेजस्विनाम्",
+      "meaning": "समस्त तेजस्वी वस्तुओं में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "जयः",
+      "meaning": "विजय"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "व्यवसायः",
+      "meaning": "साहसिक उद्यम"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "सत्त्वम्",
+      "meaning": "बल"
+     },
+     {
+      "word": "सत्त्ववताम्",
+      "meaning": "समस्त बलवानों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/36/"
   },
   {
@@ -1783,7 +5697,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "vṛṣṇīnām",
+      "meaning": "of the descendants of Vṛṣṇi"
+     },
+     {
+      "word": "vāsudevaḥ",
+      "meaning": "Kṛṣṇa in Dvāraka"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "pāṇḍavānām",
+      "meaning": "of the Pāṇḍavas"
+     },
+     {
+      "word": "dhanañjayaḥ",
+      "meaning": "Arjuna"
+     },
+     {
+      "word": "munīnām",
+      "meaning": "of the sages"
+     },
+     {
+      "word": "api",
+      "meaning": "also"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "vyāsaḥ",
+      "meaning": "Vyāsa, the compiler of all Vedic literature"
+     },
+     {
+      "word": "kavīnām",
+      "meaning": "of all great thinkers"
+     },
+     {
+      "word": "uśanā",
+      "meaning": "Uśanā"
+     },
+     {
+      "word": "kaviḥ",
+      "meaning": "the thinker."
+     }
+    ],
+    "hi": [
+     {
+      "word": "वृष्णीनाम्",
+      "meaning": "वृष्णिवंशियों में"
+     },
+     {
+      "word": "वासुदेवः",
+      "meaning": "द्वारका में श्रीकृष्ण"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "पाण्डवानाम्",
+      "meaning": "पाण्डवों में"
+     },
+     {
+      "word": "धनञ्जयः",
+      "meaning": "अर्जुन"
+     },
+     {
+      "word": "मुनीनाम्",
+      "meaning": "मुनियों में"
+     },
+     {
+      "word": "अपि",
+      "meaning": "भी"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "व्यासः",
+      "meaning": "समस्त वैदिक साहित्य के संकलनकर्ता व्यास"
+     },
+     {
+      "word": "कवीनाम्",
+      "meaning": "समस्त महान् विचारकों में"
+     },
+     {
+      "word": "उशना",
+      "meaning": "उशना"
+     },
+     {
+      "word": "कविः",
+      "meaning": "विचारक।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/37/"
   },
   {
@@ -1820,7 +5835,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "daṇḍaḥ",
+      "meaning": "punishment"
+     },
+     {
+      "word": "damayatām",
+      "meaning": "of all separation"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "nītiḥ",
+      "meaning": "morality"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "jigīṣatām",
+      "meaning": "of the victorious"
+     },
+     {
+      "word": "maunam",
+      "meaning": "silence"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "eva",
+      "meaning": "also"
+     },
+     {
+      "word": "asmi",
+      "meaning": "I am"
+     },
+     {
+      "word": "guhyānām",
+      "meaning": "of secrets"
+     },
+     {
+      "word": "jñānam",
+      "meaning": "knowledge"
+     },
+     {
+      "word": "jñānavatām",
+      "meaning": "of the wise"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am."
+     }
+    ],
+    "hi": [
+     {
+      "word": "दण्डः",
+      "meaning": "दण्ड"
+     },
+     {
+      "word": "दमयताम्",
+      "meaning": "समस्त दमन करने वालों में"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "नीतिः",
+      "meaning": "नीति"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "जिगीषताम्",
+      "meaning": "विजय के अभिलाषियों में"
+     },
+     {
+      "word": "मौनम्",
+      "meaning": "मौन"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "एव",
+      "meaning": "भी"
+     },
+     {
+      "word": "अस्मि",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "गुह्यानाम्",
+      "meaning": "गोपनीय वस्तुओं में"
+     },
+     {
+      "word": "ज्ञानम्",
+      "meaning": "ज्ञान"
+     },
+     {
+      "word": "ज्ञानवताम्",
+      "meaning": "बुद्धिमानों में"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/38/"
   },
   {
@@ -1857,7 +5989,148 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "yat",
+      "meaning": "whatever"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "api",
+      "meaning": "may be"
+     },
+     {
+      "word": "sarva-bhūtānām",
+      "meaning": "of all creations"
+     },
+     {
+      "word": "bījam",
+      "meaning": "the seed"
+     },
+     {
+      "word": "tat",
+      "meaning": "that"
+     },
+     {
+      "word": "aham",
+      "meaning": "I am"
+     },
+     {
+      "word": "arjuna",
+      "meaning": "O Arjuna"
+     },
+     {
+      "word": "na",
+      "meaning": "not"
+     },
+     {
+      "word": "tat",
+      "meaning": "that"
+     },
+     {
+      "word": "asti",
+      "meaning": "there is"
+     },
+     {
+      "word": "vinā",
+      "meaning": "without"
+     },
+     {
+      "word": "yat",
+      "meaning": "that"
+     },
+     {
+      "word": "syāt",
+      "meaning": "exists"
+     },
+     {
+      "word": "mayā",
+      "meaning": "by Me"
+     },
+     {
+      "word": "bhūtam",
+      "meaning": "created"
+     },
+     {
+      "word": "carācaram",
+      "meaning": "moving and unmoving."
+     }
+    ],
+    "hi": [
+     {
+      "word": "यत्",
+      "meaning": "जो कुछ"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अपि",
+      "meaning": "हो सकता है"
+     },
+     {
+      "word": "सर्व-भूतानाम्",
+      "meaning": "समस्त सृष्टियों का"
+     },
+     {
+      "word": "बीजम्",
+      "meaning": "बीज"
+     },
+     {
+      "word": "तत्",
+      "meaning": "वह"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं हूँ"
+     },
+     {
+      "word": "अर्जुन",
+      "meaning": "हे अर्जुन"
+     },
+     {
+      "word": "न",
+      "meaning": "नहीं"
+     },
+     {
+      "word": "तत्",
+      "meaning": "वह"
+     },
+     {
+      "word": "अस्ति",
+      "meaning": "है"
+     },
+     {
+      "word": "विना",
+      "meaning": "बिना"
+     },
+     {
+      "word": "यत्",
+      "meaning": "जो"
+     },
+     {
+      "word": "स्यात्",
+      "meaning": "विद्यमान रहे"
+     },
+     {
+      "word": "मया",
+      "meaning": "मेरे द्वारा"
+     },
+     {
+      "word": "भूतम्",
+      "meaning": "सृजित"
+     },
+     {
+      "word": "चराचरम्",
+      "meaning": "चर तथा अचर।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/39/"
   },
   {
@@ -1894,7 +6167,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "na",
+      "meaning": "nor"
+     },
+     {
+      "word": "antaḥ",
+      "meaning": "a limit"
+     },
+     {
+      "word": "asti",
+      "meaning": "is there"
+     },
+     {
+      "word": "mama",
+      "meaning": "of My"
+     },
+     {
+      "word": "divyānām",
+      "meaning": "divine"
+     },
+     {
+      "word": "vibhūtīnam",
+      "meaning": "opulences"
+     },
+     {
+      "word": "parantapa",
+      "meaning": "O conquerer of the enemies"
+     },
+     {
+      "word": "eṣaḥ",
+      "meaning": "all this"
+     },
+     {
+      "word": "tu",
+      "meaning": "that"
+     },
+     {
+      "word": "uddeśataḥ",
+      "meaning": "examples"
+     },
+     {
+      "word": "proktaḥ",
+      "meaning": "spoken"
+     },
+     {
+      "word": "vibhūteḥ",
+      "meaning": "opulences"
+     },
+     {
+      "word": "vistaraḥ",
+      "meaning": "expanded"
+     },
+     {
+      "word": "mayā",
+      "meaning": "by Me."
+     }
+    ],
+    "hi": [
+     {
+      "word": "न",
+      "meaning": "न तो"
+     },
+     {
+      "word": "अन्तः",
+      "meaning": "सीमा"
+     },
+     {
+      "word": "अस्ति",
+      "meaning": "है"
+     },
+     {
+      "word": "मम",
+      "meaning": "मेरी"
+     },
+     {
+      "word": "दिव्यानाम्",
+      "meaning": "दिव्य"
+     },
+     {
+      "word": "विभूतीनाम्",
+      "meaning": "विभूतियों की"
+     },
+     {
+      "word": "परन्तप",
+      "meaning": "हे शत्रुओं के विजेता"
+     },
+     {
+      "word": "एषः",
+      "meaning": "यह सब"
+     },
+     {
+      "word": "तु",
+      "meaning": "वह"
+     },
+     {
+      "word": "उद्देशतः",
+      "meaning": "उदाहरण"
+     },
+     {
+      "word": "प्रोक्तः",
+      "meaning": "कहा गया"
+     },
+     {
+      "word": "विभूतेः",
+      "meaning": "विभूतियों का"
+     },
+     {
+      "word": "विस्तरः",
+      "meaning": "विस्तार"
+     },
+     {
+      "word": "मया",
+      "meaning": "मेरे द्वारा।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/40/"
   },
   {
@@ -1931,7 +6321,140 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "yat yat",
+      "meaning": "whatever"
+     },
+     {
+      "word": "vibhūti",
+      "meaning": "opulences"
+     },
+     {
+      "word": "mat",
+      "meaning": "having"
+     },
+     {
+      "word": "sattvam",
+      "meaning": "existence"
+     },
+     {
+      "word": "śrīmat",
+      "meaning": "beautiful"
+     },
+     {
+      "word": "ūrjitam",
+      "meaning": "glorious"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "vā",
+      "meaning": "or"
+     },
+     {
+      "word": "tat tat",
+      "meaning": "all those"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "avagaccha",
+      "meaning": "you must know"
+     },
+     {
+      "word": "tvam",
+      "meaning": "you"
+     },
+     {
+      "word": "mama",
+      "meaning": "My"
+     },
+     {
+      "word": "tejaḥ",
+      "meaning": "splendor"
+     },
+     {
+      "word": "aṁśa",
+      "meaning": "partly"
+     },
+     {
+      "word": "sambhavam",
+      "meaning": "born of."
+     }
+    ],
+    "hi": [
+     {
+      "word": "यत् यत्",
+      "meaning": "जो जो"
+     },
+     {
+      "word": "विभूति",
+      "meaning": "विभूतियों से"
+     },
+     {
+      "word": "मत्",
+      "meaning": "युक्त"
+     },
+     {
+      "word": "सत्त्वम्",
+      "meaning": "अस्तित्व"
+     },
+     {
+      "word": "श्रीमत्",
+      "meaning": "सुन्दर"
+     },
+     {
+      "word": "ऊर्जितम्",
+      "meaning": "गौरवशाली"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "वा",
+      "meaning": "अथवा"
+     },
+     {
+      "word": "तत् तत्",
+      "meaning": "वे सब"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "अवगच्छ",
+      "meaning": "तुम जान लो"
+     },
+     {
+      "word": "त्वम्",
+      "meaning": "तुम"
+     },
+     {
+      "word": "मम",
+      "meaning": "मेरे"
+     },
+     {
+      "word": "तेजः",
+      "meaning": "तेज"
+     },
+     {
+      "word": "अंश",
+      "meaning": "अंशमात्र"
+     },
+     {
+      "word": "सम्भवम्",
+      "meaning": "से उत्पन्न।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/41/"
   },
   {
@@ -1984,7 +6507,132 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "athavā",
+      "meaning": "or"
+     },
+     {
+      "word": "bahunā",
+      "meaning": "many"
+     },
+     {
+      "word": "etena",
+      "meaning": "by this kind"
+     },
+     {
+      "word": "kim",
+      "meaning": "what"
+     },
+     {
+      "word": "jñātena",
+      "meaning": "knowing"
+     },
+     {
+      "word": "tava",
+      "meaning": "you"
+     },
+     {
+      "word": "arjuna",
+      "meaning": "O Arjuna"
+     },
+     {
+      "word": "viṣṭabhya",
+      "meaning": "entire"
+     },
+     {
+      "word": "aham",
+      "meaning": "I"
+     },
+     {
+      "word": "idam",
+      "meaning": "this"
+     },
+     {
+      "word": "kṛtsnam",
+      "meaning": "all manifestations"
+     },
+     {
+      "word": "eka",
+      "meaning": "one"
+     },
+     {
+      "word": "aṁśena",
+      "meaning": "part"
+     },
+     {
+      "word": "sthithaḥ",
+      "meaning": "situated"
+     },
+     {
+      "word": "jagat",
+      "meaning": "in the universe."
+     }
+    ],
+    "hi": [
+     {
+      "word": "अथवा",
+      "meaning": "अथवा"
+     },
+     {
+      "word": "बहुना",
+      "meaning": "बहुत"
+     },
+     {
+      "word": "एतेन",
+      "meaning": "इस प्रकार के"
+     },
+     {
+      "word": "किम्",
+      "meaning": "क्या"
+     },
+     {
+      "word": "ज्ञातेन",
+      "meaning": "जानकर"
+     },
+     {
+      "word": "तव",
+      "meaning": "तुम्हें"
+     },
+     {
+      "word": "अर्जुन",
+      "meaning": "हे अर्जुन"
+     },
+     {
+      "word": "विष्टभ्य",
+      "meaning": "सम्पूर्ण"
+     },
+     {
+      "word": "अहम्",
+      "meaning": "मैं"
+     },
+     {
+      "word": "इदम्",
+      "meaning": "इस"
+     },
+     {
+      "word": "कृत्स्नम्",
+      "meaning": "समस्त प्रकटीकरणों को"
+     },
+     {
+      "word": "एक",
+      "meaning": "एक"
+     },
+     {
+      "word": "अंशेन",
+      "meaning": "अंश से"
+     },
+     {
+      "word": "स्थितः",
+      "meaning": "स्थित"
+     },
+     {
+      "word": "जगत्",
+      "meaning": "ब्रह्माण्ड में।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/10/42/"
   }
  ]

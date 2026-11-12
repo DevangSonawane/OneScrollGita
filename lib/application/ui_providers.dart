@@ -53,6 +53,19 @@ class TabReselectNotifier extends Notifier<({int tab, int serial})> {
   void reselect(int tab) => state = (tab: tab, serial: state.serial + 1);
 }
 
+/// Whether the reader's "Word meanings" section is open. Session only, so it
+/// stays open while swiping between verses.
+final wordMeaningsOpenProvider = NotifierProvider<WordMeaningsOpen, bool>(
+  WordMeaningsOpen.new,
+);
+
+class WordMeaningsOpen extends Notifier<bool> {
+  @override
+  bool build() => false;
+
+  void toggle() => state = !state;
+}
+
 /// In-session scroll offsets of purport pages, by verse id.
 final purportOffsetsProvider = Provider<Map<String, double>>((_) => {});
 

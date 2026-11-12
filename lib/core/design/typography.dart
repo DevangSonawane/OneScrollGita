@@ -83,6 +83,65 @@ class ReadingStyles {
     FontWeight.w400,
   );
 
+  /// Word-for-word list: the word as the source prints it (IAST italic, or
+  /// Devanagari in some Hindi lists).
+  TextStyle wordMeaningWord({required bool devanagari}) => devanagari
+      ? _weighted(
+          TextStyle(
+            fontFamily: Fonts.devanagari,
+            fontSize: 16 * scale,
+            height: 1.6,
+            color: colors.textPrimary,
+            locale: _devanagariLocale,
+          ),
+          FontWeight.w500,
+        )
+      : _weighted(
+          TextStyle(
+            fontFamily: Fonts.literata,
+            fontStyle: FontStyle.italic,
+            fontSize: 16 * scale,
+            height: 1.55,
+            color: colors.textPrimary,
+          ),
+          FontWeight.w500,
+        );
+
+  /// Word-for-word list: the meaning.
+  TextStyle wordMeaningText(String lang) => _weighted(
+    TextStyle(
+      fontFamily: lang == 'hi' ? Fonts.devanagari : Fonts.literata,
+      fontSize: 16 * scale,
+      height: lang == 'hi' ? 1.6 : 1.55,
+      color: colors.textSecondary,
+      locale: lang == 'hi' ? _devanagariLocale : null,
+    ),
+    FontWeight.w400,
+  );
+
+  /// Shloka trainer words, larger for memorising.
+  TextStyle trainerWord({required bool devanagari}) => devanagari
+      ? _weighted(
+          TextStyle(
+            fontFamily: Fonts.sanskrit,
+            fontSize: 24 * scale,
+            height: 1.7,
+            color: colors.textPrimary,
+            locale: _devanagariLocale,
+          ),
+          FontWeight.w500,
+        )
+      : _weighted(
+          TextStyle(
+            fontFamily: Fonts.literata,
+            fontStyle: FontStyle.italic,
+            fontSize: 21 * scale,
+            height: 1.6,
+            color: colors.textPrimary,
+          ),
+          FontWeight.w500,
+        );
+
   TextStyle get purportSanskrit => _weighted(
     TextStyle(
       fontFamily: Fonts.sanskrit,

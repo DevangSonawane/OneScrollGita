@@ -149,10 +149,14 @@ ContentReport validateMessages(String raw) {
     if (!milestones.contains(d)) r.errors.add('No milestone message for day $d');
   }
   if (missingHi > 0) {
-    r.warnings.add('$missingHi title/body fields have no Hindi (English is used)');
+    r.warnings.add(
+      '$missingHi title/body fields have no Hindi (English is used)',
+    );
   }
   final total = counts.values.fold(0, (a, b) => a + b);
-  r.warnings.add('$total messages; Hindi present for every field: ${missingHi == 0}');
+  r.warnings.add(
+    '$total messages; Hindi present for every field: ${missingHi == 0}',
+  );
   return r;
 }
 
@@ -235,7 +239,9 @@ ContentReport validateThemes(String raw, Set<String> entryIds) {
     if (syn is! List || syn.isEmpty) r.errors.add('$id: no synonyms');
     final verses = t['verseIds'];
     if (verses is! List || verses.length < 3 || verses.length > 8) {
-      r.errors.add('$id: needs 3-8 verseIds, has ${verses is List ? verses.length : 0}');
+      r.errors.add(
+        '$id: needs 3-8 verseIds, has ${verses is List ? verses.length : 0}',
+      );
     }
     if (verses is List) {
       final seen = <String>{};

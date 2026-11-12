@@ -14,6 +14,7 @@ import 'dart:io';
 import 'package:versescroll/data/scripture/scripture_validator.dart';
 import 'package:versescroll/domain/markup.dart';
 import 'package:versescroll/domain/verse_navigation.dart';
+import 'package:versescroll/domain/word_meanings.dart';
 
 const _api = 'https://vedabase.cc/api/v1';
 const _gap = Duration(milliseconds: 600); // 100 requests a minute
@@ -123,6 +124,34 @@ List<Map<String, String>>? _purport(String? md) {
   return blocks.isEmpty ? null : blocks;
 }
 
+/// Problems found while splitting word meanings, reported at the end.
+final _meaningProblems = <String>[];
+
+/// The source's word-for-word meanings as pairs, text unchanged apart from
+/// Markdown removal. English must parse completely or the import fails. A
+/// Hindi list with any unsplittable pair is left out for that entry (the app
+/// then shows the English list) and reported; nothing is guessed.
+List<Map<String, String>>? _wordMeanings(
+  String? raw,
+  String lang,
+  String ref,
+) {
+  if (raw == null || raw.trim().isEmpty) {
+    if (lang == 'en') _meaningProblems.add('ERROR $ref en: no word meanings');
+    return null;
+  }
+  final parsed = parseWordMeanings(raw, clean: _plain);
+  if (!parsed.ok) {
+    for (final p in parsed.problems) {
+      _meaningProblems.add(
+        '${lang == 'en' ? 'ERROR' : 'SKIPPED'} $ref $lang: "$p"',
+      );
+    }
+    return null;
+  }
+  return [for (final m in parsed.pairs!) m.toJson()];
+}
+
 String _chapterTitle(String title) =>
     title.replaceFirst(RegExp(r'^(Chapter|अध्याय)\s*\d+\s*:\s*'), '').trim();
 
@@ -176,7 +205,10 @@ Future<void> main() async {
         'purport': purportEn == null && purportHi == null
             ? null
             : {'en': purportEn, 'hi': purportHi},
-        'synonyms': null,
+        'synonyms': {
+          'en': _wordMeanings(en['synonyms'] as String?, 'en', ref),
+          'hi': _wordMeanings(hi?['synonyms'] as String?, 'hi', ref),
+        },
         'sourceUrl': en['url'],
       });
     }
@@ -185,6 +217,8 @@ Future<void> main() async {
       'entries': entries,
     })}\n';
     final file = chapterFileName(c);
+    // Stop before writing anything if English meanings failed to split.
+    if (_meaningProblems.any((p) => p.startsWith('ERROR'))) break;
     File('${outDir.path}/$file').writeAsStringSync(raw);
     checksums[file] = sha256Of(raw);
     chapters.add({
@@ -198,6 +232,17 @@ Future<void> main() async {
     stdout.writeln('chapter $c: ${entries.length} entries, $verses verses');
   }
 
+  if (_meaningProblems.any((p) => p.startsWith('ERROR'))) {
+    for (final p in _meaningProblems) {
+      stderr.writeln('word meanings: $p');
+    }
+    stderr.writeln('English word meanings could not be split. Nothing after '
+        'the failing chapter was written. Fix the parser; never edit '
+        'assets/scripture by hand.');
+    _client.close();
+    exitCode = 1;
+    return;
+  }
   final index = {
     'isPlaceholder': false,
     'source': {
@@ -227,5 +272,8 @@ Future<void> main() async {
     })}\n',
   );
   _client.close();
+  for (final p in _meaningProblems) {
+    stderr.writeln('word meanings: $p');
+  }
   stdout.writeln('Done. Now run: dart run tool/validate_scripture.dart');
 }

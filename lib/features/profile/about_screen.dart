@@ -76,13 +76,19 @@ class AboutScreen extends ConsumerWidget {
             ],
             const SectionHeader('PRIVACY'),
             para(
-              'Works offline. No account. Your reading, streak, searches and '
-              'reminder settings stay on this device.',
+              'Works offline. No account. Your reading, streak, searches, '
+              'notes, highlights, journal, learning progress and reminder '
+              'settings stay on this device.',
             ),
             para(
-              'Reminders are scheduled on this phone. Nothing is sent from a '
-              'server, and the app makes no network calls. Sharing only hands '
-              'a picture to your phone\'s share sheet.',
+              'Reminders are scheduled on this phone. The app has no server '
+              'and makes no network calls of its own. Sharing only hands a '
+              'picture or PDF to your phone\'s share sheet.',
+            ),
+            para(
+              'The Sadhak plan is sold through Google Play or the App Store, '
+              'which handle payment. Google\'s billing library may send its '
+              'own diagnostic data to Google.',
             ),
             const SectionHeader('WRITTEN CONTENT'),
             para(

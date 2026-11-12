@@ -11,7 +11,7 @@
 - Placeholder data must carry isPlaceholder: true and must never ship in a release build.
 
 ## Product constraints
-- Offline-first. No network calls, no accounts, no analytics, no ads, no push notifications, no in-app purchases, no cloud sync. (v2: local notifications only, see below.)
+- Offline-first. No network calls, no accounts, no analytics, no ads, no push notifications, no in-app purchases, no cloud sync. (v2: local notifications only; v3: one paid plan through the stores. See below.)
 - Fonts are bundled assets. Do not use runtime font downloads.
 - Out of scope: AI features, chat, social, leaderboards. (v2 allows a gentle streak, keyword/situation search and completion sharing.)
 
@@ -36,3 +36,12 @@
 - Written content (messages, summaries, theme map) carries reviewed:false until the owner reviews it. List everything needing review in docs/review-needed.md.
 - Never invent a helpline number. Never map a verse to a theme from memory; use the dataset text.
 - Do not build audio. When all other v2 stages are finished, tell the owner: "All v2 features except audio are complete. Only audio remains."
+
+## v3 additions (Sadhak plan)
+- v3 spec is in docs/PRD_v3.md: shloka trainer, study layer (highlights, notes, journal, PDF export) and the paywall. It overrides v1/v2 only where its section 1 says so. Build it one stage at a time from its section 9.
+- One paid plan through the official `in_app_purchase` package only. The store's billing service is the only allowed network use. No third-party purchase SDKs, no server, no analytics.
+- Never paywall scripture: every verse, translation, purport, word meaning, search, summary, streak and the daily verse stay free. No paid streak freezes, no AI chat, no launch-time or timed upsells.
+- All free/paid checks go through `canUse` in domain/premium.dart. Screens never check products or prices. Show store prices, never hard-coded ones.
+- Word-for-word meanings come only from the importer. When a free user hits a limit or premium lapses, never hide or delete what they already made.
+- The release Android manifest has INTERNET only because Google Play Billing brings it (owner decision, 2026-11-12). The app's own code still makes no network calls.
+- Sankalpa journeys are not in v3. Do not build them until the owner writes a spec.

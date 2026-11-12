@@ -21,7 +21,11 @@ void main() {
     expect(formatVerseId(2, 47), 'bg-02-047');
     expect(formatVerseId(1, 16, 18), 'bg-01-016-018');
     expect(formatLabel(1, 16, 18), '1.16-18');
-    expect(parseVerseId('bg-01-016-018'), (chapter: 1, verseStart: 16, verseEnd: 18));
+    expect(parseVerseId('bg-01-016-018'), (
+      chapter: 1,
+      verseStart: 16,
+      verseEnd: 18,
+    ));
     expect(parseVerseId('bg-1-16'), isNull);
     expect(chapterOfId('bg-18-078'), 18);
   });

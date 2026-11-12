@@ -37,7 +37,140 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "arjunaḥ uvāca",
+      "meaning": "Arjuna said"
+     },
+     {
+      "word": "sannyāsam",
+      "meaning": "renunciation"
+     },
+     {
+      "word": "karmaṇām",
+      "meaning": "of all activities"
+     },
+     {
+      "word": "kṛṣṇa",
+      "meaning": "O Kṛṣṇa"
+     },
+     {
+      "word": "punaḥ",
+      "meaning": "again"
+     },
+     {
+      "word": "yogam",
+      "meaning": "devotional service"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "śaṁsasi",
+      "meaning": "You are praising"
+     },
+     {
+      "word": "yat",
+      "meaning": "which"
+     },
+     {
+      "word": "śreyaḥ",
+      "meaning": "is beneficial"
+     },
+     {
+      "word": "etayoḥ",
+      "meaning": "of these two"
+     },
+     {
+      "word": "ekam",
+      "meaning": "one"
+     },
+     {
+      "word": "tat",
+      "meaning": "that"
+     },
+     {
+      "word": "me",
+      "meaning": "unto me"
+     },
+     {
+      "word": "brūhi",
+      "meaning": "please tell"
+     },
+     {
+      "word": "suniścitam",
+      "meaning": "definitely."
+     }
+    ],
+    "hi": [
+     {
+      "word": "अर्जुनः उवाच",
+      "meaning": "अर्जुन ने कहा"
+     },
+     {
+      "word": "सन्न्यासम्",
+      "meaning": "त्याग"
+     },
+     {
+      "word": "कर्मणाम्",
+      "meaning": "समस्त कर्मों का"
+     },
+     {
+      "word": "कृष्ण",
+      "meaning": "हे कृष्ण"
+     },
+     {
+      "word": "पुनः",
+      "meaning": "फिर"
+     },
+     {
+      "word": "योगम्",
+      "meaning": "भक्ति"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "शंससि",
+      "meaning": "आप प्रशंसा करते हैं"
+     },
+     {
+      "word": "यत्",
+      "meaning": "जो"
+     },
+     {
+      "word": "श्रेयः",
+      "meaning": "कल्याणकारी है"
+     },
+     {
+      "word": "एतयोः",
+      "meaning": "इन दोनों में से"
+     },
+     {
+      "word": "एकम्",
+      "meaning": "एक"
+     },
+     {
+      "word": "तत्",
+      "meaning": "वह"
+     },
+     {
+      "word": "मे",
+      "meaning": "मुझसे"
+     },
+     {
+      "word": "ब्रूहि",
+      "meaning": "कृपया कहिए"
+     },
+     {
+      "word": "सुनिश्चितम्",
+      "meaning": "निश्चित रूप से।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/1/"
   },
   {
@@ -148,7 +281,100 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "śrī bhagavān uvāca",
+      "meaning": "the Personality of Godhead said"
+     },
+     {
+      "word": "sannyāsaḥ",
+      "meaning": "renunciation of work"
+     },
+     {
+      "word": "karma-yogaḥ",
+      "meaning": "work in devotion"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "niḥśreyasa-karau",
+      "meaning": "all leading to the path of liberation"
+     },
+     {
+      "word": "ubhau",
+      "meaning": "both"
+     },
+     {
+      "word": "tayoḥ",
+      "meaning": "of the two"
+     },
+     {
+      "word": "tu",
+      "meaning": "but"
+     },
+     {
+      "word": "karma-sannyāsāt",
+      "meaning": "in comparison to the renunciation of fruitive work"
+     },
+     {
+      "word": "karma-yogaḥ",
+      "meaning": "work in devotion"
+     },
+     {
+      "word": "viśiṣyate",
+      "meaning": "is better."
+     }
+    ],
+    "hi": [
+     {
+      "word": "श्रीभगवान् उवाच",
+      "meaning": "श्रीभगवान् ने कहा"
+     },
+     {
+      "word": "सन्न्यासः",
+      "meaning": "कर्म का त्याग"
+     },
+     {
+      "word": "कर्म-योगः",
+      "meaning": "भक्तिमय कर्म"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "निःश्रेयस-करौ",
+      "meaning": "दोनों मुक्ति के पथ की ओर ले जाने वाले"
+     },
+     {
+      "word": "उभौ",
+      "meaning": "दोनों"
+     },
+     {
+      "word": "तयोः",
+      "meaning": "इन दोनों में से"
+     },
+     {
+      "word": "तु",
+      "meaning": "किन्तु"
+     },
+     {
+      "word": "कर्म-सन्न्यासात्",
+      "meaning": "सकाम कर्म के त्याग की तुलना में"
+     },
+     {
+      "word": "कर्म-योगः",
+      "meaning": "भक्तिमय कर्म"
+     },
+     {
+      "word": "विशिष्यते",
+      "meaning": "श्रेष्ठ है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/2/"
   },
   {
@@ -185,7 +411,132 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "jñeyaḥ",
+      "meaning": "should be known"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he"
+     },
+     {
+      "word": "nitya",
+      "meaning": "always"
+     },
+     {
+      "word": "sannyāsī",
+      "meaning": "renouncer"
+     },
+     {
+      "word": "yaḥ",
+      "meaning": "who"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "dveṣṭi",
+      "meaning": "abhors"
+     },
+     {
+      "word": "na",
+      "meaning": "nor"
+     },
+     {
+      "word": "kāṅkṣati",
+      "meaning": "desires"
+     },
+     {
+      "word": "nirdvandvaḥ",
+      "meaning": "free from all dualities"
+     },
+     {
+      "word": "hi",
+      "meaning": "certainly"
+     },
+     {
+      "word": "mahā-bāho",
+      "meaning": "O mighty-armed one"
+     },
+     {
+      "word": "sukham",
+      "meaning": "happily"
+     },
+     {
+      "word": "bandhāt",
+      "meaning": "from bondage"
+     },
+     {
+      "word": "pramucyate",
+      "meaning": "completely liberated."
+     }
+    ],
+    "hi": [
+     {
+      "word": "ज्ञेयः",
+      "meaning": "जानना चाहिए"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "नित्य",
+      "meaning": "सदा"
+     },
+     {
+      "word": "सन्न्यासी",
+      "meaning": "त्यागी"
+     },
+     {
+      "word": "यः",
+      "meaning": "जो"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "द्वेष्टि",
+      "meaning": "घृणा करता है"
+     },
+     {
+      "word": "न",
+      "meaning": "न ही"
+     },
+     {
+      "word": "काङ्क्षति",
+      "meaning": "इच्छा करता है"
+     },
+     {
+      "word": "निर्द्वन्द्वः",
+      "meaning": "समस्त द्वन्द्वों से मुक्त"
+     },
+     {
+      "word": "हि",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "महा-बाहो",
+      "meaning": "हे महाबाहु"
+     },
+     {
+      "word": "सुखम्",
+      "meaning": "सुखपूर्वक"
+     },
+     {
+      "word": "बन्धात्",
+      "meaning": "बन्धन से"
+     },
+     {
+      "word": "प्रमुच्यते",
+      "meaning": "पूर्णतः मुक्त हो जाता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/3/"
   },
   {
@@ -222,7 +573,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "sāṅkhya",
+      "meaning": "analytical study of the material world"
+     },
+     {
+      "word": "yogau",
+      "meaning": "work in devotional service"
+     },
+     {
+      "word": "pṛthak",
+      "meaning": "different"
+     },
+     {
+      "word": "bālāḥ",
+      "meaning": "less intelligent"
+     },
+     {
+      "word": "pravadanti",
+      "meaning": "do talk"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "paṇḍitāḥ",
+      "meaning": "the learned"
+     },
+     {
+      "word": "ekam",
+      "meaning": "in one"
+     },
+     {
+      "word": "api",
+      "meaning": "even though"
+     },
+     {
+      "word": "āsthitaḥ",
+      "meaning": "being situated"
+     },
+     {
+      "word": "samyak",
+      "meaning": "complete"
+     },
+     {
+      "word": "ubhayoḥ",
+      "meaning": "of both"
+     },
+     {
+      "word": "vindate",
+      "meaning": "enjoys"
+     },
+     {
+      "word": "phalam",
+      "meaning": "result."
+     }
+    ],
+    "hi": [
+     {
+      "word": "साङ्ख्य",
+      "meaning": "भौतिक जगत् का विश्लेषणात्मक अध्ययन"
+     },
+     {
+      "word": "योगौ",
+      "meaning": "भक्तिमय कर्म"
+     },
+     {
+      "word": "पृथक्",
+      "meaning": "भिन्न"
+     },
+     {
+      "word": "बालाः",
+      "meaning": "अल्पबुद्धि वाले"
+     },
+     {
+      "word": "प्रवदन्ति",
+      "meaning": "कहते हैं"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "पण्डिताः",
+      "meaning": "विद्वान्"
+     },
+     {
+      "word": "एकम्",
+      "meaning": "एक में"
+     },
+     {
+      "word": "अपि",
+      "meaning": "यद्यपि"
+     },
+     {
+      "word": "आस्थितः",
+      "meaning": "स्थित होकर"
+     },
+     {
+      "word": "सम्यक्",
+      "meaning": "पूर्ण"
+     },
+     {
+      "word": "उभयोः",
+      "meaning": "दोनों का"
+     },
+     {
+      "word": "विन्दते",
+      "meaning": "भोगता है"
+     },
+     {
+      "word": "फलम्",
+      "meaning": "फल।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/4/"
   },
   {
@@ -259,7 +727,148 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "yat",
+      "meaning": "what"
+     },
+     {
+      "word": "sāṅkhyaiḥ",
+      "meaning": "by means of sāṅkhya philosophy"
+     },
+     {
+      "word": "prāpyate",
+      "meaning": "is achieved"
+     },
+     {
+      "word": "sthānam",
+      "meaning": "place"
+     },
+     {
+      "word": "tat",
+      "meaning": "that"
+     },
+     {
+      "word": "yogaiḥ",
+      "meaning": "by devotional service"
+     },
+     {
+      "word": "api",
+      "meaning": "also"
+     },
+     {
+      "word": "gamyate",
+      "meaning": "one can attain"
+     },
+     {
+      "word": "ekam",
+      "meaning": "one"
+     },
+     {
+      "word": "sāṅkhyam",
+      "meaning": "analytical study"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "yogam",
+      "meaning": "action in devotion"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "yaḥ",
+      "meaning": "one who"
+     },
+     {
+      "word": "paśyati",
+      "meaning": "sees"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he"
+     },
+     {
+      "word": "paśyati",
+      "meaning": "actually sees."
+     }
+    ],
+    "hi": [
+     {
+      "word": "यत्",
+      "meaning": "जो"
+     },
+     {
+      "word": "साङ्ख्यैः",
+      "meaning": "सांख्य-दर्शन के द्वारा"
+     },
+     {
+      "word": "प्राप्यते",
+      "meaning": "प्राप्त होता है"
+     },
+     {
+      "word": "स्थानम्",
+      "meaning": "स्थान"
+     },
+     {
+      "word": "तत्",
+      "meaning": "वह"
+     },
+     {
+      "word": "योगैः",
+      "meaning": "भक्ति के द्वारा"
+     },
+     {
+      "word": "अपि",
+      "meaning": "भी"
+     },
+     {
+      "word": "गम्यते",
+      "meaning": "प्राप्त किया जा सकता है"
+     },
+     {
+      "word": "एकम्",
+      "meaning": "एक"
+     },
+     {
+      "word": "साङ्ख्यम्",
+      "meaning": "विश्लेषणात्मक अध्ययन"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "योगम्",
+      "meaning": "भक्तिमय कर्म"
+     },
+     {
+      "word": "च",
+      "meaning": "और"
+     },
+     {
+      "word": "यः",
+      "meaning": "जो"
+     },
+     {
+      "word": "पश्यति",
+      "meaning": "देखता है"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "पश्यति",
+      "meaning": "वास्तव में देखता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/5/"
   },
   {
@@ -296,7 +905,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "sannyāsaḥ",
+      "meaning": "the renounced order of life"
+     },
+     {
+      "word": "tu",
+      "meaning": "but"
+     },
+     {
+      "word": "mahā-bāho",
+      "meaning": "O mighty-armed one"
+     },
+     {
+      "word": "duḥkham",
+      "meaning": "distress"
+     },
+     {
+      "word": "āptum",
+      "meaning": "to be afflicted with"
+     },
+     {
+      "word": "ayogataḥ",
+      "meaning": "without devotional service"
+     },
+     {
+      "word": "yoga-yuktaḥ",
+      "meaning": "one engaged in devotional service"
+     },
+     {
+      "word": "muniḥ",
+      "meaning": "thinker"
+     },
+     {
+      "word": "brahma",
+      "meaning": "Supreme"
+     },
+     {
+      "word": "na",
+      "meaning": "without"
+     },
+     {
+      "word": "cireṇa",
+      "meaning": "delay"
+     },
+     {
+      "word": "adhigacchati",
+      "meaning": "attains."
+     }
+    ],
+    "hi": [
+     {
+      "word": "सन्न्यासः",
+      "meaning": "संन्यास आश्रम"
+     },
+     {
+      "word": "तु",
+      "meaning": "किन्तु"
+     },
+     {
+      "word": "महा-बाहो",
+      "meaning": "हे महाबाहु"
+     },
+     {
+      "word": "दुःखम्",
+      "meaning": "दुःख"
+     },
+     {
+      "word": "आप्तुम्",
+      "meaning": "से पीड़ित होना"
+     },
+     {
+      "word": "अयोगतः",
+      "meaning": "भक्ति के बिना"
+     },
+     {
+      "word": "योग-युक्तः",
+      "meaning": "भक्ति में संलग्न"
+     },
+     {
+      "word": "मुनिः",
+      "meaning": "मननशील व्यक्ति"
+     },
+     {
+      "word": "ब्रह्म",
+      "meaning": "परम"
+     },
+     {
+      "word": "न",
+      "meaning": "बिना"
+     },
+     {
+      "word": "चिरेण",
+      "meaning": "विलम्ब"
+     },
+     {
+      "word": "अधिगच्छति",
+      "meaning": "प्राप्त करता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/6/"
   },
   {
@@ -333,7 +1043,76 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "yoga-yuktaḥ",
+      "meaning": "engaged in devotional service"
+     },
+     {
+      "word": "viśuddha-ātmā",
+      "meaning": "a purified soul"
+     },
+     {
+      "word": "vijita-ātmā",
+      "meaning": "self-controlled"
+     },
+     {
+      "word": "jita-indriyaḥ",
+      "meaning": "having conquered the senses"
+     },
+     {
+      "word": "sarvabhuta-ātmabhūta-ātmā",
+      "meaning": "compassionate to all living entities"
+     },
+     {
+      "word": "kurvan api",
+      "meaning": "although engaged in work"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "lipyate",
+      "meaning": "is entangled."
+     }
+    ],
+    "hi": [
+     {
+      "word": "योग-युक्तः",
+      "meaning": "भक्ति में संलग्न"
+     },
+     {
+      "word": "विशुद्ध-आत्मा",
+      "meaning": "शुद्ध आत्मा"
+     },
+     {
+      "word": "विजित-आत्मा",
+      "meaning": "आत्म-संयमी"
+     },
+     {
+      "word": "जित-इन्द्रियः",
+      "meaning": "जिसने इन्द्रियों को जीत लिया है"
+     },
+     {
+      "word": "सर्वभूत-आत्मभूत-आत्मा",
+      "meaning": "समस्त जीवों के प्रति करुणामय"
+     },
+     {
+      "word": "कुर्वन् अपि",
+      "meaning": "यद्यपि कर्म में संलग्न"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "लिप्यते",
+      "meaning": "बँधता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/7/"
   },
   {
@@ -376,7 +1155,228 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "kiñcit",
+      "meaning": "anything"
+     },
+     {
+      "word": "karomi",
+      "meaning": "do I do"
+     },
+     {
+      "word": "iti",
+      "meaning": "thus"
+     },
+     {
+      "word": "yuktaḥ",
+      "meaning": "engaged in the divine consciousness"
+     },
+     {
+      "word": "manyeta",
+      "meaning": "thinks"
+     },
+     {
+      "word": "tattvavit",
+      "meaning": "one who knows the truth"
+     },
+     {
+      "word": "paśyan",
+      "meaning": "by seeing"
+     },
+     {
+      "word": "śṛṇvan",
+      "meaning": "by hearing"
+     },
+     {
+      "word": "spṛśan",
+      "meaning": "by touching"
+     },
+     {
+      "word": "jighran",
+      "meaning": "by smelling"
+     },
+     {
+      "word": "aśnan",
+      "meaning": "by eating"
+     },
+     {
+      "word": "gacchan",
+      "meaning": "by going"
+     },
+     {
+      "word": "svapan",
+      "meaning": "by dreaming"
+     },
+     {
+      "word": "śvasan",
+      "meaning": "by breathing"
+     },
+     {
+      "word": "pralapan",
+      "meaning": "by talking"
+     },
+     {
+      "word": "visṛjan",
+      "meaning": "by giving up"
+     },
+     {
+      "word": "gṛhṇan",
+      "meaning": "by accepting"
+     },
+     {
+      "word": "unmiṣan",
+      "meaning": "opening"
+     },
+     {
+      "word": "nimiṣan",
+      "meaning": "closing"
+     },
+     {
+      "word": "api",
+      "meaning": "in spite of"
+     },
+     {
+      "word": "indriyāṇi",
+      "meaning": "the senses"
+     },
+     {
+      "word": "indriya-artheṣu",
+      "meaning": "in sense gratification"
+     },
+     {
+      "word": "vartante",
+      "meaning": "let them be so engaged"
+     },
+     {
+      "word": "iti",
+      "meaning": "thus"
+     },
+     {
+      "word": "dhārayan",
+      "meaning": "considering."
+     }
+    ],
+    "hi": [
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "किञ्चित्",
+      "meaning": "कुछ भी"
+     },
+     {
+      "word": "करोमि",
+      "meaning": "मैं करता हूँ"
+     },
+     {
+      "word": "इति",
+      "meaning": "इस प्रकार"
+     },
+     {
+      "word": "युक्तः",
+      "meaning": "दिव्य चेतना में संलग्न"
+     },
+     {
+      "word": "मन्येत",
+      "meaning": "सोचता है"
+     },
+     {
+      "word": "तत्त्ववित्",
+      "meaning": "जो सत्य को जानता है"
+     },
+     {
+      "word": "पश्यन्",
+      "meaning": "देखते हुए"
+     },
+     {
+      "word": "शृण्वन्",
+      "meaning": "सुनते हुए"
+     },
+     {
+      "word": "स्पृशन्",
+      "meaning": "स्पर्श करते हुए"
+     },
+     {
+      "word": "जिघ्रन्",
+      "meaning": "सूँघते हुए"
+     },
+     {
+      "word": "अश्नन्",
+      "meaning": "खाते हुए"
+     },
+     {
+      "word": "गच्छन्",
+      "meaning": "जाते हुए"
+     },
+     {
+      "word": "स्वपन्",
+      "meaning": "स्वप्न देखते हुए"
+     },
+     {
+      "word": "श्वसन्",
+      "meaning": "श्वास लेते हुए"
+     },
+     {
+      "word": "प्रलपन्",
+      "meaning": "बोलते हुए"
+     },
+     {
+      "word": "विसृजन्",
+      "meaning": "त्यागते हुए"
+     },
+     {
+      "word": "गृह्णन्",
+      "meaning": "ग्रहण करते हुए"
+     },
+     {
+      "word": "उन्मिषन्",
+      "meaning": "खोलते हुए"
+     },
+     {
+      "word": "निमिषन्",
+      "meaning": "बन्द करते हुए"
+     },
+     {
+      "word": "अपि",
+      "meaning": "होने पर भी"
+     },
+     {
+      "word": "इन्द्रियाणि",
+      "meaning": "इन्द्रियाँ"
+     },
+     {
+      "word": "इन्द्रिय-अर्थेषु",
+      "meaning": "इन्द्रियतृप्ति में"
+     },
+     {
+      "word": "वर्तन्ते",
+      "meaning": "वे इस प्रकार संलग्न रहें"
+     },
+     {
+      "word": "इति",
+      "meaning": "इस प्रकार"
+     },
+     {
+      "word": "धारयन्",
+      "meaning": "विचार करते हुए।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/8-9/"
   },
   {
@@ -413,7 +1413,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "brahmaṇi",
+      "meaning": "the Supreme Personality of Godhead"
+     },
+     {
+      "word": "ādhāya",
+      "meaning": "resigning unto"
+     },
+     {
+      "word": "karmāṇi",
+      "meaning": "all works"
+     },
+     {
+      "word": "saṅgam",
+      "meaning": "attachment"
+     },
+     {
+      "word": "tyaktvā",
+      "meaning": "giving up"
+     },
+     {
+      "word": "karoti",
+      "meaning": "performs"
+     },
+     {
+      "word": "yaḥ",
+      "meaning": "who"
+     },
+     {
+      "word": "lipyate",
+      "meaning": "is affected"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he"
+     },
+     {
+      "word": "pāpena",
+      "meaning": "by sin"
+     },
+     {
+      "word": "padma-patram",
+      "meaning": "lotus leaf"
+     },
+     {
+      "word": "iva",
+      "meaning": "like"
+     },
+     {
+      "word": "ambhasā",
+      "meaning": "in the water."
+     }
+    ],
+    "hi": [
+     {
+      "word": "ब्रह्मणि",
+      "meaning": "पूर्ण पुरुषोत्तम भगवान् को"
+     },
+     {
+      "word": "आधाय",
+      "meaning": "अर्पित करके"
+     },
+     {
+      "word": "कर्माणि",
+      "meaning": "समस्त कर्म"
+     },
+     {
+      "word": "सङ्गम्",
+      "meaning": "आसक्ति"
+     },
+     {
+      "word": "त्यक्त्वा",
+      "meaning": "त्यागकर"
+     },
+     {
+      "word": "करोति",
+      "meaning": "करता है"
+     },
+     {
+      "word": "यः",
+      "meaning": "जो"
+     },
+     {
+      "word": "लिप्यते",
+      "meaning": "प्रभावित होता है"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "पापेन",
+      "meaning": "पाप से"
+     },
+     {
+      "word": "पद्म-पत्रम्",
+      "meaning": "कमल का पत्ता"
+     },
+     {
+      "word": "इव",
+      "meaning": "के समान"
+     },
+     {
+      "word": "अम्भसा",
+      "meaning": "जल में।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/10/"
   },
   {
@@ -470,7 +1587,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "kāyena",
+      "meaning": "with the body"
+     },
+     {
+      "word": "manasā",
+      "meaning": "with the mind"
+     },
+     {
+      "word": "buddhyā",
+      "meaning": "with the intelligence"
+     },
+     {
+      "word": "kevalaiḥ",
+      "meaning": "purified"
+     },
+     {
+      "word": "indriyaiḥ",
+      "meaning": "with the senses"
+     },
+     {
+      "word": "api",
+      "meaning": "even with"
+     },
+     {
+      "word": "yoginaḥ",
+      "meaning": "the Kṛṣṇa conscious persons"
+     },
+     {
+      "word": "karma",
+      "meaning": "actions"
+     },
+     {
+      "word": "kurvanti",
+      "meaning": "they act"
+     },
+     {
+      "word": "saṅgam",
+      "meaning": "attachment"
+     },
+     {
+      "word": "tyaktvā",
+      "meaning": "giving up"
+     },
+     {
+      "word": "ātma",
+      "meaning": "self"
+     },
+     {
+      "word": "śuddhaye",
+      "meaning": "for the purpose of purification."
+     }
+    ],
+    "hi": [
+     {
+      "word": "कायेन",
+      "meaning": "शरीर से"
+     },
+     {
+      "word": "मनसा",
+      "meaning": "मन से"
+     },
+     {
+      "word": "बुद्ध्या",
+      "meaning": "बुद्धि से"
+     },
+     {
+      "word": "केवलैः",
+      "meaning": "शुद्ध"
+     },
+     {
+      "word": "इन्द्रियैः",
+      "meaning": "इन्द्रियों से"
+     },
+     {
+      "word": "अपि",
+      "meaning": "यहाँ तक कि"
+     },
+     {
+      "word": "योगिनः",
+      "meaning": "कृष्णभावनाभावित व्यक्ति"
+     },
+     {
+      "word": "कर्म",
+      "meaning": "कर्म"
+     },
+     {
+      "word": "कुर्वन्ति",
+      "meaning": "वे करते हैं"
+     },
+     {
+      "word": "सङ्गम्",
+      "meaning": "आसक्ति"
+     },
+     {
+      "word": "त्यक्त्वा",
+      "meaning": "त्यागकर"
+     },
+     {
+      "word": "आत्म",
+      "meaning": "आत्मा"
+     },
+     {
+      "word": "शुद्धये",
+      "meaning": "शुद्धि के प्रयोजन से।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/11/"
   },
   {
@@ -507,7 +1733,100 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "yuktaḥ",
+      "meaning": "one who is engaged in devotional service"
+     },
+     {
+      "word": "karma-phalam",
+      "meaning": "the results of all activities"
+     },
+     {
+      "word": "tyaktvā",
+      "meaning": "giving up"
+     },
+     {
+      "word": "śāntim",
+      "meaning": "perfect peace"
+     },
+     {
+      "word": "āpnoti",
+      "meaning": "achieves"
+     },
+     {
+      "word": "naiṣṭhikīm",
+      "meaning": "unflinching"
+     },
+     {
+      "word": "ayuktaḥ",
+      "meaning": "one who is not in Kṛṣṇa consciousness"
+     },
+     {
+      "word": "kāma-kāreṇa",
+      "meaning": "for enjoying the result of work"
+     },
+     {
+      "word": "phale",
+      "meaning": "in the result"
+     },
+     {
+      "word": "saktaḥ",
+      "meaning": "attached"
+     },
+     {
+      "word": "nibadhyate",
+      "meaning": "becomes entangled."
+     }
+    ],
+    "hi": [
+     {
+      "word": "युक्तः",
+      "meaning": "जो भक्ति में संलग्न है"
+     },
+     {
+      "word": "कर्म-फलम्",
+      "meaning": "समस्त कर्मों के फल"
+     },
+     {
+      "word": "त्यक्त्वा",
+      "meaning": "त्यागकर"
+     },
+     {
+      "word": "शान्तिम्",
+      "meaning": "पूर्ण शान्ति"
+     },
+     {
+      "word": "आप्नोति",
+      "meaning": "प्राप्त करता है"
+     },
+     {
+      "word": "नैष्ठिकीम्",
+      "meaning": "अविचल"
+     },
+     {
+      "word": "अयुक्तः",
+      "meaning": "जो कृष्णभावनामृत में नहीं है"
+     },
+     {
+      "word": "काम-कारेण",
+      "meaning": "कर्मफल का भोग करने हेतु"
+     },
+     {
+      "word": "फले",
+      "meaning": "फल में"
+     },
+     {
+      "word": "सक्तः",
+      "meaning": "आसक्त"
+     },
+     {
+      "word": "निबध्यते",
+      "meaning": "बँध जाता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/12/"
   },
   {
@@ -572,7 +1891,132 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "sarva",
+      "meaning": "all"
+     },
+     {
+      "word": "karmāṇi",
+      "meaning": "activities"
+     },
+     {
+      "word": "manasā",
+      "meaning": "by the mind"
+     },
+     {
+      "word": "sannyasya",
+      "meaning": "giving up"
+     },
+     {
+      "word": "āste",
+      "meaning": "remains"
+     },
+     {
+      "word": "sukham",
+      "meaning": "in happiness"
+     },
+     {
+      "word": "vaśī",
+      "meaning": "one who is controlled"
+     },
+     {
+      "word": "nava-dvāre",
+      "meaning": "in the place where there are nine gates"
+     },
+     {
+      "word": "pure",
+      "meaning": "in the city"
+     },
+     {
+      "word": "dehī",
+      "meaning": "the embodied soul"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "kurvan",
+      "meaning": "doing anything"
+     },
+     {
+      "word": "na",
+      "meaning": "not"
+     },
+     {
+      "word": "kārayan",
+      "meaning": "causing to be done."
+     }
+    ],
+    "hi": [
+     {
+      "word": "सर्व",
+      "meaning": "समस्त"
+     },
+     {
+      "word": "कर्माणि",
+      "meaning": "कर्म"
+     },
+     {
+      "word": "मनसा",
+      "meaning": "मन से"
+     },
+     {
+      "word": "सन्न्यस्य",
+      "meaning": "त्यागकर"
+     },
+     {
+      "word": "आस्ते",
+      "meaning": "रहता है"
+     },
+     {
+      "word": "सुखम्",
+      "meaning": "सुखपूर्वक"
+     },
+     {
+      "word": "वशी",
+      "meaning": "जो संयमी है"
+     },
+     {
+      "word": "नव-द्वारे",
+      "meaning": "जहाँ नौ द्वार हैं उस स्थान में"
+     },
+     {
+      "word": "पुरे",
+      "meaning": "नगरी में"
+     },
+     {
+      "word": "देही",
+      "meaning": "देहधारी आत्मा"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "कुर्वन्",
+      "meaning": "कुछ करते हुए"
+     },
+     {
+      "word": "न",
+      "meaning": "न"
+     },
+     {
+      "word": "कारयन्",
+      "meaning": "करवाते हुए।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/13/"
   },
   {
@@ -609,7 +2053,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "kartṛtvam",
+      "meaning": "proprietorship"
+     },
+     {
+      "word": "na",
+      "meaning": "nor"
+     },
+     {
+      "word": "karmāṇi",
+      "meaning": "activities"
+     },
+     {
+      "word": "lokasya",
+      "meaning": "of the people"
+     },
+     {
+      "word": "sṛjati",
+      "meaning": "creates"
+     },
+     {
+      "word": "prabhuḥ",
+      "meaning": "the master of the city of the body"
+     },
+     {
+      "word": "na",
+      "meaning": "nor"
+     },
+     {
+      "word": "karma-phala",
+      "meaning": "results of activities"
+     },
+     {
+      "word": "saṁyogam",
+      "meaning": "connection"
+     },
+     {
+      "word": "svabhāvaḥ",
+      "meaning": "modes of material nature"
+     },
+     {
+      "word": "tu",
+      "meaning": "but"
+     },
+     {
+      "word": "pravartate",
+      "meaning": "acts."
+     }
+    ],
+    "hi": [
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "कर्तृत्वम्",
+      "meaning": "स्वामित्व"
+     },
+     {
+      "word": "न",
+      "meaning": "न ही"
+     },
+     {
+      "word": "कर्माणि",
+      "meaning": "कर्म"
+     },
+     {
+      "word": "लोकस्य",
+      "meaning": "लोगों का"
+     },
+     {
+      "word": "सृजति",
+      "meaning": "रचता है"
+     },
+     {
+      "word": "प्रभुः",
+      "meaning": "शरीर रूपी नगरी का स्वामी"
+     },
+     {
+      "word": "न",
+      "meaning": "न ही"
+     },
+     {
+      "word": "कर्म-फल",
+      "meaning": "कर्मों के फल"
+     },
+     {
+      "word": "संयोगम्",
+      "meaning": "सम्बन्ध"
+     },
+     {
+      "word": "स्वभावः",
+      "meaning": "भौतिक प्रकृति के गुण"
+     },
+     {
+      "word": "तु",
+      "meaning": "किन्तु"
+     },
+     {
+      "word": "प्रवर्तते",
+      "meaning": "कार्य करते हैं।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/14/"
   },
   {
@@ -702,7 +2255,132 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "ādatte",
+      "meaning": "accepts"
+     },
+     {
+      "word": "kasyacit",
+      "meaning": "anyone's"
+     },
+     {
+      "word": "pāpam",
+      "meaning": "sin"
+     },
+     {
+      "word": "na",
+      "meaning": "nor"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "sukṛtam",
+      "meaning": "pious activities"
+     },
+     {
+      "word": "vibhuḥ",
+      "meaning": "the Supreme Lord"
+     },
+     {
+      "word": "ajñānena",
+      "meaning": "by ignorance"
+     },
+     {
+      "word": "āvṛtam",
+      "meaning": "covered"
+     },
+     {
+      "word": "jñānam",
+      "meaning": "knowledge"
+     },
+     {
+      "word": "tena",
+      "meaning": "by that"
+     },
+     {
+      "word": "muhyanti",
+      "meaning": "bewildered"
+     },
+     {
+      "word": "jantavaḥ",
+      "meaning": "the living entities."
+     }
+    ],
+    "hi": [
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "आदत्ते",
+      "meaning": "ग्रहण करता है"
+     },
+     {
+      "word": "कस्यचित्",
+      "meaning": "किसी का"
+     },
+     {
+      "word": "पापम्",
+      "meaning": "पाप"
+     },
+     {
+      "word": "न",
+      "meaning": "न"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "सुकृतम्",
+      "meaning": "पुण्य कर्म"
+     },
+     {
+      "word": "विभुः",
+      "meaning": "परमेश्वर"
+     },
+     {
+      "word": "अज्ञानेन",
+      "meaning": "अज्ञान से"
+     },
+     {
+      "word": "आवृतम्",
+      "meaning": "आच्छादित"
+     },
+     {
+      "word": "ज्ञानम्",
+      "meaning": "ज्ञान"
+     },
+     {
+      "word": "तेन",
+      "meaning": "उससे"
+     },
+     {
+      "word": "मुह्यन्ति",
+      "meaning": "मोहित होते हैं"
+     },
+     {
+      "word": "जन्तवः",
+      "meaning": "जीव।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/15/"
   },
   {
@@ -739,7 +2417,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "jñānena",
+      "meaning": "by knowledge"
+     },
+     {
+      "word": "tu",
+      "meaning": "but"
+     },
+     {
+      "word": "tat",
+      "meaning": "that"
+     },
+     {
+      "word": "ajñānam",
+      "meaning": "nescience"
+     },
+     {
+      "word": "yeṣām",
+      "meaning": "of those"
+     },
+     {
+      "word": "nāśitam",
+      "meaning": "is destroyed"
+     },
+     {
+      "word": "ātmanaḥ",
+      "meaning": "of the living entity"
+     },
+     {
+      "word": "teṣām",
+      "meaning": "of their"
+     },
+     {
+      "word": "ādityavat",
+      "meaning": "like the rising sun"
+     },
+     {
+      "word": "jñānam",
+      "meaning": "knowledge"
+     },
+     {
+      "word": "prakāśayati",
+      "meaning": "discloses"
+     },
+     {
+      "word": "tat param",
+      "meaning": "in Kṛṣṇa consciousness."
+     }
+    ],
+    "hi": [
+     {
+      "word": "ज्ञानेन",
+      "meaning": "ज्ञान से"
+     },
+     {
+      "word": "तु",
+      "meaning": "किन्तु"
+     },
+     {
+      "word": "तत्",
+      "meaning": "वह"
+     },
+     {
+      "word": "अज्ञानम्",
+      "meaning": "अविद्या"
+     },
+     {
+      "word": "येषाम्",
+      "meaning": "जिनकी"
+     },
+     {
+      "word": "नाशितम्",
+      "meaning": "नष्ट हो जाती है"
+     },
+     {
+      "word": "आत्मनः",
+      "meaning": "जीव की"
+     },
+     {
+      "word": "तेषाम्",
+      "meaning": "उनका"
+     },
+     {
+      "word": "आदित्यवत्",
+      "meaning": "उदित सूर्य के समान"
+     },
+     {
+      "word": "ज्ञानम्",
+      "meaning": "ज्ञान"
+     },
+     {
+      "word": "प्रकाशयति",
+      "meaning": "प्रकट करता है"
+     },
+     {
+      "word": "तत् परम्",
+      "meaning": "कृष्णभावनामृत में।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/16/"
   },
   {
@@ -776,7 +2555,84 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "tad-buddhayaḥ",
+      "meaning": "one whose intelligence is always in the Supreme"
+     },
+     {
+      "word": "tad-ātmānaḥ",
+      "meaning": "one whose mind is always in the Supreme"
+     },
+     {
+      "word": "tat-niṣṭhāḥ",
+      "meaning": "whose mind is only meant for the Supreme"
+     },
+     {
+      "word": "tat-parāyaṇāḥ",
+      "meaning": "who has completely taken shelter of Him"
+     },
+     {
+      "word": "gacchanti",
+      "meaning": "goes"
+     },
+     {
+      "word": "apunaḥ-āvṛttim",
+      "meaning": "liberation"
+     },
+     {
+      "word": "jñāna",
+      "meaning": "knowledge"
+     },
+     {
+      "word": "nirdhūta",
+      "meaning": "cleanses"
+     },
+     {
+      "word": "kalmaṣāḥ",
+      "meaning": "misgivings."
+     }
+    ],
+    "hi": [
+     {
+      "word": "तद्-बुद्धयः",
+      "meaning": "जिसकी बुद्धि सदा परम में स्थित रहती है"
+     },
+     {
+      "word": "तद्-आत्मानः",
+      "meaning": "जिसका मन सदा परम में स्थित रहता है"
+     },
+     {
+      "word": "तत्-निष्ठाः",
+      "meaning": "जिसका मन केवल परम के लिए ही है"
+     },
+     {
+      "word": "तत्-परायणाः",
+      "meaning": "जिसने पूर्णतः उनकी शरण ले ली है"
+     },
+     {
+      "word": "गच्छन्ति",
+      "meaning": "जाते हैं"
+     },
+     {
+      "word": "अपुनः-आवृत्तिम्",
+      "meaning": "मुक्ति"
+     },
+     {
+      "word": "ज्ञान",
+      "meaning": "ज्ञान"
+     },
+     {
+      "word": "निर्धूत",
+      "meaning": "धो डालता है"
+     },
+     {
+      "word": "कल्मषाः",
+      "meaning": "शंकाएँ।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/17/"
   },
   {
@@ -813,7 +2669,116 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "vidyā",
+      "meaning": "education"
+     },
+     {
+      "word": "vinaya",
+      "meaning": "gentleness"
+     },
+     {
+      "word": "sampanne",
+      "meaning": "fully equipped"
+     },
+     {
+      "word": "brāhmaṇe",
+      "meaning": "in the brāhmaṇa"
+     },
+     {
+      "word": "gavi",
+      "meaning": "in the cow"
+     },
+     {
+      "word": "hastini",
+      "meaning": "in the elephant"
+     },
+     {
+      "word": "śuni",
+      "meaning": "in the dog"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "śvapāke",
+      "meaning": "in the dog-eater (the outcaste)"
+     },
+     {
+      "word": "ca",
+      "meaning": "respectively"
+     },
+     {
+      "word": "paṇḍitāḥ",
+      "meaning": "those who are so wise"
+     },
+     {
+      "word": "sama-darśinaḥ",
+      "meaning": "do see with equal vision."
+     }
+    ],
+    "hi": [
+     {
+      "word": "विद्या",
+      "meaning": "शिक्षा"
+     },
+     {
+      "word": "विनय",
+      "meaning": "विनम्रता"
+     },
+     {
+      "word": "सम्पन्ने",
+      "meaning": "से पूर्णतः युक्त"
+     },
+     {
+      "word": "ब्राह्मणे",
+      "meaning": "ब्राह्मण में"
+     },
+     {
+      "word": "गवि",
+      "meaning": "गौ में"
+     },
+     {
+      "word": "हस्तिनि",
+      "meaning": "हाथी में"
+     },
+     {
+      "word": "शुनि",
+      "meaning": "कुत्ते में"
+     },
+     {
+      "word": "च",
+      "meaning": "तथा"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "श्व-पाके",
+      "meaning": "कुत्ता खाने वाले (चाण्डाल) में"
+     },
+     {
+      "word": "च",
+      "meaning": "क्रमशः"
+     },
+     {
+      "word": "पण्डिताः",
+      "meaning": "जो ऐसे विद्वान् हैं"
+     },
+     {
+      "word": "सम-दर्शिनः",
+      "meaning": "समान दृष्टि से देखते हैं।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/18/"
   },
   {
@@ -850,7 +2815,148 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "iha",
+      "meaning": "in this life"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "taiḥ",
+      "meaning": "by them"
+     },
+     {
+      "word": "jitaḥ",
+      "meaning": "conquered"
+     },
+     {
+      "word": "sargaḥ",
+      "meaning": "birth and death"
+     },
+     {
+      "word": "yeṣām",
+      "meaning": "of those"
+     },
+     {
+      "word": "sāmye",
+      "meaning": "in equanimity"
+     },
+     {
+      "word": "sthitam",
+      "meaning": "so situated"
+     },
+     {
+      "word": "manaḥ",
+      "meaning": "mind"
+     },
+     {
+      "word": "nirdoṣam",
+      "meaning": "flawless"
+     },
+     {
+      "word": "hi",
+      "meaning": "certainly"
+     },
+     {
+      "word": "samam",
+      "meaning": "in equanimity"
+     },
+     {
+      "word": "brahma",
+      "meaning": "the Supreme"
+     },
+     {
+      "word": "tasmāt",
+      "meaning": "therefore"
+     },
+     {
+      "word": "brahmaṇi",
+      "meaning": "in the Supreme"
+     },
+     {
+      "word": "te",
+      "meaning": "they"
+     },
+     {
+      "word": "sthitāḥ",
+      "meaning": "are situated."
+     }
+    ],
+    "hi": [
+     {
+      "word": "इह",
+      "meaning": "इस जीवन में"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "तैः",
+      "meaning": "उनके द्वारा"
+     },
+     {
+      "word": "जितः",
+      "meaning": "जीत लिया गया"
+     },
+     {
+      "word": "सर्गः",
+      "meaning": "जन्म और मृत्यु"
+     },
+     {
+      "word": "येषाम्",
+      "meaning": "जिनका"
+     },
+     {
+      "word": "साम्ये",
+      "meaning": "समभाव में"
+     },
+     {
+      "word": "स्थितम्",
+      "meaning": "स्थित"
+     },
+     {
+      "word": "मनः",
+      "meaning": "मन"
+     },
+     {
+      "word": "निर्दोषम्",
+      "meaning": "निर्दोष"
+     },
+     {
+      "word": "हि",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "समम्",
+      "meaning": "समभाव में"
+     },
+     {
+      "word": "ब्रह्म",
+      "meaning": "परम"
+     },
+     {
+      "word": "तस्मात्",
+      "meaning": "अतः"
+     },
+     {
+      "word": "ब्रह्मणि",
+      "meaning": "परम में"
+     },
+     {
+      "word": "ते",
+      "meaning": "वे"
+     },
+     {
+      "word": "स्थिताः",
+      "meaning": "स्थित हैं।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/19/"
   },
   {
@@ -887,7 +2993,124 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "prahṛṣyet",
+      "meaning": "rejoice"
+     },
+     {
+      "word": "priyam",
+      "meaning": "pleasant"
+     },
+     {
+      "word": "prāpya",
+      "meaning": "achieving"
+     },
+     {
+      "word": "na",
+      "meaning": "does not"
+     },
+     {
+      "word": "udvijet",
+      "meaning": "agitated"
+     },
+     {
+      "word": "prāpya",
+      "meaning": "obtaining"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "apriyam",
+      "meaning": "unpleasant"
+     },
+     {
+      "word": "sthira-buddhiḥ",
+      "meaning": "self-intelligent"
+     },
+     {
+      "word": "asammūḍhaḥ",
+      "meaning": "unbewildered"
+     },
+     {
+      "word": "brahmavit",
+      "meaning": "one who knows the Supreme perfectly"
+     },
+     {
+      "word": "brahmaṇi",
+      "meaning": "in the Transcendence"
+     },
+     {
+      "word": "sthitaḥ",
+      "meaning": "situated."
+     }
+    ],
+    "hi": [
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "प्रहृष्येत्",
+      "meaning": "हर्षित होता है"
+     },
+     {
+      "word": "प्रियम्",
+      "meaning": "सुखद"
+     },
+     {
+      "word": "प्राप्य",
+      "meaning": "प्राप्त करके"
+     },
+     {
+      "word": "न",
+      "meaning": "नहीं"
+     },
+     {
+      "word": "उद्विजेत्",
+      "meaning": "विचलित होता है"
+     },
+     {
+      "word": "प्राप्य",
+      "meaning": "प्राप्त करके"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "अप्रियम्",
+      "meaning": "अप्रिय"
+     },
+     {
+      "word": "स्थिर-बुद्धिः",
+      "meaning": "स्थिर-बुद्धिवाला"
+     },
+     {
+      "word": "असम्मूढः",
+      "meaning": "मोहरहित"
+     },
+     {
+      "word": "ब्रह्म-वित्",
+      "meaning": "जो परम को पूर्णतः जानता है"
+     },
+     {
+      "word": "ब्रह्मणि",
+      "meaning": "दिव्यता में"
+     },
+     {
+      "word": "स्थितः",
+      "meaning": "स्थित।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/20/"
   },
   {
@@ -952,7 +3175,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "bāhya-sparśeṣu",
+      "meaning": "in external sense pleasure"
+     },
+     {
+      "word": "asakta-ātmā",
+      "meaning": "one who is not so attached"
+     },
+     {
+      "word": "vindati",
+      "meaning": "enjoys"
+     },
+     {
+      "word": "ātmani",
+      "meaning": "in the self"
+     },
+     {
+      "word": "yat",
+      "meaning": "that which"
+     },
+     {
+      "word": "sukham",
+      "meaning": "happiness"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "that"
+     },
+     {
+      "word": "brahma-yoga",
+      "meaning": "concentrated in Brahman"
+     },
+     {
+      "word": "yukta-ātmā",
+      "meaning": "self-connected"
+     },
+     {
+      "word": "sukham",
+      "meaning": "happiness"
+     },
+     {
+      "word": "akṣayam",
+      "meaning": "unlimited"
+     },
+     {
+      "word": "aśnute",
+      "meaning": "enjoys."
+     }
+    ],
+    "hi": [
+     {
+      "word": "बाह्य-स्पर्शेषु",
+      "meaning": "बाह्य इन्द्रिय-सुख में"
+     },
+     {
+      "word": "असक्त-आत्मा",
+      "meaning": "जो आसक्त नहीं है"
+     },
+     {
+      "word": "विन्दति",
+      "meaning": "भोगता है"
+     },
+     {
+      "word": "आत्मनि",
+      "meaning": "आत्मा में"
+     },
+     {
+      "word": "यत्",
+      "meaning": "जो"
+     },
+     {
+      "word": "सुखम्",
+      "meaning": "सुख"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "ब्रह्म-योग",
+      "meaning": "ब्रह्म में एकाग्र"
+     },
+     {
+      "word": "युक्त-आत्मा",
+      "meaning": "आत्मा से संयुक्त"
+     },
+     {
+      "word": "सुखम्",
+      "meaning": "सुख"
+     },
+     {
+      "word": "अक्षयम्",
+      "meaning": "असीम"
+     },
+     {
+      "word": "अश्नुते",
+      "meaning": "भोगता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/21/"
   },
   {
@@ -1053,7 +3377,132 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "ye",
+      "meaning": "those"
+     },
+     {
+      "word": "hi",
+      "meaning": "certainly"
+     },
+     {
+      "word": "saṁsparśajāḥ",
+      "meaning": "by contact with the material senses"
+     },
+     {
+      "word": "bhogāḥ",
+      "meaning": "enjoyment"
+     },
+     {
+      "word": "duḥkha",
+      "meaning": "distress"
+     },
+     {
+      "word": "yonayaḥ",
+      "meaning": "sources of"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "te",
+      "meaning": "they are"
+     },
+     {
+      "word": "ādi",
+      "meaning": "in the beginning"
+     },
+     {
+      "word": "antavantaḥ",
+      "meaning": "subject to"
+     },
+     {
+      "word": "kaunteya",
+      "meaning": "O son of Kuntī"
+     },
+     {
+      "word": "na",
+      "meaning": "never"
+     },
+     {
+      "word": "teṣu",
+      "meaning": "in those"
+     },
+     {
+      "word": "ramate",
+      "meaning": "take delight"
+     },
+     {
+      "word": "budhaḥ",
+      "meaning": "the intelligent."
+     }
+    ],
+    "hi": [
+     {
+      "word": "ये",
+      "meaning": "वे"
+     },
+     {
+      "word": "हि",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "संस्पर्श-जाः",
+      "meaning": "भौतिक इन्द्रियों के सम्पर्क से उत्पन्न"
+     },
+     {
+      "word": "भोगाः",
+      "meaning": "भोग"
+     },
+     {
+      "word": "दुःख",
+      "meaning": "दुःख"
+     },
+     {
+      "word": "योनयः",
+      "meaning": "के स्रोत"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "ते",
+      "meaning": "वे हैं"
+     },
+     {
+      "word": "आदि",
+      "meaning": "आरम्भ में"
+     },
+     {
+      "word": "अन्तवन्तः",
+      "meaning": "के अधीन"
+     },
+     {
+      "word": "कौन्तेय",
+      "meaning": "हे कुन्तीपुत्र"
+     },
+     {
+      "word": "न",
+      "meaning": "कभी नहीं"
+     },
+     {
+      "word": "तेषु",
+      "meaning": "उनमें"
+     },
+     {
+      "word": "रमते",
+      "meaning": "आनन्द लेता है"
+     },
+     {
+      "word": "बुधः",
+      "meaning": "बुद्धिमान्।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/22/"
   },
   {
@@ -1090,7 +3539,140 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "śaknoti",
+      "meaning": "able to do"
+     },
+     {
+      "word": "iha eva",
+      "meaning": "in the present body"
+     },
+     {
+      "word": "yaḥ",
+      "meaning": "one who"
+     },
+     {
+      "word": "soḍhum",
+      "meaning": "to tolerate"
+     },
+     {
+      "word": "prāk",
+      "meaning": "before"
+     },
+     {
+      "word": "śarīra",
+      "meaning": "body"
+     },
+     {
+      "word": "vimokṣaṇāt",
+      "meaning": "giving up"
+     },
+     {
+      "word": "kāma",
+      "meaning": "desire"
+     },
+     {
+      "word": "krodha",
+      "meaning": "anger"
+     },
+     {
+      "word": "udbhavam",
+      "meaning": "generated from"
+     },
+     {
+      "word": "vegam",
+      "meaning": "urge"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he"
+     },
+     {
+      "word": "yuktaḥ",
+      "meaning": "in trance"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he"
+     },
+     {
+      "word": "sukhī",
+      "meaning": "happy"
+     },
+     {
+      "word": "naraḥ",
+      "meaning": "human being."
+     }
+    ],
+    "hi": [
+     {
+      "word": "शक्नोति",
+      "meaning": "समर्थ है"
+     },
+     {
+      "word": "इह एव",
+      "meaning": "इसी शरीर में"
+     },
+     {
+      "word": "यः",
+      "meaning": "जो"
+     },
+     {
+      "word": "सोढुम्",
+      "meaning": "सहन करने में"
+     },
+     {
+      "word": "प्राक्",
+      "meaning": "पूर्व"
+     },
+     {
+      "word": "शरीर",
+      "meaning": "शरीर"
+     },
+     {
+      "word": "विमोक्षणात्",
+      "meaning": "त्यागने से"
+     },
+     {
+      "word": "काम",
+      "meaning": "इच्छा"
+     },
+     {
+      "word": "क्रोध",
+      "meaning": "क्रोध"
+     },
+     {
+      "word": "उद्भवम्",
+      "meaning": "से उत्पन्न"
+     },
+     {
+      "word": "वेगम्",
+      "meaning": "वेग"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "युक्तः",
+      "meaning": "समाधि में"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "सुखी",
+      "meaning": "सुखी"
+     },
+     {
+      "word": "नरः",
+      "meaning": "मनुष्य।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/23/"
   },
   {
@@ -1127,7 +3709,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "yaḥ",
+      "meaning": "one who"
+     },
+     {
+      "word": "antaḥ-sukhaḥ",
+      "meaning": "happy from within"
+     },
+     {
+      "word": "antaḥ-ārāmah",
+      "meaning": "active within"
+     },
+     {
+      "word": "tathā",
+      "meaning": "as well as"
+     },
+     {
+      "word": "antaḥ-jyotiḥ",
+      "meaning": "aiming within"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "yaḥ",
+      "meaning": "anyone"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he"
+     },
+     {
+      "word": "yogī",
+      "meaning": "mystic"
+     },
+     {
+      "word": "brahma-nirvāṇam",
+      "meaning": "liberated in the Supreme"
+     },
+     {
+      "word": "brahma-bhūtaḥ",
+      "meaning": "self-realized"
+     },
+     {
+      "word": "adhigacchati",
+      "meaning": "attains."
+     }
+    ],
+    "hi": [
+     {
+      "word": "यः",
+      "meaning": "जो"
+     },
+     {
+      "word": "अन्तः-सुखः",
+      "meaning": "भीतर से सुखी"
+     },
+     {
+      "word": "अन्तः-आरामः",
+      "meaning": "भीतर सक्रिय"
+     },
+     {
+      "word": "तथा",
+      "meaning": "साथ ही"
+     },
+     {
+      "word": "अन्तः-ज्योतिः",
+      "meaning": "भीतर लक्ष्य रखने वाला"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "यः",
+      "meaning": "जो कोई"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह"
+     },
+     {
+      "word": "योगी",
+      "meaning": "योगी"
+     },
+     {
+      "word": "ब्रह्म-निर्वाणम्",
+      "meaning": "परम में मुक्त"
+     },
+     {
+      "word": "ब्रह्म-भूतः",
+      "meaning": "आत्म-साक्षात्कारी"
+     },
+     {
+      "word": "अधिगच्छति",
+      "meaning": "प्राप्त करता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/24/"
   },
   {
@@ -1172,7 +3855,92 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "labhante",
+      "meaning": "achieve"
+     },
+     {
+      "word": "brahma-nirvāṇam",
+      "meaning": "liberation in the Supreme"
+     },
+     {
+      "word": "ṛṣayaḥ",
+      "meaning": "those who are active within"
+     },
+     {
+      "word": "kṣīṇa-kalmaṣāḥ",
+      "meaning": "who are devoid of all sins"
+     },
+     {
+      "word": "chinna",
+      "meaning": "torn off"
+     },
+     {
+      "word": "dvaidhāḥ",
+      "meaning": "duality"
+     },
+     {
+      "word": "yata-ātmānaḥ",
+      "meaning": "engaged in self-realization"
+     },
+     {
+      "word": "sarva-bhūta",
+      "meaning": "in all living entities"
+     },
+     {
+      "word": "hite",
+      "meaning": "in welfare work"
+     },
+     {
+      "word": "ratāḥ",
+      "meaning": "engaged."
+     }
+    ],
+    "hi": [
+     {
+      "word": "लभन्ते",
+      "meaning": "प्राप्त करते हैं"
+     },
+     {
+      "word": "ब्रह्म-निर्वाणम्",
+      "meaning": "परम में मुक्ति"
+     },
+     {
+      "word": "ऋषयः",
+      "meaning": "जो भीतर सक्रिय हैं"
+     },
+     {
+      "word": "क्षीण-कल्मषाः",
+      "meaning": "जो समस्त पापों से रहित हैं"
+     },
+     {
+      "word": "छिन्न",
+      "meaning": "छिन्न"
+     },
+     {
+      "word": "द्वैधाः",
+      "meaning": "द्वैत"
+     },
+     {
+      "word": "यत-आत्मानः",
+      "meaning": "आत्म-साक्षात्कार में संलग्न"
+     },
+     {
+      "word": "सर्व-भूत",
+      "meaning": "समस्त जीवों के"
+     },
+     {
+      "word": "हिते",
+      "meaning": "कल्याण-कार्य में"
+     },
+     {
+      "word": "रताः",
+      "meaning": "संलग्न।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/25/"
   },
   {
@@ -1273,7 +4041,84 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "kāma",
+      "meaning": "desires"
+     },
+     {
+      "word": "krodha",
+      "meaning": "anger"
+     },
+     {
+      "word": "vimuktānām",
+      "meaning": "of those who are so liberated"
+     },
+     {
+      "word": "yatīnām",
+      "meaning": "of the saintly persons"
+     },
+     {
+      "word": "yata-cetasām",
+      "meaning": "of persons who have full control over the mind"
+     },
+     {
+      "word": "abhitaḥ",
+      "meaning": "assured in the near future"
+     },
+     {
+      "word": "brahma-nirvāṇam",
+      "meaning": "liberation in the Supreme"
+     },
+     {
+      "word": "vartate",
+      "meaning": "is there"
+     },
+     {
+      "word": "vidita-ātmanām",
+      "meaning": "of those who are self-realized."
+     }
+    ],
+    "hi": [
+     {
+      "word": "काम",
+      "meaning": "इच्छाएँ"
+     },
+     {
+      "word": "क्रोध",
+      "meaning": "क्रोध"
+     },
+     {
+      "word": "विमुक्तानाम्",
+      "meaning": "जो इस प्रकार मुक्त हैं उनकी"
+     },
+     {
+      "word": "यतीनाम्",
+      "meaning": "साधु व्यक्तियों की"
+     },
+     {
+      "word": "यत-चेतसाम्",
+      "meaning": "जिनका मन पर पूर्ण नियन्त्रण है उनकी"
+     },
+     {
+      "word": "अभितः",
+      "meaning": "निकट भविष्य में सुनिश्चित"
+     },
+     {
+      "word": "ब्रह्म-निर्वाणम्",
+      "meaning": "परम में मुक्ति"
+     },
+     {
+      "word": "वर्तते",
+      "meaning": "है"
+     },
+     {
+      "word": "विदित-आत्मनाम्",
+      "meaning": "जो आत्म-साक्षात्कारी हैं उनकी।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/26/"
   },
   {
@@ -1332,7 +4177,252 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "sparśān",
+      "meaning": "external sense objects, such as sound, etc."
+     },
+     {
+      "word": "kṛtvā",
+      "meaning": "doing so"
+     },
+     {
+      "word": "bahiḥ",
+      "meaning": "external"
+     },
+     {
+      "word": "bāhyān",
+      "meaning": "unnecessary"
+     },
+     {
+      "word": "cakṣuḥ",
+      "meaning": "eyes"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "antare",
+      "meaning": "within"
+     },
+     {
+      "word": "bhruvoḥ",
+      "meaning": "of the eyebrows"
+     },
+     {
+      "word": "prāṇa-apānau",
+      "meaning": "up-and down-moving air"
+     },
+     {
+      "word": "samau",
+      "meaning": "in suspension"
+     },
+     {
+      "word": "kṛtvā",
+      "meaning": "doing so"
+     },
+     {
+      "word": "nāsā-abhyantara",
+      "meaning": "within the nostrils"
+     },
+     {
+      "word": "cāriṇau",
+      "meaning": "blowing"
+     },
+     {
+      "word": "yata",
+      "meaning": "controlled"
+     },
+     {
+      "word": "indriya",
+      "meaning": "senses"
+     },
+     {
+      "word": "manaḥ",
+      "meaning": "mind"
+     },
+     {
+      "word": "buddhih",
+      "meaning": "intelligence"
+     },
+     {
+      "word": "muniḥ",
+      "meaning": "the transcendentalist"
+     },
+     {
+      "word": "mokṣa",
+      "meaning": "liberation"
+     },
+     {
+      "word": "parāyaṇaḥ",
+      "meaning": "being so destined"
+     },
+     {
+      "word": "vigata",
+      "meaning": "discarded"
+     },
+     {
+      "word": "icchā",
+      "meaning": "wishes"
+     },
+     {
+      "word": "bhaya",
+      "meaning": "fear"
+     },
+     {
+      "word": "krodhaḥ",
+      "meaning": "anger"
+     },
+     {
+      "word": "yaḥ",
+      "meaning": "one who"
+     },
+     {
+      "word": "sadā",
+      "meaning": "always"
+     },
+     {
+      "word": "muktaḥ",
+      "meaning": "liberated"
+     },
+     {
+      "word": "eva",
+      "meaning": "certainly"
+     },
+     {
+      "word": "saḥ",
+      "meaning": "he is."
+     }
+    ],
+    "hi": [
+     {
+      "word": "स्पर्शान्",
+      "meaning": "बाह्य इन्द्रिय-विषय, जैसे ध्वनि आदि"
+     },
+     {
+      "word": "कृत्वा",
+      "meaning": "ऐसा करके"
+     },
+     {
+      "word": "बहिः",
+      "meaning": "बाहर"
+     },
+     {
+      "word": "बाह्यान्",
+      "meaning": "अनावश्यक"
+     },
+     {
+      "word": "चक्षुः",
+      "meaning": "नेत्र"
+     },
+     {
+      "word": "च",
+      "meaning": "भी"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "अन्तरे",
+      "meaning": "भीतर"
+     },
+     {
+      "word": "भ्रुवोः",
+      "meaning": "भौंहों के"
+     },
+     {
+      "word": "प्राण-अपानौ",
+      "meaning": "ऊपर और नीचे जाने वाली वायु"
+     },
+     {
+      "word": "समौ",
+      "meaning": "निरुद्ध"
+     },
+     {
+      "word": "कृत्वा",
+      "meaning": "ऐसा करके"
+     },
+     {
+      "word": "नासा-अभ्यन्तर",
+      "meaning": "नासिका के भीतर"
+     },
+     {
+      "word": "चारिणौ",
+      "meaning": "बहने वाली"
+     },
+     {
+      "word": "यत",
+      "meaning": "नियन्त्रित"
+     },
+     {
+      "word": "इन्द्रिय",
+      "meaning": "इन्द्रियाँ"
+     },
+     {
+      "word": "मनः",
+      "meaning": "मन"
+     },
+     {
+      "word": "बुद्धिः",
+      "meaning": "बुद्धि"
+     },
+     {
+      "word": "मुनिः",
+      "meaning": "दिव्यवादी"
+     },
+     {
+      "word": "मोक्ष",
+      "meaning": "मुक्ति"
+     },
+     {
+      "word": "परायणः",
+      "meaning": "इस प्रकार लक्षित"
+     },
+     {
+      "word": "विगत",
+      "meaning": "त्यागी हुई"
+     },
+     {
+      "word": "इच्छा",
+      "meaning": "इच्छाएँ"
+     },
+     {
+      "word": "भय",
+      "meaning": "भय"
+     },
+     {
+      "word": "क्रोधः",
+      "meaning": "क्रोध"
+     },
+     {
+      "word": "यः",
+      "meaning": "जो"
+     },
+     {
+      "word": "सदा",
+      "meaning": "सदा"
+     },
+     {
+      "word": "मुक्तः",
+      "meaning": "मुक्त"
+     },
+     {
+      "word": "एव",
+      "meaning": "निश्चय ही"
+     },
+     {
+      "word": "सः",
+      "meaning": "वह है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/27-28/"
   },
   {
@@ -1385,7 +4475,108 @@
      }
     ]
    },
-   "synonyms": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "bhoktāram",
+      "meaning": "beneficiary"
+     },
+     {
+      "word": "yajña",
+      "meaning": "sacrifices"
+     },
+     {
+      "word": "tapasām",
+      "meaning": "of penances and austerities"
+     },
+     {
+      "word": "sarva-loka",
+      "meaning": "all planets and the demigods thereof"
+     },
+     {
+      "word": "maheśvaram",
+      "meaning": "the Supreme Lord"
+     },
+     {
+      "word": "suhṛdam",
+      "meaning": "benefactor"
+     },
+     {
+      "word": "sarva",
+      "meaning": "all"
+     },
+     {
+      "word": "bhūtānām",
+      "meaning": "of the living entities"
+     },
+     {
+      "word": "jñātvā",
+      "meaning": "thus knowing"
+     },
+     {
+      "word": "mām",
+      "meaning": "Me (Lord Kṛṣṇa)"
+     },
+     {
+      "word": "śāntim",
+      "meaning": "relief from material pangs"
+     },
+     {
+      "word": "ṛcchati",
+      "meaning": "achieves."
+     }
+    ],
+    "hi": [
+     {
+      "word": "भोक्तारम्",
+      "meaning": "भोक्ता"
+     },
+     {
+      "word": "यज्ञ",
+      "meaning": "यज्ञ"
+     },
+     {
+      "word": "तपसाम्",
+      "meaning": "तप एवं तपस्याओं का"
+     },
+     {
+      "word": "सर्व-लोक",
+      "meaning": "समस्त लोक तथा उनके देवता"
+     },
+     {
+      "word": "महेश्वरम्",
+      "meaning": "परमेश्वर"
+     },
+     {
+      "word": "सुहृदम्",
+      "meaning": "हितकारी"
+     },
+     {
+      "word": "सर्व",
+      "meaning": "समस्त"
+     },
+     {
+      "word": "भूतानाम्",
+      "meaning": "जीवों का"
+     },
+     {
+      "word": "ज्ञात्वा",
+      "meaning": "इस प्रकार जानकर"
+     },
+     {
+      "word": "माम्",
+      "meaning": "मुझे (भगवान् श्रीकृष्ण को)"
+     },
+     {
+      "word": "शान्तिम्",
+      "meaning": "भौतिक पीड़ाओं से राहत"
+     },
+     {
+      "word": "ऋच्छति",
+      "meaning": "प्राप्त करता है।"
+     }
+    ]
+   },
    "sourceUrl": "https://vedabase.cc/bg/5/29/"
   }
  ]

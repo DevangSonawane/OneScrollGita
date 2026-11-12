@@ -9,16 +9,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:versescroll/app/app.dart';
 import 'package:versescroll/application/core_providers.dart';
+import 'package:versescroll/application/premium_providers.dart';
 import 'package:versescroll/application/scripture_providers.dart';
 import 'package:versescroll/application/streak_providers.dart';
+import 'package:versescroll/application/study_providers.dart';
 import 'package:versescroll/application/ui_providers.dart';
 import 'package:versescroll/data/scripture/scripture_repository.dart';
 import 'package:versescroll/data/settings/settings_repository.dart';
 import 'package:versescroll/data/content/content_repository.dart';
 import 'package:versescroll/data/user/activity_repository.dart';
 import 'package:versescroll/data/user/database.dart';
+import 'package:versescroll/data/user/study_repository.dart';
 import 'package:versescroll/domain/local_date.dart';
 import 'package:versescroll/data/user/user_data_repository.dart';
+import 'package:versescroll/data/purchases/purchase_gateway.dart';
+
+import 'fakes/fake_purchase_gateway.dart';
 
 /// Reads assets straight from disk with synchronous futures, so widget
 /// tests under fake time never wait on real I/O.
@@ -56,6 +62,7 @@ Future<TestApp> pumpApp(
   bool streakPopup = false,
   Brightness brightness = Brightness.light,
   GlassMode? glass = GlassMode.solid,
+  PurchaseGateway? purchases,
 }) async {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
   tester.view.devicePixelRatio = 1;
@@ -83,6 +90,9 @@ Future<TestApp> pumpApp(
       activityRepositoryProvider.overrideWithValue(
         ActivityRepository(db, clock: now == null ? null : () => now),
       ),
+      studyRepositoryProvider.overrideWithValue(
+        StudyRepository(db, clock: now == null ? null : () => now),
+      ),
       contentRepositoryProvider.overrideWithValue(
         ContentRepository(bundle: DiskAssetBundle()),
       ),
@@ -92,6 +102,9 @@ Future<TestApp> pumpApp(
       if (glass != null) glassModeOverrideProvider.overrideWithValue(glass),
       if (now != null) clockProvider.overrideWithValue(() => now),
       todayProvider.overrideWith(_TestToday.new),
+      purchaseGatewayProvider.overrideWithValue(
+        purchases ?? FakePurchaseGateway(),
+      ),
     ],
   );
   addTearDown(() async {

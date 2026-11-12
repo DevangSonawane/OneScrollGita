@@ -119,12 +119,15 @@ class UserDataRepository {
     }
     if (orphans.isEmpty) return 0;
     await _db.transaction(() async {
-      await (_db.delete(_db.favourites)..where((t) => t.verseId.isIn(orphans)))
-          .go();
-      await (_db.delete(_db.bookmarks)..where((t) => t.verseId.isIn(orphans)))
-          .go();
-      await (_db.delete(_db.history)..where((t) => t.verseId.isIn(orphans)))
-          .go();
+      await (_db.delete(
+        _db.favourites,
+      )..where((t) => t.verseId.isIn(orphans))).go();
+      await (_db.delete(
+        _db.bookmarks,
+      )..where((t) => t.verseId.isIn(orphans))).go();
+      await (_db.delete(
+        _db.history,
+      )..where((t) => t.verseId.isIn(orphans))).go();
     });
     return orphans.length;
   }

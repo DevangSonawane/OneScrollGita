@@ -36,9 +36,7 @@ String chapterFileName(int chapter) =>
 String sha256Of(String raw) => sha256.convert(utf8.encode(raw)).toString();
 
 final _devanagari = RegExp(r'[ऀ-ॿ]');
-final _hidden = RegExp(
-  r'[\u0000-\u0008\u000B\u000C\u000E-\u001F­​⁠﻿]',
-);
+final _hidden = RegExp(r'[\u0000-\u0008\u000B\u000C\u000E-\u001F­​⁠﻿]');
 
 /// [indexRaw] is the text of chapters.json, [chapterFiles] maps file names to
 /// their raw text, [expectedCountsRaw] is tool/expected_counts.json.
@@ -182,7 +180,9 @@ ValidationReport validateScripture({
   }
   final expectedTotal = expected['totalVerses'];
   if (expectedTotal != totalVerses) {
-    r.errors.add('Expected $expectedTotal verses in total, found $totalVerses.');
+    r.errors.add(
+      'Expected $expectedTotal verses in total, found $totalVerses.',
+    );
   }
   return r;
 }
@@ -263,6 +263,8 @@ int _validateEntries(
       }
     }
 
+    _validateWordMeanings(r, where, e['synonyms']);
+
     final purport = e['purport'];
     if (purport != null) {
       if (purport is! Map) {
@@ -278,7 +280,8 @@ int _validateEntries(
           for (final b in blocks) {
             final type = b is Map ? b['type'] : null;
             final text = b is Map ? b['text'] : null;
-            if (type is! String || !const {'p', 'quote', 'sanskrit'}.contains(type)) {
+            if (type is! String ||
+                !const {'p', 'quote', 'sanskrit'}.contains(type)) {
               r.errors.add('$where: purport.$lang block type "$type".');
             }
             if (text is! String || text.trim().isEmpty) {
@@ -302,6 +305,48 @@ int _validateEntries(
     );
   }
   return verses;
+}
+
+/// Word-for-word meanings: English is required; Hindi may be null (the app
+/// shows English) but never an empty list. No pair may be empty.
+void _validateWordMeanings(ValidationReport r, String where, Object? syn) {
+  if (syn is! Map) {
+    r.errors.add('$where: synonyms must be an object with en and hi.');
+    return;
+  }
+  for (final lang in const ['en', 'hi']) {
+    final list = syn[lang];
+    if (list == null) {
+      if (lang == 'en') r.errors.add('$where: synonyms.en is missing.');
+      continue;
+    }
+    if (list is! List || list.isEmpty) {
+      r.errors.add('$where: synonyms.$lang must be a non-empty list or null.');
+      continue;
+    }
+    for (final pair in list) {
+      final word = pair is Map ? pair['word'] : null;
+      final meaning = pair is Map ? pair['meaning'] : null;
+      if (word is! String ||
+          word.trim().isEmpty ||
+          meaning is! String ||
+          meaning.trim().isEmpty) {
+        r.errors.add('$where: synonyms.$lang has an empty word or meaning.');
+        break;
+      }
+    }
+    // Hindi lists use Devanagari or IAST words, as the source prints them,
+    // so only the English words are checked for script.
+    if (lang == 'en' &&
+        list.any(
+          (p) =>
+              p is Map &&
+              p['word'] is String &&
+              _devanagari.hasMatch(p['word'] as String),
+        )) {
+      r.errors.add('$where: synonyms.en word contains Devanagari.');
+    }
+  }
 }
 
 List<String>? _lines(Object? v) {
