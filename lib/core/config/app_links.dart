@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 /// Shareable verse links.
 ///
-/// A shared link is the app's Google Play page. Play passes the `referrer`
+/// On Android a shared link is the app's Google Play page; on iOS it is the
+/// App Store page once [appStoreId] is set. Play passes the `referrer`
 /// to the app after install, so a new reader lands on the shared verse on
 /// first launch (see `handleInstallReferrer`). Someone who already has the
 /// app sees "Open" on the Play page.
@@ -15,9 +18,20 @@ abstract final class AppLinks {
   static const playStoreUrl =
       'https://play.google.com/store/apps/details?id=$packageName';
 
-  /// Play Store link carrying the verse as the install referrer.
-  static String verseUrl(String verseId) =>
-      '$playStoreUrl&referrer=${Uri.encodeQueryComponent('verse=$verseId')}';
+  /// The app's Apple ID in App Store Connect (App Information → Apple ID).
+  static const appStoreId = '6834103489';
+
+  static const appStoreUrl = 'https://apps.apple.com/app/id$appStoreId';
+
+  /// The link shared with a verse. Android: the Play Store link carrying the
+  /// verse as the install referrer. iOS: the App Store page (the App Store
+  /// has no install referrer, so a new reader starts at Home).
+  static String verseUrl(String verseId) {
+    if (defaultTargetPlatform == TargetPlatform.iOS && appStoreId.isNotEmpty) {
+      return appStoreUrl;
+    }
+    return '$playStoreUrl&referrer=${Uri.encodeQueryComponent('verse=$verseId')}';
+  }
 
   /// The verse id inside an install referrer string, if any.
   static String? verseFromReferrer(String? referrer) {
@@ -30,9 +44,15 @@ abstract final class AppLinks {
   /// before release (docs/review-needed.md). Omitted while empty.
   static const shareLink = '';
 
+  /// Apple's standard licence agreement (owner decision, 2026-11-13).
+  static const appleStandardEulaUrl =
+      'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';
+
   /// Terms of use (EULA) and privacy policy, shown on the Sadhak paywall.
-  /// The App Store requires both for subscriptions. Empty until the owner
-  /// supplies them (docs/review-needed.md); the links are hidden while empty.
-  static const termsUrl = '';
-  static const privacyUrl = '';
+  /// The App Store requires both for subscriptions. iOS uses Apple's
+  /// standard EULA; Android has no terms page yet, so the link is hidden there.
+  static String get termsUrl =>
+      defaultTargetPlatform == TargetPlatform.iOS ? appleStandardEulaUrl : '';
+
+  static const privacyUrl = 'https://onescrollgita.asynk.in/privacy';
 }

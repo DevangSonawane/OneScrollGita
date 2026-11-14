@@ -93,7 +93,11 @@ class StorePurchaseGateway implements PurchaseGateway {
   Future<List<SadhakPlan>> loadPlans() async {
     _listen();
     if (!await _iap.isAvailable()) return const [];
-    final res = await _iap.queryProductDetails(SadhakProducts.all);
+    final res = await _iap.queryProductDetails(
+      SadhakProducts.forStore(
+        appStore: defaultTargetPlatform == TargetPlatform.iOS,
+      ),
+    );
     final plans = <SadhakPlan>[];
     for (final d in res.productDetails) {
       // Subscriptions can list one entry per offer; keep the first.

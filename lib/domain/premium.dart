@@ -71,8 +71,22 @@ Entitlement resolveEntitlement({
 /// Store product ids (PRD_v3 section 2).
 abstract final class SadhakProducts {
   static const yearly = 'sadhak_yearly';
+
+  /// Lifetime unlock on Google Play.
   static const lifetime = 'sadhak_lifetime';
-  static const all = {yearly, lifetime};
+
+  /// Lifetime unlock on the App Store. Apple never frees a deleted product
+  /// id, and `sadhak_lifetime` was taken there (2026-11-13). Each store
+  /// ignores the other store's id when queried.
+  static const lifetimeAppStore = 'sadhak_lifetime_ios';
+
+  static const all = {yearly, lifetime, lifetimeAppStore};
+
+  /// The ids to show on the paywall for one store. The App Store still
+  /// returns the old `sadhak_lifetime` product, so asking for [all] there
+  /// listed two lifetime plans.
+  static Set<String> forStore({required bool appStore}) =>
+      {yearly, appStore ? lifetimeAppStore : lifetime};
 }
 
 enum PlanKind { yearly, lifetime }

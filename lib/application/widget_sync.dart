@@ -14,18 +14,26 @@ final homeWidgetRepositoryProvider = Provider<HomeWidgetRepository>(
   (_) => HomeWidgetRepository(),
 );
 
-/// Keeps the Android home-screen widgets up to date: the verse of the day
+/// Keeps the home-screen widgets (Android and iOS) up to date: the verse of the day
 /// (the next [dailyDays] days, so it changes at midnight without the app)
 /// and the recently read verses.
 final widgetSyncProvider = Provider<void>((ref) {
-  if (defaultTargetPlatform != TargetPlatform.android) return;
+  if (kIsWeb ||
+      (defaultTargetPlatform != TargetPlatform.android &&
+          defaultTargetPlatform != TargetPlatform.iOS)) {
+    return;
+  }
   final sync = _WidgetSync(ref);
   ref.listen(todayProvider, (_, _) => sync.daily(), fireImmediately: true);
   ref.listen(languageProvider, (_, _) {
     sync.daily();
     sync.history(ref.read(historyProvider).value);
   });
-  ref.listen(historyProvider, (_, next) => sync.history(next.value));
+  ref.listen(
+    historyProvider,
+    (_, next) => sync.history(next.value),
+    fireImmediately: true,
+  );
 });
 
 const dailyDays = 30;

@@ -121,4 +121,23 @@ void main() {
       expect(ordered.map((p) => p.kind), [PlanKind.yearly, PlanKind.lifetime]);
     });
   });
+
+  test('both stores lifetime ids are queried and recognised', () {
+    expect(SadhakProducts.all, {
+      'sadhak_yearly',
+      'sadhak_lifetime',
+      'sadhak_lifetime_ios',
+    });
+  });
+
+  test('each store asks only for its own lifetime id', () {
+    expect(SadhakProducts.forStore(appStore: true), {
+      'sadhak_yearly',
+      'sadhak_lifetime_ios',
+    });
+    expect(SadhakProducts.forStore(appStore: false), {
+      'sadhak_yearly',
+      'sadhak_lifetime',
+    });
+  });
 }

@@ -48,25 +48,12 @@ class SadhakCard extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Wrap(
-                      spacing: Space.s8,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        Text(
-                          'Sadhak',
-                          style: ui.title.copyWith(
-                            fontSize: 20,
-                            color: c.accentText,
-                          ),
-                        ),
-                        Text(
-                          'साधक',
-                          style: ReadingStyles(c, 1).sanskrit.copyWith(
-                            fontSize: 16,
-                            color: c.accentText,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      'Sadhak',
+                      style: ui.title.copyWith(
+                        fontSize: 20,
+                        color: c.accentText,
+                      ),
                     ),
                     const SizedBox(height: Space.s4),
                     Text(subtitle, style: ui.body(size: 14)),

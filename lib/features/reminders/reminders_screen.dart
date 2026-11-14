@@ -129,10 +129,12 @@ class RemindersScreen extends ConsumerWidget {
             'Reminders are scheduled on this phone. Nothing is sent from a '
             'server.',
           ),
-          note(
-            'If reminders arrive late, allow background activity for this '
-            "app in your phone's battery settings.",
-          ),
+          // Battery settings that delay reminders exist on Android only.
+          if (Theme.of(context).platform == TargetPlatform.android)
+            note(
+              'If reminders arrive late, allow background activity for this '
+              "app in your phone's battery settings.",
+            ),
         ],
       ),
     );

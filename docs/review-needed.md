@@ -20,7 +20,7 @@ all of it must be checked **before release**.
 | Hindi word meanings, 2.4 | vedabase.cc source (`tool/.cache/vedabase_cc/hi/bg/2/4.json`) | A comma separates two pairs where a semicolon belongs. The app shows the English list for this verse. If vedabase.cc fixes it, re-run the importer. |
 | Hindi word meanings, 13.8-12 | `tool/.cache/vedabase_cc/hi/bg/13/8-12.json` | One word has no meaning. Same fallback to English. |
 | v3 paywall, stores, copy | `docs/PRD_v3.md` section 10 | Create `sadhak_yearly` and `sadhak_lifetime` in Play Console and App Store Connect, set prices, add testers. |
-| Terms and privacy URLs | `lib/core/config/app_links.dart` | Empty, so the paywall hides those links. The App Store requires both for subscriptions. |
+| Terms and privacy URLs | `lib/core/config/app_links.dart` | Privacy: https://onescrollgita.asynk.in/privacy (both stores). Terms: Apple standard EULA on iOS; Android has no terms link yet. Check the privacy page mentions store purchases. |
 | Paywall wording | `lib/features/premium/paywall_screen.dart`, `lib/domain/premium.dart` (reason lines) | Headline, benefits, badges ("Recommended", "One-time"), terms line, welcome text. |
 | `INTERNET` permission from Play Billing | Play Console data-safety form | Kept by owner decision. Declare Google Play Billing's diagnostic data in the data-safety form. |
 | Real purchase test | phone + test track | Buy, cancel, pending, restore, and a lapsed yearly plan on Android. |
@@ -54,3 +54,13 @@ all of it must be checked **before release**.
 
 `flutter test`, debugging and building an APK were deferred until everything
 was written. The new tests are written but have **not been run**.
+
+## App Store (iOS)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| App Store listing text | `store/app-store-listing.md` | Subtitle, keywords, description (adapted from the Play listing; widgets removed, streak/notification claim changed). |
+| Paywall terms and privacy links | `lib/core/config/app_links.dart` | Set (Apple standard EULA + hosted privacy page). Build 2 on App Store Connect predates this; upload build 3. |
+| Shared links on iPhone | `lib/core/config/app_links.dart` → `appStoreId` | iOS shares the App Store page once `appStoreId` is filled in; until then it shares the Play link. |
+| Sadhak products in App Store Connect | `docs/app-store.md` section 2 | `sadhak_yearly` (subscription), `sadhak_lifetime` (non-consumable), Paid Apps agreement. |
+| Signing team | Xcode → Runner → Signing | Project has team `5MU65B6U3F` (Aniket Jha); confirm it is the publishing account. |
