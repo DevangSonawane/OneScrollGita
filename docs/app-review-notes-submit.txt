@@ -1,0 +1,18 @@
+1. SCREEN RECORDING
+The attached video (app-review-demo.mp4) starts from app launch and shows the typical flow: first-launch welcome, today's verse, the reader (word meanings, English/Hindi switch, swiping between verses, purport), favourite and bookmark, sharing a verse as an image, turning on a local reminder, the free shloka trainer, the paywall with both plans and Restore Purchases, and the paid features unlocked (journal, notes, trainer on any verse, PDF export). The app has no accounts, no login and no user-generated content shared with others, so there is no registration, account deletion, reporting or blocking flow.
+
+2. PURPOSE AND AUDIENCE
+One Scroll Gita is a fully offline reader for the Bhagavad-gita As It Is. It is for people who want to replace a few minutes of phone scrolling with reading one verse a day. Each verse is shown in Sanskrit, transliteration and English or Hindi translation with the full purport, and the app helps readers keep a daily habit, memorise verses and keep personal study notes.
+
+3. HOW TO USE IT
+No account, login, credentials or sample files are needed. After a short welcome screen the Home tab shows today's verse; tap "Read in Gita" and swipe up/down between verses. All scripture (every verse, translation, purport and word meaning), search, the daily verse and reading reminders are free.
+The optional "Sadhak" plan (sadhak_yearly auto-renewable subscription or sadhak_lifetime_ios one-time purchase) unlocks the shloka trainer for any verse, unlimited notes, the journal and PDF export. Open it from the Profile tab (Sadhak card) or by tapping any locked feature. The paywall has Restore Purchases, Terms of Use (Apple standard EULA) and Privacy Policy links.
+
+4. EXTERNAL SERVICES
+Only Apple's In-App Purchase (StoreKit) for the Sadhak plan. The app has no server, no third-party SDKs, no analytics, no ads, no AI services and makes no network calls of its own. All texts are bundled in the app and reminders are local notifications.
+
+5. REGIONAL DIFFERENCES
+None. The app works the same in all regions; only the plan price differs, as set by the App Store per storefront.
+
+6. THIRD-PARTY MATERIAL
+Bhagavad-gita As It Is (c) The Bhaktivedanta Book Trust. The text is from vedabase.cc, used with permission and reproduced without alteration. The attribution is shown in the app under Profile (Credits, and About and credits).
