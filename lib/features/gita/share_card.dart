@@ -47,7 +47,8 @@ class ShareCard extends StatelessWidget {
     final padding = story
         ? const EdgeInsets.fromLTRB(32, 96, 32, 88)
         : const EdgeInsets.fromLTRB(28, 28, 28, 20);
-    final scale = story ? 1.15 : 1.0;
+    // Share images keep the reader's ramp, a little smaller (20 / 22).
+    final k = (story ? 1.15 : 1.0) * ShareCardMetrics.verseTextFactor;
     return Container(
       width: size.width,
       height: size.height,
@@ -67,14 +68,16 @@ class ShareCard extends StatelessWidget {
                     Text(
                       entry.sanskrit.join('\n'),
                       textAlign: TextAlign.center,
-                      style: reading.sanskrit.copyWith(fontSize: 20 * scale),
+                      style: reading.sanskrit.copyWith(
+                        fontSize: ReadingType.shloka * k,
+                      ),
                     ),
                     const SizedBox(height: Space.s12),
                     Text(
                       entry.transliteration.join('\n'),
                       textAlign: TextAlign.center,
                       style: reading.transliteration.copyWith(
-                        fontSize: 13 * scale,
+                        fontSize: ReadingType.transliteration * k,
                       ),
                     ),
                     const SizedBox(height: Space.s16),
@@ -83,7 +86,7 @@ class ShareCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: reading
                           .translation(entry.hasTranslation(lang) ? lang : 'en')
-                          .copyWith(fontSize: 15 * scale),
+                          .copyWith(fontSize: ReadingType.translation * k),
                     ),
                   ],
                 ),

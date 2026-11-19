@@ -14,6 +14,8 @@ import 'package:versescroll/data/audio/audio_catalog.dart';
 import 'package:versescroll/data/audio/audio_engine.dart';
 import 'package:versescroll/data/audio/manifest_source.dart';
 import 'package:versescroll/application/premium_providers.dart';
+import 'package:versescroll/application/reminder_providers.dart';
+import 'package:versescroll/data/notifications/notification_service.dart';
 import 'package:versescroll/application/scripture_providers.dart';
 import 'package:versescroll/application/streak_providers.dart';
 import 'package:versescroll/application/study_providers.dart';
@@ -70,6 +72,9 @@ Future<TestApp> pumpApp(
 
   /// A stand-in for the real manifest (null: the silent preview).
   ManifestSource? audioManifest,
+
+  /// A stand-in for the platform notifications (null: does nothing).
+  NotificationService? notifications,
 }) async {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
   tester.view.devicePixelRatio = 1;
@@ -124,6 +129,8 @@ Future<TestApp> pumpApp(
       purchaseGatewayProvider.overrideWithValue(
         purchases ?? FakePurchaseGateway(),
       ),
+      if (notifications != null)
+        notificationServiceProvider.overrideWithValue(notifications),
     ],
   );
   addTearDown(() async {

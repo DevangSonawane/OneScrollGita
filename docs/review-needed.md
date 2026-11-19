@@ -74,3 +74,28 @@ was written. The new tests are written but have **not been run**.
 | Two samples | — | Send one shloka and one translation recording to tune compression by ear. |
 | Library copy | `lib/features/listen/` | "The Gita, recited. Each shloka, then its meaning." and player labels. |
 | Summaries before recording | `assets/summaries/summaries.json` | Review the written summaries before they are narrated. |
+
+## v5 (stages V5-1, V5-2): check on real phones
+
+| Item | What to check |
+| --- | --- |
+| Tests | `flutter test` was not run for V5-1/V5-2 (owner deferred it to the simulator session). Run it first. |
+| Notifications, iPhone | Reminders on, tap "Send a test notification", lock the phone: it arrives in about 5 s. Then set the reminder 2-3 minutes ahead and close the app. |
+| Notifications, Android | Same as iPhone. On Android 14+, the "Deliver at the exact time" row appears; turn it on in the system page and confirm reminders arrive on the minute. If they still arrive late on Xiaomi/Oppo/Vivo/Samsung, allow background activity in battery settings. |
+| Play Console | The app now declares `SCHEDULE_EXACT_ALARM` (not `USE_EXACT_ALARM`). No declaration form is needed for it, but check the pre-launch report. |
+| Type ramp | Shloka 22, transliteration 17 (was 15), translation 18. Check the reader, Home daily verse, purport, Shravan player and the share image at small and large reading sizes. |
+| Nav pill | Hide it by scrolling down a long verse, then swipe back one verse: it must come back immediately. |
+| Swiping | Swipe through a chapter quickly; it should feel smoother. Pull-to-turn on long verses now needs a shorter pull. |
+| PRD_v5 | Draft. Confirm decisions in section 2 and pick the free-trial length. |
+
+## v5 (stages V5-3 to V5-7)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| First-launch answers | `lib/domain/first_launch.dart` | reviewed:false. Peace -> "peace" theme (first verse 2.66), Guidance -> "confusion", Study -> "knowledge", Learning by heart -> "study". Check each first verse fits. |
+| First-launch copy | `lib/features/first_launch/welcome_screen.dart` | "What brings you to the Gita?", option hints, "Your first verse", "Day 1. A beginning.", "Remind me at ...". |
+| Home | `lib/features/home/home_screen.dart` | Continue button position above the nav pill; "How are you feeling?" card wording and the five themes shown. "A verse for you" card not built: say yes or no. |
+| Chapter end | reader | "Take a moment, then go on when you are ready." and "Reflect on this chapter". Free users get a note (not the journal). |
+| Free trials | Play Console, App Store Connect | Create the trial offers and pick the length. Then open the paywall on a real phone: "7 days free, then ₹X a year" and "Start free trial" should appear; without a trial, nothing about trials shows. |
+| Trial terms wording | `lib/features/premium/paywall_screen.dart` | "... Cancel before the trial ends in Google Play / your App Store settings and you will not be charged." Legal check. |
+| Screenshot captions | `store/v5-screenshot-captions.md` | Draft only, for later. Hindi captions still to write. |

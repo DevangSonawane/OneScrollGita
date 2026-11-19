@@ -313,6 +313,7 @@ class _VerseCard extends ConsumerWidget {
     final entry = ref.watch(entryProvider(verseId)).value;
     final lang = ref.watch(languageProvider);
     final styles = readingStyles(context, ref);
+    final k = PlayerMetrics.verseTextFactor * styles.scale;
     if (entry == null) {
       return const SizedBox(height: Touch.minTarget * 3);
     }
@@ -335,13 +336,13 @@ class _VerseCard extends ConsumerWidget {
           children: [
             Center(child: ReferenceChip(label: 'Bhagavad-gītā ${entry.label}')),
             const SizedBox(height: Space.s12),
-            // A little smaller than the reader: the player is for listening.
+            // A little smaller than the reader, by one even factor.
             if (sanskrit) ...[
               Text(
                 entry.sanskrit.join('\n'),
                 textAlign: TextAlign.center,
                 style: styles.sanskrit.copyWith(
-                  fontSize: (styles.sanskrit.fontSize ?? 22) * 0.82,
+                  fontSize: ReadingType.shloka * k,
                 ),
               ),
               const SizedBox(height: Space.s8),
@@ -349,7 +350,7 @@ class _VerseCard extends ConsumerWidget {
                 entry.transliteration.join('\n'),
                 textAlign: TextAlign.center,
                 style: styles.transliteration.copyWith(
-                  fontSize: (styles.transliteration.fontSize ?? 15) * 0.9,
+                  fontSize: ReadingType.transliteration * k,
                 ),
               ),
             ] else
@@ -358,17 +359,19 @@ class _VerseCard extends ConsumerWidget {
                 entry.translationEn,
                 style: styles
                     .translation('en')
-                    .copyWith(
-                      fontSize:
-                          (styles.translation('en').fontSize ?? 18) * 0.86,
-                    ),
+                    .copyWith(fontSize: ReadingType.translation * k),
                 locale: const Locale('en'),
               ),
             if (sanskrit && lang == 'hi' && entry.hasTranslation('hi')) ...[
               const SizedBox(height: Space.s12),
               Text(
                 entry.translation('hi'),
-                style: styles.translation('hi').copyWith(color: c.textTertiary),
+                style: styles
+                    .translation('hi')
+                    .copyWith(
+                      color: c.textTertiary,
+                      fontSize: ReadingType.translation * k,
+                    ),
               ),
             ],
           ],

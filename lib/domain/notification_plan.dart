@@ -92,7 +92,17 @@ abstract final class ScheduleRules {
 
   /// After this, nothing until the app is opened again.
   static const silentAfter = 30;
+
+  /// A time closer than this is skipped: it could pass while scheduling, and
+  /// the platform rejects times in the past (PRD_v5 section 3.4).
+  static const minLead = Duration(minutes: 1);
+
+  /// "Send a test notification" arrives this long after the tap.
+  static const testDelay = Duration(seconds: 5);
 }
+
+/// Platform id of "Send a test notification"; never a (date, slot) id.
+const testNotificationId = 999999999;
 
 /// Platform id for (date, slot).
 int notificationId(String date, NotifSlot slot) =>

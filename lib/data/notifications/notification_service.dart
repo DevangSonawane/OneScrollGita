@@ -48,17 +48,102 @@ abstract class NotificationService {
 
   Future<void> openSystemSettings();
 
+  /// Cancels pending and delivered notifications (reset, reminders off).
   Future<void> cancelAll();
+
+  /// Cancels pending notifications only; delivered ones stay visible.
+  Future<void> cancelPending();
 
   Future<void> cancel(Iterable<int> ids);
 
   /// Ids of notifications waiting to be delivered.
   Future<List<int>> pendingIds();
 
-  Future<void> schedule(List<NotificationRequest> requests);
+  /// Schedules each request on its own: one failure never stops the rest.
+  Future<ScheduleReport> schedule(List<NotificationRequest> requests);
+
+  /// Android 12+: whether exact alarms are allowed. Always true elsewhere.
+  Future<bool> canScheduleExact();
+
+  /// Android 12+: opens the system page for exact alarms.
+  Future<void> openExactAlarmSettings();
+
+  /// One notification shortly after the tap, to check delivery.
+  Future<void> sendTest({required String title, required String body});
 
   /// Re-reads the device time zone. Returns its name.
   Future<String> refreshTimeZone();
+}
+
+/// What a [NotificationService.schedule] call did.
+class ScheduleReport {
+  const ScheduleReport({
+    this.scheduled = 0,
+    this.skipped = 0,
+    this.failed = 0,
+    this.lastError,
+  });
+
+  static const none = ScheduleReport();
+
+  final int scheduled;
+
+  /// Too soon (less than [ScheduleRules.minLead] away).
+  final int skipped;
+  final int failed;
+  final Object? lastError;
+}
+
+/// Runs [one] for every request at least [ScheduleRules.minLead] after
+/// [now], catching errors per request.
+@visibleForTesting
+Future<ScheduleReport> scheduleEach(
+  List<NotificationRequest> requests,
+  DateTime now,
+  Future<void> Function(NotificationRequest r) one,
+) async {
+  var scheduled = 0, skipped = 0, failed = 0;
+  Object? lastError;
+  final earliest = now.add(ScheduleRules.minLead);
+  for (final r in requests) {
+    if (r.at.isBefore(earliest)) {
+      skipped++;
+      continue;
+    }
+    try {
+      await one(r);
+      scheduled++;
+    } catch (e) {
+      failed++;
+      lastError = e;
+      debugPrint('Notification ${r.id} not scheduled: $e');
+    }
+  }
+  return ScheduleReport(
+    scheduled: scheduled,
+    skipped: skipped,
+    failed: failed,
+    lastError: lastError,
+  );
+}
+
+/// A zone for a device time-zone name the database does not know: the first
+/// zone whose current UTC offset matches the device's, else UTC. Better than
+/// UTC alone, which shifts every reminder by the device's offset.
+@visibleForTesting
+tz.Location zoneForOffset(Duration offset, {DateTime? at}) {
+  final ms = (at ?? DateTime.now()).toUtc().millisecondsSinceEpoch;
+  // Prefer real cities over "Etc/" zones, which have inverted names.
+  final zones = tz.timeZoneDatabase.locations.values.toList()
+    ..sort((a, b) {
+      final ea = a.name.startsWith('Etc/') ? 1 : 0;
+      final eb = b.name.startsWith('Etc/') ? 1 : 0;
+      return ea != eb ? ea - eb : a.name.compareTo(b.name);
+    });
+  for (final z in zones) {
+    if (z.timeZone(ms).offset == offset) return z;
+  }
+  return tz.UTC;
 }
 
 class LocalNotificationService implements NotificationService {
@@ -157,6 +242,43 @@ class LocalNotificationService implements NotificationService {
   Future<void> cancelAll() => _plugin.cancelAll();
 
   @override
+  Future<void> cancelPending() => _plugin.cancelAllPendingNotifications();
+
+  @override
+  Future<bool> canScheduleExact() async {
+    final android = _android;
+    if (android == null) return true;
+    try {
+      return await android.canScheduleExactNotifications() ?? false;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<void> openExactAlarmSettings() async {
+    try {
+      await _android?.requestExactAlarmsPermission();
+    } catch (_) {
+      // Not supported on this version.
+    }
+  }
+
+  @override
+  Future<void> sendTest({required String title, required String body}) =>
+      _zoned(
+        NotificationRequest(
+          id: testNotificationId,
+          at: DateTime.now().add(ScheduleRules.testDelay),
+          category: MessageCategory.invite,
+          title: title,
+          body: body,
+        ),
+        exact: true,
+        exactSeconds: true,
+      );
+
+  @override
   Future<List<int>> pendingIds() async => [
     for (final r in await _plugin.pendingNotificationRequests()) r.id,
   ];
@@ -169,37 +291,59 @@ class LocalNotificationService implements NotificationService {
   }
 
   @override
-  Future<void> schedule(List<NotificationRequest> requests) async {
+  Future<ScheduleReport> schedule(List<NotificationRequest> requests) async {
     assert(requests.length <= ScheduleRules.maxPending);
-    for (final r in requests) {
-      final (channelId, channelName) =
-          _channels[r.category] ?? _channels[MessageCategory.invite]!;
-      await _plugin.zonedSchedule(
-        id: r.id,
-        scheduledDate: tz.TZDateTime(
-          tz.local,
-          r.at.year,
-          r.at.month,
-          r.at.day,
-          r.at.hour,
-          r.at.minute,
+    final exact = await canScheduleExact();
+    return scheduleEach(
+      requests,
+      DateTime.now(),
+      (r) => _zoned(r, exact: exact),
+    );
+  }
+
+  Future<void> _zoned(
+    NotificationRequest r, {
+    required bool exact,
+    bool exactSeconds = false,
+  }) {
+    final (channelId, channelName) =
+        _channels[r.category] ?? _channels[MessageCategory.invite]!;
+    final at = r.at;
+    return _plugin.zonedSchedule(
+      id: r.id,
+      scheduledDate: exactSeconds
+          ? tz.TZDateTime.from(at, tz.local)
+          : tz.TZDateTime(
+              tz.local,
+              at.year,
+              at.month,
+              at.day,
+              at.hour,
+              at.minute,
+            ),
+      notificationDetails: NotificationDetails(
+        android: AndroidNotificationDetails(
+          channelId,
+          channelName,
+          icon: 'ic_notification',
+          styleInformation: BigTextStyleInformation(r.body),
         ),
-        notificationDetails: NotificationDetails(
-          android: AndroidNotificationDetails(
-            channelId,
-            channelName,
-            icon: 'ic_notification',
-            styleInformation: BigTextStyleInformation(r.body),
-          ),
-          iOS: const DarwinNotificationDetails(),
+        iOS: const DarwinNotificationDetails(
+          presentAlert: true,
+          presentBanner: true,
+          presentList: true,
+          presentSound: true,
         ),
-        // Inexact: no exact-alarm permission; a few minutes late is fine.
-        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-        title: r.title,
-        body: r.body,
-        payload: r.payload,
-      );
-    }
+      ),
+      // Exact when the system already allows it; inexact otherwise (a few
+      // minutes late, or more under heavy battery saving).
+      androidScheduleMode: exact
+          ? AndroidScheduleMode.exactAllowWhileIdle
+          : AndroidScheduleMode.inexactAllowWhileIdle,
+      title: r.title,
+      body: r.body,
+      payload: r.payload,
+    );
   }
 
   @override
@@ -209,9 +353,10 @@ class LocalNotificationService implements NotificationService {
       tz.setLocalLocation(tz.getLocation(info.identifier));
       return info.identifier;
     } catch (e) {
-      debugPrint('Time zone not found, using UTC: $e');
-      tz.setLocalLocation(tz.UTC);
-      return 'UTC';
+      final zone = zoneForOffset(DateTime.now().timeZoneOffset);
+      debugPrint('Time zone not found, using ${zone.name}: $e');
+      tz.setLocalLocation(zone);
+      return zone.name;
     }
   }
 }
@@ -237,7 +382,16 @@ class NoopNotificationService implements NotificationService {
   @override
   Future<List<int>> pendingIds() async => const [];
   @override
-  Future<void> schedule(List<NotificationRequest> requests) async {}
+  Future<void> cancelPending() async {}
+  @override
+  Future<ScheduleReport> schedule(List<NotificationRequest> requests) async =>
+      ScheduleReport.none;
+  @override
+  Future<bool> canScheduleExact() async => true;
+  @override
+  Future<void> openExactAlarmSettings() async {}
+  @override
+  Future<void> sendTest({required String title, required String body}) async {}
   @override
   Future<String> refreshTimeZone() async => 'UTC';
 }

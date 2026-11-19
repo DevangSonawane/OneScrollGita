@@ -149,7 +149,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     header: true,
                     child: Text(
                       'Your library',
-                      style: ui.title.copyWith(fontSize: 25),
+                      style: ui.title.copyWith(fontSize: TitleSizes.section),
                     ),
                   ),
                 ),

@@ -42,7 +42,7 @@ class CompletionShareCard extends StatelessWidget {
             Text(
               '${stats.currentStreak}',
               style: ui.title.copyWith(
-                fontSize: 96,
+                fontSize: TitleSizes.shareStat,
                 height: 1,
                 color: c.accentText,
               ),

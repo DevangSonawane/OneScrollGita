@@ -42,6 +42,10 @@ void main() {
     await tester.pump();
     await tester.tap(find.text('Begin'));
     await settle(tester);
+    // v5: the guided steps can be skipped straight to Home.
+    expect(find.text('What brings you to the Gita?'), findsOneWidget);
+    await tester.tap(find.text('Skip'));
+    await settle(tester);
     expect(find.text("TODAY'S VERSE"), findsOneWidget);
     final s = app.container.read(settingsProvider);
     expect(s.firstLaunchDone, isTrue);

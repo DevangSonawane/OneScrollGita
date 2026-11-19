@@ -3,6 +3,7 @@ import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../application/premium_providers.dart';
 import '../../application/study_providers.dart';
 import '../../core/design/glass.dart';
 import '../../core/design/motion.dart';
@@ -22,6 +23,17 @@ void openNoteOrPaywall(BuildContext context, WidgetRef ref, String verseId) {
     openNote(context, verseId);
   } else {
     openPaywall(context, reason: PremiumFeature.unlimitedNotes);
+  }
+}
+
+/// "Reflect on this chapter" (PRD_v5 section 5): a journal entry linked to
+/// the chapter's last verse for Sadhak, otherwise a free note on it (or the
+/// paywall once the free note limit is reached, as everywhere else).
+void reflectOnChapter(BuildContext context, WidgetRef ref, String verseId) {
+  if (canUse(PremiumFeature.journal, ref.read(entitlementProvider))) {
+    context.push('/journal-edit?verse=${Uri.encodeQueryComponent(verseId)}');
+  } else {
+    openNoteOrPaywall(context, ref, verseId);
   }
 }
 

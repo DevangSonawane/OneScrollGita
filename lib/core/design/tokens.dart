@@ -202,6 +202,25 @@ abstract final class StreakMetrics {
 }
 
 /// Navigation pill geometry.
+/// Home (PRD_v5 section 5).
+abstract final class HomeMetrics {
+  /// The Continue button above the nav pill.
+  static const continueHeight = 52.0;
+}
+
+/// Reader page behaviour.
+abstract final class ReaderMetrics {
+  /// Deliberate over-pull, from a drag that starts at a long verse's edge,
+  /// that turns the page. Momentum from a flick never turns it.
+  static const pullToTurn = 40.0;
+
+  /// How close to an edge still counts as "at the edge".
+  static const edgeSlop = 2.0;
+
+  /// Height of the "more below" fade above the nav area.
+  static const moreFade = 72.0;
+}
+
 abstract final class NavBarMetrics {
   static const height = 52.0;
   static const maxWidth = 300.0;
@@ -392,7 +411,16 @@ abstract final class TrainerMetrics {
 }
 
 /// Shravan audio: Listen pill, mini player and full player.
+/// Verse share image.
+abstract final class ShareCardMetrics {
+  /// Verse text relative to the reader ramp (shloka 22 -> 20).
+  static const verseTextFactor = 20 / 22;
+}
+
 abstract final class PlayerMetrics {
+  /// Verse text in the player, relative to the reader (keeps the ramp).
+  static const verseTextFactor = 0.86;
+
   /// The Listen pill: icon only on narrow screens, icon + label otherwise.
   static const pillCompact = 52.0;
   static const pillWide = 116.0;

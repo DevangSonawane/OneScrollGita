@@ -141,7 +141,12 @@ class SadhakPlan {
     required this.rawPrice,
     required this.currencySymbol,
     this.isDemo = false,
+    this.trial,
   });
+
+  /// The store's introductory free trial for this account, if it offers one
+  /// (PRD_v5 section 6). Never invented by the app.
+  final FreeTrial? trial;
 
   final String id;
   final PlanKind kind;
@@ -161,6 +166,47 @@ class SadhakPlan {
     final m = rawPrice / 12;
     return '$currencySymbol${m.toStringAsFixed(m >= 10 ? 0 : 2)}';
   }
+}
+
+enum TrialUnit { day, week, month }
+
+/// A free introductory period, as the store describes it.
+class FreeTrial {
+  const FreeTrial(this.count, this.unit);
+
+  final int count;
+  final TrialUnit unit;
+
+  /// "7 days free", "1 month free".
+  String get label {
+    final word = switch (unit) {
+      TrialUnit.day => 'day',
+      TrialUnit.week => 'week',
+      TrialUnit.month => 'month',
+    };
+    return '$count $word${count == 1 ? '' : 's'} free';
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is FreeTrial && other.count == count && other.unit == unit;
+
+  @override
+  int get hashCode => Object.hash(count, unit);
+}
+
+/// Parses a Google Play billing period such as "P7D", "P1W" or "P1M".
+/// Null for anything else (years, mixed periods).
+FreeTrial? parseTrialPeriod(String period) {
+  final m = RegExp(r'^P(\d+)([DWM])$').firstMatch(period.trim());
+  if (m == null) return null;
+  final n = int.parse(m.group(1)!);
+  if (n <= 0) return null;
+  return FreeTrial(n, switch (m.group(2)) {
+    'D' => TrialUnit.day,
+    'W' => TrialUnit.week,
+    _ => TrialUnit.month,
+  });
 }
 
 /// Sorts plans in display order: yearly first, then lifetime.

@@ -146,6 +146,9 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
   }
 
   void _onPageChanged(int i) {
+    debugPrint('SWIPELOG page $_index -> $i'); // TEMP-SWIPE-LOG
+    // Going back a verse (swipe or pull-to-turn) always brings the nav back.
+    if (i < _index) ref.read(navBarVisibleProvider.notifier).show();
     setState(() => _index = i);
     _onSettled();
     final e = current;
@@ -290,6 +293,7 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
 
   /// Turns the page when a long verse is pulled past its end.
   void _turn(int direction) {
+    debugPrint('SWIPELOG pull-turn $direction'); // TEMP-SWIPE-LOG
     final pages = _pages;
     if (pages == null || !pages.hasClients) return;
     final duration = Motion.of(context).pageSwap;
@@ -311,40 +315,55 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
         onDoubleTapDown: (d) => _lastDoubleTap = d.localPosition,
         onDoubleTap: () => _like(_lastDoubleTap),
         // Reels-style: swipe up for the next verse, down for the previous.
-        child: PageView.builder(
-          key: ValueKey('chapter-$_chapter'),
-          controller: pages,
-          scrollDirection: Axis.vertical,
-          onPageChanged: _onPageChanged,
-          itemCount: entries.length,
-          itemBuilder: (context, i) {
-            final page = _EntryPage(
-              entry: entries[i],
-              isLast: i == entries.length - 1,
-              topPadding: topPad,
-              onNextChapter: (n) => _open(formatVerseId(n, 1), animate: false),
-              onPullPastEdge: _turn,
-            );
-            if (reduced) return page;
-            // Neighbouring pages fade to 60% and shift 12 px.
-            return AnimatedBuilder(
-              animation: pages,
-              builder: (context, child) {
-                var delta = 0.0;
-                if (pages.hasClients && pages.position.haveDimensions) {
-                  delta = (pages.page! - i).clamp(-1.0, 1.0);
-                }
-                return Opacity(
-                  opacity: 1 - 0.4 * delta.abs(),
-                  child: Transform.translate(
-                    offset: Offset(0, delta * 12),
-                    child: child,
-                  ),
-                );
-              },
-              child: page,
-            );
+        child: NotificationListener<ScrollNotification>(
+          // TEMP-SWIPE-LOG
+          onNotification: (n) {
+            if (n.depth == 0 && n is! ScrollUpdateNotification) {
+              debugPrint(
+                'SWIPELOG pager ${n.runtimeType} '
+                'drag=${n is ScrollStartNotification ? n.dragDetails != null : '-'}',
+              );
+            }
+            return false;
           },
+          child: PageView.builder(
+            key: ValueKey('chapter-$_chapter'),
+            controller: pages,
+            scrollDirection: Axis.vertical,
+            onPageChanged: _onPageChanged,
+            itemCount: entries.length,
+            itemBuilder: (context, i) {
+              final page = _EntryPage(
+                entry: entries[i],
+                isLast: i == entries.length - 1,
+                topPadding: topPad,
+                onNextChapter: (n) =>
+                    _open(formatVerseId(n, 1), animate: false),
+                onPullPastEdge: _turn,
+              );
+              if (reduced) return page;
+              // Neighbouring pages fade to 60% and shift 12 px. The boundary
+              // keeps the verse text from repainting on every swipe frame.
+              final painted = RepaintBoundary(child: page);
+              return AnimatedBuilder(
+                animation: pages,
+                builder: (context, child) {
+                  var delta = 0.0;
+                  if (pages.hasClients && pages.position.haveDimensions) {
+                    delta = (pages.page! - i).clamp(-1.0, 1.0);
+                  }
+                  return Opacity(
+                    opacity: 1 - 0.4 * delta.abs(),
+                    child: Transform.translate(
+                      offset: Offset(0, delta * 12),
+                      child: child,
+                    ),
+                  );
+                },
+                child: painted,
+              );
+            },
+          ),
         ),
       ),
     );
@@ -562,27 +581,58 @@ class _EntryPage extends ConsumerStatefulWidget {
 }
 
 class _EntryPageState extends ConsumerState<_EntryPage> {
-  static const _pullToTurn = 48.0;
   double _pull = 0;
   bool _turned = false;
   bool _sharing = false;
 
+  /// Where the current drag began: only a drag that starts at an edge may
+  /// turn the page, so reading to the end of a long verse never does.
+  bool _dragFromTop = false;
+  bool _dragFromBottom = false;
+
+  /// More verse text below the fold (shows a soft fade).
+  bool _moreBelow = false;
+
   /// The folded study tools (highlight, note, learn by heart).
   bool _moreOpen = false;
 
+  void _updateMore(ScrollMetrics m) {
+    final more = m.extentAfter > ReaderMetrics.edgeSlop;
+    if (more != _moreBelow && mounted) setState(() => _moreBelow = more);
+  }
+
   bool _onScroll(ScrollNotification n) {
+    // TEMP-SWIPE-LOG
+    if (n is! ScrollUpdateNotification) {
+      debugPrint(
+        'SWIPELOG inner ${n.runtimeType} d=${n.depth} '
+        'px=${n.metrics.pixels.toStringAsFixed(0)} '
+        'max=${n.metrics.maxScrollExtent.toStringAsFixed(0)} '
+        'vp=${n.metrics.viewportDimension.toStringAsFixed(0)} '
+        '${n is OverscrollNotification ? 'os=${n.overscroll.toStringAsFixed(1)} drag=${n.dragDetails != null}' : ''}',
+      );
+    }
     if (n.depth != 0) return false;
+    final m = n.metrics;
     if (n is ScrollStartNotification) {
       _pull = 0;
       _turned = false;
+      _dragFromTop = m.extentBefore <= ReaderMetrics.edgeSlop;
+      _dragFromBottom = m.extentAfter <= ReaderMetrics.edgeSlop;
     } else if (n is OverscrollNotification) {
-      // Drags and flicks both count, so a quick swipe at the edge turns.
-      _pull +=
-          n.overscroll + n.velocity.sign * (n.dragDetails == null ? 24 : 0);
-      if (!_turned && _pull.abs() > _pullToTurn) {
-        _turned = true;
-        widget.onPullPastEdge(_pull.sign.toInt());
+      // Only a deliberate pull turns: never momentum from a flick, and
+      // never a drag that began mid-verse and ran into the edge.
+      final allowed = n.overscroll > 0 ? _dragFromBottom : _dragFromTop;
+      if (n.dragDetails != null && allowed) {
+        _pull += n.overscroll;
+        if (!_turned && _pull.abs() > ReaderMetrics.pullToTurn) {
+          _turned = true;
+          widget.onPullPastEdge(_pull.sign.toInt());
+        }
       }
+    }
+    if (n is ScrollUpdateNotification || n is ScrollEndNotification) {
+      _updateMore(m);
     }
     return false;
   }
@@ -617,140 +667,200 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
     final ui = UiStyles(c);
     final entry = widget.entry;
     final next = nextChapter(entry.chapter);
-    return NotificationListener<ScrollNotification>(
-      onNotification: _onScroll,
-      child: SingleChildScrollView(
-        // Clamping, so pulling past the end reports an overscroll.
-        physics: const ClampingScrollPhysics(),
-        padding: EdgeInsets.only(
-          top: widget.topPadding + Space.s32,
-          bottom: navBarInset(context),
-          left: Space.readingSide,
-          right: Space.readingSide,
-        ),
-        child: ContentWidth(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              VerseTextBlock(
-                entry: entry,
-                copyable: true,
-                showWordMeanings: true,
-                highlight: ref.watch(highlightForProvider(entry.id)),
-              ),
-              const SizedBox(height: Space.s24),
-              // Heart, bookmark and share stay out; the study tools fold
-              // away behind "More". Wraps at large text sizes.
-              Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                runSpacing: Space.s4,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SaveToggleButton(
-                        verseId: entry.id,
-                        kind: SaveKind.favourite,
-                      ),
-                      SaveToggleButton(
-                        verseId: entry.id,
-                        kind: SaveKind.bookmark,
-                      ),
-                      Builder(
-                        builder: (buttonContext) => Pressable(
-                          onTap: _sharing ? null : () => _share(buttonContext),
-                          semanticLabel: 'Share verse',
+    final page = NotificationListener<ScrollMetricsNotification>(
+      onNotification: (n) {
+        if (n.depth == 0) _updateMore(n.metrics);
+        return false;
+      },
+      child: NotificationListener<ScrollNotification>(
+        onNotification: _onScroll,
+        child: SingleChildScrollView(
+          // Clamping, so pulling past the end reports an overscroll.
+          physics: const ClampingScrollPhysics(),
+          padding: EdgeInsets.only(
+            top: widget.topPadding + Space.s32,
+            bottom: navBarInset(context),
+            left: Space.readingSide,
+            right: Space.readingSide,
+          ),
+          child: ContentWidth(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                VerseTextBlock(
+                  entry: entry,
+                  copyable: true,
+                  showWordMeanings: true,
+                  highlight: ref.watch(highlightForProvider(entry.id)),
+                ),
+                const SizedBox(height: Space.s24),
+                // Heart, bookmark and share stay out; the study tools fold
+                // away behind "More". Wraps at large text sizes.
+                Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  runSpacing: Space.s4,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SaveToggleButton(
+                          verseId: entry.id,
+                          kind: SaveKind.favourite,
+                        ),
+                        SaveToggleButton(
+                          verseId: entry.id,
+                          kind: SaveKind.bookmark,
+                        ),
+                        Builder(
+                          builder: (buttonContext) => Pressable(
+                            onTap: _sharing
+                                ? null
+                                : () => _share(buttonContext),
+                            semanticLabel: 'Share verse',
+                            child: SizedBox.square(
+                              dimension: Touch.minTarget,
+                              child: Icon(
+                                Theme.of(context).platform == TargetPlatform.iOS
+                                    ? Icons.ios_share_rounded
+                                    : Icons.share_rounded,
+                                size: IconSizes.regular,
+                                color: c.textSecondary,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Pressable(
+                          onTap: () => setState(() => _moreOpen = !_moreOpen),
+                          semanticLabel: _moreOpen
+                              ? 'Hide study tools'
+                              : 'More: highlight, note, learn by heart',
+                          selected: _moreOpen,
                           child: SizedBox.square(
                             dimension: Touch.minTarget,
-                            child: Icon(
-                              Theme.of(context).platform == TargetPlatform.iOS
-                                  ? Icons.ios_share_rounded
-                                  : Icons.share_rounded,
-                              size: IconSizes.regular,
-                              color: c.textSecondary,
+                            child: AnimatedRotation(
+                              turns: _moreOpen ? 0.25 : 0,
+                              duration: Motion.of(context).crossFade,
+                              child: Icon(
+                                LucideIcons.ellipsis,
+                                size: IconSizes.regular,
+                                color: _moreOpen
+                                    ? c.accentText
+                                    : c.textSecondary,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Pressable(
-                        onTap: () => setState(() => _moreOpen = !_moreOpen),
-                        semanticLabel: _moreOpen
-                            ? 'Hide study tools'
-                            : 'More: highlight, note, learn by heart',
-                        selected: _moreOpen,
-                        child: SizedBox.square(
-                          dimension: Touch.minTarget,
-                          child: AnimatedRotation(
-                            turns: _moreOpen ? 0.25 : 0,
-                            duration: Motion.of(context).crossFade,
-                            child: Icon(
-                              LucideIcons.ellipsis,
-                              size: IconSizes.regular,
-                              color: _moreOpen ? c.accentText : c.textSecondary,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  if (entry.hasPurport)
-                    FilledButton(
-                      style: compactButtonStyle(context),
-                      onPressed: () => openPurport(context, entry.id),
-                      child: const Text('Purport'),
+                      ],
                     ),
-                ],
-              ),
-              AnimatedSize(
-                duration: Motion.of(context).crossFade,
-                curve: AppCurves.standard,
-                alignment: Alignment.topLeft,
-                child: !_moreOpen
-                    ? const SizedBox(width: double.infinity)
-                    : Padding(
-                        padding: const EdgeInsets.only(top: Space.s4),
-                        child: Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: Space.s4,
-                          children: [
-                            HighlightButton(verseId: entry.id),
-                            NoteButton(verseId: entry.id),
-                            LearnByHeartButton(verseId: entry.id),
-                          ],
-                        ),
+                    if (entry.hasPurport)
+                      FilledButton(
+                        style: compactButtonStyle(context),
+                        onPressed: () => openPurport(context, entry.id),
+                        child: const Text('Purport'),
                       ),
-              ),
-              if (widget.isLast) ...[
-                const SizedBox(height: Space.s32),
-                const Divider(),
-                const SizedBox(height: Space.s16),
-                if (next != null)
-                  Center(
-                    child: TextButton(
+                  ],
+                ),
+                AnimatedSize(
+                  duration: Motion.of(context).crossFade,
+                  curve: AppCurves.standard,
+                  alignment: Alignment.topLeft,
+                  child: !_moreOpen
+                      ? const SizedBox(width: double.infinity)
+                      : Padding(
+                          padding: const EdgeInsets.only(top: Space.s4),
+                          child: Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: Space.s4,
+                            children: [
+                              HighlightButton(verseId: entry.id),
+                              NoteButton(verseId: entry.id),
+                              LearnByHeartButton(verseId: entry.id),
+                            ],
+                          ),
+                        ),
+                ),
+                if (widget.isLast) ...[
+                  const SizedBox(height: Space.s32),
+                  const Divider(),
+                  const SizedBox(height: Space.s16),
+                  if (next != null) ...[
+                    Text(
+                      'End of Chapter ${entry.chapter}',
+                      textAlign: TextAlign.center,
+                      style: ui.emptyTitle,
+                    ),
+                    const SizedBox(height: Space.s8),
+                    Text(
+                      'Take a moment, then go on when you are ready.',
+                      textAlign: TextAlign.center,
+                      style: ui.body(),
+                    ),
+                    const SizedBox(height: Space.s16),
+                    // Two equal choices; nothing advances on its own.
+                    FilledButton(
                       onPressed: () => widget.onNextChapter(next),
                       child: Text('Continue to Chapter $next'),
                     ),
-                  )
-                else ...[
-                  Text(
-                    'You have reached the end of the Gita',
-                    textAlign: TextAlign.center,
-                    style: ui.emptyTitle,
-                  ),
-                  const SizedBox(height: Space.s8),
-                  Center(
-                    child: TextButton(
-                      onPressed: () => widget.onNextChapter(1),
-                      child: const Text('Begin again at Chapter 1'),
+                    const SizedBox(height: Space.s8),
+                    OutlinedButton(
+                      onPressed: () => reflectOnChapter(context, ref, entry.id),
+                      child: const Text('Reflect on this chapter'),
                     ),
-                  ),
+                  ] else ...[
+                    Text(
+                      'You have reached the end of the Gita',
+                      textAlign: TextAlign.center,
+                      style: ui.emptyTitle,
+                    ),
+                    const SizedBox(height: Space.s8),
+                    const SizedBox(height: Space.s8),
+                    OutlinedButton(
+                      onPressed: () => reflectOnChapter(context, ref, entry.id),
+                      child: const Text('Reflect on what you read'),
+                    ),
+                    Center(
+                      child: TextButton(
+                        onPressed: () => widget.onNextChapter(1),
+                        child: const Text('Begin again at Chapter 1'),
+                      ),
+                    ),
+                  ],
                 ],
               ],
-            ],
+            ),
           ),
         ),
       ),
+    );
+    final c2 = AppColors.of(context);
+    return Stack(
+      children: [
+        page,
+        // A soft fade says "there is more below" on long verses.
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: navBarInset(context) + ReaderMetrics.moreFade,
+          child: IgnorePointer(
+            child: AnimatedOpacity(
+              opacity: _moreBelow ? 1 : 0,
+              duration: Motion.of(context).crossFade,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [c2.bg.withValues(alpha: 0), c2.bg],
+                    stops: const [0, 0.7],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

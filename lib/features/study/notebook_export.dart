@@ -388,7 +388,10 @@ class _CoverPage extends StatelessWidget {
         children: [
           const LotusMark(size: PaywallMetrics.lotusIcon * 2),
           const SizedBox(height: Space.s24),
-          Text('My Gita notebook', style: ui.title.copyWith(fontSize: 30)),
+          Text(
+            'My Gita notebook',
+            style: ui.title.copyWith(fontSize: TitleSizes.cover),
+          ),
           const SizedBox(height: Space.s8),
           Text(formatLongDate(date), style: ui.body(size: 15)),
           const SizedBox(height: Space.s4),
@@ -469,7 +472,7 @@ class _VersePageView extends StatelessWidget {
       children: [
         Text(
           'Bhagavad-gītā ${e.label}',
-          style: ui.title.copyWith(fontSize: 20),
+          style: ui.title.copyWith(fontSize: TitleSizes.cardSmall),
         ),
         Text(
           index.chapter(e.chapter).title(lang),
@@ -536,7 +539,7 @@ class _JournalPageView extends StatelessWidget {
         const SizedBox(height: Space.s4),
         Text(
           formatLongDate(page.entry.createdAt),
-          style: ui.title.copyWith(fontSize: 18),
+          style: ui.title.copyWith(fontSize: TitleSizes.caption),
         ),
         if (e != null) ...[
           const SizedBox(height: Space.s12),

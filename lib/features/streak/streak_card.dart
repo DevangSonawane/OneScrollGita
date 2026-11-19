@@ -41,7 +41,7 @@ class StreakCard extends ConsumerWidget {
                           Text(
                             '${s.currentStreak}',
                             style: ui.title.copyWith(
-                              fontSize: 36,
+                              fontSize: TitleSizes.stat,
                               height: 1,
                               color: c.accentText,
                             ),

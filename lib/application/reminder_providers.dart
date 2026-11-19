@@ -18,12 +18,35 @@ final notificationServiceProvider = Provider<NotificationService>(
 );
 
 class ReminderState {
-  const ReminderState(this.settings, {this.permissionDenied = false});
+  const ReminderState(
+    this.settings, {
+    this.permissionDenied = false,
+    this.exactAllowed = true,
+    this.lastError,
+  });
 
   final ReminderSettings settings;
 
   /// The system refused notifications the last time we asked or checked.
   final bool permissionDenied;
+
+  /// Android 12+: exact alarms allowed (always true elsewhere).
+  final bool exactAllowed;
+
+  /// The last scheduling error, shown in debug builds only.
+  final String? lastError;
+
+  ReminderState copyWith({
+    ReminderSettings? settings,
+    bool? permissionDenied,
+    bool? exactAllowed,
+    String? Function()? lastError,
+  }) => ReminderState(
+    settings ?? this.settings,
+    permissionDenied: permissionDenied ?? this.permissionDenied,
+    exactAllowed: exactAllowed ?? this.exactAllowed,
+    lastError: lastError == null ? this.lastError : lastError(),
+  );
 }
 
 final reminderControllerProvider =
@@ -41,7 +64,7 @@ class ReminderController extends Notifier<ReminderState> {
   NotificationService get _svc => ref.read(notificationServiceProvider);
 
   Future<void> _save(ReminderSettings s) async {
-    state = ReminderState(s, permissionDenied: state.permissionDenied);
+    state = state.copyWith(settings: s);
     await ref.read(settingsRepositoryProvider).saveReminders(s);
     await rebuild();
   }
@@ -56,13 +79,13 @@ class ReminderController extends Notifier<ReminderState> {
     final granted =
         await _svc.hasPermission() || await _svc.requestPermission();
     if (!granted) {
-      state = ReminderState(
-        state.settings.copyWith(remindersEnabled: false),
+      state = state.copyWith(
+        settings: state.settings.copyWith(remindersEnabled: false),
         permissionDenied: true,
       );
       return false;
     }
-    state = ReminderState(state.settings);
+    state = state.copyWith(permissionDenied: false);
     await _save(state.settings.copyWith(remindersEnabled: true));
     return true;
   }
@@ -80,6 +103,22 @@ class ReminderController extends Notifier<ReminderState> {
       _save(state.settings.copyWith(verseNotifsEnabled: on));
 
   Future<void> openSystemSettings() => _svc.openSystemSettings();
+
+  /// Opens the Android exact-alarm page; the state updates on resume.
+  Future<void> openExactAlarmSettings() => _svc.openExactAlarmSettings();
+
+  /// "Send a test notification": arrives a few seconds later.
+  Future<void> sendTest() async {
+    try {
+      await _svc.init();
+      await _svc.sendTest(
+        title: 'Reminders are working',
+        body: 'This is how your daily reminder will look.',
+      );
+    } catch (e) {
+      state = state.copyWith(lastError: () => '$e');
+    }
+  }
 
   /// On every app open and resume: remember the day, then rebuild (this
   /// also catches time-zone and clock changes).
@@ -111,13 +150,17 @@ class ReminderController extends Notifier<ReminderState> {
       _again = true;
       return _running!;
     }
-    final run = _rebuild().catchError((Object _) {}).whenComplete(() {
-      _running = null;
-      if (_again) {
-        _again = false;
-        rebuild();
-      }
-    });
+    final run = _rebuild()
+        .catchError((Object e) {
+          state = state.copyWith(lastError: () => '$e');
+        })
+        .whenComplete(() {
+          _running = null;
+          if (_again) {
+            _again = false;
+            rebuild();
+          }
+        });
     return _running = run;
   }
 
@@ -125,14 +168,16 @@ class ReminderController extends Notifier<ReminderState> {
     final svc = _svc;
     await svc.init();
     await svc.refreshTimeZone();
-    await svc.cancelAll();
+    // Pending only: notifications already delivered stay visible.
+    await svc.cancelPending();
     final s = state.settings;
     if (!s.remindersEnabled) return;
     if (!await svc.hasPermission()) {
-      state = ReminderState(s, permissionDenied: true);
+      state = state.copyWith(permissionDenied: true);
       return;
     }
-    if (state.permissionDenied) state = ReminderState(s);
+    final exact = await svc.canScheduleExact();
+    state = state.copyWith(permissionDenied: false, exactAllowed: exact);
 
     final clock = ref.read(clockProvider);
     final now = clock();
@@ -213,7 +258,12 @@ class ReminderController extends Notifier<ReminderState> {
         );
       }
     }
-    await svc.schedule(requests);
+    final report = await svc.schedule(requests);
+    state = state.copyWith(
+      lastError: () => report.lastError == null
+          ? null
+          : '${report.failed} not scheduled: ${report.lastError}',
+    );
     await prefs.setLastScheduleRebuildAt(now);
   }
 

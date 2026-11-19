@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 
+import '../../application/core_providers.dart';
 import '../../application/scripture_providers.dart';
+import '../../application/search_providers.dart';
 import '../../application/streak_providers.dart';
 import '../../application/ui_providers.dart';
 import '../../core/design/components.dart';
@@ -56,73 +58,93 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final daily = ref.watch(dailyEntryProvider);
 
     return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: ContentWidth(
-          child: CustomScrollView(
-            controller: _scroll,
-            slivers: [
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(
-                  Space.readingSide,
-                  Space.s16,
-                  Space.readingSide - 4,
-                  0,
-                ),
-                sliver: SliverToBoxAdapter(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          formatLongDate(today),
-                          style: ui.label(color: c.textSecondary, size: 14),
-                        ),
+      body: Stack(
+        children: [
+          SafeArea(
+            bottom: false,
+            child: ContentWidth(
+              child: CustomScrollView(
+                controller: _scroll,
+                slivers: [
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(
+                      Space.readingSide,
+                      Space.s16,
+                      Space.readingSide - 4,
+                      0,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              formatLongDate(today),
+                              style: ui.label(color: c.textSecondary, size: 14),
+                            ),
+                          ),
+                          const LanguageToggle(),
+                          const SizedBox(width: Space.s8),
+                          IconButton(
+                            tooltip: 'Search',
+                            icon: const Icon(Icons.search_rounded),
+                            onPressed: () => openSearch(context),
+                          ),
+                        ],
                       ),
-                      const LanguageToggle(),
-                      const SizedBox(width: Space.s8),
-                      IconButton(
-                        tooltip: 'Search',
-                        icon: const Icon(Icons.search_rounded),
-                        onPressed: () => openSearch(context),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: switch (daily) {
-                  AsyncData(:final value) => AnimatedSwitcher(
-                    duration: AppDurations.base,
-                    child: _DailyVerse(key: ValueKey(value.id), entry: value),
-                  ),
-                  AsyncError(:final error) => Padding(
-                    padding: const EdgeInsets.only(top: Space.s48),
-                    child: LoadError(
-                      error: error,
-                      onRetry: () => ref.invalidate(dailyEntryProvider),
                     ),
                   ),
-                  // Plain background, no spinner, while parsing (<300 ms).
-                  _ => const SizedBox(height: 400),
-                },
-              ),
-              // A hairline sets "Continue" apart from today's verse.
-              const SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    Space.readingSide,
-                    Space.s24,
-                    Space.readingSide,
-                    Space.s8,
+                  SliverToBoxAdapter(
+                    child: switch (daily) {
+                      AsyncData(:final value) => AnimatedSwitcher(
+                        duration: AppDurations.base,
+                        child: _DailyVerse(
+                          key: ValueKey(value.id),
+                          entry: value,
+                        ),
+                      ),
+                      AsyncError(:final error) => Padding(
+                        padding: const EdgeInsets.only(top: Space.s48),
+                        child: LoadError(
+                          error: error,
+                          onRetry: () => ref.invalidate(dailyEntryProvider),
+                        ),
+                      ),
+                      // Plain background, no spinner, while parsing (<300 ms).
+                      _ => const SizedBox(height: 400),
+                    },
                   ),
-                  child: Divider(),
-                ),
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        Space.readingSide,
+                        Space.s32,
+                        Space.readingSide,
+                        0,
+                      ),
+                      child: FeelingsCard(),
+                    ),
+                  ),
+                  // Room for the Continue button above the nav pill.
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height:
+                          navBarInset(context) +
+                          HomeMetrics.continueHeight +
+                          Space.s24,
+                    ),
+                  ),
+                ],
               ),
-              const SliverToBoxAdapter(child: ContinueRow()),
-              SliverToBoxAdapter(child: SizedBox(height: navBarInset(context))),
-            ],
+            ),
           ),
-        ),
+          // The next step, always in thumb reach (PRD_v5 section 5).
+          Positioned(
+            left: Space.readingSide,
+            right: Space.readingSide,
+            bottom: navBarInset(context) - Space.s8,
+            child: const ContentWidth(child: ContinueButton()),
+          ),
+        ],
       ),
     );
   }
@@ -259,6 +281,107 @@ class _EntranceState extends State<_Entrance>
         ),
       ),
       child: widget.child,
+    );
+  }
+}
+
+/// "Continue at 2.48", or "Read today's verse" when nothing is in progress.
+class ContinueButton extends ConsumerWidget {
+  const ContinueButton({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lastId = ref.watch(settingsProvider.select((s) => s.lastVerseId));
+    final last = lastId == null ? null : ref.watch(entryProvider(lastId)).value;
+    final daily = ref.watch(dailyEntryProvider).value;
+    final target = last ?? daily;
+    if (target == null) return const SizedBox.shrink();
+    final label = last != null
+        ? 'Continue at ${last.label}'
+        : "Read today's verse";
+    return SizedBox(
+      height: HomeMetrics.continueHeight,
+      child: FilledButton.icon(
+        onPressed: () {
+          if (last == null) {
+            ref.read(readTrackerProvider.notifier).qualify(target.id);
+          }
+          openInReader(context, target.id);
+        },
+        iconAlignment: IconAlignment.end,
+        icon: const Icon(LucideIcons.chevron_right, size: IconSizes.small),
+        label: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
+      ),
+    );
+  }
+}
+
+/// "How are you feeling?": a few situations from the dataset's themes, and
+/// the full situation search behind the card.
+class FeelingsCard extends ConsumerWidget {
+  const FeelingsCard({super.key});
+
+  /// Theme ids from assets/search/themes.json, shown when present.
+  static const themeIds = ['peace', 'stress', 'confusion', 'sadness', 'anger'];
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = AppColors.of(context);
+    final ui = UiStyles(c);
+    final lang = ref.watch(languageProvider);
+    final themes = ref.watch(themesProvider).value ?? const [];
+    final picks = [
+      for (final id in themeIds) ?themes.where((t) => t.id == id).firstOrNull,
+    ];
+    return Material(
+      color: c.surfaceSoft,
+      borderRadius: BorderRadius.circular(Radii.card),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(Radii.card),
+        onTap: () => openSearch(context),
+        child: Padding(
+          padding: const EdgeInsets.all(Space.s16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'How are you feeling?',
+                      style: ui.label(size: 17),
+                    ),
+                  ),
+                  Icon(LucideIcons.chevron_right, color: c.textTertiary),
+                ],
+              ),
+              const SizedBox(height: Space.s4),
+              Text(
+                'Find verses for what you are going through.',
+                style: ui.body(size: 14),
+              ),
+              if (picks.isNotEmpty) ...[
+                const SizedBox(height: Space.s12),
+                Wrap(
+                  spacing: Space.s8,
+                  runSpacing: Space.s8,
+                  children: [
+                    for (final t in picks)
+                      ActionChip(
+                        label: Text(
+                          t.title.of(lang),
+                          style: ui.label(size: 14),
+                        ),
+                        onPressed: () =>
+                            openSearch(context, query: t.title.of(lang)),
+                      ),
+                  ],
+                ),
+              ],
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

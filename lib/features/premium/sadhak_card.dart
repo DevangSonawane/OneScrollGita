@@ -51,7 +51,7 @@ class SadhakCard extends ConsumerWidget {
                     Text(
                       'Sadhak',
                       style: ui.title.copyWith(
-                        fontSize: 20,
+                        fontSize: TitleSizes.cardSmall,
                         color: c.accentText,
                       ),
                     ),

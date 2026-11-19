@@ -21,6 +21,19 @@ TextStyle _weighted(TextStyle s, FontWeight w) => s.copyWith(
 
 const _devanagariLocale = Locale('hi');
 
+/// Verse text sizes before the reading scale (PRD_v5 section 3.1). One even
+/// ramp, so shloka, transliteration and translation read as one family.
+abstract final class ReadingType {
+  static const shloka = 22.0;
+  static const transliteration = 17.0;
+  static const translation = 18.0;
+  static const purport = 17.0;
+  static const purportShloka = 19.0;
+  static const wordMeaning = 16.0;
+  static const trainerShloka = 24.0;
+  static const trainerTransliteration = 21.0;
+}
+
 /// Reading styles. [scale] is the reading text-size step (0.85 to 1.25),
 /// applied on top of the system text scale.
 class ReadingStyles {
@@ -32,7 +45,7 @@ class ReadingStyles {
   TextStyle get sanskrit => _weighted(
     TextStyle(
       fontFamily: Fonts.sanskrit,
-      fontSize: 22 * scale,
+      fontSize: ReadingType.shloka * scale,
       height: 1.6,
       color: colors.textPrimary,
       locale: _devanagariLocale,
@@ -44,7 +57,7 @@ class ReadingStyles {
     TextStyle(
       fontFamily: Fonts.literata,
       fontStyle: FontStyle.italic,
-      fontSize: 15 * scale,
+      fontSize: ReadingType.transliteration * scale,
       height: 1.55,
       color: colors.textSecondary,
     ),
@@ -55,7 +68,7 @@ class ReadingStyles {
       ? _weighted(
           TextStyle(
             fontFamily: Fonts.devanagari,
-            fontSize: 18 * scale,
+            fontSize: ReadingType.translation * scale,
             height: 1.65,
             color: colors.textPrimary,
             locale: _devanagariLocale,
@@ -65,7 +78,7 @@ class ReadingStyles {
       : _weighted(
           TextStyle(
             fontFamily: Fonts.literata,
-            fontSize: 18 * scale,
+            fontSize: ReadingType.translation * scale,
             height: 1.5,
             color: colors.textPrimary,
           ),
@@ -75,7 +88,7 @@ class ReadingStyles {
   TextStyle purport(String lang) => _weighted(
     TextStyle(
       fontFamily: lang == 'hi' ? Fonts.devanagari : Fonts.literata,
-      fontSize: 17 * scale,
+      fontSize: ReadingType.purport * scale,
       height: 1.65,
       color: colors.textPrimary,
       locale: lang == 'hi' ? _devanagariLocale : null,
@@ -89,7 +102,7 @@ class ReadingStyles {
       ? _weighted(
           TextStyle(
             fontFamily: Fonts.devanagari,
-            fontSize: 16 * scale,
+            fontSize: ReadingType.wordMeaning * scale,
             height: 1.6,
             color: colors.textPrimary,
             locale: _devanagariLocale,
@@ -100,7 +113,7 @@ class ReadingStyles {
           TextStyle(
             fontFamily: Fonts.literata,
             fontStyle: FontStyle.italic,
-            fontSize: 16 * scale,
+            fontSize: ReadingType.wordMeaning * scale,
             height: 1.55,
             color: colors.textPrimary,
           ),
@@ -111,7 +124,7 @@ class ReadingStyles {
   TextStyle wordMeaningText(String lang) => _weighted(
     TextStyle(
       fontFamily: lang == 'hi' ? Fonts.devanagari : Fonts.literata,
-      fontSize: 16 * scale,
+      fontSize: ReadingType.wordMeaning * scale,
       height: lang == 'hi' ? 1.6 : 1.55,
       color: colors.textSecondary,
       locale: lang == 'hi' ? _devanagariLocale : null,
@@ -124,7 +137,7 @@ class ReadingStyles {
       ? _weighted(
           TextStyle(
             fontFamily: Fonts.sanskrit,
-            fontSize: 24 * scale,
+            fontSize: ReadingType.trainerShloka * scale,
             height: 1.7,
             color: colors.textPrimary,
             locale: _devanagariLocale,
@@ -135,7 +148,7 @@ class ReadingStyles {
           TextStyle(
             fontFamily: Fonts.literata,
             fontStyle: FontStyle.italic,
-            fontSize: 21 * scale,
+            fontSize: ReadingType.trainerTransliteration * scale,
             height: 1.6,
             color: colors.textPrimary,
           ),
@@ -145,13 +158,40 @@ class ReadingStyles {
   TextStyle get purportSanskrit => _weighted(
     TextStyle(
       fontFamily: Fonts.sanskrit,
-      fontSize: 19 * scale,
+      fontSize: ReadingType.purportShloka * scale,
       height: 1.6,
       color: colors.textPrimary,
       locale: _devanagariLocale,
     ),
     FontWeight.w500,
   );
+}
+
+/// Title sizes for display text outside reading (PRD_v5 stage V5-2).
+abstract final class TitleSizes {
+  /// Welcome screen title.
+  static const hero = 38.0;
+
+  /// Notebook PDF cover.
+  static const cover = 30.0;
+
+  /// Large section heading (Profile "Your library").
+  static const section = 25.0;
+
+  /// Streak number on the Profile card.
+  static const stat = 36.0;
+
+  /// Streak number on the completion share image.
+  static const shareStat = 96.0;
+
+  /// Choice cards and prices.
+  static const card = 22.0;
+
+  /// Small card titles and PDF chapter headings.
+  static const cardSmall = 20.0;
+
+  /// PDF verse headings.
+  static const caption = 18.0;
 }
 
 /// UI and title styles (not affected by the reading text-size setting).

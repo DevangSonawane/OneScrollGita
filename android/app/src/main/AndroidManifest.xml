@@ -8,11 +8,12 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
     <!-- v2: local reminders. Asked only when the user turns reminders on.
-         Inexact scheduling, so no exact-alarm permission. -->
+         v5: exact delivery when the system allows it (never prompted;
+         Reminders has a row to the system page). USE_EXACT_ALARM stays out. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- Reschedules reminders after a restart. -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" tools:node="remove" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" tools:node="remove" />
     <application
         android:label="One Scroll Gita"

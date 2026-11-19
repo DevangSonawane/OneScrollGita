@@ -775,8 +775,11 @@ class _PlanCard extends StatelessWidget {
     final title = yearly ? 'Yearly' : 'Lifetime';
     final badge = yearly ? 'Recommended' : 'One-time';
     final per = yearly ? ' / year' : '';
+    final trial = plan.trial;
     final sub = yearly
-        ? (plan.perMonth == null
+        ? (trial != null
+              ? '${trial.label}, then ${plan.price} a year'
+              : plan.perMonth == null
               ? 'Renews every year'
               : 'Just ${plan.perMonth} a month')
         : 'Pay once, keep it for good';
@@ -793,7 +796,7 @@ class _PlanCard extends StatelessWidget {
         Text(
           plan.price,
           style: ui.title.copyWith(
-            fontSize: 22,
+            fontSize: TitleSizes.card,
             color: selected ? c.accentText : c.textPrimary,
           ),
         ),
@@ -989,6 +992,7 @@ class _BottomPanel extends ConsumerWidget {
                   label: switch (state.status) {
                     PaywallStatus.pending => 'Waiting for confirmation',
                     PaywallStatus.restoring => 'Restoring',
+                    _ when state.selected?.trial != null => 'Start free trial',
                     _ => 'Continue',
                   },
                   busy: state.busy,
@@ -1022,6 +1026,10 @@ class _TermsAndLinks extends ConsumerWidget {
     final store = ios ? 'your App Store settings' : 'Google Play';
     final terms = plan == null
         ? ''
+        : plan.kind == PlanKind.yearly && plan.trial != null
+        ? '${plan.trial!.label}, then ${plan.price} a year until you '
+              'cancel. Cancel before the trial ends in $store and you will '
+              'not be charged.'
         : plan.kind == PlanKind.yearly
         ? 'Renews every year at ${plan.price} until you cancel. Cancel any '
               'time in $store.'

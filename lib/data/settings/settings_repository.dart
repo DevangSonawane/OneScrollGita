@@ -18,6 +18,9 @@ class SettingsRepository {
   static const kTextScale = 'textScaleStep';
   static const kLastVerse = 'lastVerseId';
   static const kFirstLaunch = 'firstLaunchDone';
+
+  /// v5: the first-launch answer ("What brings you to the Gita?").
+  static const kFirstIntent = 'firstIntent';
   static const kSimplifiedGlass = 'simplifiedGlass';
 
   // v2 (PRD_v2 section 3).
@@ -201,6 +204,8 @@ class SettingsRepository {
   Future<void> setThemeMode(AppThemeMode m) => _prefs.setString(kTheme, m.name);
   Future<void> setTextScaleStep(int s) => _prefs.setInt(kTextScale, s);
   Future<void> setFirstLaunchDone(bool v) => _prefs.setBool(kFirstLaunch, v);
+  String? get firstIntent => _get<String>(kFirstIntent);
+  Future<void> setFirstIntent(String v) => _prefs.setString(kFirstIntent, v);
   Future<void> setSimplifiedGlass(bool v) =>
       _prefs.setBool(kSimplifiedGlass, v);
 
@@ -214,6 +219,7 @@ class SettingsRepository {
       kTextScale,
       kLastVerse,
       kFirstLaunch,
+      kFirstIntent,
       kSimplifiedGlass,
       ..._v2Keys,
     ]) {

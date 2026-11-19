@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
 
 import '../../domain/premium.dart';
 
@@ -97,18 +99,37 @@ class StorePurchaseGateway implements PurchaseGateway {
     final res = await _iap.queryProductDetails({
       for (final p in Package.values) ...p.forStore(appStore: appStore),
     });
-    final plans = <SadhakPlan>[];
+    // Subscriptions can list one entry per offer (Google Play). The price
+    // comes from a paid entry; a free trial, if offered, from its own entry,
+    // which is also the one bought so the trial applies.
+    final byId = <String, List<ProductDetails>>{};
     for (final d in res.productDetails) {
-      // Subscriptions can list one entry per offer; keep the first.
-      if (_products.containsKey(d.id)) continue;
-      _products[d.id] = d;
+      (byId[d.id] ??= []).add(d);
+    }
+    final plans = <SadhakPlan>[];
+    for (final MapEntry(key: id, value: entries) in byId.entries) {
+      FreeTrial? trial;
+      ProductDetails? trialEntry;
+      for (final d in entries) {
+        final t = trialOf(d);
+        if (t != null) {
+          trial ??= t;
+          trialEntry ??= d;
+        }
+      }
+      final paid = entries.firstWhere(
+        (d) => d.rawPrice > 0,
+        orElse: () => entries.first,
+      );
+      _products[id] = trialEntry ?? paid;
       plans.add(
         SadhakPlan(
-          id: d.id,
-          kind: planKindOf(d.id),
-          price: d.price,
-          rawPrice: d.rawPrice,
-          currencySymbol: d.currencySymbol,
+          id: id,
+          kind: planKindOf(id),
+          price: paid.price,
+          rawPrice: paid.rawPrice,
+          currencySymbol: paid.currencySymbol,
+          trial: trial,
         ),
       );
     }
@@ -160,6 +181,36 @@ class StorePurchaseGateway implements PurchaseGateway {
     _sub?.cancel();
     _out.close();
   }
+}
+
+/// The free trial a store product entry carries, if any.
+@visibleForTesting
+FreeTrial? trialOf(ProductDetails d) {
+  if (d is GooglePlayProductDetails) {
+    final i = d.subscriptionIndex;
+    final offers = d.productDetails.subscriptionOfferDetails;
+    if (i == null || offers == null || i >= offers.length) return null;
+    final phases = offers[i].pricingPhases;
+    if (phases.length < 2 || phases.first.priceAmountMicros != 0) return null;
+    return parseTrialPeriod(phases.first.billingPeriod);
+  }
+  if (d is AppStoreProductDetails) {
+    final intro = d.skProduct.introductoryPrice;
+    if (intro == null ||
+        // The plugin spells it "freeTrail".
+        intro.paymentMode != SKProductDiscountPaymentMode.freeTrail) {
+      return null;
+    }
+    final p = intro.subscriptionPeriod;
+    final units = p.numberOfUnits * (intro.numberOfPeriods.clamp(1, 12));
+    return switch (p.unit) {
+      SKSubscriptionPeriodUnit.day => FreeTrial(units, TrialUnit.day),
+      SKSubscriptionPeriodUnit.week => FreeTrial(units, TrialUnit.week),
+      SKSubscriptionPeriodUnit.month => FreeTrial(units, TrialUnit.month),
+      SKSubscriptionPeriodUnit.year => null,
+    };
+  }
+  return null;
 }
 
 /// Debug builds only: preview prices so the paywall can be seen before the

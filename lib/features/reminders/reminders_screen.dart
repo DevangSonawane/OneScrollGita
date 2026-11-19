@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../application/reminder_providers.dart';
 import '../../core/design/components.dart';
+import '../../core/design/copy_on_tap.dart';
 import '../../core/design/glass_nav_bar.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
@@ -122,8 +124,31 @@ class RemindersScreen extends ConsumerWidget {
             ),
             onTap: on ? () => ctl.setVerseNotifs(!s.verseNotifsEnabled) : null,
             showChevron: false,
-            divider: false,
+            divider: on,
           ),
+          if (on &&
+              !state.exactAllowed &&
+              Theme.of(context).platform == TargetPlatform.android)
+            SettingsRow(
+              title: 'Deliver at the exact time',
+              subtitle: 'Without this, Android may send reminders late',
+              onTap: ctl.openExactAlarmSettings,
+            ),
+          if (on)
+            SettingsRow(
+              title: 'Send a test notification',
+              subtitle: 'Arrives in a few seconds',
+              onTap: () async {
+                await ctl.sendTest();
+                if (context.mounted) {
+                  showToast(context, 'Test notification on its way');
+                }
+              },
+              showChevron: false,
+              divider: false,
+            ),
+          if (kDebugMode && state.lastError != null)
+            note('Debug: ${state.lastError}'),
           const SizedBox(height: Space.s16),
           note(
             'Reminders are scheduled on this phone. Nothing is sent from a '

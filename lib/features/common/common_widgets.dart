@@ -92,39 +92,70 @@ class ContinueRow extends ConsumerWidget {
   }
 }
 
-/// Hides the nav pill while scrolling down and shows it on scroll up.
+/// Hides the nav pill while scrolling down and shows it again on any upward
+/// move (PRD_v5 section 3.2).
 class NavHideOnScroll extends ConsumerWidget {
   const NavHideOnScroll({super.key, required this.child, this.minDepth = 0});
 
   final Widget child;
 
-  /// Ignore scrolls shallower than this (the reader's own page swipes).
+  /// Downward scrolls shallower than this do not hide the pill (the reader's
+  /// own page swipes). Upward moves at any depth always show it.
   final int minDepth;
+
+  /// Upward drag distance, in one update, that counts as intent to go back.
+  static const _showSlop = 2.0;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allow = Motion.of(context).allowNavHide;
     return NotificationListener<ScrollNotification>(
       onNotification: (n) {
-        if (!allow || n.metrics.axis != Axis.vertical || n.depth < minDepth) {
-          return false;
-        }
+        if (!allow || n.metrics.axis != Axis.vertical) return false;
         final nav = ref.read(navBarVisibleProvider.notifier);
-        // Checked during the drag, so one swipe from the top also hides it.
-        if (n is ScrollUpdateNotification &&
-            n.dragDetails != null &&
-            (n.scrollDelta ?? 0) > 0 &&
-            n.metrics.pixels > 24) {
-          nav.hide();
-        } else if (n is UserScrollNotification &&
-            n.direction == ScrollDirection.forward) {
-          nav.show();
+        if (navIntent(n, minDepth: minDepth, showSlop: _showSlop)
+            case final show?) {
+          show ? nav.show() : nav.hide();
         }
         return false;
       },
       child: child,
     );
   }
+}
+
+/// What a scroll notification means for the nav pill: true to show it,
+/// false to hide it, null to leave it.
+@visibleForTesting
+bool? navIntent(
+  ScrollNotification n, {
+  required int minDepth,
+  double showSlop = 2.0,
+}) {
+  final delta = switch (n) {
+    ScrollUpdateNotification(dragDetails: _?, :final scrollDelta?) =>
+      scrollDelta,
+    _ => null,
+  };
+  // Dragging back up, at any depth (verse body or page swipe).
+  if (delta != null && delta < -showSlop) return true;
+  // Pulling down at the top edge of a verse.
+  if (n is OverscrollNotification &&
+      n.dragDetails != null &&
+      n.overscroll < 0) {
+    return true;
+  }
+  if (n is UserScrollNotification && n.direction == ScrollDirection.forward) {
+    return true;
+  }
+  // Checked during the drag, so one swipe from the top also hides it.
+  if (delta != null &&
+      delta > 0 &&
+      n.depth >= minDepth &&
+      n.metrics.pixels > 24) {
+    return false;
+  }
+  return null;
 }
 
 /// Calm load error with Retry (details only in debug).

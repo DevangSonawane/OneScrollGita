@@ -51,6 +51,8 @@ dependencies:
   flutter_lucide: ^1.62.0
   in_app_purchase: ^3.3.1
   in_app_purchase_android: ^0.5.5
+  # Same official plugin family: reads the App Store free-trial offer.
+  in_app_purchase_storekit: ^0.4.17
   characters: ^1.4.1
   pdf: ^3.13.1
   just_audio: ^0.10.6
