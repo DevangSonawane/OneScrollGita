@@ -28,6 +28,10 @@ Future<void> tapVisible(WidgetTester tester, Finder f) async {
   await settle(tester);
 }
 
+/// The study tools fold away behind "More" in the reader.
+Future<void> openMore(WidgetTester tester) =>
+    tapVisible(tester, find.bySemanticsLabel(RegExp('^More:')));
+
 Future<void> go(TestApp app, WidgetTester tester, String path) async {
   unawaited(app.container.read(routerProvider).push(path));
   await settle(tester, 4);
@@ -59,6 +63,7 @@ void main() {
     ) async {
       final app = await pumpApp(tester);
       await openReaderAt(app, tester, 'bg-02-047');
+      await openMore(tester);
       await tapVisible(tester, find.bySemanticsLabel('Highlight verse'));
       await tester.tap(find.bySemanticsLabel('Leaf'));
       await settle(tester);
@@ -82,6 +87,7 @@ void main() {
           .read(studyControllerProvider)
           .setHighlight('bg-02-047', HighlightColor.sky);
       await openReaderAt(app, tester, 'bg-02-047');
+      await openMore(tester);
       await tapVisible(tester, find.bySemanticsLabel(RegExp('Highlighted Sky')));
       await tester.tap(find.text('Remove highlight'));
       await settle(tester);
@@ -98,6 +104,7 @@ void main() {
     ) async {
       final app = await pumpApp(tester);
       await openReaderAt(app, tester, 'bg-02-047');
+      await openMore(tester);
       await tapVisible(tester, find.bySemanticsLabel('Add a note'));
       expect(find.byType(NoteEditorScreen), findsOneWidget);
       await tester.enterText(find.byType(TextField), 'Work without craving.');
@@ -126,6 +133,7 @@ void main() {
       });
       await settle(tester);
       await openReaderAt(app, tester, 'bg-03-001');
+      await openMore(tester);
       await tapVisible(tester, find.bySemanticsLabel('Add a note'));
       expect(find.byType(PaywallScreen), findsOneWidget);
       expect(find.text('Unlimited notes are part of Sadhak'), findsOneWidget);

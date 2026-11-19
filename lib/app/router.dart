@@ -6,12 +6,16 @@ import 'package:go_router/go_router.dart';
 import '../application/core_providers.dart';
 import '../application/ui_providers.dart';
 import '../core/design/motion.dart';
+import '../core/config/audio_config.dart';
 import '../core/design/tokens.dart';
 import '../domain/verse_navigation.dart';
 import '../features/first_launch/welcome_screen.dart';
 import '../features/gita/reader_screen.dart';
 import '../domain/premium.dart';
+import '../domain/shravan.dart';
 import '../features/home/home_screen.dart';
+import '../features/listen/chapter_player_screen.dart';
+import '../features/listen/listen_library_screen.dart';
 import '../features/premium/paywall_screen.dart';
 import '../features/study/journal_screens.dart';
 import '../features/study/note_editor_screen.dart';
@@ -157,6 +161,16 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
+          // Shravan (PRD_v4): the Listen pill's branch.
+          if (AudioConfig.enabled)
+            StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: '/listen',
+                  builder: (context, state) => const ListenLibraryScreen(),
+                ),
+              ],
+            ),
         ],
       ),
       GoRoute(
@@ -166,6 +180,12 @@ final routerProvider = Provider<GoRouter>((ref) {
           state,
           PurportScreen(verseId: state.pathParameters['verseId']!),
         ),
+      ),
+      GoRoute(
+        path: '/player',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) =>
+            _risePage(state, const ChapterPlayerScreen()),
       ),
       GoRoute(
         path: '/note/:verseId',
@@ -217,6 +237,20 @@ final routerProvider = Provider<GoRouter>((ref) {
         parentNavigatorKey: rootNavigatorKey,
         pageBuilder: (context, state) =>
             _risePage(state, const NotebookExportScreen()),
+      ),
+      GoRoute(
+        path: '/shravan',
+        parentNavigatorKey: rootNavigatorKey,
+        pageBuilder: (context, state) => _risePage(
+          state,
+          PaywallScreen(
+            offer: PaywallOffer.shravan,
+            reasonText: ListenFeature.values
+                .where((f) => f.name == state.uri.queryParameters['reason'])
+                .firstOrNull
+                ?.reason,
+          ),
+        ),
       ),
       GoRoute(
         path: '/sadhak',

@@ -20,10 +20,23 @@ final purchaseGatewayProvider = Provider<PurchaseGateway>((ref) {
 /// What the user has: free or premium. Works offline from the cache; the
 /// store only ever confirms or corrects it.
 final entitlementProvider = NotifierProvider<EntitlementNotifier, Entitlement>(
-  EntitlementNotifier.new,
+  () => EntitlementNotifier(Package.sadhak),
 );
 
+/// The Shravan audio package (PRD_v4 section 7).
+final shravanEntitlementProvider =
+    NotifierProvider<EntitlementNotifier, Entitlement>(
+      () => EntitlementNotifier(Package.shravan),
+    );
+
+/// The entitlement of either package.
+NotifierProvider<EntitlementNotifier, Entitlement> entitlementOf(Package p) =>
+    p == Package.sadhak ? entitlementProvider : shravanEntitlementProvider;
+
 class EntitlementNotifier extends Notifier<Entitlement> {
+  EntitlementNotifier(this.package);
+
+  final Package package;
   StreamSubscription<PurchaseUpdate>? _sub;
 
   @override
@@ -38,14 +51,16 @@ class EntitlementNotifier extends Notifier<Entitlement> {
   Entitlement _resolve() {
     final repo = ref.read(settingsRepositoryProvider);
     return resolveEntitlement(
-      cached: repo.entitlementCache,
-      pretendPremium: repo.pretendPremium,
+      cached: repo.cacheFor(package),
+      pretendPremium: repo.pretendFor(package),
       debugBuild: kDebugMode,
     );
   }
 
   Future<void> _onUpdate(PurchaseUpdate u) async {
     final gateway = ref.read(purchaseGatewayProvider);
+    // Each package listens to its own products only.
+    if (!package.owns(u.productId)) return;
     if (u.grantsPremium) {
       // A demo purchase (debug only) flips "Pretend premium", never the
       // real cache.
@@ -67,7 +82,7 @@ class EntitlementNotifier extends Notifier<Entitlement> {
   Future<void> _save(Entitlement e) async {
     await ref
         .read(settingsRepositoryProvider)
-        .setEntitlementCache(e, ref.read(clockProvider)());
+        .setCacheFor(package, e, ref.read(clockProvider)());
     state = _resolve();
   }
 
@@ -79,7 +94,9 @@ class EntitlementNotifier extends Notifier<Entitlement> {
     try {
       final owned = await gateway.ownedProducts();
       if (owned != null) {
-        await _save(owned.isEmpty ? Entitlement.free : Entitlement.premium);
+        await _save(
+          owned.any(package.owns) ? Entitlement.premium : Entitlement.free,
+        );
       } else {
         await gateway.restore();
       }
@@ -91,7 +108,7 @@ class EntitlementNotifier extends Notifier<Entitlement> {
   /// Debug builds only.
   Future<void> setPretendPremium(bool v) async {
     if (!kDebugMode) return;
-    await ref.read(settingsRepositoryProvider).setPretendPremium(v);
+    await ref.read(settingsRepositoryProvider).setPretendFor(package, v);
     state = _resolve();
   }
 }
@@ -154,11 +171,14 @@ class PaywallState {
 const restoreWait = Duration(seconds: 8);
 
 final paywallControllerProvider =
-    NotifierProvider.autoDispose<PaywallController, PaywallState>(
+    NotifierProvider.autoDispose.family<PaywallController, PaywallState, Package>(
       PaywallController.new,
     );
 
 class PaywallController extends Notifier<PaywallState> {
+  PaywallController(this.package);
+
+  final Package package;
   StreamSubscription<PurchaseUpdate>? _sub;
   Completer<bool>? _restored;
 
@@ -175,7 +195,10 @@ class PaywallController extends Notifier<PaywallState> {
     state = state.copyWith(status: PaywallStatus.loading, clearMessage: true);
     List<SadhakPlan> plans;
     try {
-      plans = await ref.read(purchaseGatewayProvider).loadPlans();
+      plans = [
+        for (final p in await ref.read(purchaseGatewayProvider).loadPlans())
+          if (package.owns(p.id)) p,
+      ];
     } catch (_) {
       plans = const [];
     }
@@ -230,9 +253,9 @@ class PaywallController extends Notifier<PaywallState> {
     try {
       final owned = await gateway.ownedProducts();
       if (owned != null) {
-        found = owned.isNotEmpty;
+        found = owned.any(package.owns);
         if (found) {
-          await ref.read(entitlementProvider.notifier).refresh();
+          await ref.read(entitlementOf(package).notifier).refresh();
         }
       } else {
         _restored = Completer<bool>();
@@ -258,7 +281,7 @@ class PaywallController extends Notifier<PaywallState> {
   }
 
   void _onUpdate(PurchaseUpdate u) {
-    if (!ref.mounted) return;
+    if (!ref.mounted || !package.owns(u.productId)) return;
     switch (u.outcome) {
       case PurchaseOutcome.purchased:
         state = state.copyWith(status: PaywallStatus.success);

@@ -16,7 +16,8 @@ class Motion {
   Duration get pageSwap => reduced ? AppDurations.fast : AppDurations.base;
   Duration get crossFade => AppDurations.fast;
   Duration get sheet => reduced ? AppDurations.fast : AppDurations.slow;
-  Duration get savePulse => reduced ? AppDurations.instant : AppDurations.savePulse;
+  Duration get savePulse =>
+      reduced ? AppDurations.instant : AppDurations.savePulse;
   Duration get navHide => AppDurations.navHide;
   Duration get stagger => reduced ? Duration.zero : AppDurations.stagger;
 

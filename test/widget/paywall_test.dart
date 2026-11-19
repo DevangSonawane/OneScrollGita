@@ -75,7 +75,7 @@ void main() {
     await tapVisible(tester, find.bySemanticsLabel('Continue'));
     await settle(tester, 6);
     expect(store.bought, [SadhakProducts.yearly]);
-    expect(find.text('Welcome, Sadhak'), findsOneWidget);
+    expect(find.text('Welcome to Sadhak'), findsOneWidget);
     expect(app.container.read(isPremiumProvider), isTrue);
     await tester.tap(find.text('Begin'));
     await settle(tester);
@@ -123,7 +123,7 @@ void main() {
         .setPretendPremium(true);
     unawaited(app.container.read(routerProvider).push('/sadhak'));
     await settle(tester, 5);
-    expect(find.text('You are a Sadhak'), findsOneWidget);
+    expect(find.text('Sadhak is active'), findsOneWidget);
     expect(find.text('Continue'), findsNothing);
   });
 
@@ -178,5 +178,15 @@ void main() {
     await tester.tap(find.byType(SadhakCard));
     await settle(tester, 5);
     expect(find.byType(PaywallScreen), findsOneWidget);
+  });
+
+  testWidgets('the Shravan paywall sells the audio package', (tester) async {
+    final app = await pumpApp(tester);
+    unawaited(
+      app.container.read(routerProvider).push('/shravan?reason=narration'),
+    );
+    await settle(tester, 5);
+    expect(find.text('Hear the Gita'), findsOneWidget);
+    expect(find.text('Chapter narrations are part of Shravan'), findsOneWidget);
   });
 }

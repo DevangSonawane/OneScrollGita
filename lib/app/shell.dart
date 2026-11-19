@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
 
+import '../application/audio_providers.dart';
 import '../application/ui_providers.dart';
+import '../core/config/audio_config.dart';
 import '../core/design/glass_nav_bar.dart';
 import '../core/design/motion.dart';
 import '../core/design/tokens.dart';
+import '../features/listen/listen_widgets.dart';
 
 const _items = [
   GlassNavItem(
@@ -26,8 +29,9 @@ const _items = [
   ),
 ];
 
-/// Three tabs that keep their own state, with the floating glass pill above
-/// the content.
+/// Tabs that keep their own state, with the floating glass pill above the
+/// content, the separate Listen pill beside it (PRD_v4 section 3) and the
+/// mini player above both while audio is loaded.
 class AppShell extends ConsumerWidget {
   const AppShell({super.key, required this.shell});
 
@@ -52,12 +56,68 @@ class AppShell extends ConsumerWidget {
         !motion.allowNavHide ||
         shell.currentIndex == 0; // always visible on Home
     final bottom = MediaQuery.paddingOf(context).bottom;
+    final listen = AudioConfig.enabled;
+    final audioActive =
+        listen && ref.watch(audioControllerProvider.select((s) => s.active));
+    final screen = MediaQuery.sizeOf(context).width;
+    final wide =
+        screen >= PlayerMetrics.wideFrom &&
+        MediaQuery.textScalerOf(context).scale(1) <= 1.3;
+    final pillWidth = wide ? PlayerMetrics.pillWide : PlayerMetrics.pillCompact;
+    final navWidth = listen
+        ? (screen -
+                  NavBarMetrics.sideMargin * 2 -
+                  pillWidth -
+                  PlayerMetrics.pillGap)
+              .clamp(
+                NavBarMetrics.minTabWidth * _items.length,
+                NavBarMetrics.maxWidth,
+              )
+        : null;
+    final miniInset = audioActive
+        ? PlayerMetrics.miniHeight + PlayerMetrics.miniGap
+        : 0.0;
+
+    Widget bar = GlassNavBar(
+      items: _items,
+      currentIndex: shell.currentIndex < _items.length
+          ? shell.currentIndex
+          : -1,
+      onSelect: (i) => _onSelect(ref, i),
+      width: navWidth?.toDouble(),
+    );
+    if (listen) {
+      bar = Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          bar,
+          const SizedBox(width: PlayerMetrics.pillGap),
+          ListenPill(
+            selected: shell.currentIndex == _items.length,
+            wide: wide,
+            onTap: () => _onSelect(ref, _items.length),
+          ),
+        ],
+      );
+    }
+    if (audioActive) {
+      bar = Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const MiniPlayer(),
+          const SizedBox(height: PlayerMetrics.miniGap),
+          bar,
+        ],
+      );
+    }
 
     return Scaffold(
       extendBody: true,
       body: Stack(
         children: [
-          Positioned.fill(child: shell),
+          Positioned.fill(
+            child: MiniPlayerInset(height: miniInset, child: shell),
+          ),
           Positioned(
             left: 0,
             right: 0,
@@ -73,11 +133,7 @@ class AppShell extends ConsumerWidget {
                     opacity: visible ? 1 : 0,
                     duration: motion.navHide,
                     curve: AppCurves.standard,
-                    child: GlassNavBar(
-                      items: _items,
-                      currentIndex: shell.currentIndex,
-                      onSelect: (i) => _onSelect(ref, i),
-                    ),
+                    child: bar,
                   ),
                 ),
               ),

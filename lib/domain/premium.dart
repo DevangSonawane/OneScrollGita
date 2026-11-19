@@ -85,9 +85,49 @@ abstract final class SadhakProducts {
   /// The ids to show on the paywall for one store. The App Store still
   /// returns the old `sadhak_lifetime` product, so asking for [all] there
   /// listed two lifetime plans.
-  static Set<String> forStore({required bool appStore}) =>
-      {yearly, appStore ? lifetimeAppStore : lifetime};
+  static Set<String> forStore({required bool appStore}) => {
+    yearly,
+    appStore ? lifetimeAppStore : lifetime,
+  };
 }
+
+/// Shravan, the audio package (PRD_v4 section 7): one one-time purchase
+/// that unlocks the whole Listen section. No subscription.
+abstract final class ShravanProducts {
+  static const lifetime = 'shravan_lifetime';
+  static const lifetimeAppStore = 'shravan_lifetime_ios';
+
+  static const all = {lifetime, lifetimeAppStore};
+
+  static Set<String> forStore({required bool appStore}) => {
+    appStore ? lifetimeAppStore : lifetime,
+  };
+}
+
+/// The two things a user can buy.
+enum Package {
+  sadhak,
+  shravan;
+
+  Set<String> get products =>
+      this == sadhak ? SadhakProducts.all : ShravanProducts.all;
+
+  Set<String> forStore({required bool appStore}) => this == sadhak
+      ? SadhakProducts.forStore(appStore: appStore)
+      : ShravanProducts.forStore(appStore: appStore);
+
+  bool owns(String productId) => products.contains(productId);
+}
+
+/// Every product id the app sells.
+final allProductIds = {...SadhakProducts.all, ...ShravanProducts.all};
+
+/// The package a product belongs to (null for unknown ids).
+Package? packageOf(String productId) =>
+    Package.values.where((p) => p.owns(productId)).firstOrNull;
+
+PlanKind planKindOf(String productId) =>
+    productId.endsWith('_yearly') ? PlanKind.yearly : PlanKind.lifetime;
 
 enum PlanKind { yearly, lifetime }
 

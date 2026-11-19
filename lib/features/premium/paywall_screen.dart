@@ -12,6 +12,7 @@ import '../../core/design/motion.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/premium.dart';
+import '../../domain/shravan.dart';
 import 'sadhak_art.dart';
 
 /// Opens the Sadhak paywall, optionally explaining which locked feature led
@@ -19,10 +20,124 @@ import 'sadhak_art.dart';
 Future<void> openPaywall(BuildContext context, {PremiumFeature? reason}) =>
     context.push(reason == null ? '/sadhak' : '/sadhak?reason=${reason.name}');
 
+/// Opens the Shravan (audio) paywall.
+Future<void> openShravanPaywall(
+  BuildContext context, {
+  ListenFeature? reason,
+}) => context.push(
+  reason == null ? '/shravan' : '/shravan?reason=${reason.name}',
+);
+
+/// What one paywall sells: the same screen serves Sadhak and Shravan.
+class PaywallOffer {
+  const PaywallOffer({
+    required this.package,
+    required this.name,
+    required this.devanagari,
+    required this.headline,
+    required this.subline,
+    required this.benefits,
+    required this.welcome,
+  });
+
+  final Package package;
+  final String name;
+  final String devanagari;
+  final String headline;
+  final String subline;
+  final List<(IconData, String, String)> benefits;
+  final String welcome;
+
+  static const sadhak = PaywallOffer(
+    package: Package.sadhak,
+    name: 'Sadhak',
+    devanagari: 'साधक',
+    headline: 'Go deeper into the Gita',
+    subline:
+        'Carry the verses in your heart, and keep your own study beside them.',
+    benefits: [
+      (
+        LucideIcons.brain,
+        'Learn any shloka by heart',
+        'A gentle five-step trainer for all 700 verses.',
+      ),
+      (
+        LucideIcons.repeat,
+        'Remember it for life',
+        'Spaced reviews bring each verse back just before you forget.',
+      ),
+      (
+        LucideIcons.notebook_pen,
+        'Unlimited notes and a journal',
+        'Your reflections, kept beside every verse.',
+      ),
+      (
+        LucideIcons.file_down,
+        'Your Gita notebook',
+        'Export notes, highlights and journal as a PDF to keep.',
+      ),
+    ],
+    welcome: 'Thank you for supporting this quiet Gita.',
+  );
+
+  static const shravan = PaywallOffer(
+    package: Package.shravan,
+    name: 'Shravan',
+    devanagari: 'श्रवण',
+    headline: 'Hear the Gita',
+    subline: 'Let the verses be recited to you, wherever you are.',
+    benefits: [
+      (
+        LucideIcons.headphones,
+        'Every chapter, narrated',
+        'Listen to each chapter told from beginning to end.',
+      ),
+      (
+        LucideIcons.audio_lines,
+        'Shlokas recited',
+        'Hear each verse chanted in Sanskrit, verse by verse.',
+      ),
+      (
+        LucideIcons.lock,
+        'Plays with the screen off',
+        'Keep listening from the lock screen or your earphones.',
+      ),
+      (
+        LucideIcons.moon,
+        'Sleep timer and repeat',
+        'Fall asleep to a chapter, or repeat one verse to learn it.',
+      ),
+    ],
+    welcome: 'Thank you for supporting this Gita.',
+  );
+}
+
+class _OfferScope extends InheritedWidget {
+  const _OfferScope({required this.offer, required super.child});
+
+  final PaywallOffer offer;
+
+  @override
+  bool updateShouldNotify(_OfferScope old) => old.offer != offer;
+}
+
+PaywallOffer _offerOf(BuildContext context) =>
+    context.dependOnInheritedWidgetOfExactType<_OfferScope>()?.offer ??
+    PaywallOffer.sadhak;
+
 class PaywallScreen extends ConsumerStatefulWidget {
-  const PaywallScreen({super.key, this.reason});
+  const PaywallScreen({
+    super.key,
+    this.reason,
+    this.offer = PaywallOffer.sadhak,
+    this.reasonText,
+  });
 
   final PremiumFeature? reason;
+  final PaywallOffer offer;
+
+  /// The one-line reason, when it does not come from a [PremiumFeature].
+  final String? reasonText;
 
   @override
   ConsumerState<PaywallScreen> createState() => _PaywallScreenState();
@@ -62,66 +177,71 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
   @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
-    final state = ref.watch(paywallControllerProvider);
-    final premium = ref.watch(isPremiumProvider);
+    final offer = widget.offer;
+    final state = ref.watch(paywallControllerProvider(offer.package));
+    final premium =
+        ref.watch(entitlementOf(offer.package)) == Entitlement.premium;
     final done = state.status == PaywallStatus.success;
     final motion = Motion.of(context);
 
-    return Scaffold(
-      backgroundColor: c.bg,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Positioned.fill(
-            child: AnimatedSwitcher(
-              duration: motion.pageSwap,
-              // Each view fills the screen (never centred and shrunk).
-              layoutBuilder: (current, previous) => Stack(
-                fit: StackFit.expand,
-                children: [...previous, ?current],
-              ),
-              child: done || premium
-                  ? _WelcomeView(
-                      key: const ValueKey('welcome'),
-                      justBought: done,
-                      onClose: _close,
-                    )
-                  : _OfferView(
-                      key: const ValueKey('offer'),
-                      entrance: _entrance,
-                      reason: widget.reason,
-                    ),
-            ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.only(left: Space.s8),
-                child: Pressable(
-                  onTap: _close,
-                  semanticLabel: 'Close',
-                  child: SizedBox.square(
-                    dimension: Touch.minTarget,
-                    child: DecoratedBox(
-                      // Stays readable over scrolled text.
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: c.bg.withValues(alpha: 0.86),
+    return _OfferScope(
+      offer: offer,
+      child: Scaffold(
+        backgroundColor: c.bg,
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            Positioned.fill(
+              child: AnimatedSwitcher(
+                duration: motion.pageSwap,
+                // Each view fills the screen (never centred and shrunk).
+                layoutBuilder: (current, previous) => Stack(
+                  fit: StackFit.expand,
+                  children: [...previous, ?current],
+                ),
+                child: done || premium
+                    ? _WelcomeView(
+                        key: const ValueKey('welcome'),
+                        justBought: done,
+                        onClose: _close,
+                      )
+                    : _OfferView(
+                        key: const ValueKey('offer'),
+                        entrance: _entrance,
+                        reason: widget.reasonText ?? widget.reason?.reason,
                       ),
-                      child: Icon(
-                        LucideIcons.x,
-                        size: IconSizes.regular,
-                        color: c.textSecondary,
+              ),
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: Space.s8),
+                  child: Pressable(
+                    onTap: _close,
+                    semanticLabel: 'Close',
+                    child: SizedBox.square(
+                      dimension: Touch.minTarget,
+                      child: DecoratedBox(
+                        // Stays readable over scrolled text.
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: c.bg.withValues(alpha: 0.86),
+                        ),
+                        child: Icon(
+                          LucideIcons.x,
+                          size: IconSizes.regular,
+                          color: c.textSecondary,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -219,38 +339,19 @@ class _OfferView extends ConsumerWidget {
   const _OfferView({super.key, required this.entrance, this.reason});
 
   final Animation<double> entrance;
-  final PremiumFeature? reason;
-
-  static const _benefits = [
-    (
-      LucideIcons.brain,
-      'Learn any shloka by heart',
-      'A gentle five-step trainer for all 700 verses.',
-    ),
-    (
-      LucideIcons.repeat,
-      'Remember it for life',
-      'Spaced reviews bring each verse back just before you forget.',
-    ),
-    (
-      LucideIcons.notebook_pen,
-      'Unlimited notes and a journal',
-      'Your reflections, kept beside every verse.',
-    ),
-    (
-      LucideIcons.file_down,
-      'Your Gita notebook',
-      'Export notes, highlights and journal as a PDF to keep.',
-    ),
-  ];
+  final String? reason;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = AppColors.of(context);
     final p = PremiumColors.of(context);
     final ui = UiStyles(c);
-    final state = ref.watch(paywallControllerProvider);
-    final controller = ref.read(paywallControllerProvider.notifier);
+    final offer = _offerOf(context);
+    final benefits = offer.benefits;
+    final state = ref.watch(paywallControllerProvider(offer.package));
+    final controller = ref.read(
+      paywallControllerProvider(offer.package).notifier,
+    );
     final stagger = Motion.of(context).reduced ? 0.0 : 0.06;
 
     final compact = _compactPanel(context);
@@ -269,7 +370,7 @@ class _OfferView extends ConsumerWidget {
                 _Reveal(
                   animation: entrance,
                   start: 0.1,
-                  child: Center(child: _ReasonChip(text: reason!.reason)),
+                  child: Center(child: _ReasonChip(text: reason!)),
                 ),
               ],
               const SizedBox(height: Space.s24),
@@ -279,7 +380,7 @@ class _OfferView extends ConsumerWidget {
                 child: Semantics(
                   header: true,
                   child: Text(
-                    'Go deeper into the Gita',
+                    offer.headline,
                     textAlign: TextAlign.center,
                     style: ui.title,
                   ),
@@ -290,14 +391,13 @@ class _OfferView extends ConsumerWidget {
                 animation: entrance,
                 start: 0.18,
                 child: Text(
-                  'Carry the verses in your heart, and keep your own '
-                  'study beside them.',
+                  offer.subline,
                   textAlign: TextAlign.center,
                   style: ui.body(size: 16),
                 ),
               ),
               const SizedBox(height: Space.s24),
-              for (final (i, (icon, title, sub)) in _benefits.indexed)
+              for (final (i, (icon, title, sub)) in benefits.indexed)
                 _Reveal(
                   animation: entrance,
                   start: 0.24 + i * stagger,
@@ -306,7 +406,7 @@ class _OfferView extends ConsumerWidget {
               const SizedBox(height: Space.s8),
               _Reveal(
                 animation: entrance,
-                start: 0.24 + _benefits.length * stagger,
+                start: 0.24 + benefits.length * stagger,
                 child: const _AlwaysFree(),
               ),
               const SizedBox(height: Space.s24),
@@ -365,13 +465,13 @@ class _Hero extends StatelessWidget {
           const _BreathingLotus(),
           const SizedBox(height: Space.s12),
           Semantics(
-            label: 'Sadhak',
+            label: _offerOf(context).name,
             excludeSemantics: true,
             child: Shimmer(
               base: colors.accentText,
               highlight: premium.gold,
               child: Text(
-                'साधक',
+                _offerOf(context).devanagari,
                 style: ReadingStyles(colors, 1).sanskrit.copyWith(
                   fontSize: PaywallMetrics.titleSize,
                   height: 1.25,
@@ -380,7 +480,7 @@ class _Hero extends StatelessWidget {
             ),
           ),
           Text(
-            'SADHAK',
+            _offerOf(context).name.toUpperCase(),
             style: ui.overline.copyWith(color: colors.textSecondary),
           ),
         ],
@@ -619,7 +719,12 @@ class _Plans extends StatelessWidget {
             const SizedBox(height: Space.s8),
             Consumer(
               builder: (context, ref, _) => TextButton(
-                onPressed: ref.read(paywallControllerProvider.notifier).load,
+                onPressed: ref
+                    .read(
+                      paywallControllerProvider(_offerOf(context).package)
+                          .notifier,
+                    )
+                    .load,
                 child: const Text('Try again'),
               ),
             ),
@@ -857,7 +962,9 @@ class _BottomPanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = AppColors.of(context);
-    final controller = ref.read(paywallControllerProvider.notifier);
+    final controller = ref.read(
+      paywallControllerProvider(_offerOf(context).package).notifier,
+    );
     final canBuy = state.selected != null && !state.busy;
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -907,7 +1014,9 @@ class _TermsAndLinks extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final c = AppColors.of(context);
     final ui = UiStyles(c);
-    final controller = ref.read(paywallControllerProvider.notifier);
+    final controller = ref.read(
+      paywallControllerProvider(_offerOf(context).package).notifier,
+    );
     final plan = state.selected;
     final ios = Theme.of(context).platform == TargetPlatform.iOS;
     final store = ios ? 'your App Store settings' : 'Google Play';
@@ -1076,7 +1185,9 @@ class _WelcomeView extends StatelessWidget {
           header: true,
           liveRegion: true,
           child: Text(
-            justBought ? 'Welcome, Sadhak' : 'You are a Sadhak',
+            justBought
+                ? 'Welcome to ${_offerOf(context).name}'
+                : '${_offerOf(context).name} is active',
             textAlign: TextAlign.center,
             style: ui.title,
           ),
@@ -1084,10 +1195,10 @@ class _WelcomeView extends StatelessWidget {
         const SizedBox(height: Space.s8),
         Text(
           justBought
-              ? 'Thank you for supporting this quiet, offline Gita. '
-                    'Everything in Sadhak is now open to you.'
-              : 'Sadhak is active on this account. Thank you for your '
-                    'support.',
+              ? '${_offerOf(context).welcome} Everything in '
+                    '${_offerOf(context).name} is now open to you.'
+              : '${_offerOf(context).name} is active on this account. '
+                    'Thank you for your support.',
           textAlign: TextAlign.center,
           style: ui.body(size: 16),
         ),

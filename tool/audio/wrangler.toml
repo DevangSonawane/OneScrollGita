@@ -1,0 +1,8 @@
+# Deploy: cd tool/audio && npx wrangler deploy
+name = "one-scroll-gita-audio"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+
+[[r2_buckets]]
+binding = "AUDIO"
+bucket_name = "one-scroll-gita"

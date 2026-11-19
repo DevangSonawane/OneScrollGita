@@ -1,5 +1,6 @@
 package com.example.versescroll
 
-import io.flutter.embedding.android.FlutterActivity
+import com.ryanheise.audioservice.AudioServiceActivity
 
-class MainActivity : FlutterActivity()
+// AudioServiceActivity keeps Shravan playing in the background (PRD_v4).
+class MainActivity : AudioServiceActivity()

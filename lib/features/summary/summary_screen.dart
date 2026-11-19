@@ -3,15 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../application/audio_providers.dart';
 import '../../application/core_providers.dart';
 import '../../application/scripture_providers.dart';
 import '../../application/search_providers.dart';
+import '../../core/config/audio_config.dart';
 import '../../core/design/glass.dart';
+import '../../core/design/motion.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/models/written_content.dart';
 import '../../domain/verse_navigation.dart';
 import '../common/common_widgets.dart';
+import 'summary_audio_bar.dart';
 
 /// Chapter summary page (PRD_v2 section 9). Written content, always
 /// labelled as not part of Srila Prabhupada's text.
@@ -33,6 +37,23 @@ class SummaryScreen extends ConsumerWidget {
     final textLang = lang == 'hi' && (summary?.text.hi?.isNotEmpty ?? false)
         ? 'hi'
         : 'en';
+    final paragraphs = summary == null
+        ? const <String>[]
+        : [
+            for (final p in summary.text.of(textLang).split(RegExp(r'\n\s*\n')))
+              p.trim(),
+          ];
+    // English narration only: the docked player reads the English summary.
+    final englishParagraphs = summary == null
+        ? const <String>[]
+        : [for (final p in summary.text.en.split(RegExp(r'\n\s*\n'))) p.trim()];
+    final audio = AudioConfig.enabled
+        ? ref.watch(audioControllerProvider)
+        : const AudioUiState();
+    final hearing =
+        audio.kind == AudioKind.summary && audio.summaryChapter == chapter;
+    final heard = hearing && textLang == 'en' ? audio.paragraph : -1;
+    final bandDuration = Motion.of(context).crossFade;
 
     return Scaffold(
       body: Stack(
@@ -48,7 +69,9 @@ class SummaryScreen extends ConsumerWidget {
                 0,
                 top + 72,
                 0,
-                MediaQuery.paddingOf(context).bottom + Space.s48,
+                MediaQuery.paddingOf(context).bottom +
+                    Space.s48 +
+                    (AudioConfig.summaryAudio ? SummaryAudioBar.height : 0),
               ),
               children: [
                 ContentWidth(
@@ -72,17 +95,25 @@ class SummaryScreen extends ConsumerWidget {
                         const SizedBox(height: Space.s16),
                         const SummaryLabel(),
                         const SizedBox(height: Space.s24),
-                        if (summary != null)
-                          for (final para
-                              in summary.text
-                                  .of(textLang)
-                                  .split(RegExp(r'\n\s*\n')))
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                bottom: Space.paragraph,
+                        for (final (i, para) in paragraphs.indexed)
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: Space.paragraph,
+                            ),
+                            // The paragraph being heard gets a soft band.
+                            child: AnimatedContainer(
+                              duration: bandDuration,
+                              padding: i == heard
+                                  ? const EdgeInsets.all(Space.s12)
+                                  : EdgeInsets.zero,
+                              decoration: BoxDecoration(
+                                color: i == heard ? c.accentSoft : null,
+                                borderRadius: BorderRadius.circular(
+                                  Radii.input,
+                                ),
                               ),
                               child: Text(
-                                para.trim(),
+                                para,
                                 locale: textLang == 'hi'
                                     ? const Locale('hi')
                                     : null,
@@ -92,6 +123,7 @@ class SummaryScreen extends ConsumerWidget {
                                 ).purport(textLang),
                               ),
                             ),
+                          ),
                         const SizedBox(height: Space.s24),
                         Center(
                           child: FilledButton(
@@ -107,6 +139,16 @@ class SummaryScreen extends ConsumerWidget {
                   ),
                 ),
               ],
+            ),
+          if (AudioConfig.summaryAudio && englishParagraphs.isNotEmpty)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: SummaryAudioBar(
+                chapter: chapter,
+                paragraphs: englishParagraphs,
+              ),
             ),
           Positioned(
             top: top + Space.s8,

@@ -8,7 +8,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:versescroll/app/app.dart';
+import 'package:versescroll/application/audio_providers.dart';
 import 'package:versescroll/application/core_providers.dart';
+import 'package:versescroll/data/audio/audio_catalog.dart';
+import 'package:versescroll/data/audio/audio_engine.dart';
+import 'package:versescroll/data/audio/manifest_source.dart';
 import 'package:versescroll/application/premium_providers.dart';
 import 'package:versescroll/application/scripture_providers.dart';
 import 'package:versescroll/application/streak_providers.dart';
@@ -63,6 +67,9 @@ Future<TestApp> pumpApp(
   Brightness brightness = Brightness.light,
   GlassMode? glass = GlassMode.solid,
   PurchaseGateway? purchases,
+
+  /// A stand-in for the real manifest (null: the silent preview).
+  ManifestSource? audioManifest,
 }) async {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
   tester.view.devicePixelRatio = 1;
@@ -102,6 +109,18 @@ Future<TestApp> pumpApp(
       if (glass != null) glassModeOverrideProvider.overrideWithValue(glass),
       if (now != null) clockProvider.overrideWithValue(() => now),
       todayProvider.overrideWith(_TestToday.new),
+      // Tests never stream: the silent engine and estimated lengths.
+      audioEngineProvider.overrideWith((ref) {
+        final e = PretendAudioEngine();
+        ref.onDispose(e.dispose);
+        return e;
+      }),
+      audioCatalogProvider.overrideWith(
+        (ref) => AudioCatalog(
+          ref.watch(scriptureRepositoryProvider),
+          manifest: audioManifest,
+        ),
+      ),
       purchaseGatewayProvider.overrideWithValue(
         purchases ?? FakePurchaseGateway(),
       ),

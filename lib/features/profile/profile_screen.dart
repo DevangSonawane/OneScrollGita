@@ -16,6 +16,7 @@ import '../../core/design/glass_nav_bar.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/models/app_settings.dart';
+import '../../domain/premium.dart';
 import '../../domain/trainer/trainer.dart';
 import '../../application/streak_providers.dart';
 import '../common/common_widgets.dart';
@@ -121,6 +122,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     // Rebuilds when the entitlement changes, so the debug switch follows it.
     ref.watch(entitlementProvider);
     final isPremium = ref.watch(isPremiumProvider);
+    ref.watch(shravanEntitlementProvider);
+    final pretendShravan =
+        kDebugMode &&
+        ref.read(settingsRepositoryProvider).pretendFor(Package.shravan);
     final pretendPremium =
         kDebugMode && ref.read(settingsRepositoryProvider).pretendPremium;
 
@@ -296,6 +301,20 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   SettingsRow(
                     title: 'Typography specimen (debug)',
                     onTap: () => context.go('/profile/specimen'),
+                  ),
+                  SettingsRow(
+                    title: 'Pretend Shravan (debug)',
+                    subtitle: 'Unlocks Listen in debug builds only.',
+                    trailing: Switch(
+                      value: pretendShravan,
+                      onChanged: (v) => ref
+                          .read(shravanEntitlementProvider.notifier)
+                          .setPretendPremium(v),
+                    ),
+                    onTap: () => ref
+                        .read(shravanEntitlementProvider.notifier)
+                        .setPretendPremium(!pretendShravan),
+                    showChevron: false,
                   ),
                   SettingsRow(
                     title: 'Pretend premium (debug)',

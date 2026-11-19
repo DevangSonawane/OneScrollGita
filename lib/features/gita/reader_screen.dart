@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../application/core_providers.dart';
@@ -23,6 +24,7 @@ import '../../domain/verse_navigation.dart';
 import '../common/common_widgets.dart';
 import '../common/qualifying_read.dart';
 import '../common/save_toggle_button.dart';
+import '../../core/design/components.dart';
 import '../../core/design/copy_on_tap.dart';
 import '../summary/summary_screen.dart' show openSummary;
 import 'chapter_sheet.dart';
@@ -565,6 +567,9 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
   bool _turned = false;
   bool _sharing = false;
 
+  /// The folded study tools (highlight, note, learn by heart).
+  bool _moreOpen = false;
+
   bool _onScroll(ScrollNotification n) {
     if (n.depth != 0) return false;
     if (n is ScrollStartNotification) {
@@ -634,12 +639,12 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
                 highlight: ref.watch(highlightForProvider(entry.id)),
               ),
               const SizedBox(height: Space.s24),
-              // Wraps at large text sizes so the Purport button never
-              // overflows.
+              // Heart, bookmark and share stay out; the study tools fold
+              // away behind "More". Wraps at large text sizes.
               Wrap(
                 alignment: WrapAlignment.spaceBetween,
                 crossAxisAlignment: WrapCrossAlignment.center,
-                runSpacing: Space.s8,
+                runSpacing: Space.s4,
                 children: [
                   Row(
                     mainAxisSize: MainAxisSize.min,
@@ -652,8 +657,6 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
                         verseId: entry.id,
                         kind: SaveKind.bookmark,
                       ),
-                      HighlightButton(verseId: entry.id),
-                      NoteButton(verseId: entry.id),
                       Builder(
                         builder: (buttonContext) => Pressable(
                           onTap: _sharing ? null : () => _share(buttonContext),
@@ -670,19 +673,53 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
                           ),
                         ),
                       ),
+                      Pressable(
+                        onTap: () => setState(() => _moreOpen = !_moreOpen),
+                        semanticLabel: _moreOpen
+                            ? 'Hide study tools'
+                            : 'More: highlight, note, learn by heart',
+                        selected: _moreOpen,
+                        child: SizedBox.square(
+                          dimension: Touch.minTarget,
+                          child: AnimatedRotation(
+                            turns: _moreOpen ? 0.25 : 0,
+                            duration: Motion.of(context).crossFade,
+                            child: Icon(
+                              LucideIcons.ellipsis,
+                              size: IconSizes.regular,
+                              color: _moreOpen ? c.accentText : c.textSecondary,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   if (entry.hasPurport)
                     FilledButton(
+                      style: compactButtonStyle(context),
                       onPressed: () => openPurport(context, entry.id),
                       child: const Text('Purport'),
                     ),
                 ],
               ),
-              const SizedBox(height: Space.s8),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: LearnByHeartButton(verseId: entry.id),
+              AnimatedSize(
+                duration: Motion.of(context).crossFade,
+                curve: AppCurves.standard,
+                alignment: Alignment.topLeft,
+                child: !_moreOpen
+                    ? const SizedBox(width: double.infinity)
+                    : Padding(
+                        padding: const EdgeInsets.only(top: Space.s4),
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: Space.s4,
+                          children: [
+                            HighlightButton(verseId: entry.id),
+                            NoteButton(verseId: entry.id),
+                            LearnByHeartButton(verseId: entry.id),
+                          ],
+                        ),
+                      ),
               ),
               if (widget.isLast) ...[
                 const SizedBox(height: Space.s32),

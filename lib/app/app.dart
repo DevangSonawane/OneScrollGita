@@ -34,6 +34,7 @@ class _GitaAppState extends ConsumerState<GitaApp> with WidgetsBindingObserver {
       // Starts listening to the store (pending purchases complete here) and
       // re-checks the Sadhak plan. Offline keeps the cached state.
       ref.read(entitlementProvider.notifier).refresh().ignore();
+      ref.read(shravanEntitlementProvider.notifier).refresh().ignore();
     });
   }
 
@@ -77,6 +78,7 @@ class _GitaAppState extends ConsumerState<GitaApp> with WidgetsBindingObserver {
       ref.read(todayProvider.notifier).refresh();
       ref.read(reminderControllerProvider.notifier).onAppOpened().ignore();
       ref.read(entitlementProvider.notifier).refresh().ignore();
+      ref.read(shravanEntitlementProvider.notifier).refresh().ignore();
     }
   }
 

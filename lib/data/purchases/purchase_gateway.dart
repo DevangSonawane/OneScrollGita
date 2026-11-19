@@ -64,7 +64,7 @@ class StorePurchaseGateway implements PurchaseGateway {
   void _listen() {
     _sub ??= _iap.purchaseStream.listen((list) {
       for (final p in list) {
-        if (!SadhakProducts.all.contains(p.productID)) continue;
+        if (!allProductIds.contains(p.productID)) continue;
         _out.add(
           PurchaseUpdate(
             p.productID,
@@ -93,11 +93,10 @@ class StorePurchaseGateway implements PurchaseGateway {
   Future<List<SadhakPlan>> loadPlans() async {
     _listen();
     if (!await _iap.isAvailable()) return const [];
-    final res = await _iap.queryProductDetails(
-      SadhakProducts.forStore(
-        appStore: defaultTargetPlatform == TargetPlatform.iOS,
-      ),
-    );
+    final appStore = defaultTargetPlatform == TargetPlatform.iOS;
+    final res = await _iap.queryProductDetails({
+      for (final p in Package.values) ...p.forStore(appStore: appStore),
+    });
     final plans = <SadhakPlan>[];
     for (final d in res.productDetails) {
       // Subscriptions can list one entry per offer; keep the first.
@@ -106,9 +105,7 @@ class StorePurchaseGateway implements PurchaseGateway {
       plans.add(
         SadhakPlan(
           id: d.id,
-          kind: d.id == SadhakProducts.yearly
-              ? PlanKind.yearly
-              : PlanKind.lifetime,
+          kind: planKindOf(d.id),
           price: d.price,
           rawPrice: d.rawPrice,
           currencySymbol: d.currencySymbol,
@@ -145,7 +142,7 @@ class StorePurchaseGateway implements PurchaseGateway {
     return {
       for (final p in res.pastPurchases)
         if (p.status == PurchaseStatus.purchased &&
-            SadhakProducts.all.contains(p.productID))
+            allProductIds.contains(p.productID))
           p.productID,
     };
   }
@@ -188,6 +185,14 @@ class DemoPurchaseGateway implements PurchaseGateway {
       kind: PlanKind.lifetime,
       price: '₹1,999',
       rawPrice: 1999,
+      currencySymbol: '₹',
+      isDemo: true,
+    ),
+    SadhakPlan(
+      id: ShravanProducts.lifetime,
+      kind: PlanKind.lifetime,
+      price: '₹1,499',
+      rawPrice: 1499,
       currencySymbol: '₹',
       isDemo: true,
     ),
@@ -241,11 +246,18 @@ class DebugFallbackGateway implements PurchaseGateway {
 
   @override
   Future<List<SadhakPlan>> loadPlans() async {
+    var real = const <SadhakPlan>[];
     try {
-      final real = await store.loadPlans();
-      if (real.isNotEmpty) return real;
+      real = await store.loadPlans();
     } catch (_) {}
-    return demo.loadPlans();
+    // Per package: the store's plans when it has them, else demo prices.
+    final demoPlans = await demo.loadPlans();
+    return orderPlans([
+      for (final pkg in Package.values)
+        ...(real.any((p) => pkg.owns(p.id))
+            ? real.where((p) => pkg.owns(p.id))
+            : demoPlans.where((p) => pkg.owns(p.id))),
+    ]);
   }
 
   @override

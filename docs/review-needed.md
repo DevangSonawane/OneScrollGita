@@ -64,3 +64,13 @@ was written. The new tests are written but have **not been run**.
 | Shared links on iPhone | `lib/core/config/app_links.dart` → `appStoreId` | iOS shares the App Store page once `appStoreId` is filled in; until then it shares the Play link. |
 | Sadhak products in App Store Connect | `docs/app-store.md` section 2 | `sadhak_yearly` (subscription), `sadhak_lifetime` (non-consumable), Paid Apps agreement. |
 | Signing team | Xcode → Runner → Signing | Project has team `5MU65B6U3F` (Aniket Jha); confirm it is the publishing account. |
+
+## v4: Shravan audio (UI preview built)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Try the audio UI | Debug build → Listen pill | Library, player, mini player, sleep timer, Sanskrit-only, repeat, summary playback. Audio is silent with estimated lengths. |
+| Recordings: file layout | — | One file per shloka, or one per chapter? Voice only, or with music? |
+| Two samples | — | Send one shloka and one translation recording to tune compression by ear. |
+| Library copy | `lib/features/listen/` | "The Gita, recited. Each shloka, then its meaning." and player labels. |
+| Summaries before recording | `assets/summaries/summaries.json` | Review the written summaries before they are narrated. |

@@ -112,19 +112,19 @@ void main() {
   group('paywall controller', () {
     test('loads plans and pre-selects yearly', () async {
       final (c, _, _) = await setup();
-      c.listen(paywallControllerProvider, (_, _) {});
+      c.listen(paywallControllerProvider(Package.sadhak), (_, _) {});
       await flush();
-      final s = c.read(paywallControllerProvider);
+      final s = c.read(paywallControllerProvider(Package.sadhak));
       expect(s.status, PaywallStatus.ready);
       expect(s.selectedId, SadhakProducts.yearly);
     });
 
     test('no plans means unavailable', () async {
       final (c, _, _) = await setup(gateway: FakePurchaseGateway(plans: []));
-      c.listen(paywallControllerProvider, (_, _) {});
+      c.listen(paywallControllerProvider(Package.sadhak), (_, _) {});
       await flush();
       expect(
-        c.read(paywallControllerProvider).status,
+        c.read(paywallControllerProvider(Package.sadhak)).status,
         PaywallStatus.unavailable,
       );
     });
@@ -133,26 +133,26 @@ void main() {
       final (c, g, _) = await setup(
         gateway: FakePurchaseGateway(buyResult: PurchaseOutcome.purchased),
       );
-      c.listen(paywallControllerProvider, (_, _) {});
+      c.listen(paywallControllerProvider(Package.sadhak), (_, _) {});
       await flush();
       c
-          .read(paywallControllerProvider.notifier)
+          .read(paywallControllerProvider(Package.sadhak).notifier)
           .select(SadhakProducts.lifetime);
-      await c.read(paywallControllerProvider.notifier).buy();
+      await c.read(paywallControllerProvider(Package.sadhak).notifier).buy();
       await flush();
       expect(g.bought, [SadhakProducts.lifetime]);
-      expect(c.read(paywallControllerProvider).status, PaywallStatus.success);
+      expect(c.read(paywallControllerProvider(Package.sadhak)).status, PaywallStatus.success);
     });
 
     test('cancel goes quietly back to the plans', () async {
       final (c, _, _) = await setup(
         gateway: FakePurchaseGateway(buyResult: PurchaseOutcome.cancelled),
       );
-      c.listen(paywallControllerProvider, (_, _) {});
+      c.listen(paywallControllerProvider(Package.sadhak), (_, _) {});
       await flush();
-      await c.read(paywallControllerProvider.notifier).buy();
+      await c.read(paywallControllerProvider(Package.sadhak).notifier).buy();
       await flush();
-      final s = c.read(paywallControllerProvider);
+      final s = c.read(paywallControllerProvider(Package.sadhak));
       expect(s.status, PaywallStatus.ready);
       expect(s.message, isNull);
     });
@@ -161,11 +161,11 @@ void main() {
       final (c, _, _) = await setup(
         gateway: FakePurchaseGateway(buyResult: PurchaseOutcome.pending),
       );
-      c.listen(paywallControllerProvider, (_, _) {});
+      c.listen(paywallControllerProvider(Package.sadhak), (_, _) {});
       await flush();
-      await c.read(paywallControllerProvider.notifier).buy();
+      await c.read(paywallControllerProvider(Package.sadhak).notifier).buy();
       await flush();
-      final s = c.read(paywallControllerProvider);
+      final s = c.read(paywallControllerProvider(Package.sadhak));
       expect(s.status, PaywallStatus.pending);
       expect(s.busy, isTrue);
       expect(s.message, contains('being processed'));
@@ -173,10 +173,10 @@ void main() {
 
     test('restore with nothing owned says so', () async {
       final (c, _, _) = await setup(gateway: FakePurchaseGateway(owned: {}));
-      c.listen(paywallControllerProvider, (_, _) {});
+      c.listen(paywallControllerProvider(Package.sadhak), (_, _) {});
       await flush();
-      await c.read(paywallControllerProvider.notifier).restore();
-      final s = c.read(paywallControllerProvider);
+      await c.read(paywallControllerProvider(Package.sadhak).notifier).restore();
+      final s = c.read(paywallControllerProvider(Package.sadhak));
       expect(s.status, PaywallStatus.ready);
       expect(s.message, contains('No earlier Sadhak purchase'));
     });
@@ -185,10 +185,10 @@ void main() {
       final (c, _, repo) = await setup(
         gateway: FakePurchaseGateway(owned: {SadhakProducts.lifetime}),
       );
-      c.listen(paywallControllerProvider, (_, _) {});
+      c.listen(paywallControllerProvider(Package.sadhak), (_, _) {});
       await flush();
-      await c.read(paywallControllerProvider.notifier).restore();
-      expect(c.read(paywallControllerProvider).status, PaywallStatus.success);
+      await c.read(paywallControllerProvider(Package.sadhak).notifier).restore();
+      expect(c.read(paywallControllerProvider(Package.sadhak)).status, PaywallStatus.success);
       expect(repo.entitlementCache, Entitlement.premium);
     });
   });

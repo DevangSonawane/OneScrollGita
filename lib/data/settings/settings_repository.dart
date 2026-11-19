@@ -41,6 +41,9 @@ class SettingsRepository {
   /// Shloka trainer script: `latin` (default) or `devanagari`.
   static const kTrainerScript = 'trainerScript';
 
+  /// Shravan: where the listener stopped (`chapter|verseId`).
+  static const kLastAudioPlace = 'lastAudioPlace';
+
   /// Debug builds only ("Pretend premium"); ignored in release.
   static const kPretendPremium = 'debugPretendPremium';
 
@@ -55,6 +58,7 @@ class SettingsRepository {
     kMilestonesShown,
     kLastOpenedDate,
     kTrainerScript,
+    kLastAudioPlace,
   ];
 
   AppSettings load() {
@@ -152,6 +156,37 @@ class SettingsRepository {
 
   Future<void> setTrainerDevanagari(bool v) =>
       _prefs.setString(kTrainerScript, v ? 'devanagari' : 'latin');
+
+  String? get lastAudioPlace => _get<String>(kLastAudioPlace);
+
+  Future<void> setLastAudioPlace(String v) =>
+      _prefs.setString(kLastAudioPlace, v);
+
+  // Shravan (PRD_v4): its own purchase, same rules as Sadhak.
+  static const kShravanCache = 'shravanEntitlementCache';
+  static const kShravanCheckedAt = 'shravanEntitlementCheckedAt';
+  static const kPretendShravan = 'debugPretendShravan';
+
+  /// The cached purchase for [p] (kept by "Reset all saved data").
+  Entitlement cacheFor(Package p) => p == Package.sadhak
+      ? entitlementCache
+      : (_get<String>(kShravanCache) == Entitlement.premium.name
+            ? Entitlement.premium
+            : Entitlement.free);
+
+  Future<void> setCacheFor(Package p, Entitlement e, DateTime at) async {
+    if (p == Package.sadhak) return setEntitlementCache(e, at);
+    await _prefs.setString(kShravanCache, e.name);
+    await _prefs.setString(kShravanCheckedAt, at.toIso8601String());
+  }
+
+  bool pretendFor(Package p) => p == Package.sadhak
+      ? pretendPremium
+      : (_get<bool>(kPretendShravan) ?? false);
+
+  Future<void> setPretendFor(Package p, bool v) => p == Package.sadhak
+      ? setPretendPremium(v)
+      : _prefs.setBool(kPretendShravan, v);
 
   bool get pretendPremium => _get<bool>(kPretendPremium) ?? false;
 

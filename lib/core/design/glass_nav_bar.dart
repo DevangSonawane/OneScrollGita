@@ -26,11 +26,17 @@ class GlassNavBar extends StatefulWidget {
     required this.items,
     required this.currentIndex,
     required this.onSelect,
+    this.width,
   });
 
   final List<GlassNavItem> items;
+
+  /// The selected tab, or -1 when another destination (Listen) is active.
   final int currentIndex;
   final ValueChanged<int> onSelect;
+
+  /// Fixed width; defaults to the screen width less margins (max 300).
+  final double? width;
 
   @override
   State<GlassNavBar> createState() => _GlassNavBarState();
@@ -41,7 +47,7 @@ class _GlassNavBarState extends State<GlassNavBar>
   /// Droplet centre measured in tabs (0 = first tab).
   late final AnimationController _pos = AnimationController.unbounded(
     vsync: this,
-    value: widget.currentIndex.toDouble(),
+    value: widget.currentIndex.clamp(0, widget.items.length - 1).toDouble(),
   );
   double _velocity = 0; // tabs per second, for the stretch
   bool _dragging = false;
@@ -56,13 +62,15 @@ class _GlassNavBarState extends State<GlassNavBar>
   @override
   void initState() {
     super.initState();
-    _hoverIndex = widget.currentIndex;
+    _hoverIndex = widget.currentIndex.clamp(0, widget.items.length - 1);
   }
 
   @override
   void didUpdateWidget(GlassNavBar old) {
     super.didUpdateWidget(old);
-    if (!_dragging && widget.currentIndex != old.currentIndex) {
+    if (!_dragging &&
+        widget.currentIndex != old.currentIndex &&
+        widget.currentIndex >= 0) {
       _settle(widget.currentIndex, 0);
     }
   }
@@ -100,10 +108,13 @@ class _GlassNavBarState extends State<GlassNavBar>
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
     final screen = MediaQuery.sizeOf(context).width;
-    final width = (screen - NavBarMetrics.sideMargin * 2).clamp(
-      NavBarMetrics.minTabWidth * widget.items.length,
-      NavBarMetrics.maxWidth,
-    );
+    final width =
+        widget.width ??
+        (screen - NavBarMetrics.sideMargin * 2).clamp(
+          NavBarMetrics.minTabWidth * widget.items.length,
+          NavBarMetrics.maxWidth,
+        );
+    final hasSelection = widget.currentIndex >= 0;
     final n = widget.items.length;
     const inset = 6.0;
     final tabWidth = (width - inset * 2) / n;
@@ -162,12 +173,16 @@ class _GlassNavBarState extends State<GlassNavBar>
                         width: w,
                         height: h,
                         child: ExcludeSemantics(
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: c.accentSoft.withValues(alpha: 0.85),
-                              borderRadius: BorderRadius.circular(h / 2),
-                              border: Border.all(
-                                color: Colors.white.withValues(alpha: 0.35),
+                          child: AnimatedOpacity(
+                            opacity: hasSelection ? 1 : 0,
+                            duration: AppDurations.fast,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: c.accentSoft.withValues(alpha: 0.85),
+                                borderRadius: BorderRadius.circular(h / 2),
+                                border: Border.all(
+                                  color: Colors.white.withValues(alpha: 0.35),
+                                ),
                               ),
                             ),
                           ),
@@ -251,9 +266,29 @@ class _Tab extends StatelessWidget {
   }
 }
 
-/// Bottom padding a scrollable needs so its end clears the floating pill.
+/// Bottom padding a scrollable needs so its end clears the floating pill
+/// (and the Shravan mini player when it is showing).
 double navBarInset(BuildContext context) =>
     NavBarMetrics.height +
     NavBarMetrics.bottomGap +
     MediaQuery.paddingOf(context).bottom +
-    Space.s16;
+    Space.s16 +
+    MiniPlayerInset.of(context);
+
+/// Extra bottom space taken by the mini player above the nav pills.
+class MiniPlayerInset extends InheritedWidget {
+  const MiniPlayerInset({
+    super.key,
+    required this.height,
+    required super.child,
+  });
+
+  final double height;
+
+  static double of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<MiniPlayerInset>()?.height ??
+      0;
+
+  @override
+  bool updateShouldNotify(MiniPlayerInset old) => old.height != height;
+}

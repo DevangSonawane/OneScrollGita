@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:versescroll/domain/premium.dart';
+import 'package:versescroll/domain/shravan.dart';
 
 void main() {
   group('canUse', () {
@@ -138,6 +139,26 @@ void main() {
     expect(SadhakProducts.forStore(appStore: false), {
       'sadhak_yearly',
       'sadhak_lifetime',
+    });
+  });
+
+  group('packages', () {
+    test('products belong to one package each', () {
+      expect(packageOf(SadhakProducts.yearly), Package.sadhak);
+      expect(packageOf(ShravanProducts.lifetimeAppStore), Package.shravan);
+      expect(packageOf('other'), isNull);
+      expect(ShravanProducts.forStore(appStore: false), {
+        ShravanProducts.lifetime,
+      });
+      expect(planKindOf(SadhakProducts.lifetimeAppStore), PlanKind.lifetime);
+    });
+
+    test('every part of Listen needs Shravan', () {
+      for (final f in ListenFeature.values) {
+        expect(canListen(f, Entitlement.free), isFalse);
+        expect(canListen(f, Entitlement.premium), isTrue);
+        expect(f.reason, contains('Shravan'));
+      }
     });
   });
 }

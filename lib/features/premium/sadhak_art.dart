@@ -13,9 +13,12 @@ import '../../core/design/tokens.dart';
 // Ambient hero: aura + mandala + sparks, driven by one repeating controller.
 
 class SadhakAmbient extends StatefulWidget {
-  const SadhakAmbient({super.key, required this.height});
+  const SadhakAmbient({super.key, required this.height, this.fadeTop = false});
 
   final double height;
+
+  /// Also fade the top edge into the page (art that starts below a bar).
+  final bool fadeTop;
 
   @override
   State<SadhakAmbient> createState() => _SadhakAmbientState();
@@ -61,6 +64,7 @@ class _SadhakAmbientState extends State<SadhakAmbient>
             animation: _c,
             builder: (context, _) => CustomPaint(
               painter: _AmbientPainter(
+                fadeTop: widget.fadeTop,
                 seconds: _c.value * AppDurations.mandalaTurn.inSeconds,
                 premium: p,
                 line: c.accent,
@@ -102,12 +106,14 @@ class _AmbientPainter extends CustomPainter {
     required this.premium,
     required this.line,
     required this.bg,
+    this.fadeTop = false,
   });
 
   final double seconds;
   final PremiumColors premium;
   final Color line;
   final Color bg;
+  final bool fadeTop;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -186,6 +192,19 @@ class _AmbientPainter extends CustomPainter {
       final alpha = math.sin(progress * math.pi) * 0.85;
       sparkPaint.color = premium.gold.withValues(alpha: alpha);
       canvas.drawCircle(Offset(x, y), s.size, sparkPaint);
+    }
+
+    if (fadeTop) {
+      final top = Rect.fromLTWH(0, 0, w, h * 0.22);
+      canvas.drawRect(
+        top,
+        Paint()
+          ..shader = LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [bg, bg.withValues(alpha: 0)],
+          ).createShader(top),
+      );
     }
 
     // 4. Fade the bottom edge into the page.

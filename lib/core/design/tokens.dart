@@ -165,6 +165,10 @@ abstract final class AppDurations {
   // Study layer and trainer.
   static const noteAutosave = Duration(milliseconds: 600);
   static const wordReveal = Duration(milliseconds: 220);
+
+  // Shravan player.
+  static const soundWave = Duration(milliseconds: 900);
+  static const breathe = Duration(milliseconds: 4200);
 }
 
 abstract final class AppCurves {
@@ -385,4 +389,29 @@ abstract final class TrainerMetrics {
   static const blankHeight = 30.0;
   static const stepDot = 8.0;
   static const stepDotActive = 22.0;
+}
+
+/// Shravan audio: Listen pill, mini player and full player.
+abstract final class PlayerMetrics {
+  /// The Listen pill: icon only on narrow screens, icon + label otherwise.
+  static const pillCompact = 52.0;
+  static const pillWide = 116.0;
+  static const pillGap = 8.0;
+
+  /// Wide pill only when the screen is at least this wide.
+  static const wideFrom = 380.0;
+
+  static const miniHeight = 64.0;
+  static const miniTile = 44.0;
+  static const miniGap = 8.0;
+  static const progressLine = 2.0;
+
+  static const art = 180.0;
+  static const artNumeral = 48.0;
+  static const playButton = 60.0;
+  static const scrubberHeight = 24.0;
+  static const tickHeight = 8.0;
+  static const chapterTile = 40.0;
+  static const waveBar = 3.0;
+  static const waveHeight = 18.0;
 }

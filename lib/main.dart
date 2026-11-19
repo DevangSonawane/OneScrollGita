@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:liquid_glass_renderer/liquid_glass_renderer.dart';
 import 'package:play_install_referrer/play_install_referrer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,7 @@ import 'application/streak_providers.dart';
 import 'application/study_providers.dart';
 import 'application/ui_providers.dart';
 import 'core/config/app_links.dart';
+import 'core/config/audio_config.dart';
 import 'data/settings/settings_repository.dart';
 import 'data/notifications/notification_service.dart';
 import 'data/user/activity_repository.dart';
@@ -27,6 +29,17 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   _registerFontLicences();
+
+  // Shravan: lock-screen controls and background play (PRD_v4).
+  if (AudioConfig.baseUrl.isNotEmpty &&
+      (defaultTargetPlatform == TargetPlatform.android ||
+          defaultTargetPlatform == TargetPlatform.iOS)) {
+    await JustAudioBackground.init(
+      androidNotificationChannelId: 'com.onescrollgita.app.shravan',
+      androidNotificationChannelName: 'Shravan playback',
+      androidNotificationOngoing: true,
+    );
+  }
 
   final prefs = await SharedPreferences.getInstance();
   final db = await AppDatabase.open();
