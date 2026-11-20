@@ -54,3 +54,9 @@ tool/.cache/
 android/key.properties
 *.jks
 *.keystore
+
+# v9 account keys (docs/auth-setup.md)
+auth.env.json
+supabase/.db-password
+supabase/.temp/
+supabase/.env

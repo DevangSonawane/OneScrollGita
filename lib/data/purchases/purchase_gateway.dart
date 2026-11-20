@@ -12,9 +12,18 @@ enum PurchaseOutcome { pending, purchased, restored, cancelled, error }
 
 /// One store event for a Sadhak product.
 class PurchaseUpdate {
-  const PurchaseUpdate(this.productId, this.outcome, {this.message, this.raw});
+  const PurchaseUpdate(
+    this.productId,
+    this.outcome, {
+    this.message,
+    this.raw,
+    this.transactionId,
+  });
 
   final String productId;
+
+  /// The store's transaction ID, when it gave one.
+  final String? transactionId;
   final PurchaseOutcome outcome;
   final String? message;
 
@@ -34,8 +43,9 @@ abstract class PurchaseGateway {
   /// Plans the store offers, in display order. Empty when unavailable.
   Future<List<SadhakPlan>> loadPlans();
 
-  /// Starts a purchase; the result arrives on [updates].
-  Future<bool> buy(SadhakPlan plan);
+  /// Starts a purchase; the result arrives on [updates]. [accountId] is the
+  /// signed-in user's ID, passed to the store to link the purchase (PRD_v9).
+  Future<bool> buy(SadhakPlan plan, {String? accountId});
 
   /// Asks the store to replay earlier purchases on [updates].
   Future<void> restore();
@@ -79,6 +89,7 @@ class StorePurchaseGateway implements PurchaseGateway {
             },
             message: p.error?.message,
             raw: p,
+            transactionId: p.purchaseID,
           ),
         );
       }
@@ -137,12 +148,17 @@ class StorePurchaseGateway implements PurchaseGateway {
   }
 
   @override
-  Future<bool> buy(SadhakPlan plan) async {
+  Future<bool> buy(SadhakPlan plan, {String? accountId}) async {
     final d = _products[plan.id];
     if (d == null) return false;
     // Subscriptions and lifetime unlocks are both bought as non-consumables.
+    // The account ID becomes the App Store appAccountToken and the Google
+    // Play obfuscated account ID.
     return _iap.buyNonConsumable(
-      purchaseParam: PurchaseParam(productDetails: d),
+      purchaseParam: PurchaseParam(
+        productDetails: d,
+        applicationUserName: accountId,
+      ),
     );
   }
 
@@ -256,7 +272,7 @@ class DemoPurchaseGateway implements PurchaseGateway {
   Future<List<SadhakPlan>> loadPlans() async => plans;
 
   @override
-  Future<bool> buy(SadhakPlan plan) async {
+  Future<bool> buy(SadhakPlan plan, {String? accountId}) async {
     Future<void>.delayed(delay, () {
       if (!_out.isClosed) {
         _out.add(PurchaseUpdate(plan.id, PurchaseOutcome.purchased));
@@ -312,8 +328,9 @@ class DebugFallbackGateway implements PurchaseGateway {
   }
 
   @override
-  Future<bool> buy(SadhakPlan plan) =>
-      plan.isDemo ? demo.buy(plan) : store.buy(plan);
+  Future<bool> buy(SadhakPlan plan, {String? accountId}) => plan.isDemo
+      ? demo.buy(plan, accountId: accountId)
+      : store.buy(plan, accountId: accountId);
 
   @override
   Future<void> restore() => store.restore();

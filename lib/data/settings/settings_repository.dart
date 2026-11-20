@@ -23,6 +23,9 @@ class SettingsRepository {
   static const kFirstIntent = 'firstIntent';
   static const kSimplifiedGlass = 'simplifiedGlass';
 
+  /// v9: show the sign-up page once after first launch (new installs only).
+  static const kAccountStepPending = 'accountStepPending';
+
   // v2 (PRD_v2 section 3).
   static const kRemindersEnabled = 'remindersEnabled';
   static const kReminderTime = 'reminderTime';
@@ -82,6 +85,7 @@ class SettingsRepository {
       lastVerseId: last != null && parseVerseId(last) != null ? last : null,
       firstLaunchDone: _get<bool>(kFirstLaunch) ?? false,
       simplifiedGlass: _get<bool>(kSimplifiedGlass) ?? false,
+      accountStepPending: _get<bool>(kAccountStepPending) ?? false,
     );
   }
 
@@ -208,6 +212,8 @@ class SettingsRepository {
   Future<void> setFirstIntent(String v) => _prefs.setString(kFirstIntent, v);
   Future<void> setSimplifiedGlass(bool v) =>
       _prefs.setBool(kSimplifiedGlass, v);
+  Future<void> setAccountStepPending(bool v) =>
+      _prefs.setBool(kAccountStepPending, v);
 
   Future<void> setLastVerseId(String? id) =>
       id == null ? _prefs.remove(kLastVerse) : _prefs.setString(kLastVerse, id);
@@ -221,6 +227,7 @@ class SettingsRepository {
       kFirstLaunch,
       kFirstIntent,
       kSimplifiedGlass,
+      kAccountStepPending,
       ..._v2Keys,
     ]) {
       await _prefs.remove(k);

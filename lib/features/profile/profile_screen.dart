@@ -4,6 +4,7 @@ import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../application/auth_providers.dart';
 import '../../application/core_providers.dart';
 import '../../application/library_providers.dart';
 import '../../application/premium_providers.dart';
@@ -27,7 +28,8 @@ import '../streak/streak_card.dart';
 import '../purport/purport_screen.dart' show TextSizeSlider;
 import '../../core/config/build_flags.dart';
 
-/// Profile (PRD 5.7): a quiet local library plus settings. No account.
+/// Profile (PRD 5.7): a quiet local library plus settings, and the
+/// optional account (PRD_v9).
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
@@ -291,6 +293,17 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   showChevron: false,
                   divider: false,
                 ),
+                if (ref.watch(authGatewayProvider).available) ...[
+                  const _ProfileSectionHeader('ACCOUNT'),
+                  SettingsRow(
+                    title: 'Account',
+                    subtitle:
+                        ref.watch(currentUserProvider)?.displayName ??
+                        'Optional. Link your purchases',
+                    onTap: () => context.go('/profile/account'),
+                    divider: false,
+                  ),
+                ],
                 const _ProfileSectionHeader('ABOUT'),
                 SettingsRow(
                   title: 'About and credits',

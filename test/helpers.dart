@@ -11,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:versescroll/app/app.dart';
 import 'package:versescroll/features/gita/reader_screen.dart';
 import 'package:versescroll/application/audio_providers.dart';
+import 'package:versescroll/application/auth_providers.dart';
+import 'package:versescroll/data/auth/auth_gateway.dart';
 import 'package:versescroll/application/core_providers.dart';
 import 'package:versescroll/data/audio/audio_catalog.dart';
 import 'package:versescroll/data/audio/audio_engine.dart';
@@ -77,6 +79,9 @@ Future<TestApp> pumpApp(
 
   /// A stand-in for the platform notifications (null: does nothing).
   NotificationService? notifications,
+
+  /// A stand-in for Supabase (null: no account features, as without keys).
+  AuthGateway? auth,
 }) async {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
   tester.view.devicePixelRatio = 1;
@@ -133,6 +138,9 @@ Future<TestApp> pumpApp(
       ),
       if (notifications != null)
         notificationServiceProvider.overrideWithValue(notifications),
+      authGatewayProvider.overrideWithValue(
+        auth ?? const DisabledAuthGateway(),
+      ),
     ],
   );
   addTearDown(() async {

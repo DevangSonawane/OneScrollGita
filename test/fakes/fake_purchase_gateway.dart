@@ -35,6 +35,9 @@ class FakePurchaseGateway implements PurchaseGateway {
   PurchaseOutcome? buyResult;
 
   final bought = <String>[];
+
+  /// The account ID passed with the last [buy].
+  String? lastAccountId;
   final completed = <PurchaseUpdate>[];
   int restoreCalls = 0;
   final _out = StreamController<PurchaseUpdate>.broadcast();
@@ -48,7 +51,8 @@ class FakePurchaseGateway implements PurchaseGateway {
   Future<List<SadhakPlan>> loadPlans() async => plans;
 
   @override
-  Future<bool> buy(SadhakPlan plan) async {
+  Future<bool> buy(SadhakPlan plan, {String? accountId}) async {
+    lastAccountId = accountId;
     bought.add(plan.id);
     final r = buyResult;
     if (r != null) {

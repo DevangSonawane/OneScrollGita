@@ -12,6 +12,7 @@ class AppSettings {
     this.lastVerseId,
     this.firstLaunchDone = false,
     this.simplifiedGlass = false,
+    this.accountStepPending = false,
   });
 
   final String languageCode;
@@ -20,6 +21,9 @@ class AppSettings {
   final String? lastVerseId;
   final bool firstLaunchDone;
   final bool simplifiedGlass;
+
+  /// v9: the one-time sign-up page after first launch has not been answered.
+  final bool accountStepPending;
 
   double get readingScale => readingScaleSteps[textScaleStep];
 
@@ -31,6 +35,7 @@ class AppSettings {
     bool clearLastVerseId = false,
     bool? firstLaunchDone,
     bool? simplifiedGlass,
+    bool? accountStepPending,
   }) => AppSettings(
     languageCode: languageCode ?? this.languageCode,
     themeMode: themeMode ?? this.themeMode,
@@ -38,5 +43,6 @@ class AppSettings {
     lastVerseId: clearLastVerseId ? null : (lastVerseId ?? this.lastVerseId),
     firstLaunchDone: firstLaunchDone ?? this.firstLaunchDone,
     simplifiedGlass: simplifiedGlass ?? this.simplifiedGlass,
+    accountStepPending: accountStepPending ?? this.accountStepPending,
   );
 }

@@ -4,12 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../application/auth_providers.dart';
 import '../application/core_providers.dart';
 import '../application/ui_providers.dart';
 import '../core/design/motion.dart';
 import '../core/config/audio_config.dart';
 import '../core/design/tokens.dart';
+import '../domain/auth.dart';
 import '../domain/verse_navigation.dart';
+import '../features/account/account_screen.dart';
+import '../features/account/sign_up_screen.dart';
 import '../features/first_launch/welcome_screen.dart';
 import '../features/gita/reader_screen.dart';
 import '../domain/premium.dart';
@@ -39,20 +43,30 @@ final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 final routerProvider = Provider<GoRouter>((ref) {
   final refresh = ValueNotifier<int>(0);
   ref.listen(
-    settingsProvider.select((s) => s.firstLaunchDone),
+    settingsProvider.select((s) => (s.firstLaunchDone, s.accountStepPending)),
     (_, _) => refresh.value++,
   );
+  final accounts = ref.read(authGatewayProvider).available;
 
   final router = GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: '/home',
     refreshListenable: refresh,
     redirect: (context, state) {
-      final done = ref.read(settingsProvider).firstLaunchDone;
+      final settings = ref.read(settingsProvider);
+      final done = settings.firstLaunchDone;
       final atWelcome = state.matchedLocation == '/welcome';
+      final atSignUp = state.matchedLocation == '/signup';
       if (!done && !atWelcome) return '/welcome';
+      // The one-time sign-up page right after first launch (PRD_v9).
+      final signUp = shouldShowSignUp(
+        accountsAvailable: accounts,
+        stepPending: settings.accountStepPending,
+        signedIn: ref.read(currentUserProvider) != null,
+      );
+      if (done && signUp) return atSignUp ? null : '/signup';
       // A shared verse opened before first launch finishes opens after it.
-      if (done && atWelcome) {
+      if (done && (atWelcome || atSignUp)) {
         return ref.read(readerJumpProvider) == null ? '/home' : '/gita';
       }
       return null;
@@ -76,6 +90,10 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/welcome',
         pageBuilder: (context, state) =>
             _fadePage(state, const WelcomeScreen()),
+      ),
+      GoRoute(
+        path: '/signup',
+        pageBuilder: (context, state) => _fadePage(state, const SignUpScreen()),
       ),
       StatefulShellRoute.indexedStack(
         pageBuilder: (context, state, shell) =>
@@ -152,6 +170,12 @@ final routerProvider = Provider<GoRouter>((ref) {
                     pageBuilder: (context, state) =>
                         _platformPage(state, const RemindersScreen()),
                   ),
+                  if (accounts)
+                    GoRoute(
+                      path: 'account',
+                      pageBuilder: (context, state) =>
+                          _platformPage(state, const AccountScreen()),
+                    ),
                   GoRoute(
                     path: 'about',
                     pageBuilder: (context, state) =>

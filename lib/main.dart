@@ -17,6 +17,8 @@ import 'application/study_providers.dart';
 import 'application/ui_providers.dart';
 import 'core/config/app_links.dart';
 import 'core/config/audio_config.dart';
+import 'core/config/auth_config.dart';
+import 'data/auth/auth_gateway.dart';
 import 'data/settings/settings_repository.dart';
 import 'data/notifications/notification_service.dart';
 import 'data/user/activity_repository.dart';
@@ -40,6 +42,10 @@ Future<void> main() async {
       androidNotificationOngoing: true,
     );
   }
+
+  // Optional account (PRD_v9): only when the build has a Supabase project.
+  // Restores a saved session from the phone; works offline.
+  if (AuthConfig.enabled) await SupabaseAuthGateway.initialize();
 
   final prefs = await SharedPreferences.getInstance();
   final db = await AppDatabase.open();

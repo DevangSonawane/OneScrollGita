@@ -107,3 +107,16 @@ was written. The new tests are written but have **not been run**.
 | Owner preview flag | `lib/core/config/build_flags.dart` | Never build a store upload with `--dart-define=OWNER_PREVIEW=true`. Profile shows a red "Owner preview build" row when it is on. |
 | Monk figure | `lib/features/premium/figure_art.dart` | Look on both paywalls, light and dark. |
 | Lock screen widgets | iOS lock screen > Customize | Verse of the day (inline, rectangle, lotus circle) and Continue reading. |
+
+## v9 (optional account)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Setup | `docs/auth-setup.md` | Done. Consent screen support email is officialaniketjha@gmail.com. |
+| Sign-up copy | `lib/features/account/sign_up_screen.dart` | "Keep your purchases safe", the subline, the privacy line, "Not now". |
+| Google button look | same file | Plain outlined button, no Google "G" logo yet. Google's brand rules prefer their logo; supply the asset or approve as is. |
+| Delete wording | `lib/features/account/account_screen.dart` | Delete dialog text about cancelling store subscriptions (Apple requirement). |
+| Privacy policy | `store/privacy-policy.html` | Add a section on the optional account (email, name, purchase record, deletion). Legal wording is yours. |
+| Store labels | App Store Connect, Play Console | Change "Data not collected" to email, name, user ID, purchase history (linked, not tracking). Play: also add the account-deletion URL or in-app path. |
+| Privacy manifest | `ios/Runner/PrivacyInfo.xcprivacy` | Still says no data collected. Update the collected data types to match the new App Store label. |
+| Android Apple sign-in | — | Not built. Say if you want it. |

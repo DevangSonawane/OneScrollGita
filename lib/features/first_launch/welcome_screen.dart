@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../application/auth_providers.dart';
 import '../../application/core_providers.dart';
 import '../../application/reminder_providers.dart';
 import '../../application/scripture_providers.dart';
@@ -53,7 +54,10 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
     }
     final settings = ref.read(settingsProvider.notifier);
     if (_firstVerseId != null) await settings.setLastVerseId(_firstVerseId);
-    await settings.completeFirstLaunch(_lang);
+    await settings.completeFirstLaunch(
+      _lang,
+      askAccount: ref.read(authGatewayProvider).available,
+    );
   }
 
   @override

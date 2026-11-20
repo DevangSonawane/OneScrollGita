@@ -51,10 +51,25 @@ class SettingsNotifier extends Notifier<AppSettings> {
     await _repo.setSimplifiedGlass(v);
   }
 
-  Future<void> completeFirstLaunch(String languageCode) async {
+  /// [askAccount]: show the one-time sign-up page next (PRD_v9).
+  Future<void> completeFirstLaunch(
+    String languageCode, {
+    bool askAccount = false,
+  }) async {
     await setLanguage(languageCode);
-    state = state.copyWith(firstLaunchDone: true);
+    if (askAccount) await _repo.setAccountStepPending(true);
+    state = state.copyWith(
+      firstLaunchDone: true,
+      accountStepPending: askAccount ? true : null,
+    );
     await _repo.setFirstLaunchDone(true);
+  }
+
+  /// The sign-up page was answered (signed in or "Not now").
+  Future<void> finishAccountStep() async {
+    if (!state.accountStepPending) return;
+    state = state.copyWith(accountStepPending: false);
+    await _repo.setAccountStepPending(false);
   }
 
   Future<void> setLastVerseId(String? id) async {

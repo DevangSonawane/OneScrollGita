@@ -4,7 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/purchases/purchase_gateway.dart';
+import '../domain/auth.dart';
 import '../domain/premium.dart';
+import 'auth_providers.dart';
 import 'core_providers.dart';
 import '../core/config/build_flags.dart';
 
@@ -69,6 +71,7 @@ class EntitlementNotifier extends Notifier<Entitlement> {
         await setPretendPremium(true);
       } else {
         await _save(Entitlement.premium);
+        if (u.outcome == PurchaseOutcome.purchased) _record(u);
       }
     }
     if (u.outcome != PurchaseOutcome.pending) {
@@ -78,6 +81,24 @@ class EntitlementNotifier extends Notifier<Entitlement> {
         // The store retries delivery; premium is already granted.
       }
     }
+  }
+
+  /// A support record on the account, if signed in (PRD_v9 section 4).
+  /// Never awaited and never used to unlock anything.
+  void _record(PurchaseUpdate u) {
+    if (ref.read(currentUserProvider) == null) return;
+    ref
+        .read(authGatewayProvider)
+        .recordPurchase(
+          PurchaseRecord(
+            productId: u.productId,
+            platform: defaultTargetPlatform == TargetPlatform.iOS
+                ? 'ios'
+                : 'android',
+            transactionId: u.transactionId,
+          ),
+        )
+        .ignore();
   }
 
   Future<void> _save(Entitlement e) async {
@@ -228,7 +249,9 @@ class PaywallController extends Notifier<PaywallState> {
       clearMessage: true,
     );
     try {
-      final started = await ref.read(purchaseGatewayProvider).buy(plan);
+      final started = await ref
+          .read(purchaseGatewayProvider)
+          .buy(plan, accountId: ref.read(currentUserProvider)?.id);
       if (!started && ref.mounted) {
         state = state.copyWith(
           status: PaywallStatus.error,
