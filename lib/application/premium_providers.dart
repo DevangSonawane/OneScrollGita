@@ -6,11 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/purchases/purchase_gateway.dart';
 import '../domain/premium.dart';
 import 'core_providers.dart';
+import '../core/config/build_flags.dart';
 
 /// The store connection. Debug builds fall back to demo prices when the
 /// store has no products yet. Overridden in tests.
 final purchaseGatewayProvider = Provider<PurchaseGateway>((ref) {
-  final gateway = kDebugMode
+  final gateway = previewBuild
       ? DebugFallbackGateway(StorePurchaseGateway(), DemoPurchaseGateway())
       : StorePurchaseGateway();
   ref.onDispose(gateway.dispose);
@@ -53,7 +54,7 @@ class EntitlementNotifier extends Notifier<Entitlement> {
     return resolveEntitlement(
       cached: repo.cacheFor(package),
       pretendPremium: repo.pretendFor(package),
-      debugBuild: kDebugMode,
+      debugBuild: previewBuild,
     );
   }
 
@@ -64,7 +65,7 @@ class EntitlementNotifier extends Notifier<Entitlement> {
     if (u.grantsPremium) {
       // A demo purchase (debug only) flips "Pretend premium", never the
       // real cache.
-      if (u.raw == null && kDebugMode) {
+      if (u.raw == null && previewBuild) {
         await setPretendPremium(true);
       } else {
         await _save(Entitlement.premium);
@@ -107,7 +108,7 @@ class EntitlementNotifier extends Notifier<Entitlement> {
 
   /// Debug builds only.
   Future<void> setPretendPremium(bool v) async {
-    if (!kDebugMode) return;
+    if (!previewBuild) return;
     await ref.read(settingsRepositoryProvider).setPretendFor(package, v);
     state = _resolve();
   }
@@ -170,10 +171,8 @@ class PaywallState {
 /// How long to wait for the App Store to replay a purchase on restore.
 const restoreWait = Duration(seconds: 8);
 
-final paywallControllerProvider =
-    NotifierProvider.autoDispose.family<PaywallController, PaywallState, Package>(
-      PaywallController.new,
-    );
+final paywallControllerProvider = NotifierProvider.autoDispose
+    .family<PaywallController, PaywallState, Package>(PaywallController.new);
 
 class PaywallController extends Notifier<PaywallState> {
   PaywallController(this.package);

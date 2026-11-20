@@ -22,6 +22,16 @@ class ActivityRepository {
       .watch()
       .map((rows) => [for (final r in rows) ReadDay(r.date, r.verseCount)]);
 
+  /// Every verse that ever counted as read (kept by "Clear history", like
+  /// the streak). Drives chapter progress and the verse grid (PRD_v7).
+  Stream<Set<String>> watchReadVerseIds() =>
+      (_db.selectOnly(
+        _db.readDayVerses,
+        distinct: true,
+      )..addColumns([_db.readDayVerses.verseId])).watch().map(
+        (rows) => {for (final r in rows) r.read(_db.readDayVerses.verseId)!},
+      );
+
   Future<List<ReadDay>> readDays() async => [
     for (final r in await _db.select(_db.readDays).get())
       ReadDay(r.date, r.verseCount),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' show CupertinoPage;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -133,29 +134,34 @@ final routerProvider = Provider<GoRouter>((ref) {
                   for (final kind in LibraryKind.values)
                     GoRoute(
                       path: kind.name,
-                      builder: (context, state) =>
-                          LibraryListScreen(kind: kind),
+                      pageBuilder: (context, state) =>
+                          _platformPage(state, LibraryListScreen(kind: kind)),
                     ),
                   GoRoute(
                     path: 'highlights',
-                    builder: (context, state) => const HighlightsScreen(),
+                    pageBuilder: (context, state) =>
+                        _platformPage(state, const HighlightsScreen()),
                   ),
                   GoRoute(
                     path: 'notes',
-                    builder: (context, state) => const NotesScreen(),
+                    pageBuilder: (context, state) =>
+                        _platformPage(state, const NotesScreen()),
                   ),
                   GoRoute(
                     path: 'reminders',
-                    builder: (context, state) => const RemindersScreen(),
+                    pageBuilder: (context, state) =>
+                        _platformPage(state, const RemindersScreen()),
                   ),
                   GoRoute(
                     path: 'about',
-                    builder: (context, state) => const AboutScreen(),
+                    pageBuilder: (context, state) =>
+                        _platformPage(state, const AboutScreen()),
                   ),
                   if (kDebugMode)
                     GoRoute(
                       path: 'specimen',
-                      builder: (context, state) => const SpecimenScreen(),
+                      pageBuilder: (context, state) =>
+                          _platformPage(state, const SpecimenScreen()),
                     ),
                 ],
               ),
@@ -281,30 +287,46 @@ final routerProvider = Provider<GoRouter>((ref) {
   return router;
 });
 
-/// Fade with a 16 px rise (fade only under reduced motion).
-Page<void> _risePage(GoRouterState state, Widget child) => CustomTransitionPage(
-  key: state.pageKey,
-  transitionDuration: AppDurations.base,
-  reverseTransitionDuration: AppDurations.base,
-  child: child,
-  transitionsBuilder: (context, animation, secondary, child) {
-    final motion = Motion.of(context);
-    final curved = CurvedAnimation(
-      parent: animation,
-      curve: AppCurves.standard,
+/// Sub-pages inside a tab (Profile > Bookmarks, Reminders, About...). A
+/// plain `builder` gets go_router's no-transition page here, which has no
+/// iOS back swipe; this gives the native page on each platform instead.
+Page<void> _platformPage(GoRouterState state, Widget child) =>
+    defaultTargetPlatform == TargetPlatform.iOS
+    ? CupertinoPage<void>(key: state.pageKey, child: child)
+    : MaterialPage<void>(key: state.pageKey, child: child);
+
+/// Pushed pages. iOS: the native page route, so a swipe from the left edge
+/// goes back with the page following the finger (PRD_v6 section 4).
+/// Elsewhere: fade with a 16 px rise (fade only under reduced motion).
+Page<void> _risePage(GoRouterState state, Widget child) =>
+    defaultTargetPlatform == TargetPlatform.iOS
+    ? CupertinoPage<void>(key: state.pageKey, child: child)
+    : _riseTransitionPage(state, child);
+
+Page<void> _riseTransitionPage(GoRouterState state, Widget child) =>
+    CustomTransitionPage(
+      key: state.pageKey,
+      transitionDuration: AppDurations.base,
+      reverseTransitionDuration: AppDurations.base,
+      child: child,
+      transitionsBuilder: (context, animation, secondary, child) {
+        final motion = Motion.of(context);
+        final curved = CurvedAnimation(
+          parent: animation,
+          curve: AppCurves.standard,
+        );
+        final fade = FadeTransition(opacity: curved, child: child);
+        if (motion.reduced) return fade;
+        return AnimatedBuilder(
+          animation: curved,
+          builder: (context, child) => Transform.translate(
+            offset: Offset(0, 16 * (1 - curved.value)),
+            child: child,
+          ),
+          child: fade,
+        );
+      },
     );
-    final fade = FadeTransition(opacity: curved, child: child);
-    if (motion.reduced) return fade;
-    return AnimatedBuilder(
-      animation: curved,
-      builder: (context, child) => Transform.translate(
-        offset: Offset(0, 16 * (1 - curved.value)),
-        child: child,
-      ),
-      child: fade,
-    );
-  },
-);
 
 Page<void> _fadePage(GoRouterState state, Widget child) =>
     CustomTransitionPage<void>(

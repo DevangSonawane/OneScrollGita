@@ -13,6 +13,7 @@ import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/premium.dart';
 import '../../domain/shravan.dart';
+import 'figure_art.dart';
 import 'sadhak_art.dart';
 
 /// Opens the Sadhak paywall, optionally explaining which locked feature led
@@ -38,7 +39,11 @@ class PaywallOffer {
     required this.subline,
     required this.benefits,
     required this.welcome,
+    required this.pose,
   });
+
+  /// The figure at the top of the paywall (PRD_v6 section 3).
+  final FigurePose pose;
 
   final Package package;
   final String name;
@@ -78,6 +83,7 @@ class PaywallOffer {
       ),
     ],
     welcome: 'Thank you for supporting this quiet Gita.',
+    pose: FigurePose.reading,
   );
 
   static const shravan = PaywallOffer(
@@ -109,6 +115,7 @@ class PaywallOffer {
       ),
     ],
     welcome: 'Thank you for supporting this Gita.',
+    pose: FigurePose.listening,
   );
 }
 
@@ -251,41 +258,53 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen>
 bool _compactPanel(BuildContext context) =>
     MediaQuery.textScalerOf(context).scale(1) > 1.3;
 
-/// Scrolls [content] over the ambient art, whose centre lines up with the
-/// hero (the lotus on the offer, the bloom on the welcome).
-class _HeroScroll extends StatelessWidget {
-  const _HeroScroll({required this.children});
+/// One screen without scrolling when it fits (PRD_v6 section 3): the figure
+/// takes whatever height is left, between [FigureMetrics.minHeight] and
+/// [FigureMetrics.maxHeight]. Scrolls only when it cannot fit (large text,
+/// very small phones), so layouts still survive text scale 2.0.
+class _FitScroll extends StatelessWidget {
+  const _FitScroll({
+    required this.figure,
+    required this.children,
+    this.figureMin = FigureMetrics.minHeight,
+  });
 
+  final Widget figure;
   final List<Widget> children;
+  final double figureMin;
 
   @override
   Widget build(BuildContext context) {
     final top = MediaQuery.paddingOf(context).top + Touch.minTarget;
-    const heroMin = PaywallMetrics.heroHeight - Touch.minTarget;
-    return SingleChildScrollView(
-      child: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: SadhakAmbient(height: (top + heroMin / 2) * 2),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-              Space.readingSide,
-              top,
-              Space.readingSide,
-              0,
-            ),
-            child: ContentWidth(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: children,
+    return LayoutBuilder(
+      builder: (context, box) => SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: box.maxHeight),
+          child: IntrinsicHeight(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                Space.readingSide,
+                top - Space.s16,
+                Space.readingSide,
+                Space.s8,
+              ),
+              child: ContentWidth(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(minHeight: figureMin),
+                        child: figure,
+                      ),
+                    ),
+                    ...children,
+                  ],
+                ),
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -355,25 +374,45 @@ class _OfferView extends ConsumerWidget {
     final stagger = Motion.of(context).reduced ? 0.0 : 0.06;
 
     final compact = _compactPanel(context);
+    // Short phones (iPhone SE): smaller figure, no subline, benefits in a
+    // 2 x 2 grid, so the offer still fits one screen.
+    final short =
+        MediaQuery.sizeOf(context).height < PaywallMetrics.shortScreen;
+    final benefitRows = [
+      for (final (i, (icon, title, sub)) in benefits.indexed)
+        _Reveal(
+          animation: entrance,
+          start: 0.24 + i * stagger,
+          child: _BenefitRow(icon: icon, title: title, sub: sub),
+        ),
+    ];
     return Column(
       children: [
         Expanded(
-          child: _HeroScroll(
+          child: _FitScroll(
+            figureMin: short
+                ? FigureMetrics.minHeightShort
+                : FigureMetrics.minHeight,
+            figure: _Reveal(
+              animation: entrance,
+              start: 0,
+              child: SeekerFigure(pose: offer.pose),
+            ),
             children: [
               _Reveal(
                 animation: entrance,
-                start: 0,
-                child: _Hero(premium: p, colors: c),
+                start: 0.06,
+                child: _Hero(premium: p, colors: c, short: short),
               ),
               if (reason != null) ...[
-                const SizedBox(height: Space.s16),
+                const SizedBox(height: Space.s8),
                 _Reveal(
                   animation: entrance,
                   start: 0.1,
                   child: Center(child: _ReasonChip(text: reason!)),
                 ),
               ],
-              const SizedBox(height: Space.s24),
+              SizedBox(height: short ? Space.s4 : Space.s12),
               _Reveal(
                 animation: entrance,
                 start: 0.14,
@@ -382,34 +421,46 @@ class _OfferView extends ConsumerWidget {
                   child: Text(
                     offer.headline,
                     textAlign: TextAlign.center,
-                    style: ui.title,
+                    style: ui.title.copyWith(fontSize: PaywallMetrics.headline),
                   ),
                 ),
               ),
-              const SizedBox(height: Space.s8),
-              _Reveal(
-                animation: entrance,
-                start: 0.18,
-                child: Text(
-                  offer.subline,
-                  textAlign: TextAlign.center,
-                  style: ui.body(size: 16),
-                ),
-              ),
-              const SizedBox(height: Space.s24),
-              for (final (i, (icon, title, sub)) in benefits.indexed)
+              if (!short) ...[
+                const SizedBox(height: Space.s4),
                 _Reveal(
                   animation: entrance,
-                  start: 0.24 + i * stagger,
-                  child: _BenefitRow(icon: icon, title: title, sub: sub),
+                  start: 0.18,
+                  child: Text(
+                    offer.subline,
+                    textAlign: TextAlign.center,
+                    style: ui.body(size: 14),
+                  ),
                 ),
-              const SizedBox(height: Space.s8),
+              ],
+              SizedBox(height: short ? Space.s12 : Space.s16),
+              if (short)
+                for (var i = 0; i < benefitRows.length; i += 2)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: benefitRows[i]),
+                      const SizedBox(width: Space.s8),
+                      Expanded(
+                        child: i + 1 < benefitRows.length
+                            ? benefitRows[i + 1]
+                            : const SizedBox.shrink(),
+                      ),
+                    ],
+                  )
+              else
+                ...benefitRows,
+              const SizedBox(height: Space.s4),
               _Reveal(
                 animation: entrance,
                 start: 0.24 + benefits.length * stagger,
                 child: const _AlwaysFree(),
               ),
-              const SizedBox(height: Space.s24),
+              SizedBox(height: short ? Space.s8 : Space.s16),
               _Reveal(
                 animation: entrance,
                 start: 0.5,
@@ -430,7 +481,6 @@ class _OfferView extends ConsumerWidget {
                 const SizedBox(height: Space.s16),
                 _TermsAndLinks(state: state),
               ],
-              const SizedBox(height: Space.s16),
             ],
           ),
         ),
@@ -444,124 +494,47 @@ class _OfferView extends ConsumerWidget {
   }
 }
 
+/// The package name: Devanagari with a soft shimmer, then the Latin name.
 class _Hero extends StatelessWidget {
-  const _Hero({required this.premium, required this.colors});
+  const _Hero({
+    required this.premium,
+    required this.colors,
+    this.short = false,
+  });
 
   final PremiumColors premium;
   final AppColors colors;
 
+  /// Short phones: the Latin name is left out (the headline follows).
+  final bool short;
+
   @override
   Widget build(BuildContext context) {
     final ui = UiStyles(colors);
-    // Grows with large text instead of overflowing.
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        minHeight: PaywallMetrics.heroHeight - Touch.minTarget,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const _BreathingLotus(),
-          const SizedBox(height: Space.s12),
-          Semantics(
-            label: _offerOf(context).name,
-            excludeSemantics: true,
-            child: Shimmer(
-              base: colors.accentText,
-              highlight: premium.gold,
-              child: Text(
-                _offerOf(context).devanagari,
-                style: ReadingStyles(colors, 1).sanskrit.copyWith(
-                  fontSize: PaywallMetrics.titleSize,
-                  height: 1.25,
-                ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Semantics(
+          label: _offerOf(context).name,
+          excludeSemantics: true,
+          child: Shimmer(
+            base: colors.accentText,
+            highlight: premium.gold,
+            child: Text(
+              _offerOf(context).devanagari,
+              style: ReadingStyles(colors, 1).sanskrit.copyWith(
+                fontSize: PaywallMetrics.nameSize,
+                height: 1.2,
               ),
             ),
           ),
+        ),
+        if (!short)
           Text(
             _offerOf(context).name.toUpperCase(),
             style: ui.overline.copyWith(color: colors.textSecondary),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-/// The lotus gently grows and settles with a soft glow (still under reduced
-/// motion).
-class _BreathingLotus extends StatefulWidget {
-  const _BreathingLotus();
-
-  @override
-  State<_BreathingLotus> createState() => _BreathingLotusState();
-}
-
-class _BreathingLotusState extends State<_BreathingLotus>
-    with SingleTickerProviderStateMixin {
-  late final _c = AnimationController(
-    vsync: this,
-    duration: AppDurations.shimmer,
-  );
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (Motion.of(context).reduced) {
-      _c
-        ..stop()
-        ..value = 0.5;
-    } else if (!_c.isAnimating) {
-      _c.repeat(reverse: true);
-    }
-  }
-
-  @override
-  void dispose() {
-    _c.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final p = PremiumColors.of(context);
-    const size = PaywallMetrics.lotusIcon * 1.6;
-    return ExcludeSemantics(
-      child: AnimatedBuilder(
-        animation: _c,
-        builder: (context, child) {
-          final v = Curves.easeInOut.transform(_c.value);
-          return SizedBox.square(
-            dimension: size,
-            child: Stack(
-              alignment: Alignment.center,
-              clipBehavior: Clip.none,
-              children: [
-                // A soft halo that breathes with the lotus.
-                OverflowBox(
-                  maxWidth: size * 3,
-                  maxHeight: size * 3,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        colors: [
-                          p.glow.withValues(alpha: 0.5 + 0.3 * v),
-                          p.glow.withValues(alpha: 0),
-                        ],
-                      ),
-                    ),
-                    child: SizedBox.square(dimension: size * (2.4 + 0.4 * v)),
-                  ),
-                ),
-                Transform.scale(scale: 0.97 + 0.05 * v, child: child),
-              ],
-            ),
-          );
-        },
-        child: const LotusMark(size: size),
-      ),
+      ],
     );
   }
 }
@@ -605,6 +578,8 @@ class _ReasonChip extends StatelessWidget {
   }
 }
 
+/// One line per benefit on the paywall (PRD_v6 section 3). The longer
+/// description stays available to screen readers.
 class _BenefitRow extends StatelessWidget {
   const _BenefitRow({
     required this.icon,
@@ -621,11 +596,12 @@ class _BenefitRow extends StatelessWidget {
     final c = AppColors.of(context);
     final p = PremiumColors.of(context);
     final ui = UiStyles(c);
-    return MergeSemantics(
+    return Semantics(
+      label: '$title. $sub',
+      excludeSemantics: true,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: Space.s16),
+        padding: const EdgeInsets.only(bottom: Space.s8),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: PaywallMetrics.benefitIcon,
@@ -638,19 +614,10 @@ class _BenefitRow extends StatelessWidget {
                   colors: [p.goldSoft, c.accentSoft],
                 ),
               ),
-              child: Icon(icon, size: IconSizes.small, color: c.accentText),
+              child: Icon(icon, size: IconSizes.small - 4, color: c.accentText),
             ),
-            const SizedBox(width: Space.s16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: ui.label(size: 16)),
-                  const SizedBox(height: 2),
-                  Text(sub, style: ui.body(size: 14)),
-                ],
-              ),
-            ),
+            const SizedBox(width: Space.s12),
+            Expanded(child: Text(title, style: ui.label(size: 15))),
           ],
         ),
       ),
@@ -665,7 +632,10 @@ class _AlwaysFree extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
     return Container(
-      padding: const EdgeInsets.all(Space.s12),
+      padding: const EdgeInsets.symmetric(
+        horizontal: Space.s12,
+        vertical: Space.s8,
+      ),
       decoration: BoxDecoration(
         color: c.surfaceSoft,
         borderRadius: BorderRadius.circular(Radii.input),
@@ -674,7 +644,7 @@ class _AlwaysFree extends StatelessWidget {
         children: [
           Icon(
             LucideIcons.heart_handshake,
-            size: IconSizes.small,
+            size: IconSizes.small - 2,
             color: c.textSecondary,
           ),
           const SizedBox(width: Space.s12),
@@ -682,7 +652,7 @@ class _AlwaysFree extends StatelessWidget {
             child: Text(
               'Every verse, translation, purport and word meaning stays free '
               'for everyone.',
-              style: UiStyles(c).body(size: 14),
+              style: UiStyles(c).body(size: 12.5),
             ),
           ),
         ],
@@ -741,7 +711,7 @@ class _Plans extends StatelessWidget {
                 selected: plan.id == state.selectedId,
                 onTap: () => onSelect(plan.id),
               ),
-              const SizedBox(height: Space.s12),
+              const SizedBox(height: Space.s8),
             ],
             if (demo)
               Text(
@@ -796,7 +766,7 @@ class _PlanCard extends StatelessWidget {
         Text(
           plan.price,
           style: ui.title.copyWith(
-            fontSize: TitleSizes.card,
+            fontSize: PaywallMetrics.price,
             color: selected ? c.accentText : c.textPrimary,
           ),
         ),
@@ -817,7 +787,10 @@ class _PlanCard extends StatelessWidget {
           duration: duration,
           curve: AppCurves.standard,
           constraints: const BoxConstraints(minHeight: Touch.minTarget),
-          padding: const EdgeInsets.all(Space.s16),
+          padding: const EdgeInsets.symmetric(
+            horizontal: Space.s16,
+            vertical: Space.s12,
+          ),
           decoration: BoxDecoration(
             color: c.surface,
             borderRadius: BorderRadius.circular(Radii.card),
@@ -850,12 +823,12 @@ class _PlanCard extends StatelessWidget {
                       runSpacing: Space.s4,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        Text(title, style: ui.label(size: 17)),
+                        Text(title, style: ui.label(size: 16)),
                         _Badge(text: badge, strong: yearly),
                       ],
                     ),
-                    const SizedBox(height: Space.s4),
-                    Text(sub, style: ui.body(size: 14)),
+                    const SizedBox(height: 2),
+                    Text(sub, style: ui.body(size: 13)),
                     // Large text: the price moves under the title.
                     if (stacked) ...[const SizedBox(height: Space.s8), price],
                   ],
@@ -979,9 +952,9 @@ class _BottomPanel extends ConsumerWidget {
         child: Padding(
           padding: EdgeInsets.fromLTRB(
             Space.readingSide,
-            Space.s12,
+            Space.s8,
             Space.readingSide,
-            compact ? Space.s12 : Space.s4,
+            compact ? Space.s8 : 0,
           ),
           child: ContentWidth(
             child: Column(
@@ -1039,11 +1012,11 @@ class _TermsAndLinks extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         if (terms.isNotEmpty) ...[
-          const SizedBox(height: Space.s8),
+          const SizedBox(height: Space.s4),
           Text(
             terms,
             textAlign: TextAlign.center,
-            style: ui.body(size: 12, color: c.textTertiary),
+            style: ui.body(size: 11.5, color: c.textTertiary),
           ),
         ],
         Wrap(
@@ -1181,14 +1154,10 @@ class _WelcomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
     final ui = UiStyles(c);
-    return _HeroScroll(
+    return _FitScroll(
+      figure: SeekerFigure(pose: _offerOf(context).pose, animate: false),
       children: [
-        // The bloom opens in the centre of the mandala.
-        const SizedBox(
-          height: PaywallMetrics.heroHeight - Touch.minTarget,
-          child: Center(child: LotusBloom()),
-        ),
-        const SizedBox(height: Space.s24),
+        const SizedBox(height: Space.s16),
         Semantics(
           header: true,
           liveRegion: true,

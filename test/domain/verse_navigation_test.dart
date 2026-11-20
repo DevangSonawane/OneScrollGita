@@ -51,4 +51,17 @@ void main() {
     expect(shortLabel(entries[2]), '3-5');
     expect(shortLabel(entries[0]), '1');
   });
+
+  test('parseVerseReference', () {
+    expect(parseVerseReference('2.47'), (2, 47));
+    expect(parseVerseReference(' 18 66 '), (18, 66));
+    expect(parseVerseReference('BG 2:47'), (2, 47));
+    expect(parseVerseReference('19.1'), isNull);
+    expect(parseVerseReference('2'), isNull);
+    expect(parseVerseReference('two'), isNull);
+  });
+
+  test('readCount', () {
+    expect(readCount(['a', 'b', 'c'], {'b', 'c', 'x'}), 2);
+  });
 }

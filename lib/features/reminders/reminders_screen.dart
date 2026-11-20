@@ -147,8 +147,12 @@ class RemindersScreen extends ConsumerWidget {
               showChevron: false,
               divider: false,
             ),
-          if (kDebugMode && state.lastError != null)
-            note('Debug: ${state.lastError}'),
+          if (state.lastError != null)
+            note(
+              'Reminders could not be scheduled on this phone. '
+              '${kDebugMode ? state.lastError! : 'Try turning reminders off '
+                        'and on again.'}',
+            ),
           const SizedBox(height: Space.s16),
           note(
             'Reminders are scheduled on this phone. Nothing is sent from a '

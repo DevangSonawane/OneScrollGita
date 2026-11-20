@@ -171,12 +171,13 @@ class SettingsRow extends StatelessWidget {
     final ui = UiStyles(c);
     final chevron = showChevron ?? (onTap != null && !destructive);
     final row = Padding(
+      // Compact rows (PRD_v6 section 6); the tap target stays 48 dp.
       padding: const EdgeInsets.symmetric(
         horizontal: Space.readingSide,
-        vertical: Space.s12,
+        vertical: Space.s8,
       ),
       child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: Touch.minTarget - 24),
+        constraints: const BoxConstraints(minHeight: Touch.minTarget - 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -189,13 +190,13 @@ class SettingsRow extends StatelessWidget {
                       Text(
                         title,
                         style: ui.label(
-                          size: 16,
+                          size: 15,
                           color: destructive ? c.danger : c.textPrimary,
                         ),
                       ),
                       if (subtitle != null) ...[
                         const SizedBox(height: 2),
-                        Text(subtitle!, style: ui.body(size: 13)),
+                        Text(subtitle!, style: ui.body(size: 12.5)),
                       ],
                     ],
                   ),

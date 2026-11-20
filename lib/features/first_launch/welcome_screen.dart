@@ -143,7 +143,7 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen> {
         child: _Option(
           label: label,
           semanticLabel: hint,
-          fontFamily: code == 'en' ? Fonts.literata : Fonts.devanagari,
+          fontFamily: code == 'en' ? Fonts.english : Fonts.devanagari,
           selected: _lang == code,
           onTap: () => setState(() => _lang = code),
         ),

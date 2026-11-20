@@ -7,6 +7,7 @@ import '../domain/local_date.dart';
 import '../domain/models/written_content.dart';
 import '../domain/streak.dart';
 import 'core_providers.dart';
+import 'library_providers.dart';
 import 'reminder_providers.dart';
 import 'scripture_providers.dart';
 
@@ -20,6 +21,18 @@ final contentRepositoryProvider = Provider<ContentRepository>(
 
 final messageBankProvider = FutureProvider<MessageBank>(
   (ref) => ref.watch(contentRepositoryProvider).messages(),
+);
+
+/// Verses read: counted reads plus reading history, so older reads made
+/// before streaks existed still show (PRD_v7).
+final readVerseIdsProvider = Provider<Set<String>>((ref) {
+  final counted = ref.watch(_countedVerseIdsProvider).value ?? const {};
+  final history = ref.watch(historyProvider).value ?? const [];
+  return {...counted, for (final h in history) h.verseId};
+});
+
+final _countedVerseIdsProvider = StreamProvider<Set<String>>(
+  (ref) => ref.watch(activityRepositoryProvider).watchReadVerseIds(),
 );
 
 final readDaysProvider = StreamProvider<List<ReadDay>>(

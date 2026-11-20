@@ -6,8 +6,6 @@ import 'package:versescroll/core/design/components.dart';
 import 'package:versescroll/data/settings/settings_repository.dart';
 import 'package:versescroll/features/gita/reader_screen.dart';
 import 'package:versescroll/features/purport/purport_screen.dart';
-import 'package:versescroll/features/search/search_screen.dart';
-import 'package:versescroll/features/summary/summary_screen.dart';
 
 import '../helpers.dart';
 
@@ -97,11 +95,10 @@ void main() {
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
     expect(reader.current!.id, 'bg-01-001');
-    expect(find.text('1.1'), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^1\.1 · ')), findsOneWidget);
 
     // Reels-style: swipe up for the next verse.
-    await tester.fling(find.byType(PageView), const Offset(0, -400), 1500);
-    await settle(tester);
+    await swipeToNextVerse(tester, () => reader.current!.id);
     expect(reader.current!.id, 'bg-01-002');
 
     await tester.tap(find.bySemanticsLabel('Hindi translation'));
@@ -123,14 +120,18 @@ void main() {
     final app = await pumpApp(tester);
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
-    await tester.fling(find.byType(PageView), const Offset(0, 400), 1500);
+    await tester.fling(
+      find.byKey(ReaderScreen.scrollKey),
+      const Offset(0, 400),
+      1500,
+    );
     await settle(tester);
     expect(reader.current!.id, 'bg-01-001');
 
     app.container.read(readerJumpProvider.notifier).request('bg-01-017');
     await settle(tester);
     expect(reader.current!.id, 'bg-01-016-018');
-    expect(find.text('1.16-18'), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^1\.16-18 · ')), findsOneWidget);
 
     app.container.read(readerJumpProvider.notifier).request('bg-01-046');
     await settle(tester);
@@ -144,34 +145,61 @@ void main() {
     expect(end, findsOneWidget);
   });
 
-  testWidgets('chapter sheet and verse selector', (tester) async {
+  testWidgets('go to verse: chapter tile, verse grid, reference box', (
+    tester,
+  ) async {
     await pumpApp(tester);
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
 
+    // Chapter pill opens the sheet; pick chapter 2, then verse 47.
     await tester.tap(
       find.bySemanticsLabel(RegExp(r'^Chapter 1, .*Choose chapter')),
     );
     await settle(tester);
-    expect(find.text('Chapters'), findsOneWidget);
-    await tester.tap(find.bySemanticsLabel(RegExp(r'^Chapter 2, .*72 verses')));
+    expect(find.text('Go to verse'), findsOneWidget);
+    await tester.tap(find.bySemanticsLabel(RegExp(r'^Chapter 2, ')));
     await settle(tester);
-    expect(reader.current!.id, 'bg-02-001');
-
-    await tester.tap(
-      find.bySemanticsLabel(RegExp(r'^Verse 2.1\. Choose verse')),
-    );
-    await settle(tester);
-    expect(find.text('Chapter 2 - 72 verses'), findsOneWidget);
+    expect(find.text('Chapter 2 · 72 verses'), findsOneWidget);
     final v = find.bySemanticsLabel(RegExp(r'^Verse 2\.47'));
     await tester.scrollUntilVisible(
       v,
       200,
-      scrollable: find.byType(Scrollable).last,
+      scrollable: find
+          .descendant(
+            of: find.byType(BottomSheet),
+            matching: find.byType(Scrollable),
+          )
+          .first,
     );
-    await tester.tap(v);
+    await tester.ensureVisible(v);
     await settle(tester);
+    await tester.tap(v);
+    await settle(tester, 5);
     expect(reader.current!.id, 'bg-02-047');
+
+    // Verse pill opens the same sheet; type a reference.
+    await tester.tap(
+      find.bySemanticsLabel(RegExp(r'^Chapter 2, .*verse 2\.47\. Choose')),
+    );
+    await settle(tester);
+    await tester.enterText(find.byType(TextField), '18.66');
+    await tester.testTextInput.receiveAction(TextInputAction.go);
+    await settle(tester, 5);
+    expect(reader.current!.id, 'bg-18-066');
+  });
+
+  testWidgets('go to verse: a bad reference explains itself', (tester) async {
+    await pumpApp(tester);
+    await tapTab(tester, 'Gita');
+    await tester.tap(
+      find.bySemanticsLabel(RegExp(r'^Chapter 1, .*Choose chapter')),
+    );
+    await settle(tester);
+    await tester.enterText(find.byType(TextField), '2.99');
+    await tester.testTextInput.receiveAction(TextInputAction.go);
+    await settle(tester);
+    expect(find.text('Try a reference like 2.47'), findsOneWidget);
   });
 
   testWidgets('purport: opens, long text, back returns to the same entry', (
@@ -180,12 +208,21 @@ void main() {
     await pumpApp(tester);
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
-    await tapVisible(tester, find.text('Purport'));
+    // The current verse's own Purport button (the next verse is laid out
+    // below it in the same scroll).
+    final purport = find.descendant(
+      of: find.byKey(ValueKey(reader.current!.id)),
+      matching: find.text('Purport'),
+    );
+    await Scrollable.ensureVisible(tester.element(purport), alignment: 0.5);
+    await settle(tester);
+    await tester.tap(purport);
+    await settle(tester);
     expect(find.byType(PurportScreen), findsOneWidget);
     expect(find.textContaining('BHAGAVAD-GITA'), findsOneWidget);
     // A long purport scrolls without overflow.
     await tester.fling(
-      find.byType(CustomScrollView),
+      find.byType(CustomScrollView).last,
       const Offset(0, -20000),
       8000,
     );
@@ -203,7 +240,23 @@ void main() {
     await app.container.read(settingsProvider.notifier).setLanguage('hi');
     app.container.read(readerJumpProvider.notifier).request('bg-02-001');
     await tapTab(tester, 'Gita');
-    await tapVisible(tester, find.text('Purport'));
+    // The current verse's own Purport button (the next verse is laid out
+    // below it in the same scroll).
+    final purport = find.descendant(
+      of: find.byKey(
+        ValueKey(
+          tester
+              .state<ReaderScreenState>(find.byType(ReaderScreen))
+              .current!
+              .id,
+        ),
+      ),
+      matching: find.text('Purport'),
+    );
+    await Scrollable.ensureVisible(tester.element(purport), alignment: 0.5);
+    await settle(tester);
+    await tester.tap(purport);
+    await settle(tester);
     expect(find.byType(PurportScreen), findsOneWidget);
     expect(find.textContaining('BHAGAVAD-GITA'), findsOneWidget);
     // Every bundled entry has a Hindi purport; the English fallback is
@@ -303,27 +356,5 @@ void main() {
       Brightness.dark,
     );
     expect(app.prefs.getString(SettingsRepository.kTheme), 'dark');
-  });
-
-  testWidgets('reader three-dot glass menu opens summary and search', (
-    tester,
-  ) async {
-    await pumpApp(tester);
-    await tapTab(tester, 'Gita');
-    await tester.tap(find.bySemanticsLabel('More'));
-    await settle(tester);
-    expect(find.text('Chapter summary'), findsOneWidget);
-    expect(find.byType(PopupMenuItem<String>), findsNothing);
-    await tester.tap(find.text('Chapter summary'));
-    await settle(tester);
-    expect(find.byType(SummaryScreen), findsOneWidget);
-    await tester.tap(find.bySemanticsLabel('Back'));
-    await settle(tester);
-
-    await tester.tap(find.bySemanticsLabel('More'));
-    await settle(tester);
-    await tester.tap(find.text('Search'));
-    await settle(tester);
-    expect(find.byType(SearchScreen), findsOneWidget);
   });
 }

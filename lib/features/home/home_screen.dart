@@ -16,6 +16,7 @@ import '../../core/design/typography.dart';
 import '../../core/utils/date_format.dart';
 import '../../domain/models/verse_entry.dart';
 import '../../domain/read_rule.dart';
+import '../../domain/verse_navigation.dart';
 import '../common/common_widgets.dart';
 import '../common/qualifying_read.dart';
 import '../common/save_toggle_button.dart';
@@ -93,6 +94,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                     ),
                   ),
+                  const SliverToBoxAdapter(child: _Greeting()),
+                  const SliverToBoxAdapter(child: ContinueCard()),
                   SliverToBoxAdapter(
                     child: switch (daily) {
                       AsyncData(:final value) => AnimatedSwitcher(
@@ -117,7 +120,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(
                         Space.readingSide,
-                        Space.s32,
+                        Space.s16,
                         Space.readingSide,
                         0,
                       ),
@@ -150,6 +153,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
+/// Today's verse as a card (PRD_v7 section 2): the shloka and the
+/// translation, then Read in Gita, Purport, favourite and bookmark. The full
+/// verse with transliteration is one tap away in the reader.
 class _DailyVerse extends ConsumerWidget {
   const _DailyVerse({super.key, required this.entry});
 
@@ -157,74 +163,279 @@ class _DailyVerse extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final c = AppColors.of(context);
     // Any action on today's verse counts it at once.
     void qualify() => ref.read(readTrackerProvider.notifier).qualify(entry.id);
     final blocks = <Widget>[
       ShlokaView(lines: entry.sanskrit),
-      TransliterationView(lines: entry.transliteration),
       TranslationView(entry: entry),
     ];
     return QualifyingRead(
       verseId: entry.id,
       dwell: ReadRule.homeDwell,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Space.readingSide),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: Space.s32),
-            const SectionHeader("TODAY'S VERSE", padding: EdgeInsets.zero),
-            const SizedBox(height: Space.s32),
-            for (var i = 0; i < blocks.length; i++) ...[
-              _Entrance(index: i, child: blocks[i]),
-              const SizedBox(height: Space.s32),
-            ],
-            Center(child: ReferenceChip(label: 'Bhagavad-gītā ${entry.label}')),
-            const SizedBox(height: Space.s24),
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: Space.s8,
-              runSpacing: Space.s8,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                FilledButton.icon(
-                  onPressed: () {
-                    qualify();
-                    openInReader(context, entry.id);
-                  },
-                  style: compactButtonStyle(context),
-                  iconAlignment: IconAlignment.end,
-                  icon: const Icon(LucideIcons.chevron_right, size: 16),
-                  label: const Text('Read in Gita'),
-                ),
-                if (entry.hasPurport)
-                  TextButton(
-                    onPressed: () {
-                      qualify();
-                      openPurport(context, entry.id);
-                    },
-                    style: compactButtonStyle(context, filled: false),
-                    child: const Text('Purport'),
+        padding: const EdgeInsets.fromLTRB(
+          Space.readingSide,
+          Space.s16,
+          Space.readingSide,
+          0,
+        ),
+        child: _HomeCard(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: Space.s8,
+                runSpacing: Space.s8,
+                children: [
+                  const SectionHeader(
+                    "TODAY'S VERSE",
+                    padding: EdgeInsets.zero,
                   ),
+                  ReferenceChip(label: 'Bhagavad-gītā ${entry.label}'),
+                ],
+              ),
+              const SizedBox(height: Space.s16),
+              for (var i = 0; i < blocks.length; i++) ...[
+                _Entrance(index: i, child: blocks[i]),
+                const SizedBox(height: Space.s16),
               ],
+              // Wraps onto two lines at large text sizes.
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SaveToggleButton(
+                        verseId: entry.id,
+                        kind: SaveKind.favourite,
+                        onToggled: qualify,
+                      ),
+                      SaveToggleButton(
+                        verseId: entry.id,
+                        kind: SaveKind.bookmark,
+                        onToggled: qualify,
+                      ),
+                    ],
+                  ),
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      if (entry.hasPurport)
+                        TextButton(
+                          onPressed: () {
+                            qualify();
+                            openPurport(context, entry.id);
+                          },
+                          style: compactButtonStyle(context, filled: false),
+                          child: const Text('Purport'),
+                        ),
+                      TextButton.icon(
+                        onPressed: () {
+                          qualify();
+                          openInReader(context, entry.id);
+                        },
+                        style: compactButtonStyle(context, filled: false),
+                        iconAlignment: IconAlignment.end,
+                        icon: Icon(
+                          LucideIcons.chevron_right,
+                          size: IconSizes.small - 4,
+                          color: c.accentText,
+                        ),
+                        label: const Text('Read in Gita'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The calm card surface Home uses (never glass: reading text sits here).
+class _HomeCard extends StatelessWidget {
+  const _HomeCard({required this.child, this.onTap});
+
+  final Widget child;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = AppColors.of(context);
+    return Material(
+      color: c.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(Radii.card),
+        side: BorderSide(color: c.hairline),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(padding: const EdgeInsets.all(Space.s16), child: child),
+      ),
+    );
+  }
+}
+
+/// "Good morning" and a gentle streak chip (no streak: no chip, no nudge).
+class _Greeting extends ConsumerWidget {
+  const _Greeting();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final c = AppColors.of(context);
+    final ui = UiStyles(c);
+    final hour = ref.watch(clockProvider)().hour;
+    final greeting = hour < 12
+        ? 'Good morning'
+        : hour < 17
+        ? 'Good afternoon'
+        : 'Good evening';
+    final streak = ref.watch(streakStatsProvider).currentStreak;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        Space.readingSide,
+        Space.s4,
+        Space.readingSide,
+        0,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Semantics(
+              header: true,
+              child: Text(
+                greeting,
+                style: ui.title.copyWith(fontSize: HomeMetrics.greeting),
+              ),
             ),
-            const SizedBox(height: Space.s8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SaveToggleButton(
-                  verseId: entry.id,
-                  kind: SaveKind.favourite,
-                  onToggled: qualify,
+          ),
+          if (streak > 0)
+            Semantics(
+              label: 'Day $streak of your reading streak',
+              excludeSemantics: true,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Space.s12,
+                  vertical: Space.s4,
                 ),
-                SaveToggleButton(
-                  verseId: entry.id,
-                  kind: SaveKind.bookmark,
-                  onToggled: qualify,
+                decoration: BoxDecoration(
+                  color: c.accentSoft,
+                  borderRadius: BorderRadius.circular(Radii.pill),
                 ),
-              ],
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      LucideIcons.flame,
+                      size: IconSizes.small - 4,
+                      color: c.accentText,
+                    ),
+                    const SizedBox(width: Space.s4),
+                    Text(
+                      'Day $streak',
+                      style: ui.label(size: 13, color: c.accentText),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ],
+        ],
+      ),
+    );
+  }
+}
+
+/// "Continue reading": where the reader stopped, with the chapter's
+/// progress (PRD_v7 section 2). Hidden until something has been read.
+class ContinueCard extends ConsumerWidget {
+  const ContinueCard({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final lastId = ref.watch(settingsProvider.select((s) => s.lastVerseId));
+    if (lastId == null) return const SizedBox.shrink();
+    final entry = ref.watch(entryProvider(lastId)).value;
+    final index = ref.watch(chaptersIndexProvider).value;
+    if (entry == null || index == null) return const SizedBox.shrink();
+    final chapter = index.chapters
+        .where((ch) => ch.number == entry.chapter)
+        .firstOrNull;
+    if (chapter == null) return const SizedBox.shrink();
+    final c = AppColors.of(context);
+    final ui = UiStyles(c);
+    final lang = ref.watch(languageProvider);
+    final done = ref
+        .watch(readVerseIdsProvider)
+        .where((id) => chapterOfId(id) == chapter.number)
+        .length
+        .clamp(0, chapter.entryCount);
+    final title = lang == 'hi' && (chapter.titleHi?.isNotEmpty ?? false)
+        ? chapter.titleHi!
+        : chapter.titleEn;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        Space.readingSide,
+        Space.s16,
+        Space.readingSide,
+        0,
+      ),
+      child: Semantics(
+        button: true,
+        label:
+            'Continue reading. Chapter ${chapter.number}, $title. '
+            '$done of ${chapter.entryCount} read. You are at ${entry.label}.',
+        excludeSemantics: true,
+        child: _HomeCard(
+          onTap: () => openInReader(context, lastId),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SectionHeader('CONTINUE READING', padding: EdgeInsets.zero),
+              const SizedBox(height: Space.s8),
+              Text(
+                'Chapter ${chapter.number} · $title',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: ui.label(size: 16),
+              ),
+              const SizedBox(height: Space.s12),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(Radii.pill),
+                child: LinearProgressIndicator(
+                  value: chapter.entryCount == 0
+                      ? 0
+                      : done / chapter.entryCount,
+                  minHeight: HomeMetrics.progress,
+                  backgroundColor: c.surfaceSoft,
+                  color: c.accent,
+                ),
+              ),
+              const SizedBox(height: Space.s8),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      '$done of ${chapter.entryCount} verses',
+                      style: ui.body(size: 13),
+                    ),
+                  ),
+                  Text(
+                    'You are at ${entry.label}',
+                    style: ui.label(size: 13, color: c.accentText),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

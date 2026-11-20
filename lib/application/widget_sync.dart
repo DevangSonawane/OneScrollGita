@@ -34,6 +34,12 @@ final widgetSyncProvider = Provider<void>((ref) {
     (_, next) => sync.history(next.value),
     fireImmediately: true,
   );
+  // "Continue reading" starts at the exact place the reader stopped
+  // (PRD_v6 section 5), which can change without a new history entry.
+  ref.listen(
+    settingsProvider.select((s) => s.lastVerseId),
+    (_, _) => sync.history(ref.read(historyProvider).value),
+  );
 });
 
 const dailyDays = 30;
@@ -80,8 +86,11 @@ class _WidgetSync {
       final scripture = ref.read(scriptureRepositoryProvider);
       final lang = ref.read(languageProvider);
       final out = <Map<String, String>>[];
-      for (final item in items) {
-        final entry = await scripture.entryById(item.verseId);
+      // The resume position first, then recent history without repeats.
+      final resume = ref.read(settingsProvider).lastVerseId;
+      final ids = <String>{?resume, for (final i in items) i.verseId};
+      for (final id in ids) {
+        final entry = await scripture.entryById(id);
         if (entry == null) continue;
         out.add({
           'id': entry.id,

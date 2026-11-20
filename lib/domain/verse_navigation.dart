@@ -65,3 +65,20 @@ bool isLastInChapter(List<VerseEntry> entries, int index) =>
 int? nextChapter(int chapter) => chapter < chapterCount ? chapter + 1 : null;
 
 int? previousChapter(int chapter) => chapter > 1 ? chapter - 1 : null;
+
+/// How many of a chapter's [entries] have been read (PRD_v7).
+int readCount(List<String> entryIds, Set<String> readIds) =>
+    entryIds.where(readIds.contains).length;
+
+/// Parses "2.47", "2 47", "2:47" or "bg 2.47" into (chapter, verse).
+/// Null when it is not a reference inside the Gita's 18 chapters.
+(int, int)? parseVerseReference(String input) {
+  final m = RegExp(
+    r'^\s*(?:bg\.?\s*)?(\d{1,2})\s*[.:\s]\s*(\d{1,2})\s*$',
+    caseSensitive: false,
+  ).firstMatch(input);
+  if (m == null) return null;
+  final ch = int.parse(m.group(1)!), v = int.parse(m.group(2)!);
+  if (ch < 1 || ch > chapterCount || v < 1) return null;
+  return (ch, v);
+}

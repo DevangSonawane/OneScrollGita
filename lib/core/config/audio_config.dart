@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'build_flags.dart';
 
 /// Shravan audio settings (PRD_v4 section 6).
 abstract final class AudioConfig {
@@ -10,7 +10,7 @@ abstract final class AudioConfig {
   /// The Listen pill and audio screens. Debug builds only until real
   /// playback exists (V4-5): the pretend engine and placeholder timings must
   /// never ship.
-  static bool get enabled => kDebugMode;
+  static bool get enabled => previewBuild;
 
   /// The summary screen's player (chapter narrations once uploaded).
   static bool get summaryAudio => enabled;

@@ -202,8 +202,18 @@ abstract final class StreakMetrics {
 }
 
 /// Navigation pill geometry.
+/// "Go to verse" sheet (PRD_v7 section 3).
+abstract final class GoToMetrics {
+  static const tileWidth = 132.0;
+  static const tileHeight = 104.0;
+  static const chip = 56.0;
+}
+
 /// Home (PRD_v5 section 5).
 abstract final class HomeMetrics {
+  static const greeting = 26.0;
+  static const progress = 6.0;
+
   /// The Continue button above the nav pill.
   static const continueHeight = 52.0;
 }
@@ -214,6 +224,19 @@ abstract final class ReaderMetrics {
   /// that turns the page. Momentum from a flick never turns it.
   static const pullToTurn = 40.0;
 
+  /// A flick at the edge this fast (logical px/s) turns even when short.
+  static const flickVelocity = 700.0;
+
+  /// The least pull past the edge a quick flick needs.
+  static const flickPull = 8.0;
+
+  /// A release at least this fast (px/s) counts as a swipe to the next or
+  /// previous verse; slower releases settle by position.
+  static const snapVelocity = 550.0;
+
+  /// A swipe must move the text at least this far (px) to turn a verse.
+  static const swipeMinDistance = 24.0;
+
   /// How close to an edge still counts as "at the edge".
   static const edgeSlop = 2.0;
 
@@ -222,7 +245,10 @@ abstract final class ReaderMetrics {
 }
 
 abstract final class NavBarMetrics {
-  static const height = 52.0;
+  /// Taller since v7: each tab shows its name under the icon.
+  static const height = 58.0;
+  static const icon = 22.0;
+  static const labelSize = 11.0;
   static const maxWidth = 300.0;
   static const sideMargin = 20.0;
   static const bottomGap = 8.0;
@@ -341,13 +367,31 @@ class PremiumColors {
 }
 
 /// Sadhak paywall geometry.
+/// The paywall figure (PRD_v6 section 3).
+abstract final class FigureMetrics {
+  /// One breath; the reading figure turns a page at the end of each.
+  static const cycle = Duration(milliseconds: 6400);
+  static const minHeight = 96.0;
+  static const minHeightShort = 56.0;
+  static const maxHeight = 230.0;
+  static const motes = 7;
+  static const waves = 3;
+}
+
 abstract final class PaywallMetrics {
+  /// One-screen paywall sizes (PRD_v6 section 3).
+  static const nameSize = 30.0;
+  static const headline = 23.0;
+  static const price = 19.0;
+
+  /// Below this screen height the paywall uses its compact layout.
+  static const shortScreen = 740.0;
   static const heroHeight = 280.0;
   static const mandalaSize = 260.0;
   static const lotusIcon = 44.0;
   static const titleSize = 52.0;
   static const ctaHeight = 56.0;
-  static const benefitIcon = 40.0;
+  static const benefitIcon = 30.0;
   static const radioSize = 22.0;
   static const sparkCount = 22;
   static const selectedBorder = 2.0;
@@ -422,7 +466,7 @@ abstract final class PlayerMetrics {
   static const verseTextFactor = 0.86;
 
   /// The Listen pill: icon only on narrow screens, icon + label otherwise.
-  static const pillCompact = 52.0;
+  static const pillCompact = 64.0;
   static const pillWide = 116.0;
   static const pillGap = 8.0;
 

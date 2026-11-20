@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:drift/drift.dart' show driftRuntimeOptions;
@@ -8,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:versescroll/app/app.dart';
+import 'package:versescroll/features/gita/reader_screen.dart';
 import 'package:versescroll/application/audio_providers.dart';
 import 'package:versescroll/application/core_providers.dart';
 import 'package:versescroll/data/audio/audio_catalog.dart';
@@ -155,6 +157,55 @@ Future<void> settle(WidgetTester tester, [int rounds = 3]) async {
     );
     await tester.pump(const Duration(milliseconds: 400));
   }
+}
+
+/// Swipes up to the next verse. A verse taller than the screen first
+/// scrolls to its end; only a new swipe from there turns the page (PRD_v6),
+/// so this swipes again (up to 6 times) until the page changes.
+Future<void> swipeToNextVerse(
+  WidgetTester tester,
+  String Function() currentId,
+) async {
+  final start = currentId();
+  for (var i = 0; i < 6 && currentId() == start; i++) {
+    await tester.fling(
+      find.byKey(ReaderScreen.scrollKey),
+      const Offset(0, -400),
+      1500,
+    );
+    await settle(tester);
+  }
+}
+
+/// Runs [action] while advancing both real time (database work) and the
+/// test clock (providers), so it can finish. Use instead of
+/// `tester.runAsync` for controller calls that touch both.
+Future<T> drive<T>(WidgetTester tester, Future<T> Function() action) async {
+  var done = false;
+  late T result;
+  Object? error;
+  unawaited(
+    action().then(
+      (v) {
+        result = v;
+        done = true;
+      },
+      onError: (Object e) {
+        error = e;
+        done = true;
+      },
+    ),
+  );
+  // Real time for isolates and the database, test time for providers.
+  for (var i = 0; i < 400 && !done; i++) {
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 30)),
+    );
+    await tester.pump(const Duration(milliseconds: 200));
+  }
+  if (error != null) throw error!;
+  if (!done) throw StateError('drive: action did not finish');
+  return result;
 }
 
 /// No midnight timer in tests.

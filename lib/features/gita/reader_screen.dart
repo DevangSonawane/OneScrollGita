@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show ScrollCacheExtent;
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
@@ -27,16 +28,20 @@ import '../common/save_toggle_button.dart';
 import '../../core/design/components.dart';
 import '../../core/design/copy_on_tap.dart';
 import '../summary/summary_screen.dart' show openSummary;
-import 'chapter_sheet.dart';
+import 'go_to_verse_sheet.dart';
 import 'heart_burst.dart';
 import '../study/study_actions.dart';
 import '../trainer/trainer_entry.dart';
 import 'share_card.dart';
-import 'verse_selector_sheet.dart';
+import 'verse_snap_physics.dart';
 
-/// The Gita tab: one PageView per chapter, one page per entry.
+/// The Gita tab: one scroll per chapter, verse after verse, with verse
+/// snapping (VerseSnapPhysics).
 class ReaderScreen extends ConsumerStatefulWidget {
   const ReaderScreen({super.key});
+
+  /// The chapter scroll (tests swipe on it).
+  static const scrollKey = ValueKey('reader-scroll');
 
   @override
   ConsumerState<ReaderScreen> createState() => ReaderScreenState();
@@ -47,7 +52,18 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
     with WidgetsBindingObserver {
   int? _chapter;
   List<VerseEntry>? _entries;
-  PageController? _pages;
+
+  /// The chapter scroll. Offset 0 is the top of the verse at [_centerIndex];
+  /// earlier verses sit at negative offsets (so any verse opens instantly).
+  ScrollController? _scroll;
+  int _centerIndex = 0;
+  GlobalKey _beforeKey = GlobalKey();
+  GlobalKey _afterKey = GlobalKey();
+  late final VerseLayout _layout = VerseLayout(
+    beforeKey: _beforeKey,
+    afterKey: _afterKey,
+    centerIndex: () => _centerIndex,
+  );
   int _index = 0;
   Object? _error;
   String? _pendingId;
@@ -84,7 +100,7 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
     _saveNow();
     _saveTimer?.cancel();
     _historyTimer?.cancel();
-    _pages?.dispose();
+    _scroll?.dispose();
     super.dispose();
   }
 
@@ -113,12 +129,13 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
       final entries = await ref.read(chapterEntriesProvider(chapter).future);
       if (!mounted || serial != _loadSerial) return;
       final i = indexOfId(entries, id);
-      _pages?.dispose();
+      _scroll?.dispose();
       setState(() {
         _chapter = chapter;
         _entries = entries;
         _index = i < 0 ? 0 : i;
-        _pages = PageController(initialPage: _index);
+        _recenter(_index);
+        _scroll = ScrollController()..addListener(_onScroll);
         _pendingId = null;
       });
       final repo = ref.read(scriptureRepositoryProvider);
@@ -130,23 +147,50 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
     }
   }
 
+  /// Makes [index] the scroll's anchor (offset 0). New keys rebuild both
+  /// lists around it.
+  void _recenter(int index) {
+    _layout.lockedTarget = null;
+    _centerIndex = index;
+    _beforeKey = GlobalKey();
+    _afterKey = GlobalKey();
+    _layout
+      ..beforeKeyRef = _beforeKey
+      ..afterKeyRef = _afterKey;
+  }
+
   void _goToIndex(int target, {required bool animate}) {
-    final pages = _pages;
-    if (pages == null || !pages.hasClients) return;
-    final distance = (target - _index).abs();
-    if (!animate || distance > 5 || Motion.of(context).reduced) {
-      pages.jumpToPage(target);
-    } else {
-      pages.animateToPage(
-        target,
+    final scroll = _scroll;
+    if (scroll == null || !scroll.hasClients) return;
+    _layout.lockedTarget = null; // a jump is not a swipe
+    final span = _layout.spans().where((v) => v.index == target).firstOrNull;
+    final near = (target - _index).abs() <= 5;
+    if (span != null && animate && near && !Motion.of(context).reduced) {
+      scroll.animateTo(
+        span.top,
         duration: AppDurations.base,
         curve: AppCurves.position,
       );
+      return;
     }
+    // Far away (or not laid out): reopen the chapter at that verse.
+    setState(() => _recenter(target));
+    if (target != _index) _onPageChanged(target);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (scroll.hasClients) scroll.jumpTo(0);
+    });
+  }
+
+  /// The verse under the middle of the screen is the current one.
+  void _onScroll() {
+    final scroll = _scroll;
+    if (scroll == null || !scroll.hasClients) return;
+    final pos = scroll.position;
+    final span = _layout.at(pos.pixels + pos.viewportDimension / 2);
+    if (span != null && span.index != _index) _onPageChanged(span.index);
   }
 
   void _onPageChanged(int i) {
-    debugPrint('SWIPELOG page $_index -> $i'); // TEMP-SWIPE-LOG
     // Going back a verse (swipe or pull-to-turn) always brings the nav back.
     if (i < _index) ref.read(navBarVisibleProvider.notifier).show();
     setState(() => _index = i);
@@ -184,29 +228,17 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
     _settings.setLastVerseId(e.id);
   }
 
-  void _openChapterSheet(ChaptersIndex index) async {
-    final picked = await showChapterSheet(
+  /// One "Go to verse" sheet for both the chapter and the verse pill.
+  void _openGoTo(ChaptersIndex index) async {
+    final picked = await showGoToVerseSheet(
       context,
       index: index,
       currentChapter: _chapter ?? 1,
+      currentId: current?.id,
     );
-    if (picked != null && picked != _chapter) {
-      unawaited(_open(formatVerseId(picked, 1), animate: false));
-    }
-  }
-
-  void _openVerseSelector(Chapter chapter) async {
-    final entries = _entries;
-    if (entries == null) return;
-    final picked = await showVerseSelector(
-      context,
-      chapter: chapter,
-      entries: entries,
-      currentIndex: _index,
-    );
-    if (picked != null && picked != _index) {
-      _goToIndex(picked, animate: true);
-    }
+    if (picked == null || picked == current?.id) return;
+    final sameChapter = chapterOfId(picked) == _chapter;
+    unawaited(_open(picked, animate: sameChapter));
   }
 
   @override
@@ -227,7 +259,7 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
           );
         },
       );
-    } else if (_entries == null || _pages == null || !indexAsync.hasValue) {
+    } else if (_entries == null || _scroll == null || !indexAsync.hasValue) {
       body = const SizedBox.expand();
     } else {
       body = _buildPages(context, indexAsync.value!);
@@ -257,8 +289,8 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
                 chapter: chapter,
                 entry: current!,
                 progress: (_index + 1) / _entries!.length,
-                onChapterTap: () => _openChapterSheet(index!),
-                onVerseTap: () => _openVerseSelector(chapter),
+                onChapterTap: () => _openGoTo(index!),
+                onVerseTap: () => _openGoTo(index!),
               ),
             ),
           for (final h in _hearts)
@@ -291,83 +323,81 @@ class ReaderScreenState extends ConsumerState<ReaderScreen>
     setState(() => _hearts.add((key: UniqueKey(), position: position)));
   }
 
-  /// Turns the page when a long verse is pulled past its end.
-  void _turn(int direction) {
-    debugPrint('SWIPELOG pull-turn $direction'); // TEMP-SWIPE-LOG
-    final pages = _pages;
-    if (pages == null || !pages.hasClients) return;
-    final duration = Motion.of(context).pageSwap;
-    if (direction > 0 && _index < _entries!.length - 1) {
-      pages.nextPage(duration: duration, curve: AppCurves.position);
-    } else if (direction < 0 && _index > 0) {
-      pages.previousPage(duration: duration, curve: AppCurves.position);
-    }
-  }
-
   Widget _buildPages(BuildContext context, ChaptersIndex index) {
     final entries = _entries!;
-    final pages = _pages!;
+    final scroll = _scroll!;
     final topPad = MediaQuery.paddingOf(context).top + _TopBar.height;
-    final reduced = Motion.of(context).reduced;
+    Widget page(int i) => _EntryPage(
+      key: ValueKey(entries[i].id),
+      entry: entries[i],
+      isLast: i == entries.length - 1,
+      topPadding: topPad,
+      onNextChapter: (n) => _open(formatVerseId(n, 1), animate: false),
+    );
     return NavHideOnScroll(
-      minDepth: 1, // page swipes do not hide the nav pill
       child: GestureDetector(
+        key: ReaderScreen.scrollKey,
         onDoubleTapDown: (d) => _lastDoubleTap = d.localPosition,
         onDoubleTap: () => _like(_lastDoubleTap),
-        // Reels-style: swipe up for the next verse, down for the previous.
-        child: NotificationListener<ScrollNotification>(
-          // TEMP-SWIPE-LOG
-          onNotification: (n) {
-            if (n.depth == 0 && n is! ScrollUpdateNotification) {
-              debugPrint(
-                'SWIPELOG pager ${n.runtimeType} '
-                'drag=${n is ScrollStartNotification ? n.dragDetails != null : '-'}',
-              );
+        child: Listener(
+          // Each touch starts a fresh swipe decision (VerseSnapPhysics).
+          onPointerDown: (_) {
+            if (scroll.hasClients) {
+              _layout.touchDown(scroll.position.pixels);
             }
-            return false;
           },
-          child: PageView.builder(
-            key: ValueKey('chapter-$_chapter'),
-            controller: pages,
-            scrollDirection: Axis.vertical,
-            onPageChanged: _onPageChanged,
-            itemCount: entries.length,
-            itemBuilder: (context, i) {
-              final page = _EntryPage(
-                entry: entries[i],
-                isLast: i == entries.length - 1,
-                topPadding: topPad,
-                onNextChapter: (n) =>
-                    _open(formatVerseId(n, 1), animate: false),
-                onPullPastEdge: _turn,
-              );
-              if (reduced) return page;
-              // Neighbouring pages fade to 60% and shift 12 px. The boundary
-              // keeps the verse text from repainting on every swipe frame.
-              final painted = RepaintBoundary(child: page);
-              return AnimatedBuilder(
-                animation: pages,
-                builder: (context, child) {
-                  var delta = 0.0;
-                  if (pages.hasClients && pages.position.haveDimensions) {
-                    delta = (pages.page! - i).clamp(-1.0, 1.0);
-                  }
-                  return Opacity(
-                    opacity: 1 - 0.4 * delta.abs(),
-                    child: Transform.translate(
-                      offset: Offset(0, delta * 12),
-                      child: child,
+          child: LayoutBuilder(
+            builder: (context, box) => _VerseViewport(
+              height: box.maxHeight,
+              child: CustomScrollView(
+                key: ValueKey('chapter-$_chapter'),
+                controller: scroll,
+                center: _afterKey,
+                // Keep the neighbouring verses laid out, so snapping always
+                // knows where the next and previous verse begin.
+                scrollCacheExtent: const ScrollCacheExtent.viewport(1.5),
+                physics: VerseSnapPhysics(
+                  layout: _layout,
+                  parent: const ClampingScrollPhysics(),
+                ),
+                slivers: [
+                  SliverList(
+                    key: _beforeKey,
+                    delegate: SliverChildBuilderDelegate(
+                      (context, i) => page(_centerIndex - 1 - i),
+                      childCount: _centerIndex,
                     ),
-                  );
-                },
-                child: painted,
-              );
-            },
+                  ),
+                  SliverList(
+                    key: _afterKey,
+                    delegate: SliverChildBuilderDelegate(
+                      (context, i) => page(_centerIndex + i),
+                      childCount: entries.length - _centerIndex,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+/// The reader's screen height, so each verse is at least one screen tall
+/// (short verses centred, one per swipe).
+class _VerseViewport extends InheritedWidget {
+  const _VerseViewport({required this.height, required super.child});
+
+  final double height;
+
+  static double of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<_VerseViewport>()?.height ??
+      MediaQuery.sizeOf(context).height;
+
+  @override
+  bool updateShouldNotify(_VerseViewport old) => old.height != height;
 }
 
 class _TopBar extends StatelessWidget {
@@ -380,7 +410,8 @@ class _TopBar extends StatelessWidget {
     required this.onVerseTap,
   });
 
-  static const height = Touch.pillHeight * 2 + Space.s8 * 3 + 2;
+  /// One row since v7 (owner removed the separate verse pill).
+  static const height = Touch.pillHeight + Space.s8 * 2 + 2;
 
   final double topInset;
   final Chapter chapter;
@@ -417,14 +448,15 @@ class _TopBar extends StatelessWidget {
                           child: GlassPill(
                             onTap: onChapterTap,
                             semanticLabel:
-                                'Chapter ${chapter.number}, ${chapter.titleEn}. '
-                                'Choose chapter',
+                                'Chapter ${chapter.number}, ${chapter.titleEn}, '
+                                'verse ${entry.label}. Choose chapter and verse',
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Flexible(
                                   child: Text(
-                                    'Ch ${chapter.number} · ${chapter.titleEn}',
+                                    // Where you are, in one pill: "2.47 · title".
+                                    '${entry.label} · ${chapter.titleEn}',
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: ui.label(size: 14),
@@ -455,32 +487,6 @@ class _TopBar extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: Space.s8),
-                        GlassPill(
-                          padding: EdgeInsets.zero,
-                          child: _ReaderOverflow(chapter: chapter.number),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: Space.s8),
-                    Row(
-                      children: [
-                        GlassPill(
-                          onTap: onVerseTap,
-                          semanticLabel: 'Verse ${entry.label}. Choose verse',
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(entry.label, style: ui.label(size: 14)),
-                              const SizedBox(width: Space.s4),
-                              Icon(
-                                Icons.expand_more_rounded,
-                                size: IconSizes.small,
-                                color: c.textSecondary,
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Spacer(),
                         const GlassPill(
                           padding: EdgeInsets.symmetric(horizontal: 4),
                           child: LanguageToggle(onSurface: true),
@@ -515,57 +521,13 @@ class _TopBar extends StatelessWidget {
 
 /// Overflow menu in the reader's top row: search and chapter summary, in
 /// a floating glass menu that matches the rest of the reader.
-class _ReaderOverflow extends StatelessWidget {
-  const _ReaderOverflow({required this.chapter});
-
-  final int chapter;
-
-  Future<void> _open(BuildContext context) async {
-    final picked = await showGlassMenu<String>(
-      context,
-      items: const [
-        GlassMenuItem(
-          value: 'search',
-          icon: Icons.search_rounded,
-          label: 'Search',
-        ),
-        GlassMenuItem(
-          value: 'summary',
-          icon: Icons.info_outline_rounded,
-          label: 'Chapter summary',
-        ),
-      ],
-    );
-    if (!context.mounted || picked == null) return;
-    picked == 'search' ? openSearch(context) : openSummary(context, chapter);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final c = AppColors.of(context);
-    return Pressable(
-      onTap: () => _open(context),
-      semanticLabel: 'More',
-      radius: Touch.pillHeight / 2,
-      child: SizedBox.square(
-        dimension: Touch.pillHeight,
-        child: Icon(
-          Icons.more_horiz_rounded,
-          size: IconSizes.small,
-          color: c.textPrimary,
-        ),
-      ),
-    );
-  }
-}
-
 class _EntryPage extends ConsumerStatefulWidget {
   const _EntryPage({
+    super.key,
     required this.entry,
     required this.isLast,
     required this.topPadding,
     required this.onNextChapter,
-    required this.onPullPastEdge,
   });
 
   final VerseEntry entry;
@@ -573,69 +535,15 @@ class _EntryPage extends ConsumerStatefulWidget {
   final double topPadding;
   final ValueChanged<int> onNextChapter;
 
-  /// +1 when a long verse is pulled up past its end, -1 past its start.
-  final ValueChanged<int> onPullPastEdge;
-
   @override
   ConsumerState<_EntryPage> createState() => _EntryPageState();
 }
 
 class _EntryPageState extends ConsumerState<_EntryPage> {
-  double _pull = 0;
-  bool _turned = false;
   bool _sharing = false;
-
-  /// Where the current drag began: only a drag that starts at an edge may
-  /// turn the page, so reading to the end of a long verse never does.
-  bool _dragFromTop = false;
-  bool _dragFromBottom = false;
-
-  /// More verse text below the fold (shows a soft fade).
-  bool _moreBelow = false;
 
   /// The folded study tools (highlight, note, learn by heart).
   bool _moreOpen = false;
-
-  void _updateMore(ScrollMetrics m) {
-    final more = m.extentAfter > ReaderMetrics.edgeSlop;
-    if (more != _moreBelow && mounted) setState(() => _moreBelow = more);
-  }
-
-  bool _onScroll(ScrollNotification n) {
-    // TEMP-SWIPE-LOG
-    if (n is! ScrollUpdateNotification) {
-      debugPrint(
-        'SWIPELOG inner ${n.runtimeType} d=${n.depth} '
-        'px=${n.metrics.pixels.toStringAsFixed(0)} '
-        'max=${n.metrics.maxScrollExtent.toStringAsFixed(0)} '
-        'vp=${n.metrics.viewportDimension.toStringAsFixed(0)} '
-        '${n is OverscrollNotification ? 'os=${n.overscroll.toStringAsFixed(1)} drag=${n.dragDetails != null}' : ''}',
-      );
-    }
-    if (n.depth != 0) return false;
-    final m = n.metrics;
-    if (n is ScrollStartNotification) {
-      _pull = 0;
-      _turned = false;
-      _dragFromTop = m.extentBefore <= ReaderMetrics.edgeSlop;
-      _dragFromBottom = m.extentAfter <= ReaderMetrics.edgeSlop;
-    } else if (n is OverscrollNotification) {
-      // Only a deliberate pull turns: never momentum from a flick, and
-      // never a drag that began mid-verse and ran into the edge.
-      final allowed = n.overscroll > 0 ? _dragFromBottom : _dragFromTop;
-      if (n.dragDetails != null && allowed) {
-        _pull += n.overscroll;
-        if (!_turned && _pull.abs() > ReaderMetrics.pullToTurn) {
-          _turned = true;
-          widget.onPullPastEdge(_pull.sign.toInt());
-        }
-      }
-    }
-    if (n is ScrollUpdateNotification || n is ScrollEndNotification) {
-      _updateMore(m);
-    }
-    return false;
-  }
 
   Future<void> _share(BuildContext buttonContext) async {
     if (_sharing) return;
@@ -667,200 +575,176 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
     final ui = UiStyles(c);
     final entry = widget.entry;
     final next = nextChapter(entry.chapter);
-    final page = NotificationListener<ScrollMetricsNotification>(
-      onNotification: (n) {
-        if (n.depth == 0) _updateMore(n.metrics);
-        return false;
-      },
-      child: NotificationListener<ScrollNotification>(
-        onNotification: _onScroll,
-        child: SingleChildScrollView(
-          // Clamping, so pulling past the end reports an overscroll.
-          physics: const ClampingScrollPhysics(),
-          padding: EdgeInsets.only(
-            top: widget.topPadding + Space.s32,
-            bottom: navBarInset(context),
-            left: Space.readingSide,
-            right: Space.readingSide,
-          ),
-          child: ContentWidth(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                VerseTextBlock(
-                  entry: entry,
-                  copyable: true,
-                  showWordMeanings: true,
-                  highlight: ref.watch(highlightForProvider(entry.id)),
-                ),
-                const SizedBox(height: Space.s24),
-                // Heart, bookmark and share stay out; the study tools fold
-                // away behind "More". Wraps at large text sizes.
-                Wrap(
-                  alignment: WrapAlignment.spaceBetween,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  runSpacing: Space.s4,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SaveToggleButton(
-                          verseId: entry.id,
-                          kind: SaveKind.favourite,
-                        ),
-                        SaveToggleButton(
-                          verseId: entry.id,
-                          kind: SaveKind.bookmark,
-                        ),
-                        Builder(
-                          builder: (buttonContext) => Pressable(
-                            onTap: _sharing
-                                ? null
-                                : () => _share(buttonContext),
-                            semanticLabel: 'Share verse',
+    final top = widget.topPadding + Space.s32;
+    final bottom = navBarInset(context);
+    // At least one screen tall: a short verse is centred on its own page; a
+    // long one starts at the top and continues below.
+    return ConstrainedBox(
+      constraints: BoxConstraints(minHeight: _VerseViewport.of(context)),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          Space.readingSide,
+          top,
+          Space.readingSide,
+          bottom,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ContentWidth(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  VerseTextBlock(
+                    entry: entry,
+                    copyable: true,
+                    showWordMeanings: true,
+                    highlight: ref.watch(highlightForProvider(entry.id)),
+                  ),
+                  const SizedBox(height: Space.s24),
+                  // Heart, bookmark and share stay out; the study tools fold
+                  // away behind "More". Wraps at large text sizes.
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    runSpacing: Space.s4,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SaveToggleButton(
+                            verseId: entry.id,
+                            kind: SaveKind.favourite,
+                          ),
+                          SaveToggleButton(
+                            verseId: entry.id,
+                            kind: SaveKind.bookmark,
+                          ),
+                          Builder(
+                            builder: (buttonContext) => Pressable(
+                              onTap: _sharing
+                                  ? null
+                                  : () => _share(buttonContext),
+                              semanticLabel: 'Share verse',
+                              child: SizedBox.square(
+                                dimension: Touch.minTarget,
+                                child: Icon(
+                                  Theme.of(context).platform ==
+                                          TargetPlatform.iOS
+                                      ? Icons.ios_share_rounded
+                                      : Icons.share_rounded,
+                                  size: IconSizes.regular,
+                                  color: c.textSecondary,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Pressable(
+                            onTap: () => setState(() => _moreOpen = !_moreOpen),
+                            semanticLabel: _moreOpen
+                                ? 'Hide study tools'
+                                : 'More: highlight, note, learn by heart',
+                            selected: _moreOpen,
                             child: SizedBox.square(
                               dimension: Touch.minTarget,
-                              child: Icon(
-                                Theme.of(context).platform == TargetPlatform.iOS
-                                    ? Icons.ios_share_rounded
-                                    : Icons.share_rounded,
-                                size: IconSizes.regular,
-                                color: c.textSecondary,
+                              child: AnimatedRotation(
+                                turns: _moreOpen ? 0.25 : 0,
+                                duration: Motion.of(context).crossFade,
+                                child: Icon(
+                                  LucideIcons.ellipsis,
+                                  size: IconSizes.regular,
+                                  color: _moreOpen
+                                      ? c.accentText
+                                      : c.textSecondary,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Pressable(
-                          onTap: () => setState(() => _moreOpen = !_moreOpen),
-                          semanticLabel: _moreOpen
-                              ? 'Hide study tools'
-                              : 'More: highlight, note, learn by heart',
-                          selected: _moreOpen,
-                          child: SizedBox.square(
-                            dimension: Touch.minTarget,
-                            child: AnimatedRotation(
-                              turns: _moreOpen ? 0.25 : 0,
-                              duration: Motion.of(context).crossFade,
-                              child: Icon(
-                                LucideIcons.ellipsis,
-                                size: IconSizes.regular,
-                                color: _moreOpen
-                                    ? c.accentText
-                                    : c.textSecondary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (entry.hasPurport)
-                      FilledButton(
-                        style: compactButtonStyle(context),
-                        onPressed: () => openPurport(context, entry.id),
-                        child: const Text('Purport'),
+                        ],
                       ),
-                  ],
-                ),
-                AnimatedSize(
-                  duration: Motion.of(context).crossFade,
-                  curve: AppCurves.standard,
-                  alignment: Alignment.topLeft,
-                  child: !_moreOpen
-                      ? const SizedBox(width: double.infinity)
-                      : Padding(
-                          padding: const EdgeInsets.only(top: Space.s4),
-                          child: Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            spacing: Space.s4,
-                            children: [
-                              HighlightButton(verseId: entry.id),
-                              NoteButton(verseId: entry.id),
-                              LearnByHeartButton(verseId: entry.id),
-                            ],
-                          ),
+                      if (entry.hasPurport)
+                        FilledButton(
+                          style: compactButtonStyle(context),
+                          onPressed: () => openPurport(context, entry.id),
+                          child: const Text('Purport'),
                         ),
-                ),
-                if (widget.isLast) ...[
-                  const SizedBox(height: Space.s32),
-                  const Divider(),
-                  const SizedBox(height: Space.s16),
-                  if (next != null) ...[
-                    Text(
-                      'End of Chapter ${entry.chapter}',
-                      textAlign: TextAlign.center,
-                      style: ui.emptyTitle,
-                    ),
-                    const SizedBox(height: Space.s8),
-                    Text(
-                      'Take a moment, then go on when you are ready.',
-                      textAlign: TextAlign.center,
-                      style: ui.body(),
-                    ),
+                    ],
+                  ),
+                  AnimatedSize(
+                    duration: Motion.of(context).crossFade,
+                    curve: AppCurves.standard,
+                    alignment: Alignment.topLeft,
+                    child: !_moreOpen
+                        ? const SizedBox(width: double.infinity)
+                        : Padding(
+                            padding: const EdgeInsets.only(top: Space.s4),
+                            child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              spacing: Space.s4,
+                              children: [
+                                HighlightButton(verseId: entry.id),
+                                NoteButton(verseId: entry.id),
+                                LearnByHeartButton(verseId: entry.id),
+                              ],
+                            ),
+                          ),
+                  ),
+                  if (widget.isLast) ...[
+                    const SizedBox(height: Space.s32),
+                    const Divider(),
                     const SizedBox(height: Space.s16),
-                    // Two equal choices; nothing advances on its own.
-                    FilledButton(
-                      onPressed: () => widget.onNextChapter(next),
-                      child: Text('Continue to Chapter $next'),
-                    ),
-                    const SizedBox(height: Space.s8),
-                    OutlinedButton(
-                      onPressed: () => reflectOnChapter(context, ref, entry.id),
-                      child: const Text('Reflect on this chapter'),
-                    ),
-                  ] else ...[
-                    Text(
-                      'You have reached the end of the Gita',
-                      textAlign: TextAlign.center,
-                      style: ui.emptyTitle,
-                    ),
-                    const SizedBox(height: Space.s8),
-                    const SizedBox(height: Space.s8),
-                    OutlinedButton(
-                      onPressed: () => reflectOnChapter(context, ref, entry.id),
-                      child: const Text('Reflect on what you read'),
-                    ),
-                    Center(
-                      child: TextButton(
-                        onPressed: () => widget.onNextChapter(1),
-                        child: const Text('Begin again at Chapter 1'),
+                    if (next != null) ...[
+                      Text(
+                        'End of Chapter ${entry.chapter}',
+                        textAlign: TextAlign.center,
+                        style: ui.emptyTitle,
                       ),
-                    ),
+                      const SizedBox(height: Space.s8),
+                      Text(
+                        'Take a moment, then go on when you are ready.',
+                        textAlign: TextAlign.center,
+                        style: ui.body(),
+                      ),
+                      const SizedBox(height: Space.s16),
+                      // Two equal choices; nothing advances on its own.
+                      FilledButton(
+                        onPressed: () => widget.onNextChapter(next),
+                        child: Text('Continue to Chapter $next'),
+                      ),
+                      const SizedBox(height: Space.s8),
+                      OutlinedButton(
+                        onPressed: () =>
+                            reflectOnChapter(context, ref, entry.id),
+                        child: const Text('Reflect on this chapter'),
+                      ),
+                    ] else ...[
+                      Text(
+                        'You have reached the end of the Gita',
+                        textAlign: TextAlign.center,
+                        style: ui.emptyTitle,
+                      ),
+                      const SizedBox(height: Space.s8),
+                      const SizedBox(height: Space.s8),
+                      OutlinedButton(
+                        onPressed: () =>
+                            reflectOnChapter(context, ref, entry.id),
+                        child: const Text('Reflect on what you read'),
+                      ),
+                      Center(
+                        child: TextButton(
+                          onPressed: () => widget.onNextChapter(1),
+                          child: const Text('Begin again at Chapter 1'),
+                        ),
+                      ),
+                    ],
                   ],
                 ],
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-    final c2 = AppColors.of(context);
-    return Stack(
-      children: [
-        page,
-        // A soft fade says "there is more below" on long verses.
-        Positioned(
-          left: 0,
-          right: 0,
-          bottom: 0,
-          height: navBarInset(context) + ReaderMetrics.moreFade,
-          child: IgnorePointer(
-            child: AnimatedOpacity(
-              opacity: _moreBelow ? 1 : 0,
-              duration: Motion.of(context).crossFade,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [c2.bg.withValues(alpha: 0), c2.bg],
-                    stops: const [0, 0.7],
-                  ),
-                ),
               ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

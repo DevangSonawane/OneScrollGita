@@ -126,7 +126,7 @@ class ListenPill extends ConsumerWidget {
       button: true,
       excludeSemantics: true,
       child: SizedBox(
-        width: wide ? PlayerMetrics.pillWide : PlayerMetrics.pillCompact,
+        width: PlayerMetrics.pillCompact,
         height: NavBarMetrics.height,
         child: GlassLayer(
           child: GlassShape(
@@ -145,7 +145,8 @@ class ListenPill extends ConsumerWidget {
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(Radii.pill),
                   ),
-                  child: Row(
+                  // Icon over its name, like the other tabs (PRD_v7).
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if (playing)
@@ -153,21 +154,20 @@ class ListenPill extends ConsumerWidget {
                       else
                         Icon(
                           LucideIcons.headphones,
-                          size: IconSizes.regular,
+                          size: NavBarMetrics.icon,
                           color: fg,
                         ),
-                      if (wide) ...[
-                        const SizedBox(width: Space.s8),
-                        Flexible(
-                          child: Text(
-                            'Listen',
-                            maxLines: 1,
-                            overflow: TextOverflow.fade,
-                            softWrap: false,
-                            style: UiStyles(c).label(size: 15, color: fg),
-                          ),
-                        ),
-                      ],
+                      const SizedBox(height: 2),
+                      Text(
+                        'Listen',
+                        maxLines: 1,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                        textScaler: MediaQuery.textScalerOf(context)
+                            .clamp(maxScaleFactor: 1.2),
+                        style: UiStyles(c)
+                            .label(size: NavBarMetrics.labelSize, color: fg),
+                      ),
                     ],
                   ),
                 ),

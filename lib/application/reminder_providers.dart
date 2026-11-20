@@ -1,3 +1,4 @@
+
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -171,8 +172,9 @@ class ReminderController extends Notifier<ReminderState> {
     // Pending only: notifications already delivered stay visible.
     await svc.cancelPending();
     final s = state.settings;
+    final granted = await svc.hasPermission();
     if (!s.remindersEnabled) return;
-    if (!await svc.hasPermission()) {
+    if (!granted) {
       state = state.copyWith(permissionDenied: true);
       return;
     }

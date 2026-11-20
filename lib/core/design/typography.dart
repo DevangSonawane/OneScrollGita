@@ -8,6 +8,11 @@ abstract final class Fonts {
   static const tiro = 'TiroDevanagariSanskrit';
   static const inter = 'Inter';
 
+  /// All English text, reading and UI alike (owner, 2026-11-20: the clean
+  /// sans used on the settings and Shravan pages). Devanagari keeps its own
+  /// faces. Inter covers every IAST letter in the dataset.
+  static const english = inter;
+
   /// Chosen Sanskrit face. Compare both on the specimen screen and record
   /// the decision in docs/typography.md.
   static const sanskrit = devanagari;
@@ -25,11 +30,11 @@ const _devanagariLocale = Locale('hi');
 /// ramp, so shloka, transliteration and translation read as one family.
 abstract final class ReadingType {
   static const shloka = 22.0;
-  static const transliteration = 17.0;
-  static const translation = 18.0;
-  static const purport = 17.0;
+  static const transliteration = 16.0;
+  static const translation = 17.0;
+  static const purport = 16.0;
   static const purportShloka = 19.0;
-  static const wordMeaning = 16.0;
+  static const wordMeaning = 15.0;
   static const trainerShloka = 24.0;
   static const trainerTransliteration = 21.0;
 }
@@ -55,7 +60,7 @@ class ReadingStyles {
 
   TextStyle get transliteration => _weighted(
     TextStyle(
-      fontFamily: Fonts.literata,
+      fontFamily: Fonts.english,
       fontStyle: FontStyle.italic,
       fontSize: ReadingType.transliteration * scale,
       height: 1.55,
@@ -77,7 +82,7 @@ class ReadingStyles {
         )
       : _weighted(
           TextStyle(
-            fontFamily: Fonts.literata,
+            fontFamily: Fonts.english,
             fontSize: ReadingType.translation * scale,
             height: 1.5,
             color: colors.textPrimary,
@@ -87,7 +92,7 @@ class ReadingStyles {
 
   TextStyle purport(String lang) => _weighted(
     TextStyle(
-      fontFamily: lang == 'hi' ? Fonts.devanagari : Fonts.literata,
+      fontFamily: lang == 'hi' ? Fonts.devanagari : Fonts.english,
       fontSize: ReadingType.purport * scale,
       height: 1.65,
       color: colors.textPrimary,
@@ -111,7 +116,7 @@ class ReadingStyles {
         )
       : _weighted(
           TextStyle(
-            fontFamily: Fonts.literata,
+            fontFamily: Fonts.english,
             fontStyle: FontStyle.italic,
             fontSize: ReadingType.wordMeaning * scale,
             height: 1.55,
@@ -123,7 +128,7 @@ class ReadingStyles {
   /// Word-for-word list: the meaning.
   TextStyle wordMeaningText(String lang) => _weighted(
     TextStyle(
-      fontFamily: lang == 'hi' ? Fonts.devanagari : Fonts.literata,
+      fontFamily: lang == 'hi' ? Fonts.devanagari : Fonts.english,
       fontSize: ReadingType.wordMeaning * scale,
       height: lang == 'hi' ? 1.6 : 1.55,
       color: colors.textSecondary,
@@ -146,7 +151,7 @@ class ReadingStyles {
         )
       : _weighted(
           TextStyle(
-            fontFamily: Fonts.literata,
+            fontFamily: Fonts.english,
             fontStyle: FontStyle.italic,
             fontSize: ReadingType.trainerTransliteration * scale,
             height: 1.6,
@@ -202,7 +207,7 @@ class UiStyles {
 
   TextStyle get title => _weighted(
     TextStyle(
-      fontFamily: Fonts.literata,
+      fontFamily: Fonts.english,
       fontSize: 28,
       height: 1.25,
       color: colors.textPrimary,
@@ -212,7 +217,7 @@ class UiStyles {
 
   TextStyle get emptyTitle => _weighted(
     TextStyle(
-      fontFamily: Fonts.literata,
+      fontFamily: Fonts.english,
       fontSize: 22,
       height: 1.3,
       color: colors.textPrimary,

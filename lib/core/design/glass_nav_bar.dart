@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'glass.dart';
 import 'motion.dart';
 import 'tokens.dart';
+import 'typography.dart';
 
 class GlassNavItem {
   const GlassNavItem({
@@ -254,9 +255,22 @@ class _Tab extends StatelessWidget {
                 child: Icon(
                   selected ? item.selectedIcon : item.icon,
                   key: ValueKey(selected),
-                  size: IconSizes.regular,
+                  size: NavBarMetrics.icon,
                   color: iconColor,
                 ),
+              ),
+              const SizedBox(height: 2),
+              // Labels under the icons (PRD_v7); capped so large text never
+              // breaks the pill (the screen reader still gets the full name).
+              Text(
+                item.label,
+                maxLines: 1,
+                overflow: TextOverflow.fade,
+                softWrap: false,
+                textScaler: MediaQuery.textScalerOf(context)
+                    .clamp(maxScaleFactor: 1.2),
+                style: UiStyles(c)
+                    .label(size: NavBarMetrics.labelSize, color: iconColor),
               ),
             ],
           ),

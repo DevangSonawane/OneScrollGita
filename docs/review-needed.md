@@ -99,3 +99,11 @@ was written. The new tests are written but have **not been run**.
 | Free trials | Play Console, App Store Connect | Create the trial offers and pick the length. Then open the paywall on a real phone: "7 days free, then ₹X a year" and "Start free trial" should appear; without a trial, nothing about trials shows. |
 | Trial terms wording | `lib/features/premium/paywall_screen.dart` | "... Cancel before the trial ends in Google Play / your App Store settings and you will not be charged." Legal check. |
 | Screenshot captions | `store/v5-screenshot-captions.md` | Draft only, for later. Hindi captions still to write. |
+
+## v6
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Owner preview flag | `lib/core/config/build_flags.dart` | Never build a store upload with `--dart-define=OWNER_PREVIEW=true`. Profile shows a red "Owner preview build" row when it is on. |
+| Monk figure | `lib/features/premium/figure_art.dart` | Look on both paywalls, light and dark. |
+| Lock screen widgets | iOS lock screen > Customize | Verse of the day (inline, rectangle, lotus circle) and Continue reading. |

@@ -9,7 +9,6 @@ import '../../application/library_providers.dart';
 import '../../application/premium_providers.dart';
 import '../../application/study_providers.dart';
 import '../../application/reminder_providers.dart';
-import '../../application/scripture_providers.dart';
 import '../../application/ui_providers.dart';
 import '../../core/design/components.dart';
 import '../../core/design/glass_nav_bar.dart';
@@ -26,6 +25,7 @@ import '../study/notebook_export.dart';
 import '../trainer/trainer_entry.dart';
 import '../streak/streak_card.dart';
 import '../purport/purport_screen.dart' show TextSizeSlider;
+import '../../core/config/build_flags.dart';
 
 /// Profile (PRD 5.7): a quiet local library plus settings. No account.
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -124,10 +124,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final isPremium = ref.watch(isPremiumProvider);
     ref.watch(shravanEntitlementProvider);
     final pretendShravan =
-        kDebugMode &&
+        previewBuild &&
         ref.read(settingsRepositoryProvider).pretendFor(Package.shravan);
     final pretendPremium =
-        kDebugMode && ref.read(settingsRepositoryProvider).pretendPremium;
+        previewBuild && ref.read(settingsRepositoryProvider).pretendPremium;
 
     return Scaffold(
       body: SafeArea(
@@ -294,14 +294,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 const _ProfileSectionHeader('ABOUT'),
                 SettingsRow(
                   title: 'About and credits',
+                  subtitle: 'Source text, privacy and licences',
                   onTap: () => context.go('/profile/about'),
-                  divider: kDebugMode,
+                  divider: previewBuild,
                 ),
-                if (kDebugMode) ...[
-                  SettingsRow(
-                    title: 'Typography specimen (debug)',
-                    onTap: () => context.go('/profile/specimen'),
-                  ),
+                if (previewBuild) ...[
+                  if (ownerPreview)
+                    const SettingsRow(
+                      title: 'Owner preview build',
+                      subtitle:
+                          'Listen and test switches are on. Never upload '
+                          'this build to a store.',
+                      destructive: true,
+                    ),
+                  if (kDebugMode)
+                    SettingsRow(
+                      title: 'Typography specimen (debug)',
+                      onTap: () => context.go('/profile/specimen'),
+                    ),
                   SettingsRow(
                     title: 'Pretend Shravan (debug)',
                     subtitle: 'Unlocks Listen in debug builds only.',
@@ -360,48 +370,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     style: ui.body(size: 13),
                   ),
                 ),
-                const _Credits(),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-/// Credits for the scripture text, from the dataset's source block.
-class _Credits extends ConsumerWidget {
-  const _Credits();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final c = AppColors.of(context);
-    final ui = UiStyles(c);
-    final index = ref.watch(chaptersIndexProvider).value;
-    if (index == null) return const SizedBox.shrink();
-    final source = index.source;
-    Widget line(String text, {Color? color, double size = 13}) => Padding(
-      padding: const EdgeInsets.fromLTRB(
-        Space.readingSide,
-        0,
-        Space.readingSide,
-        Space.s8,
-      ),
-      child: Text(
-        text,
-        style: ui.body(size: size, color: color),
-      ),
-    );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const _ProfileSectionHeader('CREDITS'),
-        line(source.edition, color: c.textPrimary, size: 15),
-        line('Text from ${source.name}.'),
-        line(source.attribution),
-        const SizedBox(height: Space.s16),
-      ],
     );
   }
 }

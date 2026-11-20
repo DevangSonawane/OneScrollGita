@@ -265,18 +265,22 @@ class LocalNotificationService implements NotificationService {
   }
 
   @override
-  Future<void> sendTest({required String title, required String body}) =>
-      _zoned(
-        NotificationRequest(
-          id: testNotificationId,
-          at: DateTime.now().add(ScheduleRules.testDelay),
-          category: MessageCategory.invite,
-          title: title,
-          body: body,
-        ),
-        exact: true,
-        exactSeconds: true,
-      );
+  Future<void> sendTest({required String title, required String body}) async {
+    // Exact only when allowed: Android 12+ refuses exact alarms otherwise
+    // (PRD_v6 section 2). Inexact still arrives within seconds when idle.
+    final exact = await canScheduleExact();
+    await _zoned(
+      NotificationRequest(
+        id: testNotificationId,
+        at: DateTime.now().add(ScheduleRules.testDelay),
+        category: MessageCategory.invite,
+        title: title,
+        body: body,
+      ),
+      exact: exact,
+      exactSeconds: true,
+    );
+  }
 
   @override
   Future<List<int>> pendingIds() async => [

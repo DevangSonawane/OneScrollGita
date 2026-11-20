@@ -34,14 +34,12 @@ void main() {
         );
         await settle(tester);
 
-        // Reader, chapter sheet, verse selector
+        // Reader, then the Go to verse sheet from both pills
         await tester.tap(find.bySemanticsLabel(RegExp('^Gita, tab')));
         await settle(tester);
-        await tester.tap(find.bySemanticsLabel(RegExp(r'Choose chapter$')));
-        await settle(tester);
-        await tester.tapAt(const Offset(10, 10));
-        await settle(tester);
-        await tester.tap(find.bySemanticsLabel(RegExp(r'Choose verse$')));
+        await tester.tap(
+          find.bySemanticsLabel(RegExp(r'Choose chapter and verse$')),
+        );
         await settle(tester);
         await tester.tapAt(const Offset(10, 10));
         await settle(tester);
