@@ -92,5 +92,42 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<!-- Home Screen Quick Actions (long-press the icon). Types must match
+	     lib/domain/quick_action.dart. -->
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.onescrollgita.app.quick.continue-reading</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Continue Reading</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>book</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.onescrollgita.app.quick.todays-verse</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Today's Verse</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>sun.max</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.onescrollgita.app.quick.random-verse</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Random Verse</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>shuffle</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.onescrollgita.app.quick.bookmarks</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Bookmarks</string>
+			<key>UIApplicationShortcutItemIconSymbolName</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
 </dict>
 </plist>

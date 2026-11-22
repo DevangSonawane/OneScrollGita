@@ -18,6 +18,8 @@ import 'package:versescroll/data/audio/audio_catalog.dart';
 import 'package:versescroll/data/audio/audio_engine.dart';
 import 'package:versescroll/data/audio/manifest_source.dart';
 import 'package:versescroll/application/premium_providers.dart';
+import 'package:versescroll/application/quick_actions.dart';
+import 'package:versescroll/data/platform/quick_actions_channel.dart';
 import 'package:versescroll/application/reminder_providers.dart';
 import 'package:versescroll/data/notifications/notification_service.dart';
 import 'package:versescroll/application/scripture_providers.dart';
@@ -35,6 +37,7 @@ import 'package:versescroll/data/user/user_data_repository.dart';
 import 'package:versescroll/data/purchases/purchase_gateway.dart';
 
 import 'fakes/fake_purchase_gateway.dart';
+import 'fakes/fake_quick_actions_channel.dart';
 
 /// Reads assets straight from disk with synchronous futures, so widget
 /// tests under fake time never wait on real I/O.
@@ -82,6 +85,9 @@ Future<TestApp> pumpApp(
 
   /// A stand-in for Supabase (null: no account features, as without keys).
   AuthGateway? auth,
+
+  /// A stand-in for iOS Home Screen Quick Actions (null: none).
+  QuickActionsChannel? quickActions,
 }) async {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
   tester.view.devicePixelRatio = 1;
@@ -138,6 +144,9 @@ Future<TestApp> pumpApp(
       ),
       if (notifications != null)
         notificationServiceProvider.overrideWithValue(notifications),
+      quickActionsChannelProvider.overrideWithValue(
+        quickActions ?? FakeQuickActionsChannel(),
+      ),
       authGatewayProvider.overrideWithValue(
         auth ?? const DisabledAuthGateway(),
       ),

@@ -6,11 +6,13 @@ import 'package:go_router/go_router.dart';
 
 import '../application/auth_providers.dart';
 import '../application/core_providers.dart';
+import '../application/quick_actions.dart';
 import '../application/ui_providers.dart';
 import '../core/design/motion.dart';
 import '../core/config/audio_config.dart';
 import '../core/design/tokens.dart';
 import '../domain/auth.dart';
+import '../domain/quick_action.dart';
 import '../domain/verse_navigation.dart';
 import '../features/account/account_screen.dart';
 import '../features/account/sign_up_screen.dart';
@@ -83,6 +85,21 @@ final routerProvider = Provider<GoRouter>((ref) {
           }
           return ref.read(settingsProvider).firstLaunchDone
               ? '/gita'
+              : '/welcome';
+        },
+      ),
+      // Control Center controls (iOS 18): gitaapp://open/quick?type=<type>.
+      // The quick-action handler decides the destination with the app's
+      // own data (lib/application/quick_actions.dart); Home meanwhile.
+      GoRoute(
+        path: '/quick',
+        redirect: (context, state) {
+          final type = QuickAction.fromType(state.uri.queryParameters['type']);
+          if (type != null) {
+            ref.read(pendingQuickActionProvider.notifier).request(type.type);
+          }
+          return ref.read(settingsProvider).firstLaunchDone
+              ? '/home'
               : '/welcome';
         },
       ),

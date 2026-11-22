@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -63,3 +64,12 @@ final dailyEntryProvider = FutureProvider<VerseEntry>((ref) async {
   final i = dailyEntryIndex(day, index.totalEntries);
   return repo.entryAtGlobalIndex(i);
 });
+
+/// A verse chosen at random from the bundled dataset (the same global entry
+/// index the daily verse uses), for the "Random Verse" quick action.
+Future<String> randomVerseId(Ref ref, {Random? random}) async {
+  final repo = ref.read(scriptureRepositoryProvider);
+  final index = await repo.chapters();
+  final i = (random ?? Random()).nextInt(index.totalEntries);
+  return (await repo.entryAtGlobalIndex(i)).id;
+}

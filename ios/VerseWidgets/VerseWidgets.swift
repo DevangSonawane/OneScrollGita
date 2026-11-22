@@ -3,6 +3,7 @@
 // "Continue reading". The Flutter app writes the data through home_widget
 // into the shared App Group; these widgets only read it. No network.
 
+import AppIntents
 import SwiftUI
 import WidgetKit
 
@@ -383,10 +384,110 @@ struct RecentWidget: Widget {
   }
 }
 
+// MARK: - Control Center controls (iOS 18+, docs/PRD_v8.md)
+//
+// Each control runs an intent that opens the app (openAppWhenRun). The same
+// intents are defined in the app target (ios/Runner/AppDelegate.swift), as
+// Apple requires; iOS runs the app's copy, which hands the Home Screen
+// Quick Action type to Flutter. The app decides the destination with its
+// own data (last-read position, daily verse, dataset, bookmarks).
+// Keep names, titles and types identical in both files.
+
+@available(iOSApplicationExtension 16.0, *)
+struct OpenTodaysVerseIntent: AppIntent {
+  static let title: LocalizedStringResource = "Open Today's Verse"
+  static let description = IntentDescription("Open today's verse from the Bhagavad-gītā in One Scroll Gita.")
+  static let openAppWhenRun = true
+  func perform() async throws -> some IntentResult { .result() }
+}
+
+@available(iOSApplicationExtension 16.0, *)
+struct OpenRandomVerseIntent: AppIntent {
+  static let title: LocalizedStringResource = "Open a Random Verse"
+  static let description = IntentDescription("Open a random verse from the Bhagavad-gītā in One Scroll Gita.")
+  static let openAppWhenRun = true
+  func perform() async throws -> some IntentResult { .result() }
+}
+
+@available(iOSApplicationExtension 16.0, *)
+struct OpenContinueReadingIntent: AppIntent {
+  static let title: LocalizedStringResource = "Continue Reading"
+  static let description = IntentDescription("Open the verse you read last in One Scroll Gita.")
+  static let openAppWhenRun = true
+  func perform() async throws -> some IntentResult { .result() }
+}
+
+@available(iOSApplicationExtension 16.0, *)
+struct OpenBookmarksIntent: AppIntent {
+  static let title: LocalizedStringResource = "Open Bookmarks"
+  static let description = IntentDescription("Open your bookmarked verses in One Scroll Gita.")
+  static let openAppWhenRun = true
+  func perform() async throws -> some IntentResult { .result() }
+}
+
+@available(iOSApplicationExtension 18.0, *)
+struct TodaysVerseControl: ControlWidget {
+  var body: some ControlWidgetConfiguration {
+    StaticControlConfiguration(kind: "com.onescrollgita.app.control.todays-verse") {
+      ControlWidgetButton(action: OpenTodaysVerseIntent()) {
+        Label("Today's Verse", systemImage: "sun.max")
+      }
+    }
+    .displayName("Today's Verse")
+    .description("Open today's verse in One Scroll Gita.")
+  }
+}
+
+@available(iOSApplicationExtension 18.0, *)
+struct RandomVerseControl: ControlWidget {
+  var body: some ControlWidgetConfiguration {
+    StaticControlConfiguration(kind: "com.onescrollgita.app.control.random-verse") {
+      ControlWidgetButton(action: OpenRandomVerseIntent()) {
+        Label("Random Verse", systemImage: "shuffle")
+      }
+    }
+    .displayName("Random Verse")
+    .description("Open a random verse in One Scroll Gita.")
+  }
+}
+
+@available(iOSApplicationExtension 18.0, *)
+struct ContinueReadingControl: ControlWidget {
+  var body: some ControlWidgetConfiguration {
+    StaticControlConfiguration(kind: "com.onescrollgita.app.control.continue-reading") {
+      ControlWidgetButton(action: OpenContinueReadingIntent()) {
+        Label("Continue Reading", systemImage: "book")
+      }
+    }
+    .displayName("Continue Reading")
+    .description("Open the verse you read last in One Scroll Gita.")
+  }
+}
+
+@available(iOSApplicationExtension 18.0, *)
+struct BookmarksControl: ControlWidget {
+  var body: some ControlWidgetConfiguration {
+    StaticControlConfiguration(kind: "com.onescrollgita.app.control.bookmarks") {
+      ControlWidgetButton(action: OpenBookmarksIntent()) {
+        Label("Bookmarks", systemImage: "bookmark")
+      }
+    }
+    .displayName("Bookmarks")
+    .description("Open your saved verses in One Scroll Gita.")
+  }
+}
+
 @main
 struct VerseWidgetsBundle: WidgetBundle {
   var body: some Widget {
     DailyVerseWidget()
     RecentWidget()
+    // Control Center (iOS 18+). Older iOS versions get the widgets only.
+    if #available(iOSApplicationExtension 18.0, *) {
+      TodaysVerseControl()
+      RandomVerseControl()
+      ContinueReadingControl()
+      BookmarksControl()
+    }
   }
 }

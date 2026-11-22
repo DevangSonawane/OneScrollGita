@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../application/core_providers.dart';
 import '../application/premium_providers.dart';
+import '../application/quick_actions.dart';
 import '../application/reminder_providers.dart';
 import '../application/scripture_providers.dart';
 import '../application/widget_sync.dart';
@@ -30,6 +31,8 @@ class _GitaAppState extends ConsumerState<GitaApp> with WidgetsBindingObserver {
     // Home-screen widgets: start syncing once the first verse is on screen.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(widgetSyncProvider);
+      // iOS Home Screen Quick Actions (long-press the app icon).
+      ref.read(quickActionsProvider);
       _startReminders().ignore();
       // Starts listening to the store (pending purchases complete here) and
       // re-checks the Sadhak plan. Offline keeps the cached state.
