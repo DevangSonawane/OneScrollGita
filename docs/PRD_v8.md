@@ -85,6 +85,32 @@ older iOS versions keep the widgets only.
 - No new target, entitlement or App Group change (the extension already
   exists and is signed with the app's team).
 
+## 2d. Shortcuts app and the Action Button (owner, 2026-11-22)
+
+The open-app intents built for the Control Center controls are now
+discoverable (no duplicates) and registered as App Shortcuts, with
+descriptions and SF Symbols, so they appear in the Shortcuts app and in
+**Settings > Action Button > Shortcut > One Scroll Gita**:
+
+| Shortcut | Intent | Symbol |
+| --- | --- | --- |
+| Verse of the Day (Siri reads it) | `VerseOfTheDayIntent` | `text.book.closed` |
+| Today's Verse | `OpenTodaysVerseIntent` | `sun.max` |
+| Random Verse | `OpenRandomVerseIntent` | `shuffle` |
+| Continue Reading | `OpenContinueReadingIntent` | `book` |
+| Bookmarks | `OpenBookmarksIntent` | `bookmark` |
+| Start Listening | `StartListeningIntent` (new) | `headphones` |
+
+- **Start Listening**: with Shravan, resumes the last chapter where
+  listening stopped (or chapter 1) and opens the player over the Listen
+  tab; without Shravan, opens the Listen library (nothing plays, no paywall
+  pushed); with listening unavailable, Home. Uses `canListen` and the
+  existing audio controller. Quick action type
+  `com.onescrollgita.app.quick.start-listening` (not a Home Screen item).
+- The app never assigns the Action Button; users choose it in Settings.
+- Each phrase names the app and is unique (Apple's rule); the provider
+  stays iOS 16+, deployment target unchanged (iOS 15).
+
 ## 3. Not in scope
 
 - Android (Google Assistant / Gemini cannot speak an app's answer back the
@@ -102,3 +128,8 @@ older iOS versions keep the widgets only.
 - [x] Control Center controls in the widget extension; `/quick` route;
       tests for the link path.
 - [x] Owner check: controls work on the owner's iPhone (2026-11-22).
+- [x] Shortcuts / Action Button: discoverable intents, App Shortcuts,
+      Start Listening (tests for the listening route).
+- [ ] Owner check: shortcuts listed in the Shortcuts app; each assigned to
+      the Action Button opens the right place (app closed, background,
+      open).
