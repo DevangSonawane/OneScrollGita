@@ -10,6 +10,7 @@ import '../../application/ui_providers.dart';
 import '../../core/design/components.dart';
 import '../../core/design/glass_nav_bar.dart';
 import '../../core/design/motion.dart';
+import '../../core/design/native_glass.dart';
 import '../../core/design/reading_views.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
@@ -510,15 +511,33 @@ class ContinueButton extends ConsumerWidget {
     final label = last != null
         ? 'Continue at ${last.label}'
         : "Read today's verse";
+    void open() {
+      if (last == null) {
+        ref.read(readTrackerProvider.notifier).qualify(target.id);
+      }
+      openInReader(context, target.id);
+    }
+
+    // iOS 26+: Apple's clear Liquid Glass button, like the tab bar (owner,
+    // 2026-11-22; docs/PRD_v7.md section 4e). Saffron text keeps it the
+    // main action.
+    if (useNativeGlass(context, ref)) {
+      return Center(
+        child: NativeGlassButton(
+          semanticLabel: label,
+          title: label,
+          symbol: 'chevron.right',
+          symbolTrailing: true,
+          foreground: AppColors.of(context).accentText,
+          height: HomeMetrics.continueHeight,
+          onTap: open,
+        ),
+      );
+    }
     return SizedBox(
       height: HomeMetrics.continueHeight,
       child: FilledButton.icon(
-        onPressed: () {
-          if (last == null) {
-            ref.read(readTrackerProvider.notifier).qualify(target.id);
-          }
-          openInReader(context, target.id);
-        },
+        onPressed: open,
         iconAlignment: IconAlignment.end,
         icon: const Icon(LucideIcons.chevron_right, size: IconSizes.small),
         label: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),

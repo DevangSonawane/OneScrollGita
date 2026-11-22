@@ -15,6 +15,7 @@ import '../../application/ui_providers.dart';
 import '../../core/design/glass.dart';
 import '../../core/design/glass_nav_bar.dart';
 import '../../core/design/motion.dart';
+import '../../core/design/native_glass.dart';
 import '../../core/design/reading_views.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
@@ -400,7 +401,7 @@ class _VerseViewport extends InheritedWidget {
   bool updateShouldNotify(_VerseViewport old) => old.height != height;
 }
 
-class _TopBar extends StatelessWidget {
+class _TopBar extends ConsumerWidget {
   const _TopBar({
     required this.topInset,
     required this.chapter,
@@ -420,83 +421,129 @@ class _TopBar extends StatelessWidget {
   final VoidCallback onChapterTap;
   final VoidCallback onVerseTap;
 
+  String get _chapterLabel =>
+      'Chapter ${chapter.number}, ${chapter.titleEn}, '
+      'verse ${entry.label}. Choose chapter and verse';
+
+  /// iOS 26+: Apple's glass buttons and segmented control, in one glass
+  /// group (docs/PRD_v7.md section 4e).
+  Widget _native(BuildContext context, WidgetRef ref) {
+    final lang = ref.watch(languageProvider);
+    return LayoutBuilder(
+      builder: (context, box) => Semantics(
+        container: true,
+        explicitChildNodes: true,
+        child: NativePlatformView(
+          viewType: 'native_reader_bar',
+          size: Size(box.maxWidth, Touch.pillHeight),
+          params: {
+            'chapterTitle': '${entry.label} · ${chapter.titleEn}',
+            'chapterLabel': _chapterLabel,
+            'infoLabel': 'Summary of chapter ${chapter.number}',
+            'language': lang,
+          },
+          onEvent: (method, args) {
+            if (method == 'tap' && args == 'chapter') onChapterTap();
+            if (method == 'tap' && args == 'info') {
+              openSummary(context, chapter.number);
+            }
+            if (method == 'language' && args is String && args != lang) {
+              ref.read(settingsProvider.notifier).setLanguage(args);
+            }
+          },
+        ),
+      ),
+    );
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final c = AppColors.of(context);
     final ui = UiStyles(c);
+    final native = useNativeGlass(context, ref);
     return MediaQuery.withClampedTextScaling(
       maxScaleFactor: 1.3,
       child: Padding(
         padding: EdgeInsets.only(top: topInset),
         child: Column(
           children: [
-            GlassLayer(
-              strength: GlassStrength.light,
-              child: Padding(
+            if (native)
+              Padding(
                 padding: const EdgeInsets.fromLTRB(
                   Space.s16,
                   Space.s8,
                   Space.s16,
                   0,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          child: GlassPill(
-                            onTap: onChapterTap,
-                            semanticLabel:
-                                'Chapter ${chapter.number}, ${chapter.titleEn}, '
-                                'verse ${entry.label}. Choose chapter and verse',
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    // Where you are, in one pill: "2.47 · title".
-                                    '${entry.label} · ${chapter.titleEn}',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: ui.label(size: 14),
+                child: _native(context, ref),
+              )
+            else
+              GlassLayer(
+                strength: GlassStrength.light,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    Space.s16,
+                    Space.s8,
+                    Space.s16,
+                    0,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Flexible(
+                            child: GlassPill(
+                              onTap: onChapterTap,
+                              semanticLabel: _chapterLabel,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      // Where you are, in one pill: "2.47 · title".
+                                      '${entry.label} · ${chapter.titleEn}',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: ui.label(size: 14),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: Space.s4),
-                                Icon(
-                                  Icons.expand_more_rounded,
-                                  size: IconSizes.small,
-                                  color: c.textSecondary,
-                                ),
-                              ],
+                                  const SizedBox(width: Space.s4),
+                                  Icon(
+                                    Icons.expand_more_rounded,
+                                    size: IconSizes.small,
+                                    color: c.textSecondary,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: Space.s8),
-                        GlassPill(
-                          onTap: () => openSummary(context, chapter.number),
-                          semanticLabel: 'Summary of chapter ${chapter.number}',
-                          padding: EdgeInsets.zero,
-                          child: SizedBox(
-                            width: Touch.pillHeight,
-                            child: Icon(
-                              Icons.info_outline_rounded,
-                              size: IconSizes.small,
-                              color: c.textPrimary,
+                          const SizedBox(width: Space.s8),
+                          GlassPill(
+                            onTap: () => openSummary(context, chapter.number),
+                            semanticLabel:
+                                'Summary of chapter ${chapter.number}',
+                            padding: EdgeInsets.zero,
+                            child: SizedBox(
+                              width: Touch.pillHeight,
+                              child: Icon(
+                                Icons.info_outline_rounded,
+                                size: IconSizes.small,
+                                color: c.textPrimary,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: Space.s8),
-                        const GlassPill(
-                          padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: LanguageToggle(onSurface: true),
-                        ),
-                      ],
-                    ),
-                  ],
+                          const SizedBox(width: Space.s8),
+                          const GlassPill(
+                            padding: EdgeInsets.symmetric(horizontal: 4),
+                            child: LanguageToggle(onSurface: true),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
             const SizedBox(height: Space.s8),
             // Decorative chapter progress line.
             ExcludeSemantics(
@@ -569,11 +616,52 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
     }
   }
 
+  /// iOS 26+: "…" opens Apple's menu with the study tools instead of
+  /// unfolding them inline (docs/PRD_v7.md section 4e).
+  Widget _nativeMore(BuildContext context, String verseId) {
+    final highlight = ref.watch(highlightForProvider(verseId));
+    final hasNote = ref.watch(noteForProvider(verseId)) != null;
+    final learn = learnByHeartState(ref, verseId);
+    return NativeGlassButton(
+      semanticLabel: 'More: highlight, note, learn by heart',
+      symbol: 'ellipsis',
+      style: NativeButtonStyle.plain,
+      foreground: AppColors.of(context).textSecondary,
+      width: Touch.minTarget,
+      menu: [
+        NativeMenuItem(
+          id: 'highlight',
+          title: highlight == null
+              ? 'Highlight'
+              : 'Highlighted ${highlight.label}',
+          symbol: 'highlighter',
+        ),
+        NativeMenuItem(
+          id: 'note',
+          title: hasNote ? 'Open your note' : 'Add a note',
+          symbol: hasNote ? 'note.text' : 'square.and.pencil',
+        ),
+        NativeMenuItem(
+          id: 'learn',
+          title: learn.label,
+          symbol: learn.locked ? 'lock' : 'brain.head.profile',
+        ),
+      ],
+      onMenu: (id) => switch (id) {
+        'highlight' => showHighlightSheet(context, verseId),
+        'note' => openNoteOrPaywall(context, ref, verseId),
+        'learn' => openLearnByHeart(context, ref, verseId),
+        _ => null,
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
     final ui = UiStyles(c);
     final entry = widget.entry;
+    final native = useNativeGlass(context, ref);
     final next = nextChapter(entry.chapter);
     final top = widget.topPadding + Space.s32;
     final bottom = navBarInset(context);
@@ -640,27 +728,31 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
                               ),
                             ),
                           ),
-                          Pressable(
-                            onTap: () => setState(() => _moreOpen = !_moreOpen),
-                            semanticLabel: _moreOpen
-                                ? 'Hide study tools'
-                                : 'More: highlight, note, learn by heart',
-                            selected: _moreOpen,
-                            child: SizedBox.square(
-                              dimension: Touch.minTarget,
-                              child: AnimatedRotation(
-                                turns: _moreOpen ? 0.25 : 0,
-                                duration: Motion.of(context).crossFade,
-                                child: Icon(
-                                  LucideIcons.ellipsis,
-                                  size: IconSizes.regular,
-                                  color: _moreOpen
-                                      ? c.accentText
-                                      : c.textSecondary,
+                          if (native)
+                            _nativeMore(context, entry.id)
+                          else
+                            Pressable(
+                              onTap: () =>
+                                  setState(() => _moreOpen = !_moreOpen),
+                              semanticLabel: _moreOpen
+                                  ? 'Hide study tools'
+                                  : 'More: highlight, note, learn by heart',
+                              selected: _moreOpen,
+                              child: SizedBox.square(
+                                dimension: Touch.minTarget,
+                                child: AnimatedRotation(
+                                  turns: _moreOpen ? 0.25 : 0,
+                                  duration: Motion.of(context).crossFade,
+                                  child: Icon(
+                                    LucideIcons.ellipsis,
+                                    size: IconSizes.regular,
+                                    color: _moreOpen
+                                        ? c.accentText
+                                        : c.textSecondary,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
                         ],
                       ),
                       if (entry.hasPurport)
@@ -675,7 +767,7 @@ class _EntryPageState extends ConsumerState<_EntryPage> {
                     duration: Motion.of(context).crossFade,
                     curve: AppCurves.standard,
                     alignment: Alignment.topLeft,
-                    child: !_moreOpen
+                    child: native || !_moreOpen
                         ? const SizedBox(width: double.infinity)
                         : Padding(
                             padding: const EdgeInsets.only(top: Space.s4),

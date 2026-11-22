@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../application/audio_providers.dart';
-import '../../core/design/glass.dart';
 import '../../core/design/motion.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
@@ -99,87 +98,6 @@ class _SoundWaveState extends State<SoundWave>
   );
 }
 
-/// The separate Listen pill beside the main nav pill.
-class ListenPill extends ConsumerWidget {
-  const ListenPill({
-    super.key,
-    required this.selected,
-    required this.wide,
-    required this.onTap,
-  });
-
-  final bool selected;
-  final bool wide;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final c = AppColors.of(context);
-    final playing = ref.watch(
-      audioControllerProvider.select((s) => s.playing && s.active),
-    );
-    final lit = selected || playing;
-    final fg = lit ? c.accentText : c.textSecondary;
-    return Semantics(
-      label: 'Listen, tab 4 of 4${playing ? ', playing' : ''}',
-      selected: selected,
-      button: true,
-      excludeSemantics: true,
-      child: SizedBox(
-        width: PlayerMetrics.pillCompact,
-        height: NavBarMetrics.height,
-        child: GlassLayer(
-          child: GlassShape(
-            radius: NavBarMetrics.height / 2,
-            child: Pressable(
-              onTap: onTap,
-              button: false,
-              radius: NavBarMetrics.height / 2,
-              child: Padding(
-                padding: const EdgeInsets.all(6),
-                child: AnimatedContainer(
-                  duration: AppDurations.fast,
-                  decoration: BoxDecoration(
-                    color: lit
-                        ? c.accentSoft.withValues(alpha: 0.85)
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(Radii.pill),
-                  ),
-                  // Icon over its name, like the other tabs (PRD_v7).
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (playing)
-                        SoundWave(playing: true, color: fg)
-                      else
-                        Icon(
-                          LucideIcons.headphones,
-                          size: NavBarMetrics.icon,
-                          color: fg,
-                        ),
-                      const SizedBox(height: 2),
-                      Text(
-                        'Listen',
-                        maxLines: 1,
-                        overflow: TextOverflow.fade,
-                        softWrap: false,
-                        textScaler: MediaQuery.textScalerOf(context)
-                            .clamp(maxScaleFactor: 1.2),
-                        style: UiStyles(c)
-                            .label(size: NavBarMetrics.labelSize, color: fg),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 /// A chapter's number on a warm tile ("२").
 class ChapterNumeral extends StatelessWidget {
   const ChapterNumeral({super.key, required this.chapter, required this.size});
@@ -220,6 +138,32 @@ class ChapterNumeral extends StatelessWidget {
 }
 
 /// Floats above the nav pills on every tab while something is loaded.
+/// The mini player's two lines, shared with the native docked player.
+({String title, String subtitle}) miniPlayerText(AudioUiState s) {
+  final chapter = s.chapter ?? 1;
+  if (s.kind == AudioKind.summary) {
+    return (title: 'Chapter $chapter · Summary', subtitle: 'Chapter summary');
+  }
+  return (
+    title: 'Chapter $chapter · ${s.track?.label ?? ''}',
+    subtitle:
+        '${s.track?.phase.label ?? ''}${s.mode == PlayMode.sanskritOnly
+            ? ''
+            : s.track?.phase == AudioPhase.sanskrit
+            ? ' · then translation'
+            : ''}',
+  );
+}
+
+/// Opens what the mini player is playing: the player, or the summary.
+void openNowPlaying(BuildContext context, AudioUiState s) {
+  if (s.kind == AudioKind.summary) {
+    context.push('/gita/summary/${s.chapter ?? 1}');
+  } else {
+    openPlayer(context);
+  }
+}
+
 class MiniPlayer extends ConsumerWidget {
   const MiniPlayer({super.key});
 
@@ -230,17 +174,7 @@ class MiniPlayer extends ConsumerWidget {
     final s = ref.watch(audioControllerProvider);
     final audio = ref.read(audioControllerProvider.notifier);
     final chapter = s.chapter ?? 1;
-    final summary = s.kind == AudioKind.summary;
-    final title = summary
-        ? 'Chapter $chapter · Summary'
-        : 'Chapter $chapter · ${s.track?.label ?? ''}';
-    final subtitle = summary
-        ? 'Chapter summary'
-        : '${s.track?.phase.label ?? ''}${s.mode == PlayMode.sanskritOnly
-              ? ''
-              : s.track?.phase == AudioPhase.sanskrit
-              ? ' · then translation'
-              : ''}';
+    final (:title, :subtitle) = miniPlayerText(s);
     // Like the nav pills it sits on, its labels grow to 1.3x at most.
     return MediaQuery.withClampedTextScaling(
       maxScaleFactor: 1.3,
@@ -265,9 +199,7 @@ class MiniPlayer extends ConsumerWidget {
               children: [
                 Expanded(
                   child: InkWell(
-                    onTap: () => summary
-                        ? context.push('/gita/summary/$chapter')
-                        : openPlayer(context),
+                    onTap: () => openNowPlaying(context, s),
                     child: Padding(
                       padding: const EdgeInsets.only(left: Space.s12),
                       child: Row(

@@ -19,6 +19,8 @@ import UserNotifications
     if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "QuickActionsPlugin") {
       QuickActionsPlugin.register(with: registrar)
     }
+    // Apple's own Liquid Glass controls on iOS 26+ (NativeGlass.swift).
+    NativeGlass.register(with: engineBridge.pluginRegistry)
   }
 }
 

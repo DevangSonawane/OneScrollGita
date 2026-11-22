@@ -102,6 +102,36 @@ opened verse so any verse opens instantly), with `VerseSnapPhysics`
 - Swipes must be deliberate: at least 550 px/s and 24 px of movement;
   smaller touches spring back.
 
+## 4e. Native iOS tab bar (owner decision, 2026-11-22)
+
+- On iOS 26 and later the bottom nav is Apple's own UIKit `UITabBar`
+  (system Liquid Glass, SF Symbols), shown through a platform view. No new
+  package: a small bridge in ios/Runner/AppDelegate.swift.
+- One system bar holds all tabs, full width at the bottom edge, laid out
+  by UIKit as in system apps (device test, 2026-11-22: a separate Listen
+  bar was squeezed by UIKit's own margins). Hide-on-scroll stays in Flutter.
+- Tab order (owner, 2026-11-22), on every platform: Home, Gita, Listen,
+  Profile. Router branch indexes are unchanged; only the display order is.
+- Owner asked (2026-11-22) for native glass in four more places, iOS 26+
+  only, with the Flutter versions kept as the fallback:
+  - Mini player: docked as the `UITabBarController` bottom accessory (as in
+    Apple Music): chapter, title, play/pause, close; tap opens the player.
+  - Reader top bar: chapter button, summary button and EN | हि as Apple
+    glass buttons and segmented control, in one glass group (one surface).
+  - "…" under a verse: a native menu with Highlight, Note, Learn by heart
+    (replaces the inline unfold on iOS 26).
+  - Long-press on Favourites/Bookmarks: the system action sheet.
+  - Home "Continue at …": Apple's clear glass button with saffron text
+    (owner, 2026-11-22: "liquid glass" like the tab bar, not tinted).
+  - Segmented controls (owner, 2026-11-22): Home EN | हि (in a glass
+    capsule), Profile Translation and Theme (the system control).
+- Tab taps give a light selection haptic, as the Flutter pill did; so do
+  the native segmented controls.
+- Native code lives in ios/Runner/NativeGlass.swift.
+- Fallback: Android, iOS before 26, simplified glass and high contrast keep
+  the existing Flutter `GlassNavBar` and Listen pill unchanged.
+- The native bar counts as one glass surface in the budget, like the pill.
+
 ## 5. TODO
 
 - [x] Inter for English text; widgets sans.
@@ -113,5 +143,10 @@ opened verse so any verse opens instantly), with `VerseSnapPhysics`
 - [ ] Owner review on device.
 - [ ] Tests for the rebuilt reader not run (owner asked not to test or
       install this round); test finders now point at the chapter scroll.
+- [x] Native iOS 26 tab bar with Flutter fallback (section 4e; tests).
+- [x] Tab order Home, Gita, Listen, Profile; native mini player, reader
+      top bar, "…" menu, action sheet, Continue button (section 4e; tests).
+- [x] Native segmented controls (Home, Profile) and tab haptics (tests).
+- [ ] Native tab bar checked on a real iOS 26 iPhone.
 - [x] Long-verse flick skip (single scroller; tests for flicks, a new swipe
       from the bottom, and short verses).

@@ -137,7 +137,7 @@ void main() {
     await tester.tap(find.text('I have read it'));
     await settle(tester);
     expect(find.text('Day 1. A beginning.'), findsOneWidget);
-    await tester.tap(find.text('Not now'));
+    await tester.tap(find.text('I will come back on my own'));
     await settle(tester);
 
     expect(find.text("TODAY'S VERSE"), findsOneWidget);

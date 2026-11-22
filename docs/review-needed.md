@@ -133,3 +133,13 @@ was written. The new tests are written but have **not been run**.
 | Shravan prices | App Store Connect | ₹1,999 / year and ₹499 / month (no ₹2,000 / ₹500 tier). Play Console products not created yet. |
 | Play release notes 1.2.0 | `docs/play-store.md` | Draft "What's new" text. |
 | Account deletion page | website `/delete-account` | Missing (404). Required by Play Data safety for apps with accounts. |
+
+## Onboarding and sign-up redesign (2026-11-22)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Required sign-in, no skip | `lib/features/account/sign_up_screen.dart` | Owner decision. Risk: App Store rejection under guideline 5.1.1(v), and a new install with no internet cannot finish first launch. |
+| Onboarding wording (reviewed: false) | `lib/features/first_launch/welcome_screen.dart`, `sign_up_screen.dart` | "Timeless wisdom, one verse at a time…", "Take a slow breath…", reminder text and "I will come back on my own", "Keep your journey safe" and the three benefit lines. |
+| Intro numbers | welcome screen | Verses and chapters are counted from the dataset; "2 languages" means the English and Hindi translations. |
+| Apple and Google buttons | `lib/features/account/sign_in_buttons.dart`, `brand_logos.dart` | Custom buttons drawn to each brand's guidelines (Apple logo from the sign_in_with_apple package, Google's four-colour G). Check them on a phone in light and dark mode. |
+| Real-device sign-in | iPhone + Android | Apple and Google sheets open, finish, and land on Home. A sign-in with no reply now stops after 25 s with the offline line. |

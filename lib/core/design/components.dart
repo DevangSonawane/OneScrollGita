@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'glass.dart';
 import 'motion.dart';
+import 'native_glass.dart';
 import 'tokens.dart';
 import 'typography.dart';
 
@@ -325,8 +327,56 @@ class _SegmentedChoiceState<T> extends State<SegmentedChoice<T>>
     super.dispose();
   }
 
+  /// iOS 26+: Apple's UISegmentedControl; compact ones in a glass capsule
+  /// (docs/PRD_v7.md section 4e).
+  Widget _native(BuildContext context) {
+    final choices = widget.choices;
+    final label = choices.map((c) => c.semanticLabel ?? c.label).join(', ');
+    final params = {
+      'labels': [for (final c in choices) c.label],
+      'selected': _selectedIndex,
+      'compact': widget.compact,
+      'label': label,
+    };
+    void onEvent(String method, Object? args) {
+      if (method != 'select' || args is! int) return;
+      if (args < 0 || args >= choices.length) return;
+      final value = choices[args].value;
+      if (value != widget.value) widget.onChanged(value);
+    }
+
+    if (widget.compact) {
+      return NativePlatformView(
+        viewType: 'native_segmented',
+        size: Size(choices.length * 52.0, Touch.pillHeight),
+        sizeFromNative: (width: true, height: true),
+        params: params,
+        onEvent: onEvent,
+      );
+    }
+    return LayoutBuilder(
+      builder: (context, box) => NativePlatformView(
+        viewType: 'native_segmented',
+        size: Size(box.maxWidth, Touch.minTarget),
+        params: params,
+        onEvent: onEvent,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Inside another glass control (the reader bar) the Flutter one stays.
+    if (!widget.onSurface) {
+      return Consumer(
+        builder: (context, ref, _) =>
+            useNativeGlass(context, ref) ? _native(context) : _flutter(context),
+      );
+    }
+    return _flutter(context);
+  }
+
+  Widget _flutter(BuildContext context) {
     final c = AppColors.of(context);
     final ui = UiStyles(c);
     final height = widget.compact ? 36.0 : Touch.minTarget;

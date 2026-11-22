@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/platform/ios_version.dart';
+
 /// What the reader should show. A [JumpRequest] is issued by
 /// `go('/gita?verse=<id>')` and consumed by the reader.
 class JumpRequest {
@@ -70,6 +72,15 @@ class WordMeaningsOpen extends Notifier<bool> {
 final purportOffsetsProvider = Provider<Map<String, double>>((_) => {});
 
 enum GlassMode { full, frosted, solid }
+
+/// First iOS version whose UIKit tab bar is Liquid Glass.
+const nativeTabBarMinIos = 26;
+
+/// Whether the bottom nav can be Apple's own UIKit tab bar (iOS 26 and
+/// later, docs/PRD_v7.md section 4e). Elsewhere the Flutter pill is used.
+final nativeTabBarSupportedProvider = Provider<bool>(
+  (_) => (iosMajorVersion() ?? 0) >= nativeTabBarMinIos,
+);
 
 /// Forces a glass mode (tests, debugging). Null means automatic.
 final glassModeOverrideProvider = Provider<GlassMode?>((_) => null);

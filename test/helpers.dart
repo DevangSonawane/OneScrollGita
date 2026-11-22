@@ -88,6 +88,9 @@ Future<TestApp> pumpApp(
 
   /// A stand-in for iOS Home Screen Quick Actions (null: none).
   QuickActionsChannel? quickActions,
+
+  /// Pretend to be iOS 26+, where the nav is Apple's UIKit tab bar.
+  bool nativeTabBar = false,
 }) async {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
   tester.view.devicePixelRatio = 1;
@@ -125,6 +128,7 @@ Future<TestApp> pumpApp(
         ScriptureRepository(bundle: DiskAssetBundle(), parseInIsolate: false),
       ),
       if (glass != null) glassModeOverrideProvider.overrideWithValue(glass),
+      nativeTabBarSupportedProvider.overrideWithValue(nativeTabBar),
       if (now != null) clockProvider.overrideWithValue(() => now),
       todayProvider.overrideWith(_TestToday.new),
       // Tests never stream: the silent engine and estimated lengths.

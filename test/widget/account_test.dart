@@ -6,6 +6,7 @@ import 'package:versescroll/application/core_providers.dart';
 import 'package:versescroll/data/settings/settings_repository.dart';
 import 'package:versescroll/domain/auth.dart';
 import 'package:versescroll/features/account/account_screen.dart';
+import 'package:versescroll/features/account/brand_logos.dart';
 import 'package:versescroll/features/account/sign_in_buttons.dart';
 import 'package:versescroll/features/account/sign_up_screen.dart';
 import 'package:versescroll/features/home/home_screen.dart';
@@ -19,7 +20,7 @@ const _newInstall = {
 };
 
 void main() {
-  testWidgets('a new install sees sign-up once; Not now goes Home', (
+  testWidgets('a new install must sign in; there is no way past it', (
     tester,
   ) async {
     final app = await pumpApp(
@@ -28,15 +29,28 @@ void main() {
       auth: FakeAuthGateway(),
     );
     expect(find.byType(SignUpScreen), findsOneWidget);
-    expect(find.text('Keep your purchases safe'), findsOneWidget);
+    expect(find.text('Keep your journey safe'), findsOneWidget);
     expect(find.byKey(SignInButtons.googleKey), findsOneWidget);
     // Apple shows on iOS only.
     expect(find.byKey(SignInButtons.appleKey), findsNothing);
+    // Owner decision (2026-11-22): no skip on this step.
+    expect(find.text('Not now'), findsNothing);
+    expect(find.text('Skip'), findsNothing);
+    expect(app.container.read(settingsProvider).accountStepPending, isTrue);
+  });
 
-    await tester.tap(find.text('Not now'));
-    await settle(tester);
-    expect(find.byType(HomeScreen), findsOneWidget);
-    expect(app.container.read(settingsProvider).accountStepPending, isFalse);
+  testWidgets('Apple and Google show their logos', (tester) async {
+    await pumpApp(
+      tester,
+      prefs: _newInstall,
+      auth: FakeAuthGateway(
+        methods: const [SignInMethod.apple, SignInMethod.google],
+      ),
+    );
+    expect(find.byType(AppleLogo), findsOneWidget);
+    expect(find.byType(GoogleLogo), findsOneWidget);
+    expect(find.text('Continue with Apple'), findsOneWidget);
+    expect(find.text('Continue with Google'), findsOneWidget);
   });
 
   testWidgets('signing in with Google goes Home signed in', (tester) async {

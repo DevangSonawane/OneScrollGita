@@ -30,19 +30,24 @@ void main() {
   ) async {
     final app = await pumpApp(tester, prefs: const {});
     expect(find.text('Begin'), findsOneWidget);
-    expect(
-      find.text(
-        'Read the Bhagavad-gita As It Is. No account. No internet needed.',
-      ),
-      findsOneWidget,
-    );
+    expect(find.text('One Scroll Gita'), findsOneWidget);
+    // The numbers come from the dataset.
+    expect(find.text('chapters'), findsOneWidget);
+    // Owner decision (2026-11-22): no Skip anywhere in first launch.
+    expect(find.text('Skip'), findsNothing);
+    await tester.ensureVisible(find.text('हिन्दी'));
     await tester.tap(find.text('हिन्दी'));
     await tester.pump();
     await tester.tap(find.text('Begin'));
     await settle(tester);
-    // v5: the guided steps can be skipped straight to Home.
     expect(find.text('What brings you to the Gita?'), findsOneWidget);
-    await tester.tap(find.text('Skip'));
+    expect(find.text('Skip'), findsNothing);
+    await tester.tap(find.text('Peace'));
+    await settle(tester);
+    await tester.ensureVisible(find.text('I have read it'));
+    await tester.tap(find.text('I have read it'));
+    await settle(tester);
+    await tester.tap(find.text('I will come back on my own'));
     await settle(tester);
     expect(find.text("TODAY'S VERSE"), findsOneWidget);
     final s = app.container.read(settingsProvider);

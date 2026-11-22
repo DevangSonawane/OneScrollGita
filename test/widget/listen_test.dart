@@ -38,11 +38,12 @@ Future<void> advance(WidgetTester tester, Duration d) async {
 }
 
 void main() {
-  testWidgets('Listen pill opens the library with all 18 chapters', (
+  testWidgets('Listen tab opens the library with all 18 chapters', (
     tester,
   ) async {
     await pumpApp(tester);
-    expect(find.byType(ListenPill), findsOneWidget);
+    // Third of four tabs: Home, Gita, Listen, Profile (owner, 2026-11-22).
+    expect(find.bySemanticsLabel('Listen, tab 3 of 4'), findsOneWidget);
     await openListen(tester);
     expect(find.byType(ListenLibraryScreen), findsOneWidget);
     expect(find.bySemanticsLabel('Shravan'), findsOneWidget);

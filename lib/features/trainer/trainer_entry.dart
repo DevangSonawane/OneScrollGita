@@ -29,6 +29,45 @@ void openTrainerFor(BuildContext context, WidgetRef ref, String verseId) {
   }
 }
 
+/// What "Learn by heart" shows for a verse: its icon, label and whether
+/// it is locked for free users. Shared by the button and the native menu.
+({IconData icon, String label, bool locked}) learnByHeartState(
+  WidgetRef ref,
+  String verseId,
+) {
+  final s = ref.watch(shlokaForProvider(verseId));
+  final today = dateKey(ref.watch(todayProvider));
+  final premium = ref.watch(isPremiumProvider);
+  final locked = !premium && !FreeLimits.trainerVerses.contains(verseId);
+  final (IconData icon, String label) = switch (s?.status) {
+    null => (LucideIcons.brain, 'Learn by heart'),
+    ShlokaStatus.learning => (
+      LucideIcons.brain,
+      'Continue learning · step ${s!.step} of 5',
+    ),
+    ShlokaStatus.learned when s!.isDue(today) => (
+      LucideIcons.repeat,
+      'Review due',
+    ),
+    ShlokaStatus.learned => (LucideIcons.check, 'Learned'),
+    ShlokaStatus.mastered => (LucideIcons.sparkles, 'Mastered'),
+  };
+  return (icon: icon, label: label, locked: locked && s == null);
+}
+
+/// What tapping "Learn by heart" does for a verse.
+void openLearnByHeart(BuildContext context, WidgetRef ref, String verseId) {
+  final s = ref.read(shlokaForProvider(verseId));
+  final today = dateKey(ref.read(todayProvider));
+  if (s?.status == ShlokaStatus.learned && s!.isDue(today)) {
+    context.push('/trainer-review');
+  } else if (s != null && s.status != ShlokaStatus.learning) {
+    openTrainerHome(context);
+  } else {
+    openTrainerFor(context, ref, verseId);
+  }
+}
+
 /// "Learn by heart" under each verse in the reader. Shows the verse's
 /// trainer state once it has one.
 class LearnByHeartButton extends ConsumerWidget {
@@ -39,36 +78,16 @@ class LearnByHeartButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = AppColors.of(context);
-    final s = ref.watch(shlokaForProvider(verseId));
-    final today = dateKey(ref.watch(todayProvider));
-    final premium = ref.watch(isPremiumProvider);
-    final locked = !premium && !FreeLimits.trainerVerses.contains(verseId);
-    final (IconData icon, String label) = switch (s?.status) {
-      null => (LucideIcons.brain, 'Learn by heart'),
-      ShlokaStatus.learning => (
-        LucideIcons.brain,
-        'Continue learning · step ${s!.step} of 5',
-      ),
-      ShlokaStatus.learned when s!.isDue(today) => (
-        LucideIcons.repeat,
-        'Review due',
-      ),
-      ShlokaStatus.learned => (LucideIcons.check, 'Learned'),
-      ShlokaStatus.mastered => (LucideIcons.sparkles, 'Mastered'),
-    };
+    final state = learnByHeartState(ref, verseId);
     return TextButton.icon(
       style: compactButtonStyle(context, filled: false),
-      onPressed: () => s?.status == ShlokaStatus.learned && s!.isDue(today)
-          ? context.push('/trainer-review')
-          : s != null && s.status != ShlokaStatus.learning
-          ? openTrainerHome(context)
-          : openTrainerFor(context, ref, verseId),
+      onPressed: () => openLearnByHeart(context, ref, verseId),
       icon: Icon(
-        locked && s == null ? LucideIcons.lock : icon,
+        state.locked ? LucideIcons.lock : state.icon,
         size: IconSizes.small - 2,
         color: c.accentText,
       ),
-      label: Text(label),
+      label: Text(state.label),
     );
   }
 }

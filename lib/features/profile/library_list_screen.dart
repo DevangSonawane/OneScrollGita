@@ -8,6 +8,7 @@ import '../../application/library_providers.dart';
 import '../../application/scripture_providers.dart';
 import '../../core/design/components.dart';
 import '../../core/design/glass_nav_bar.dart';
+import '../../core/design/native_glass.dart';
 import '../../core/design/tokens.dart';
 import '../../domain/models/user_items.dart';
 import '../common/common_widgets.dart';
@@ -143,8 +144,25 @@ class LibraryListScreen extends ConsumerWidget {
     );
   }
 
-  void _showItemMenu(BuildContext context, WidgetRef ref, SavedItem item) {
-    showModalBottomSheet<void>(
+  Future<void> _showItemMenu(
+    BuildContext context,
+    WidgetRef ref,
+    SavedItem item,
+  ) async {
+    // iOS 26+: Apple's action sheet (docs/PRD_v7.md section 4e).
+    if (useNativeGlass(context, ref)) {
+      final choice = await showNativeActions(
+        actions: const [
+          NativeMenuItem(id: 'open', title: 'Open in Gita'),
+          NativeMenuItem(id: 'remove', title: 'Remove', destructive: true),
+        ],
+      );
+      if (!context.mounted) return;
+      if (choice == 'open') openInReader(context, item.verseId);
+      if (choice == 'remove') await _remove(context, ref, item);
+      return;
+    }
+    await showModalBottomSheet<void>(
       context: context,
       useRootNavigator: true,
       builder: (sheet) => SafeArea(

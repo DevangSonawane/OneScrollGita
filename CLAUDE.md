@@ -56,5 +56,5 @@
 ## v9 additions (optional account)
 - v9 spec is in docs/PRD_v9.md. Owner decision (2026-11-21): an optional account through Supabase Auth, Sign in with Apple and Google only.
 - The only extra network use is the single configured Supabase project (sign-in, sign-out, delete account, purchase record). No sync, no analytics.
-- The account is always optional; reading and everything the user made never need it. Never unlock anything from the Supabase purchase record; the store stays the truth.
+- Owner decision (2026-11-22): new installs must sign in at the end of first launch (no skip). After that, signing out never blocks reading or anything the user made. Never unlock anything from the Supabase purchase record; the store stays the truth.
 - Supabase keys come from --dart-define only. Never commit them.

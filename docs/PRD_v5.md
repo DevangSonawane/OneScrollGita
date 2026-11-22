@@ -24,7 +24,7 @@ Scripture-text rules in `CLAUDE.md` still apply in full.
 | --- | --- |
 | Android reminders use inexact scheduling only; exact-alarm permissions removed (v2 section 5) | Use **exact** scheduling when the system already allows it, otherwise inexact. `SCHEDULE_EXACT_ALARM` is declared (never `USE_EXACT_ALARM`). The app never prompts for it on its own; a row on the Reminders screen opens the system page if the user wants on-time delivery (section 3). |
 | Rebuilding the schedule cancels all notifications (v2 section 5) | The rebuild cancels **pending** notifications only, so ones already delivered stay in the notification centre. |
-| First launch is one skippable language screen (v1 section 5.1) | A short guided first launch that ends with the first verse read (section 4). Still skippable. |
+| First launch is one skippable language screen (v1 section 5.1) | A short guided first launch that ends with the first verse read (section 4). Owner decision (2026-11-22): no Skip; every step is answered, with Back to the previous step. |
 
 Still true: no analytics, no accounts, no backend, no guilt language, no
 streak freezes, no launch-time or timed upsells, scripture is never
@@ -95,7 +95,7 @@ derived styles (player, trainer, purport Sanskrit) never hard-code them.
 
 ## 4. Guided first launch (stage V5-3)
 
-Steps, each skippable with "Skip", total under a minute:
+Steps, total under a minute. Owner decision (2026-11-22): there is no "Skip"; each step has one clear action and a Back arrow:
 1. Language (English or Hindi), as today.
 2. "What brings you to the Gita?" Peace, Guidance, Study, Learning by heart.
    One tap. Stored locally only; used to choose the first verse and which
@@ -195,7 +195,7 @@ Steps, each skippable with "Skip", total under a minute:
 ### V5-3: Guided first launch
 - [x] Section 4: language, "What brings you to the Gita?", first verse
       (counts day 1, saved as the Continue position), optional reminder.
-      Every step after language has Skip.
+      No Skip (owner, 2026-11-22); Back on every step after language.
 - [x] Answer-to-theme map in `domain/first_launch.dart` (Peace -> peace,
       Guidance -> confusion, Study -> knowledge, Learning by heart -> study),
       reviewed:false. The first verse is the theme's top verse from

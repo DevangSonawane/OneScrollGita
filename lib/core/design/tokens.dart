@@ -401,6 +401,48 @@ abstract final class PaywallMetrics {
   static const bloomSize = 180.0;
 }
 
+/// Guided first launch and the sign-up step (owner, 2026-11-22).
+abstract final class OnboardingMetrics {
+  static const ctaHeight = 56.0;
+  static const providerHeight = 56.0;
+  static const providerLogo = 20.0;
+  static const heroArt = 220.0;
+  static const heroArtShort = 150.0;
+  static const lotus = 64.0;
+  static const lotusSmall = 48.0;
+  static const statNumber = 26.0;
+  static const benefitIcon = 40.0;
+  static const dayNumber = 72.0;
+  static const entranceRise = 14.0;
+
+  /// Below this height the hero art shrinks.
+  static const shortScreen = 720.0;
+
+  /// The whole staggered entrance of one step.
+  static const entrance = Duration(milliseconds: 900);
+}
+
+/// Third-party brand marks, used only inside their own logos and buttons
+/// (Sign in with Apple and Google branding guidelines).
+abstract final class BrandColors {
+  static const appleBlack = Color(0xFF000000);
+  static const appleWhite = Color(0xFFFFFFFF);
+  static const googleBlue = Color(0xFF4285F4);
+  static const googleRed = Color(0xFFEA4335);
+  static const googleYellow = Color(0xFFFBBC05);
+  static const googleGreen = Color(0xFF34A853);
+
+  /// Google's light button: white fill, #747775 stroke, #1F1F1F text.
+  static const googleLightFill = Color(0xFFFFFFFF);
+  static const googleLightStroke = Color(0xFF747775);
+  static const googleLightText = Color(0xFF1F1F1F);
+
+  /// Google's dark button: #131314 fill, #8E918F stroke, #E3E3E3 text.
+  static const googleDarkFill = Color(0xFF131314);
+  static const googleDarkStroke = Color(0xFF8E918F);
+  static const googleDarkText = Color(0xFFE3E3E3);
+}
+
 /// Highlight colours: a soft band behind the translation (text keeps
 /// `textPrimary`, at least 4.5:1, see test/design/contrast_test.dart) and a
 /// stronger swatch for pickers and list markers.

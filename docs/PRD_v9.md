@@ -27,8 +27,13 @@ without an account or internet. Scripture is never behind a sign-in.
 | 4 | Scope | Keep it basic: sign in, sign out, delete account, link purchases to the account. |
 
 Claude's choices, for owner review:
-- The sign-up page can always be skipped ("Not now"). Apple guideline 5.1.1
-  forbids forcing a login for features that do not need an account.
+- ~~The sign-up page can always be skipped ("Not now").~~ Owner decision
+  (2026-11-22): the sign-up page is the last step of first launch and has
+  no skip; new installs sign in with Apple or Google to finish. Claude
+  flagged the risk: App Store guideline 5.1.1(v) lets reviewers reject apps
+  that require a login for features that do not need an account, and a new
+  install with no internet cannot get past this step. People who later sign
+  out are not asked again.
 - It is shown once, to new installs only. People updating from an earlier
   version are not interrupted; they find it in Profile.
 - Sign in with Apple shows on iOS only. On Android it needs a web redirect

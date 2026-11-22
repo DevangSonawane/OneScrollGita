@@ -129,6 +129,10 @@ class SupabaseAuthGateway implements AuthGateway {
     }
   }
 
+  /// A sign-in that hangs (weak network) ends with the offline line
+  /// instead of a spinner that never stops.
+  static const _networkTimeout = Duration(seconds: 25);
+
   static const _offline =
       'Could not reach the sign-in service. Check your internet connection.';
 
@@ -149,11 +153,13 @@ class SupabaseAuthGateway implements AuthGateway {
         'Apple sign-in did not finish. Please try again.',
       );
     }
-    final res = await _auth.signInWithIdToken(
-      provider: OAuthProvider.apple,
-      idToken: idToken,
-      nonce: rawNonce,
-    );
+    final res = await _auth
+        .signInWithIdToken(
+          provider: OAuthProvider.apple,
+          idToken: idToken,
+          nonce: rawNonce,
+        )
+        .timeout(_networkTimeout);
     // Apple sends the name on the first sign-in only: keep it.
     final name = [
       cred.givenName,
@@ -191,10 +197,9 @@ class SupabaseAuthGateway implements AuthGateway {
         'Google sign-in did not finish. Please try again.',
       );
     }
-    final res = await _auth.signInWithIdToken(
-      provider: OAuthProvider.google,
-      idToken: idToken,
-    );
+    final res = await _auth
+        .signInWithIdToken(provider: OAuthProvider.google, idToken: idToken)
+        .timeout(_networkTimeout);
     return _toUser(res.user ?? _auth.currentUser);
   }
 
