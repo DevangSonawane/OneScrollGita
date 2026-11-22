@@ -189,4 +189,44 @@ void main() {
     expect(find.text('Hear the Gita'), findsOneWidget);
     expect(find.text('Chapter narrations are part of Shravan'), findsOneWidget);
   });
+
+  testWidgets('Shravan sells monthly and yearly, yearly pre-selected', (
+    tester,
+  ) async {
+    final store = FakePurchaseGateway(plans: shravanPlans);
+    await openSadhak(tester, store: store, path: '/shravan');
+    expect(find.text('Yearly'), findsOneWidget);
+    expect(find.text('Monthly'), findsOneWidget);
+    expect(find.text('Lifetime'), findsNothing);
+    expect(
+      tester.getSemantics(find.bySemanticsLabel(RegExp('^Yearly'))),
+      isSemantics(isSelected: true),
+    );
+    expect(
+      find.textContaining('Renews every year at ₹1,999.00'),
+      findsOneWidget,
+    );
+    await tapVisible(tester, find.text('Monthly'));
+    expect(
+      find.textContaining('Renews every month at ₹499.00'),
+      findsOneWidget,
+    );
+  });
 }
+
+const shravanPlans = [
+  SadhakPlan(
+    id: ShravanProducts.yearly,
+    kind: PlanKind.yearly,
+    price: '₹1,999.00',
+    rawPrice: 1999,
+    currencySymbol: '₹',
+  ),
+  SadhakPlan(
+    id: ShravanProducts.monthly,
+    kind: PlanKind.monthly,
+    price: '₹499.00',
+    rawPrice: 499,
+    currencySymbol: '₹',
+  ),
+];

@@ -6,6 +6,7 @@ import '../../application/audio_providers.dart';
 import '../../application/core_providers.dart';
 import '../../application/premium_providers.dart';
 import '../../application/scripture_providers.dart';
+import '../../core/config/audio_config.dart';
 import '../../core/design/glass_nav_bar.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
@@ -446,10 +447,11 @@ class _ChapterCard extends ConsumerWidget {
           ),
         ),
         // Outside the card's label, so a screen reader can reach it.
-        Padding(
-          padding: const EdgeInsets.only(right: Space.s16),
-          child: _DownloadButton(chapter: chapter, bytes: info?.bytes),
-        ),
+        if (AudioConfig.downloads)
+          Padding(
+            padding: const EdgeInsets.only(right: Space.s16),
+            child: _DownloadButton(chapter: chapter, bytes: info?.bytes),
+          ),
       ],
     );
   }

@@ -91,17 +91,21 @@ abstract final class SadhakProducts {
   };
 }
 
-/// Shravan, the audio package (PRD_v4 section 7): one one-time purchase
-/// that unlocks the whole Listen section. No subscription.
+/// Shravan, the audio package (PRD_v4 section 7): a monthly or yearly
+/// subscription that unlocks the whole Listen section (owner, 2026-11-21).
+/// Same ids on both stores.
 abstract final class ShravanProducts {
+  static const monthly = 'shravan_monthly';
+  static const yearly = 'shravan_yearly';
+
+  /// The earlier one-time product. No longer sold, but still recognised so a
+  /// tester who bought it keeps Shravan.
   static const lifetime = 'shravan_lifetime';
   static const lifetimeAppStore = 'shravan_lifetime_ios';
 
-  static const all = {lifetime, lifetimeAppStore};
+  static const all = {monthly, yearly, lifetime, lifetimeAppStore};
 
-  static Set<String> forStore({required bool appStore}) => {
-    appStore ? lifetimeAppStore : lifetime,
-  };
+  static Set<String> forStore({required bool appStore}) => {monthly, yearly};
 }
 
 /// The two things a user can buy.
@@ -126,10 +130,13 @@ final allProductIds = {...SadhakProducts.all, ...ShravanProducts.all};
 Package? packageOf(String productId) =>
     Package.values.where((p) => p.owns(productId)).firstOrNull;
 
-PlanKind planKindOf(String productId) =>
-    productId.endsWith('_yearly') ? PlanKind.yearly : PlanKind.lifetime;
+PlanKind planKindOf(String productId) => productId.endsWith('_yearly')
+    ? PlanKind.yearly
+    : productId.endsWith('_monthly')
+    ? PlanKind.monthly
+    : PlanKind.lifetime;
 
-enum PlanKind { yearly, lifetime }
+enum PlanKind { yearly, monthly, lifetime }
 
 /// A plan as the store describes it. [price] is the store's localised price
 /// string; the app never makes up a price.

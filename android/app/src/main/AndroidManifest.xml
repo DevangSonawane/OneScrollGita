@@ -15,6 +15,9 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" tools:node="remove" />
+    <!-- The activity is portrait-only; this keeps devices without a portrait
+         screen (Chromebooks, XR, some tablets) able to install the app. -->
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false" />
     <application
         android:label="One Scroll Gita"
         android:name="${applicationName}"

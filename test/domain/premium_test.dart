@@ -146,11 +146,17 @@ void main() {
     test('products belong to one package each', () {
       expect(packageOf(SadhakProducts.yearly), Package.sadhak);
       expect(packageOf(ShravanProducts.lifetimeAppStore), Package.shravan);
+      expect(packageOf(ShravanProducts.monthly), Package.shravan);
       expect(packageOf('other'), isNull);
-      expect(ShravanProducts.forStore(appStore: false), {
-        ShravanProducts.lifetime,
-      });
+      for (final appStore in [true, false]) {
+        expect(ShravanProducts.forStore(appStore: appStore), {
+          ShravanProducts.monthly,
+          ShravanProducts.yearly,
+        });
+      }
       expect(planKindOf(SadhakProducts.lifetimeAppStore), PlanKind.lifetime);
+      expect(planKindOf(ShravanProducts.monthly), PlanKind.monthly);
+      expect(planKindOf(ShravanProducts.yearly), PlanKind.yearly);
     });
 
     test('every part of Listen needs Shravan', () {

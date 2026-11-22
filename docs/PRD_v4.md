@@ -38,7 +38,7 @@ except **listening** to the recordings (reading stays free).
 | # | Decision | Value |
 | --- | --- | --- |
 | 1 | Name | Shravan (श्रवण, "listening"); a **separate** paid package, not part of Sadhak |
-| 2 | Pricing | **One-time purchase only** (no subscription): `shravan_lifetime` (Play), `shravan_lifetime_ios` (App Store). Price later |
+| 2 | Pricing | **Subscriptions** (owner, 2026-11-21; replaces the earlier one-time purchase): `shravan_monthly` and `shravan_yearly`, same ids on both stores. App Store: group "Shravan", ₹499 / month and ₹1,999 / year (India base; Apple has no ₹500 or ₹2,000 price point). The old `shravan_lifetime(_ios)` ids are still recognised but no longer sold. |
 | 3 | What it unlocks | **The whole Listen section** (owner, 2026-11-19): recitations, player, downloads, narrations. Free users can browse the library |
 | 4 | Languages | Sanskrit recitation + **English** translation narration. Hindi later |
 | 5 | Hosting | Cloudflare R2 bucket, served by a small Cloudflare Worker on a free `workers.dev` address. URL in one config constant |
@@ -215,7 +215,7 @@ headset control for free.
       (R2 bucket `one-scroll-gita`).
 
 ### V4-4: Shravan entitlement and paywall
-- [x] Products (one-time only: `shravan_lifetime`, `shravan_lifetime_ios`),
+- [x] Products (now subscriptions: `shravan_monthly`, `shravan_yearly`; see decision 2),
       cache, `canListen`, paywall variant (`PaywallOffer.shravan`, `/shravan`).
       The whole Listen section is locked behind Shravan; the library can be
       browsed. Debug: "Pretend Shravan" switch in Profile.
@@ -224,6 +224,8 @@ headset control for free.
 - [x] `just_audio` + `just_audio_background`, background play, media
       session, iOS background audio mode, Android foreground service.
       **Not yet heard on a real phone.** English translations: owner to send.
+      Listen is on in store builds from build 9 (2026-11-21); chapter
+      downloads stay hidden there until V4-6.
 
 ### V4-6: Streaming cache and downloads
 - [ ] Stream-and-save, chapter downloads in the background, storage screen,

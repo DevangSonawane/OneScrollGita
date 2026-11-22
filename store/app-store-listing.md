@@ -42,8 +42,8 @@ KEEP AND SHARE WHAT MOVES YOU
 • Share any verse as a picture: full-screen for Instagram Stories and WhatsApp Status, or a card for chats
 
 MADE FOR READING
-• Works completely offline. No internet needed, ever
-• No account, no sign-in, no ads, no tracking
+• Reading works offline: every verse is on your phone
+• No ads, no tracking. Signing in is optional
 • Light and dark themes, five text sizes
 • Your favourites, bookmarks and history stay on your phone
 

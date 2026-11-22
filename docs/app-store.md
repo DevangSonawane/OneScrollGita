@@ -104,3 +104,19 @@ Apple does not accept the 1080 x 1920 Play screenshots. Required:
   duplicate "Lifetime" plan on iOS.
 - The Android-only battery tip on the Reminders screen is hidden on iOS.
 - Uploaded to App Store Connect from Xcode on 2026-11-14.
+
+## Build 9 (2026-11-21)
+
+- Optional account (v9): Sign in with Apple / Google through Supabase. Built with
+  `--dart-define-from-file=auth.env.json`. Privacy manifest now declares email,
+  name, user ID and purchase history (linked, app functionality, no tracking).
+- Listen (Shravan audio) is on in store builds, streaming from the audio host.
+  Chapter downloads are hidden until V4-6.
+- Shravan is now a subscription group "Shravan": `shravan_yearly` ₹1,999 and
+  `shravan_monthly` ₹499 (closest Apple price points to ₹2,000 / ₹500).
+- Build 8 was uploaded first but never submitted (stale privacy manifest, audio off).
+- Uploaded with `xcodebuild -exportArchive` (destination upload) using the Xcode account.
+- Submitted 2026-11-21 22:18 with all 7 items: version 1.0.0 (9), `shravan_yearly`,
+  `shravan_monthly`, group Shravan, `sadhak_yearly`, group Sadhak, `sadhak_lifetime_ios`.
+  Lesson: removing a version from review also pulls every product submitted with it;
+  re-add them all before resubmitting.

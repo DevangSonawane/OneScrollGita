@@ -75,3 +75,21 @@ referrer:
 - Installed: Play shows "Open", which opens the app (at Home, not the verse;
   opening the exact verse needs a website domain with app links, see
   docs/sharing.md).
+
+## Release 1.2.0 (11), 2026-11-21 (in progress)
+
+- Bundle: `flutter build appbundle --release --build-name=1.2.0 --build-number=12 --dart-define-from-file=auth.env.json`
+  (production was 10 / 1.1.0; pubspec stays on the iOS number). Signed with the upload key.
+- Shravan subscriptions created and active: `shravan_yearly` (base plan `yearly`, ₹2,000)
+  and `shravan_monthly` (base plan `monthly`, ₹500). Play allows the exact prices; the App
+  Store uses ₹1,999 / ₹499.
+- Target audience stays all ages (owner, 2026-11-21), so the Families policy applies.
+- Data safety: draft saved with "collects data: yes", encrypted in transit, OAuth accounts.
+  Blocked on a delete-account web page (Play requires the URL) and an updated privacy policy.
+- The 80 MB bundle must be uploaded by hand (browser automation limit is 10 MB).
+- Release notes draft (reviewed: false): "Listen to the Gita with the new Shravan audio plan:
+  shlokas recited verse by verse and every chapter narrated. Optional sign-in with Google keeps
+  your purchases safe. Reading stays free."
+- Build 11 was blocked by Play: the portrait lock implied a required
+  `android.hardware.screen.portrait`. The manifest now declares it with
+  `required="false"`; rebuilt as 12. Remove bundle 11 from the draft and upload 12.

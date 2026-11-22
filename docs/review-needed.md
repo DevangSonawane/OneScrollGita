@@ -120,3 +120,16 @@ was written. The new tests are written but have **not been run**.
 | Store labels | App Store Connect, Play Console | Change "Data not collected" to email, name, user ID, purchase history (linked, not tracking). Play: also add the account-deletion URL or in-app path. |
 | Privacy manifest | `ios/Runner/PrivacyInfo.xcprivacy` | Still says no data collected. Update the collected data types to match the new App Store label. |
 | Android Apple sign-in | — | Not built. Say if you want it. |
+
+## v9: App Store resubmission (build 9, 2026-11-21)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| App Review notes | `docs/app-review-notes-submit.txt` (pasted into App Store Connect) | `reviewed: false`. Rewritten by Claude Code for the optional account (sections 1, 3, 4). |
+| App Privacy label and privacy manifest | App Store Connect > App Privacy; `ios/Runner/PrivacyInfo.xcprivacy` | Email, name, user ID, purchase history: linked to the user, app functionality, not tracking. |
+| Privacy policy page | https://onescrollgita.asynk.in/privacy | Still needs an account section (Supabase sign-in, deletion). |
+| Review video | `app-review-demo.mp4` | Recorded before sign-in existed; does not show the sign-up page. |
+| Shravan subscription text | App Store Connect > Subscriptions > Shravan | Display name "Shravan Yearly"/"Shravan Monthly", description "Hear every shloka recited and every chapter told." Paywall badge "Flexible" on the monthly plan (`paywall_screen.dart`). |
+| Shravan prices | App Store Connect | ₹1,999 / year and ₹499 / month (no ₹2,000 / ₹500 tier). Play Console products not created yet. |
+| Play release notes 1.2.0 | `docs/play-store.md` | Draft "What's new" text. |
+| Account deletion page | website `/delete-account` | Missing (404). Required by Play Data safety for apps with accounts. |

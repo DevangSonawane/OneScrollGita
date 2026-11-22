@@ -742,9 +742,22 @@ class _PlanCard extends StatelessWidget {
     final p = PremiumColors.of(context);
     final ui = UiStyles(c);
     final yearly = plan.kind == PlanKind.yearly;
-    final title = yearly ? 'Yearly' : 'Lifetime';
-    final badge = yearly ? 'Recommended' : 'One-time';
-    final per = yearly ? ' / year' : '';
+    final monthly = plan.kind == PlanKind.monthly;
+    final title = yearly
+        ? 'Yearly'
+        : monthly
+        ? 'Monthly'
+        : 'Lifetime';
+    final badge = yearly
+        ? 'Recommended'
+        : monthly
+        ? 'Flexible'
+        : 'One-time';
+    final per = yearly
+        ? ' / year'
+        : monthly
+        ? ' / month'
+        : '';
     final trial = plan.trial;
     final sub = yearly
         ? (trial != null
@@ -752,6 +765,10 @@ class _PlanCard extends StatelessWidget {
               : plan.perMonth == null
               ? 'Renews every year'
               : 'Just ${plan.perMonth} a month')
+        : monthly
+        ? (trial != null
+              ? '${trial.label}, then ${plan.price} a month'
+              : 'Renews every month')
         : 'Pay once, keep it for good';
     final duration = Motion.of(context).reduced
         ? AppDurations.instant
@@ -1005,6 +1022,13 @@ class _TermsAndLinks extends ConsumerWidget {
               'not be charged.'
         : plan.kind == PlanKind.yearly
         ? 'Renews every year at ${plan.price} until you cancel. Cancel any '
+              'time in $store.'
+        : plan.kind == PlanKind.monthly && plan.trial != null
+        ? '${plan.trial!.label}, then ${plan.price} a month until you '
+              'cancel. Cancel before the trial ends in $store and you will '
+              'not be charged.'
+        : plan.kind == PlanKind.monthly
+        ? 'Renews every month at ${plan.price} until you cancel. Cancel any '
               'time in $store.'
         : 'One payment of ${plan.price}. No renewal.';
     return Column(
