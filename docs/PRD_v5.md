@@ -96,6 +96,9 @@ derived styles (player, trainer, purport Sanskrit) never hard-code them.
 ## 4. Guided first launch (stage V5-3)
 
 Steps, total under a minute. Owner decision (2026-11-22): there is no "Skip"; each step has one clear action and a Back arrow:
+
+> Owner decision (2026-11-23): the steps below are replaced by a feature tour: the app in numbers, the first verse lighting the streak, a swiping demo, the Sadhak trainer demo, the Shravan 1.1 preview, then sign-in (see docs/review-needed.md).
+
 1. Language (English or Hindi), as today.
 2. "What brings you to the Gita?" Peace, Guidance, Study, Learning by heart.
    One tap. Stored locally only; used to choose the first verse and which

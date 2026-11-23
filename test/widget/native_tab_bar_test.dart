@@ -70,9 +70,7 @@ void main() {
   Future<void> nativeTap(WidgetTester tester, int index) async {
     await tester.binding.defaultBinaryMessenger.handlePlatformMessage(
       '${NativeTabBar.viewType}_$viewId',
-      const StandardMethodCodec().encodeMethodCall(
-        MethodCall('select', index),
-      ),
+      const StandardMethodCodec().encodeMethodCall(MethodCall('select', index)),
       (_) {},
     );
     await settle(tester);

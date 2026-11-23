@@ -19,6 +19,7 @@ import '../../domain/models/app_settings.dart';
 import '../../domain/premium.dart';
 import '../../domain/trainer/trainer.dart';
 import '../../application/streak_providers.dart';
+import '../account/account_screen.dart';
 import '../common/common_widgets.dart';
 import '../premium/sadhak_card.dart';
 import '../study/journal_screens.dart';
@@ -295,14 +296,31 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 if (ref.watch(authGatewayProvider).available) ...[
                   const _ProfileSectionHeader('ACCOUNT'),
-                  SettingsRow(
-                    title: 'Account',
-                    subtitle:
-                        ref.watch(currentUserProvider)?.displayName ??
-                        'Optional. Link your purchases',
-                    onTap: () => context.go('/profile/account'),
-                    divider: false,
-                  ),
+                  if (ref.watch(currentUserProvider) case final user?) ...[
+                    SettingsRow(
+                      title: 'Account',
+                      subtitle: user.displayName,
+                      onTap: () => context.go('/profile/account'),
+                    ),
+                    SettingsRow(
+                      title: 'Sign out',
+                      onTap: () => confirmSignOut(context, ref),
+                      showChevron: false,
+                    ),
+                    SettingsRow(
+                      title: 'Delete account',
+                      destructive: true,
+                      onTap: () => confirmDeleteAccount(context, ref),
+                      showChevron: false,
+                      divider: false,
+                    ),
+                  ] else
+                    SettingsRow(
+                      title: 'Sign in',
+                      subtitle: 'With Apple or Google',
+                      onTap: () => context.go('/profile/account'),
+                      divider: false,
+                    ),
                 ],
                 const _ProfileSectionHeader('ABOUT'),
                 SettingsRow(
@@ -320,6 +338,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           'this build to a store.',
                       destructive: true,
                     ),
+                  SettingsRow(
+                    title: 'Test sign-up again (debug)',
+                    subtitle:
+                        'Signs out and restarts first launch. Your '
+                        'reading and notes stay.',
+                    onTap: () async {
+                      await ref.read(authControllerProvider.notifier).signOut();
+                      await ref
+                          .read(settingsProvider.notifier)
+                          .restartFirstLaunch();
+                    },
+                  ),
                   if (kDebugMode)
                     SettingsRow(
                       title: 'Typography specimen (debug)',

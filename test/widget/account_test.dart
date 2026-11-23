@@ -106,6 +106,58 @@ void main() {
     expect(find.byType(SignUpScreen), findsOneWidget);
   });
 
+  testWidgets('Profile shows Sign out and Delete account when signed in', (
+    tester,
+  ) async {
+    final app = await pumpApp(
+      tester,
+      auth: FakeAuthGateway(
+        user: const AppUser(
+          id: 'u1',
+          email: 'reader@example.com',
+          name: 'Test Reader',
+          method: SignInMethod.google,
+        ),
+      ),
+    );
+    app.container.read(routerProvider).go('/profile');
+    await settle(tester);
+    await tester.scrollUntilVisible(
+      find.text('Delete account'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    expect(find.text('Sign out'), findsOneWidget);
+    expect(find.text('Delete account'), findsOneWidget);
+  });
+
+  testWidgets('Test sign-up again restarts first launch, signed out', (
+    tester,
+  ) async {
+    final auth = FakeAuthGateway(
+      user: const AppUser(
+        id: 'u1',
+        email: 'reader@example.com',
+        name: 'Test Reader',
+        method: SignInMethod.google,
+      ),
+    );
+    final app = await pumpApp(tester, auth: auth);
+    app.container.read(routerProvider).go('/profile');
+    await settle(tester);
+    final row = find.text('Test sign-up again (debug)');
+    await tester.scrollUntilVisible(
+      row,
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(row);
+    await settle(tester);
+    expect(auth.signOuts, 1);
+    expect(app.container.read(settingsProvider).firstLaunchDone, isFalse);
+    expect(find.text('Begin'), findsOneWidget);
+  });
+
   testWidgets('Account: sign out and delete', (tester) async {
     final auth = FakeAuthGateway(
       user: const AppUser(
@@ -150,7 +202,8 @@ void main() {
     final app = await pumpApp(tester, auth: FakeAuthGateway());
     app.container.read(routerProvider).go('/profile');
     await settle(tester);
-    await tester.scrollUntilVisible(find.text('Account'), 300);
-    expect(find.text('Optional. Link your purchases'), findsOneWidget);
+    // Signed out: a Sign in row.
+    await tester.scrollUntilVisible(find.text('Sign in'), 300);
+    expect(find.text('With Apple or Google'), findsOneWidget);
   });
 }

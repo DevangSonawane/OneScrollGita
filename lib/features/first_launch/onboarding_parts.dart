@@ -114,7 +114,7 @@ class OnboardingCta extends StatelessWidget {
             disabledBackgroundColor: c.accent,
             disabledForegroundColor: c.onAccent,
             textStyle: UiStyles(c)
-                .label(size: 17)
+                .label(size: 16)
                 .copyWith(fontWeight: FontWeight.w600),
           ),
           child: busy
@@ -344,7 +344,7 @@ class OnboardingBenefit extends StatelessWidget {
                 Text(
                   title,
                   style: ui
-                      .label(size: 16)
+                      .label(size: 15)
                       .copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: Space.s4 / 2),

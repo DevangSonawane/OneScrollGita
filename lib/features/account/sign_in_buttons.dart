@@ -195,7 +195,7 @@ class _ProviderButton extends StatelessWidget {
                 label,
                 textAlign: TextAlign.center,
                 style: ui
-                    .label(color: text, size: 17)
+                    .label(color: text, size: 16)
                     .copyWith(fontWeight: FontWeight.w600),
               ),
             ),

@@ -105,7 +105,7 @@ void main() {
           .load();
       expect(s.languageCode, 'en');
       expect(s.themeMode, AppThemeMode.system);
-      expect(s.textScaleStep, 2);
+      expect(s.textScaleStep, 1);
       expect(s.lastVerseId, isNull);
       expect(s.firstLaunchDone, isFalse);
     });
@@ -122,7 +122,7 @@ void main() {
           .load();
       expect(s.languageCode, 'en');
       expect(s.themeMode, AppThemeMode.system);
-      expect(s.textScaleStep, 2);
+      expect(s.textScaleStep, 1);
       expect(s.lastVerseId, isNull);
       expect(s.firstLaunchDone, isFalse);
     });

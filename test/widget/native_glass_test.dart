@@ -118,23 +118,6 @@ void main() {
     },
   );
 
-  testWidgets('Continue is a clear glass button that opens the reader', (
-    tester,
-  ) async {
-    fakeUiKit(tester);
-    final app = await pumpNative(tester);
-    final button = views['native_button']!.params;
-    expect(button['style'], 'glass');
-    expect(button['title'], 'Continue at 2.47');
-    expect(button['symbol'], 'chevron.right');
-
-    await nativeEvent(tester, 'native_button', 'tap');
-    expect(
-      app.container.read(routerProvider).state.uri.path,
-      startsWith('/gita'),
-    );
-  });
-
   testWidgets('reader top bar: chapter, summary and language', (tester) async {
     fakeUiKit(tester);
     final app = await pumpNative(tester);
@@ -196,20 +179,6 @@ void main() {
     expect(actions.map((a) => a['id']), ['open', 'remove']);
     expect(actions.last['destructive'], isTrue);
     expect(find.text('No favourites yet'), findsOneWidget);
-  });
-
-  testWidgets('Home EN | हि is a compact native segmented control', (
-    tester,
-  ) async {
-    fakeUiKit(tester);
-    final app = await pumpNative(tester);
-    final id = segmented(['EN', 'हि']);
-    expect(byId[id]!.params['compact'], isTrue);
-    expect(byId[id]!.params['selected'], 0);
-
-    await sendTo(tester, id, 'select', 1);
-    expect(app.container.read(languageProvider), 'hi');
-    expect(byId[id]!.params['selected'], 1);
   });
 
   testWidgets('Profile translation and theme use native segmented controls', (

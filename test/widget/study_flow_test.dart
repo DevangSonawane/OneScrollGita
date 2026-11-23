@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:versescroll/core/design/tactile.dart';
+import 'package:versescroll/features/trainer/word_bank.dart';
 import 'package:versescroll/app/router.dart';
 import 'package:versescroll/application/premium_providers.dart';
 import 'package:versescroll/application/study_providers.dart';
@@ -71,10 +73,7 @@ void main() {
         await current(app, tester, highlightForProvider('bg-02-047')),
         HighlightColor.leaf,
       );
-      expect(
-        find.bySemanticsLabel(RegExp('Highlighted Leaf')),
-        findsWidgets,
-      );
+      expect(find.bySemanticsLabel(RegExp('Highlighted Leaf')), findsWidgets);
       app.container.read(routerProvider).go('/profile/highlights');
       await settle(tester, 4);
       expect(find.text('LEAF'), findsOneWidget);
@@ -88,7 +87,10 @@ void main() {
           .setHighlight('bg-02-047', HighlightColor.sky);
       await openReaderAt(app, tester, 'bg-02-047');
       await openMore(tester);
-      await tapVisible(tester, find.bySemanticsLabel(RegExp('Highlighted Sky')));
+      await tapVisible(
+        tester,
+        find.bySemanticsLabel(RegExp('Highlighted Sky')),
+      );
       await tester.tap(find.text('Remove highlight'));
       await settle(tester);
       expect(
@@ -190,13 +192,37 @@ void main() {
       expect(s.nextReview, '2026-11-13');
     });
 
+    testWidgets('step 2 fills its blanks from 3D word buttons', (tester) async {
+      final app = await pumpApp(tester);
+      await go(app, tester, '/trainer-learn/bg-02-047');
+      await tapVisible(tester, find.text('I have read it'));
+      expect(find.textContaining('Step 2 of 5'), findsOneWidget);
+      expect(find.byKey(WordBank.wordKey(0)), findsOneWidget);
+      for (var round = 0; round < 30; round++) {
+        if (find.text('Every word in place').evaluate().isNotEmpty) break;
+        for (var p = 0; p < 30; p++) {
+          final f = find.byKey(WordBank.wordKey(p));
+          if (f.evaluate().isEmpty) break;
+          if (tester.widget<TactileButton>(f).onTap == null) continue;
+          await tester.ensureVisible(f);
+          await tester.tap(f);
+          await tester.pump(const Duration(milliseconds: 400));
+        }
+      }
+      expect(find.text('Every word in place'), findsOneWidget);
+      expect(find.bySemanticsLabel('Hidden word. Tap to show'), findsNothing);
+    });
+
     testWidgets('too many reveals repeat a step once', (tester) async {
       final app = await pumpApp(tester);
       await go(app, tester, '/trainer-learn/bg-02-047');
       await tapVisible(tester, find.text('I have read it'));
-      await tapVisible(tester, find.text('I have read it').evaluate().isEmpty
-          ? find.text('Next step')
-          : find.text('I have read it'));
+      await tapVisible(
+        tester,
+        find.text('I have read it').evaluate().isEmpty
+            ? find.text('Next step')
+            : find.text('I have read it'),
+      );
       // Now on step 3 (most hidden): reveal three words.
       expect(find.textContaining('Step 3 of 5'), findsOneWidget);
       for (var i = 0; i < 3; i++) {

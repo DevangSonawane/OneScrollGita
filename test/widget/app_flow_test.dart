@@ -25,34 +25,35 @@ Future<void> tapVisible(WidgetTester tester, Finder f) async {
 final _chip = find.textContaining(RegExp(r'^Bhagavad-gītā \d'));
 
 void main() {
-  testWidgets('first launch: choose Hindi, Begin, land on Home', (
+  testWidgets('first launch: numbers, five steps, no Skip, land on Home', (
     tester,
   ) async {
     final app = await pumpApp(tester, prefs: const {});
     expect(find.text('Begin'), findsOneWidget);
     expect(find.text('One Scroll Gita'), findsOneWidget);
-    // The numbers come from the dataset.
+    // The numbers come from the dataset; no language choice here.
     expect(find.text('chapters'), findsOneWidget);
+    expect(find.text('हिन्दी'), findsNothing);
     // Owner decision (2026-11-22): no Skip anywhere in first launch.
     expect(find.text('Skip'), findsNothing);
-    await tester.ensureVisible(find.text('हिन्दी'));
-    await tester.tap(find.text('हिन्दी'));
-    await tester.pump();
     await tester.tap(find.text('Begin'));
     await settle(tester);
-    expect(find.text('What brings you to the Gita?'), findsOneWidget);
+
+    expect(find.text('Your first verse'), findsOneWidget);
+    await tapVisible(tester, find.text('I have read it'));
+    await tapVisible(tester, find.text('Continue'));
+    expect(find.text('One swipe, one verse'), findsOneWidget);
+    await tapVisible(tester, find.text('Continue'));
+    expect(find.text('Learn shlokas by heart'), findsOneWidget);
+    await tapVisible(tester, find.text('Continue'));
+    expect(find.text('Listen to every shloka'), findsOneWidget);
     expect(find.text('Skip'), findsNothing);
-    await tester.tap(find.text('Peace'));
-    await settle(tester);
-    await tester.ensureVisible(find.text('I have read it'));
-    await tester.tap(find.text('I have read it'));
-    await settle(tester);
-    await tester.tap(find.text('I will come back on my own'));
-    await settle(tester);
+    await tapVisible(tester, find.text('Continue'));
+
     expect(find.text("TODAY'S VERSE"), findsOneWidget);
     final s = app.container.read(settingsProvider);
     expect(s.firstLaunchDone, isTrue);
-    expect(s.languageCode, 'hi');
+    expect(s.languageCode, 'en');
     expect(app.prefs.getBool(SettingsRepository.kFirstLaunch), isTrue);
   });
 
@@ -60,7 +61,8 @@ void main() {
     tester,
   ) async {
     await pumpApp(tester, now: DateTime(2026, 10, 28, 8));
-    expect(find.text('Wednesday, 28 October'), findsOneWidget);
+    // Owner, 2026-11-23: no date on Home.
+    expect(find.text('Wednesday, 28 October'), findsNothing);
     expect(find.text("TODAY'S VERSE"), findsOneWidget);
     expect(tester.widget<Text>(_chip).data, isNotNull);
   });

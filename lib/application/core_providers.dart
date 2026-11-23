@@ -65,6 +65,14 @@ class SettingsNotifier extends Notifier<AppSettings> {
     await _repo.setFirstLaunchDone(true);
   }
 
+  /// Debug and owner preview builds: back to the first-launch flow (and
+  /// its sign-up step), keeping everything else.
+  Future<void> restartFirstLaunch() async {
+    state = state.copyWith(firstLaunchDone: false, accountStepPending: false);
+    await _repo.setAccountStepPending(false);
+    await _repo.setFirstLaunchDone(false);
+  }
+
   /// The sign-up page was answered (signed in or "Not now").
   Future<void> finishAccountStep() async {
     if (!state.accountStepPending) return;

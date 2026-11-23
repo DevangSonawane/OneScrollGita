@@ -10,43 +10,44 @@ import '../../core/design/typography.dart';
 import '../common/common_widgets.dart';
 import 'sign_in_buttons.dart';
 
+/// Sign out and delete, with their confirmations; Profile uses them too.
+Future<void> confirmSignOut(BuildContext context, WidgetRef ref) async {
+  final ok = await showConfirmDialog(
+    context,
+    title: 'Sign out?',
+    message: 'Everything on this phone stays as it is.',
+    confirmLabel: 'Sign out',
+  );
+  if (ok) await ref.read(authControllerProvider.notifier).signOut();
+}
+
+Future<void> confirmDeleteAccount(BuildContext context, WidgetRef ref) async {
+  final ok = await showConfirmDialog(
+    context,
+    title: 'Delete your account?',
+    message:
+        'Your account and its purchase record are deleted from our server. '
+        'It cannot be undone. Your reading, notes and streak stay on this '
+        'phone. Deleting the account does not cancel a subscription: '
+        'cancel it in your App Store or Google Play settings.',
+    confirmLabel: 'Delete',
+    destructive: true,
+  );
+  if (!ok) return;
+  final deleted = await ref
+      .read(authControllerProvider.notifier)
+      .deleteAccount();
+  if (deleted && context.mounted) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Your account was deleted.')));
+  }
+}
+
 /// Profile > Account (PRD_v9 section 3): sign in, or see the account, sign
 /// out and delete it. Nothing on the phone is touched either way.
 class AccountScreen extends ConsumerWidget {
   const AccountScreen({super.key});
-
-  Future<void> _signOut(BuildContext context, WidgetRef ref) async {
-    final ok = await showConfirmDialog(
-      context,
-      title: 'Sign out?',
-      message: 'Everything on this phone stays as it is.',
-      confirmLabel: 'Sign out',
-    );
-    if (ok) await ref.read(authControllerProvider.notifier).signOut();
-  }
-
-  Future<void> _delete(BuildContext context, WidgetRef ref) async {
-    final ok = await showConfirmDialog(
-      context,
-      title: 'Delete your account?',
-      message:
-          'Your account and its purchase record are deleted from our server. '
-          'It cannot be undone. Your reading, notes and streak stay on this '
-          'phone. Deleting the account does not cancel a subscription: '
-          'cancel it in your App Store or Google Play settings.',
-      confirmLabel: 'Delete',
-      destructive: true,
-    );
-    if (!ok) return;
-    final deleted = await ref
-        .read(authControllerProvider.notifier)
-        .deleteAccount();
-    if (deleted && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Your account was deleted.')),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -98,13 +99,15 @@ class AccountScreen extends ConsumerWidget {
               ),
               SettingsRow(
                 title: 'Sign out',
-                onTap: auth.working ? null : () => _signOut(context, ref),
+                onTap: auth.working ? null : () => confirmSignOut(context, ref),
                 showChevron: false,
               ),
               SettingsRow(
                 title: auth.deleting ? 'Deleting...' : 'Delete account',
                 destructive: true,
-                onTap: auth.working ? null : () => _delete(context, ref),
+                onTap: auth.working
+                    ? null
+                    : () => confirmDeleteAccount(context, ref),
                 divider: false,
               ),
               if (auth.message != null)

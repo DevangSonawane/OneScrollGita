@@ -3,18 +3,46 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:versescroll/core/design/tactile.dart';
+import 'package:versescroll/features/trainer/word_bank.dart';
+import 'package:versescroll/domain/auth.dart';
+import 'package:versescroll/features/premium/paywall_screen.dart';
+import 'package:versescroll/features/home/home_extras.dart';
+import 'package:versescroll/features/first_launch/onboarding_demos.dart';
 import 'package:versescroll/app/router.dart';
-import 'package:versescroll/application/core_providers.dart';
 import 'package:versescroll/application/reminder_providers.dart';
 import 'package:versescroll/application/streak_providers.dart';
-import 'package:versescroll/data/settings/settings_repository.dart';
 import 'package:versescroll/domain/premium.dart';
 import 'package:versescroll/application/ui_providers.dart';
 import 'package:versescroll/features/gita/reader_screen.dart';
-import 'package:versescroll/features/home/home_screen.dart';
 
+import '../fakes/fake_auth_gateway.dart';
 import '../fakes/fake_notification_service.dart';
 import '../helpers.dart';
+
+/// Taps the word bank's buttons until every blank is filled (wrong words
+/// just shake, so trying each in turn always gets there).
+Future<void> fillAllFromBank(WidgetTester tester) async {
+  for (var round = 0; round < 30; round++) {
+    if (find.text('Every word in place').evaluate().isNotEmpty) return;
+    for (var p = 0; p < 30; p++) {
+      final f = find.byKey(WordBank.wordKey(p));
+      if (f.evaluate().isEmpty) break;
+      final enabled = tester.widget<TactileButton>(f).onTap != null;
+      if (!enabled) continue;
+      await tester.ensureVisible(f);
+      await tester.tap(f);
+      await tester.pump(const Duration(milliseconds: 400));
+    }
+  }
+}
+
+Future<void> tapVisible(WidgetTester tester, Finder f) async {
+  await tester.ensureVisible(f);
+  await settle(tester);
+  await tester.tap(f);
+  await settle(tester);
+}
 
 Future<void> tapTab(WidgetTester tester, String label) async {
   await tester.tap(find.bySemanticsLabel(RegExp('^$label, tab')));
@@ -122,46 +150,95 @@ void main() {
     },
   );
 
-  testWidgets('guided first launch: Peace, first verse counts day 1', (
+  testWidgets('first launch: reading the first verse counts day 1', (
     tester,
   ) async {
     final app = await pumpApp(tester, prefs: const {});
     await tester.tap(find.text('Begin'));
     await settle(tester);
-    await tester.tap(find.text('Peace'));
-    await settle(tester);
     expect(find.text('Your first verse'), findsOneWidget);
-    // The top verse of the dataset's "peace" theme.
-    expect(find.text('Bhagavad-gītā 2.66'), findsOneWidget);
-    await tester.ensureVisible(find.text('I have read it'));
-    await tester.tap(find.text('I have read it'));
-    await settle(tester);
-    expect(find.text('Day 1. A beginning.'), findsOneWidget);
-    await tester.tap(find.text('I will come back on my own'));
-    await settle(tester);
-
-    expect(find.text("TODAY'S VERSE"), findsOneWidget);
-    expect(app.container.read(settingsProvider).lastVerseId, 'bg-02-066');
-    expect(app.prefs.getString(SettingsRepository.kFirstIntent), 'peace');
+    await tapVisible(tester, find.text('I have read it'));
+    // Owner, 2026-11-23: only the streak popup, no streak card here.
+    expect(find.text('day streak'), findsNothing);
+    expect(find.text('Day 1. A beginning.'), findsNothing);
+    expect(find.text('Continue'), findsOneWidget);
     // Day 1 is saved in the database (real async), not just in memory.
     final days = await tester.runAsync(
       () => app.container.read(activityRepositoryProvider).readDays(),
     );
     expect(days, hasLength(1));
-    expect(find.text('Continue at 2.66'), findsOneWidget);
   });
 
-  testWidgets('home: feelings card and Continue in thumb reach', (
+  testWidgets('first launch demos: swipe, fill a blank, play 1.1', (
+    tester,
+  ) async {
+    await pumpApp(tester, prefs: const {});
+    await tester.tap(find.text('Begin'));
+    await settle(tester);
+    await tapVisible(tester, find.text('I have read it'));
+    await tapVisible(tester, find.text('Continue'));
+
+    // Scrolling: real verses of chapter 2, one swipe moves to the next.
+    expect(find.text('Bhagavad-gītā 2.20'), findsOneWidget);
+    await tester.drag(find.byKey(ScrollDemo.cardKey), const Offset(0, -300));
+    await settle(tester);
+    expect(find.text('Bhagavad-gītā 2.21'), findsOneWidget);
+    await tapVisible(tester, find.text('Continue'));
+
+    // Sadhak: tapping a blank fills it.
+    expect(find.text('Bhagavad-gītā 2.47'), findsOneWidget);
+    expect(find.textContaining('0 of'), findsOneWidget);
+    // Sadhak: 3D word buttons; the right one fills the next blank.
+    await fillAllFromBank(tester);
+    expect(find.text('Every word in place'), findsOneWidget);
+    await tapVisible(tester, find.text('Continue'));
+
+    // Shravan: 1.1 plays (the silent pretend engine in tests).
+    expect(find.text('Bhagavad-gītā 1.1'), findsOneWidget);
+    await tapVisible(tester, find.byKey(ListenDemo.playKey));
+    expect(find.text('Sanskrit, then the translation'), findsOneWidget);
+    expect(find.bySemanticsLabel('Pause'), findsOneWidget);
+    await tapVisible(tester, find.byKey(ListenDemo.playKey));
+    expect(find.text('Paused'), findsOneWidget);
+  });
+
+  testWidgets('home: greeting, plan banners and short feeling cards', (
     tester,
   ) async {
     await pumpApp(tester);
-    expect(
-      find.text('How are you feeling?', skipOffstage: false),
-      findsOneWidget,
+    expect(find.text('Hi there'), findsOneWidget);
+    expect(find.text('How are you?'), findsOneWidget);
+    // Owner, 2026-11-23: none of these on Home any more.
+    expect(find.text('Good morning'), findsNothing);
+    expect(find.byTooltip('Search'), findsNothing);
+    expect(find.text("Read today's verse"), findsNothing);
+    expect(find.textContaining('Continue at'), findsNothing);
+    expect(find.byKey(PlanBanners.sadhakKey), findsOneWidget);
+    for (final w in ['Peace', 'Stress', 'Confusion']) {
+      expect(find.text(w, skipOffstage: false), findsOneWidget);
+    }
+    expect(find.text('Peace of mind', skipOffstage: false), findsNothing);
+  });
+
+  testWidgets('home: the greeting uses the account first name', (tester) async {
+    await pumpApp(
+      tester,
+      auth: FakeAuthGateway(
+        user: const AppUser(
+          id: 'u1',
+          email: 'reader@example.com',
+          name: 'Arjun Pandava',
+          method: SignInMethod.google,
+        ),
+      ),
     );
-    expect(find.text("Read today's verse"), findsOneWidget);
-    final button = tester.getRect(find.byType(ContinueButton));
-    expect(button.top, greaterThan(844 / 2), reason: 'lower half');
+    expect(find.text('Hi, Arjun'), findsOneWidget);
+  });
+
+  testWidgets('home: the Sadhak banner opens the Sadhak page', (tester) async {
+    await pumpApp(tester);
+    await tapVisible(tester, find.byKey(PlanBanners.sadhakKey));
+    expect(find.byType(PaywallScreen), findsOneWidget);
   });
 
   testWidgets('chapter end offers next chapter and reflect', (tester) async {

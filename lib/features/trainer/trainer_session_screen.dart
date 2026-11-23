@@ -21,6 +21,7 @@ import '../common/common_widgets.dart';
 import '../gita/share_card.dart';
 import '../premium/paywall_screen.dart';
 import '../premium/sadhak_art.dart';
+import 'word_bank.dart';
 
 /// Learning one verse through the five steps.
 class TrainerLearnScreen extends ConsumerStatefulWidget {
@@ -414,6 +415,48 @@ class _StepView extends ConsumerStatefulWidget {
 class _StepViewState extends ConsumerState<_StepView> {
   final _revealed = <String>{};
 
+  /// Steps 2 to 4 fill their blanks from a bank of 3D word buttons (owner,
+  /// 2026-11-23), the same as the first-launch demo.
+  WordBankController? _bank;
+  String? _bankFor;
+
+  bool get _usesBank =>
+      !widget.review &&
+      (widget.step == TrainerStep.someHidden ||
+          widget.step == TrainerStep.mostHidden ||
+          widget.step == TrainerStep.firstLetters);
+
+  /// The hidden words of the lines on screen, in reading order.
+  WordBankController? _bankFor0(List<String> lines, List<int> lineIdx) {
+    if (!_usesBank) return null;
+    final sig = '${lines.hashCode}|$lineIdx';
+    if (_bankFor == sig && _bank != null) return _bank;
+    final firstLetters = widget.step == TrainerStep.firstLetters;
+    final slots = <BankSlot>[
+      for (final li in lineIdx)
+        for (final (i, w) in _hiddenOf(lines[li], li, firstLetters))
+          (key: '$li-$i', word: w),
+    ];
+    _bankFor = sig;
+    return _bank = slots.isEmpty
+        ? null
+        : WordBankController(widget.entry.id, slots);
+  }
+
+  List<(int, String)> _hiddenOf(String line, int li, bool firstLetters) {
+    final words = wordsOf(line);
+    final mask = hiddenMask(
+      verseId: widget.entry.id,
+      step: widget.step,
+      part: li,
+      words: words,
+    );
+    return [
+      for (var i = 0; i < words.length; i++)
+        if (mask[i] || (firstLetters && isHideable(words[i]))) (i, words[i]),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
@@ -434,14 +477,16 @@ class _StepViewState extends ConsumerState<_StepView> {
       context,
       ref,
     ).trainerWord(devanagari: devanagari);
+    final bank = _bankFor0(lines, lineIdx);
 
     final prompt = switch (step) {
       TrainerStep.understand =>
         'Read the verse slowly, with its meaning and the word meanings.',
-      TrainerStep.someHidden ||
-      TrainerStep.mostHidden => 'Say the verse. Tap a blank if you need it.',
+      TrainerStep.someHidden || TrainerStep.mostHidden =>
+        'Tap the words below in order to fill the blanks. Tap a blank if '
+            'you need help.',
       TrainerStep.firstLetters =>
-        'Only first letters now. Tap a word if you need it.',
+        'Only first letters now. Tap the words below in order.',
       TrainerStep.recite =>
         widget.shown
             ? 'How did it go?'
@@ -519,6 +564,42 @@ class _StepViewState extends ConsumerState<_StepView> {
                 ),
                 child: verse,
               ),
+              if (bank != null) ...[
+                const SizedBox(height: Space.s24),
+                AnimatedSwitcher(
+                  duration: Motion.of(context).crossFade,
+                  child: bank.done
+                      ? Row(
+                          key: const ValueKey('bankDone'),
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              LucideIcons.circle_check,
+                              color: PremiumColors.of(context).gold,
+                            ),
+                            const SizedBox(width: Space.s8),
+                            Flexible(
+                              child: Text(
+                                'Every word in place',
+                                style: ui.label(color: c.accentText),
+                              ),
+                            ),
+                          ],
+                        )
+                      : WordBank(
+                          key: const ValueKey('bank'),
+                          controller: bank,
+                          style: wordStyle.copyWith(
+                            fontSize: TrainerMetrics.bankWord,
+                            height: 1.3,
+                          ),
+                          onPick: (p) => setState(() {
+                            // A wrong word counts like asking for help.
+                            if (!bank.pick(p)) widget.onReveal();
+                          }),
+                        ),
+                ),
+              ],
               if (step == TrainerStep.understand) ...[
                 const SizedBox(height: Space.s24),
                 Text(
@@ -567,11 +648,16 @@ class _StepViewState extends ConsumerState<_StepView> {
           style: style,
           hidden:
               (mask[i] || (firstLetters && isHideable(words[i]))) &&
-              !_revealed.contains('$lineIndex-$i'),
+              !_revealed.contains('$lineIndex-$i') &&
+              !(_bank?.filled.contains('$lineIndex-$i') ?? false),
+          current: _bank?.next?.key == '$lineIndex-$i',
           firstLetterOnly: firstLetters,
           tappable: step != TrainerStep.recite,
           onReveal: () {
-            setState(() => _revealed.add('$lineIndex-$i'));
+            setState(() {
+              _revealed.add('$lineIndex-$i');
+              _bank?.reveal('$lineIndex-$i');
+            });
             widget.onReveal();
           },
         ),
@@ -627,6 +713,7 @@ class _Word extends StatelessWidget {
     required this.word,
     required this.style,
     required this.hidden,
+    this.current = false,
     required this.firstLetterOnly,
     required this.tappable,
     required this.onReveal,
@@ -635,6 +722,9 @@ class _Word extends StatelessWidget {
   final String word;
   final TextStyle style;
   final bool hidden;
+
+  /// The blank the next bank word goes into.
+  final bool current;
   final bool firstLetterOnly;
   final bool tappable;
   final VoidCallback onReveal;
@@ -653,6 +743,10 @@ class _Word extends StatelessWidget {
       key: ValueKey(hidden),
       constraints: const BoxConstraints(minWidth: TrainerMetrics.blankMinWidth),
       decoration: BoxDecoration(
+        color: hidden && current ? c.accentSoft : null,
+        borderRadius: hidden && current
+            ? const BorderRadius.vertical(top: Radius.circular(Radii.chip))
+            : null,
         border: Border(
           bottom: BorderSide(
             color: hidden ? c.accent : Colors.transparent,

@@ -403,14 +403,17 @@ abstract final class PaywallMetrics {
 
 /// Guided first launch and the sign-up step (owner, 2026-11-22).
 abstract final class OnboardingMetrics {
-  static const ctaHeight = 56.0;
-  static const providerHeight = 56.0;
+  /// Step titles and the app name on the first step.
+  static const title = 24.0;
+  static const heroTitle = 32.0;
+  static const ctaHeight = 52.0;
+  static const providerHeight = 52.0;
   static const providerLogo = 20.0;
   static const heroArt = 220.0;
   static const heroArtShort = 150.0;
-  static const lotus = 64.0;
+  static const lotus = 52.0;
   static const lotusSmall = 48.0;
-  static const statNumber = 26.0;
+  static const statNumber = 22.0;
   static const benefitIcon = 40.0;
   static const dayNumber = 72.0;
   static const entranceRise = 14.0;
@@ -418,8 +421,78 @@ abstract final class OnboardingMetrics {
   /// Below this height the hero art shrinks.
   static const shortScreen = 720.0;
 
+  /// The feature demos (scrolling, Sadhak, Shravan).
+  static const demoCard = 340.0;
+  static const playButton = 68.0;
+  static const playRing = 3.0;
+  static const blankMinWidth = 44.0;
+  static const hintBounce = Duration(milliseconds: 1400);
+
   /// The whole staggered entrance of one step.
   static const entrance = Duration(milliseconds: 900);
+}
+
+/// Chunky 3D buttons and icon tiles (owner, 2026-11-23).
+abstract final class TactileMetrics {
+  /// How far the face sits above its base; it sinks to 0 when pressed.
+  static const depth = 4.0;
+  static const radius = 14.0;
+  static const press = Duration(milliseconds: 70);
+  static const shake = Duration(milliseconds: 360);
+  static const iconTile = 56.0;
+  static const iconGlyph = 28.0;
+}
+
+/// Feeling cards on Home: one gentle hue per card, top and bottom of the
+/// icon tile's gradient.
+@immutable
+class FeelingPalette {
+  const FeelingPalette(this.top, this.bottom);
+
+  final Color top;
+  final Color bottom;
+
+  static const light = [
+    FeelingPalette(Color(0xFFFFD59E), Color(0xFFF29A4A)), // saffron
+    FeelingPalette(Color(0xFFB9E4F7), Color(0xFF4FA3D9)), // sky
+    FeelingPalette(Color(0xFFD9C9F5), Color(0xFF8E6BD6)), // lilac
+    FeelingPalette(Color(0xFFC6EBC9), Color(0xFF52B06A)), // leaf
+    FeelingPalette(Color(0xFFFFC9C4), Color(0xFFE2675B)), // rose
+    FeelingPalette(Color(0xFFFFE9A8), Color(0xFFE0B23A)), // gold
+  ];
+
+  static const dark = [
+    FeelingPalette(Color(0xFFF2B26B), Color(0xFFB8621E)),
+    FeelingPalette(Color(0xFF7CC3E8), Color(0xFF2E6F9E)),
+    FeelingPalette(Color(0xFFB29BE6), Color(0xFF5E43A3)),
+    FeelingPalette(Color(0xFF8FD39C), Color(0xFF2F7A44)),
+    FeelingPalette(Color(0xFFF29A90), Color(0xFFA8433A)),
+    FeelingPalette(Color(0xFFF2D27A), Color(0xFFA67E1E)),
+  ];
+
+  static List<FeelingPalette> of(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? dark : light;
+}
+
+/// The Shravan banner on Home: a deep night-blue card with light text,
+/// the same in light and dark mode (text on it is at least 4.5:1).
+abstract final class ShravanBannerColors {
+  static const top = Color(0xFF2B2350);
+  static const bottom = Color(0xFF4B3B7F);
+  static const text = Color(0xFFFFFFFF);
+  static const textSoft = Color(0xCCFFFFFF);
+}
+
+/// Home's auto-scrolling plan banners.
+abstract final class BannerMetrics {
+  static const height = 156.0;
+  static const art = 112.0;
+  static const interval = Duration(seconds: 4);
+  static const slide = Duration(milliseconds: 600);
+  static const maxTextScale = 1.3;
+  static const title = 19.0;
+  static const feelingCardWidth = 112.0;
+  static const feelingCardHeight = 120.0;
 }
 
 /// Third-party brand marks, used only inside their own logos and buttons
@@ -490,6 +563,9 @@ class HighlightColors {
 
 /// Shloka trainer geometry.
 abstract final class TrainerMetrics {
+  /// Words in the 3D word bank under the verse.
+  static const bankWord = 17.0;
+
   static const blankMinWidth = 36.0;
   static const blankHeight = 30.0;
   static const stepDot = 8.0;

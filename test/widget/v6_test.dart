@@ -98,7 +98,7 @@ void main() {
     });
   }
 
-  testWidgets('Home: Continue reading card shows where you stopped', (
+  testWidgets('Home: no Continue reading card or button (owner, 2026-11-23)', (
     tester,
   ) async {
     await pumpApp(
@@ -108,14 +108,8 @@ void main() {
         SettingsRepository.kLastVerse: 'bg-02-024',
       },
     );
-    expect(find.text('CONTINUE READING', skipOffstage: false), findsOneWidget);
-    expect(find.text('You are at 2.24', skipOffstage: false), findsOneWidget);
-    expect(find.text('Continue at 2.24'), findsOneWidget);
-  });
-
-  testWidgets('Home: no Continue card before reading anything', (tester) async {
-    await pumpApp(tester);
     expect(find.text('CONTINUE READING', skipOffstage: false), findsNothing);
+    expect(find.text('Continue at 2.24'), findsNothing);
   });
 }
 

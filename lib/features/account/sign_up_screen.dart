@@ -79,14 +79,16 @@ class SignUpScreen extends ConsumerWidget {
                                         child: Text(
                                           'Keep your journey safe',
                                           textAlign: TextAlign.center,
-                                          style: ui.title,
+                                          style: ui.title.copyWith(
+                                            fontSize: OnboardingMetrics.title,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(height: Space.s12),
                                       Text(
                                         'Create your free account in one tap.',
                                         textAlign: TextAlign.center,
-                                        style: ui.body(size: 16),
+                                        style: ui.body(),
                                       ),
                                       const SizedBox(height: Space.s32),
                                       const OnboardingBenefit(

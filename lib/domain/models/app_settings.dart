@@ -2,7 +2,7 @@ enum AppThemeMode { system, light, dark }
 
 /// Text-size steps for reading text (Small to Extra large).
 const readingScaleSteps = <double>[0.85, 0.92, 1.0, 1.12, 1.25];
-const defaultTextScaleStep = 2;
+const defaultTextScaleStep = 1; // "Small" by default (owner, 2026-11-23).
 
 class AppSettings {
   const AppSettings({

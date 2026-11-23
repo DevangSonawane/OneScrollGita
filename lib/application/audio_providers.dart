@@ -480,3 +480,155 @@ class PretendDownloads extends Notifier<Map<int, double>> {
     state = {...state}..remove(chapter);
   }
 }
+
+// ---------------------------------------------------------------------------
+// First-launch Shravan preview (owner, 2026-11-23): one verse, Sanskrit then
+// translation, played once. It never touches the Listen queue or the saved
+// listening place.
+
+/// The verse the first-launch preview plays.
+const previewVerseId = 'bg-01-001';
+
+enum VersePreviewStatus { idle, loading, playing, paused, done, failed }
+
+@immutable
+class VersePreviewState {
+  const VersePreviewState({
+    this.status = VersePreviewStatus.idle,
+    this.progress = 0,
+  });
+
+  final VersePreviewStatus status;
+
+  /// 0 to 1 through the verse's recordings.
+  final double progress;
+
+  bool get playing => status == VersePreviewStatus.playing;
+}
+
+final versePreviewProvider =
+    NotifierProvider.autoDispose<VersePreview, VersePreviewState>(
+      VersePreview.new,
+    );
+
+class VersePreview extends Notifier<VersePreviewState> {
+  StreamSubscription<EngineState>? _states;
+  StreamSubscription<EngineEvent>? _events;
+  List<int> _starts = const [];
+  int _totalMs = 0;
+  Future<bool>? _preparing;
+
+  late AudioEngine _engine;
+
+  @override
+  VersePreviewState build() {
+    final engine = _engine = ref.watch(audioEngineProvider);
+    ref.onDispose(() {
+      _states?.cancel();
+      _events?.cancel();
+      if (_totalMs > 0) engine.stop();
+    });
+    return const VersePreviewState();
+  }
+
+  /// Fetches the recording list and loads 1.1 into the player ahead of
+  /// time (from the start of first launch), so Play starts at once.
+  /// Safe to call more than once; a failure is retried on the next call.
+  Future<bool> prepare() => _preparing ??= _load().then((ok) {
+    if (!ok) _preparing = null;
+    return ok;
+  });
+
+  Future<bool> _load() async {
+    try {
+      final chapter = chapterOfId(previewVerseId)!;
+      final queue = buildChapterQueue(
+        chapter,
+        await ref.read(audioCatalogProvider).chapter(chapter),
+        mode: PlayMode.withTranslation,
+      );
+      final tracks = [
+        for (final t in queue.tracks)
+          if (t.verseId == previewVerseId) t,
+      ];
+      if (tracks.isEmpty || !ref.mounted) return false;
+      var at = 0;
+      _starts = [for (final t in tracks) (at += t.ms) - t.ms];
+      _totalMs = at;
+      await _states?.cancel();
+      await _events?.cancel();
+      _states = _engine.states.listen(_onState);
+      _events = _engine.events.listen((e) {
+        if (e is QueueFinished && ref.mounted) {
+          state = const VersePreviewState(
+            status: VersePreviewStatus.done,
+            progress: 1,
+          );
+        }
+      });
+      await _engine.load(tracks);
+      return ref.mounted;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Play, pause or resume; after the end it plays again.
+  Future<void> toggle() async {
+    switch (state.status) {
+      case VersePreviewStatus.loading:
+        return;
+      case VersePreviewStatus.playing:
+        state = VersePreviewState(
+          status: VersePreviewStatus.paused,
+          progress: state.progress,
+        );
+        return _engine.pause();
+      case VersePreviewStatus.paused:
+        state = VersePreviewState(
+          status: VersePreviewStatus.playing,
+          progress: state.progress,
+        );
+        return _engine.play();
+      case VersePreviewStatus.done:
+        state = const VersePreviewState(status: VersePreviewStatus.playing);
+        await _engine.seek(0, 0);
+        return _engine.play();
+      case VersePreviewStatus.idle:
+      case VersePreviewStatus.failed:
+        state = const VersePreviewState(status: VersePreviewStatus.loading);
+        if (!await prepare()) {
+          if (ref.mounted) {
+            state = const VersePreviewState(status: VersePreviewStatus.failed);
+          }
+          return;
+        }
+        if (!ref.mounted) return;
+        state = const VersePreviewState(status: VersePreviewStatus.playing);
+        return _engine.play();
+    }
+  }
+
+  Future<void> pause() async {
+    if (state.playing) await toggle();
+  }
+
+  void _onState(EngineState s) {
+    if (!ref.mounted || _totalMs == 0) return;
+    final st = state.status;
+    // Loading ahead of time must not show up as "paused".
+    if (st == VersePreviewStatus.done ||
+        st == VersePreviewStatus.idle ||
+        st == VersePreviewStatus.loading) {
+      return;
+    }
+    final i = s.index.clamp(0, _starts.length - 1);
+    final p = ((_starts[i] + s.offsetMs) / _totalMs).clamp(0.0, 1.0);
+    state = VersePreviewState(
+      status: s.playing
+          ? VersePreviewStatus.playing
+          : VersePreviewStatus.paused,
+      progress: p,
+    );
+  }
+}

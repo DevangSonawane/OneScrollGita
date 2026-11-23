@@ -143,3 +143,24 @@ was written. The new tests are written but have **not been run**.
 | Intro numbers | welcome screen | Verses and chapters are counted from the dataset; "2 languages" means the English and Hindi translations. |
 | Apple and Google buttons | `lib/features/account/sign_in_buttons.dart`, `brand_logos.dart` | Custom buttons drawn to each brand's guidelines (Apple logo from the sign_in_with_apple package, Google's four-colour G). Check them on a phone in light and dark mode. |
 | Real-device sign-in | iPhone + Android | Apple and Google sheets open, finish, and land on Home. A sign-in with no reply now stops after 25 s with the offline line. |
+
+## Onboarding v2: feature tour (2026-11-23)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| New step order | `lib/features/first_launch/welcome_screen.dart` | Numbers → first verse + streak → swiping demo → Sadhak trainer demo → Shravan 1.1 → sign-in. The language choice, "What brings you here" and the reminder step were removed: language follows the phone (Hindi phones get Hindi), reminders are in Profile. |
+| First verse | welcome screen | It is today's daily verse (the same one Home shows), so some days it is a less inviting verse. Say if you want a fixed opening verse instead. |
+| Free 1.1 recording | `versePreviewProvider` in `lib/application/audio_providers.dart` | Everyone hears 1.1 (Sanskrit + translation) once during onboarding, without Shravan. It needs internet; offline it shows a "check your connection" line. |
+| Demo verses | `DemoVerses` in `onboarding_demos.dart` | Swiping: 2.20 to 2.23. Trainer: 2.47, hidden words picked by the trainer's own rule. |
+| Tour wording (reviewed: false) | welcome screen, `onboarding_demos.dart` | "One swipe, one verse", "Learn shlokas by heart", "Listen to every shloka", the streak lines, the "SADHAK" / "SHRAVAN" badges. No prices or buy buttons (v3: no launch-time upsells). |
+
+## Home, trainer and text size (2026-11-23)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Home layout | `lib/features/home/` | Removed: date, EN/हि toggle, search button, streak chip, Continue reading card and the "Continue at …" button (search stays in the Gita tab and "See all"). Added: "Hi, {first name}" / "How are you?", the Sadhak and Shravan banners, short feeling cards. |
+| Auto-sliding plan banners | `home_extras.dart` (`PlanBanners`) | Owner request. Note the v3 rule "no launch-time or timed upsells": the banners sit on Home and slide every 4 s (not under reduced motion), but they never pop up or block anything. Confirm this is fine with you. Owners of a plan see "Open" / "Listen" instead of "Explore". |
+| Feeling words (reviewed: false) | `homeFeelings` in `home_extras.dart` | Peace, Stress, Confusion, Sadness, Anger, Fear, Lonely, Motivation, Grief, Doubt; each opens the dataset theme. Hindi readers see the dataset's Hindi theme titles. |
+| "3D" icons | `Icon3D` in `lib/core/design/tactile.dart` | Drawn in code (gradient tile, gloss, coloured shadow). Supply real 3D artwork if you want rendered icons. |
+| Trainer word bank | `lib/features/trainer/word_bank.dart` | Steps 2 to 4 now fill blanks from 3D word buttons in reading order, the same as the onboarding demo. A wrong word shakes and counts as one "help". Tapping a blank still reveals it. Step 5 (recite) is unchanged. |
+| Default text size | `defaultTextScaleStep` in `lib/domain/models/app_settings.dart` | Now step 2 of 5 ("small", 0.92) instead of the middle. People who never changed it get the smaller size after updating. |

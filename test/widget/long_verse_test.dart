@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:versescroll/data/settings/settings_repository.dart';
 import 'package:versescroll/application/ui_providers.dart';
 import 'package:versescroll/features/gita/reader_screen.dart';
 
@@ -39,12 +40,23 @@ final _gestures = <(String, Future<void> Function(WidgetTester))>[
   ),
 ];
 
+/// These verses are long at the Medium reading size (the default before
+/// 2026-11-23); the test keeps that size so they stay taller than the screen.
+const _mediumText = {
+  SettingsRepository.kFirstLaunch: true,
+  SettingsRepository.kTextScale: 2,
+};
+
 void main() {
   for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
     for (final (name, act) in _gestures) {
       testWidgets('long verse (${platform.name}): $name stays', (tester) async {
         debugDefaultTargetPlatformOverride = platform;
-        final app = await pumpApp(tester, size: const Size(402, 874));
+        final app = await pumpApp(
+          tester,
+          prefs: _mediumText,
+          size: const Size(402, 874),
+        );
         await tapTab(tester, 'Gita');
         app.container.read(readerJumpProvider.notifier).request('bg-02-007');
         await settle(tester);
@@ -64,7 +76,11 @@ void main() {
   testWidgets('long verse: a flick stops at its end; the next one goes on', (
     tester,
   ) async {
-    final app = await pumpApp(tester, size: const Size(402, 874));
+    final app = await pumpApp(
+      tester,
+      prefs: _mediumText,
+      size: const Size(402, 874),
+    );
     await tapTab(tester, 'Gita');
     app.container.read(readerJumpProvider.notifier).request('bg-02-007');
     await settle(tester);
@@ -88,7 +104,7 @@ void main() {
   });
 
   testWidgets('short verse: one quick flick turns the page', (tester) async {
-    await pumpApp(tester, size: const Size(402, 874));
+    await pumpApp(tester, prefs: _mediumText, size: const Size(402, 874));
     await tapTab(tester, 'Gita');
     final reader = tester.state<ReaderScreenState>(find.byType(ReaderScreen));
     final start = reader.current!.id;
