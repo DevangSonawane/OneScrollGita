@@ -8,9 +8,9 @@
    "verseEnd": 1,
    "label": "17.1",
    "sanskrit": [
-    "अर्जुन उवाच ।",
-    "ये शास्त्रविधिमुत्सृज्य यजन्ते श्रद्धयान्विताः ।",
-    "तेषां निष्ठा तु का कृष्ण सत्त्वमाहो रजस्तमः ॥१॥"
+    "अर्जुन उवाच",
+    "ये शास्त्रविधिमुत्सृज्य यजन्ते श्रद्धयान्विता: ।",
+    "तेषां निष्ठा तु का कृष्ण सत्त्वमाहो रजस्तम: ॥ १ ॥"
    ],
    "transliteration": [
     "arjuna uvāca",
@@ -20,14 +20,14 @@
     "sattvam āho rajas tamaḥ"
    ],
    "translation": {
-    "en": "Arjuna said, O Kṛṣṇa, what is the situation of one who does not follow the principles of scripture but worships according to his own imagination? Is he in goodness, in passion or in ignorance?",
+    "en": "Arjuna inquired: O Kṛṣṇa, what is the situation of those who do not follow the principles of scripture but worship according to their own imagination? Are they in goodness, in passion or in ignorance?",
     "hi": "अर्जुन ने कहा, हे श्रीकृष्ण! जो व्यक्ति शास्त्र के सिद्धान्तों का पालन नहीं करता, अपितु अपनी कल्पना के अनुसार पूजा करता है, उसकी स्थिति क्या होती है? वह सतोगुण में है, रजोगुण में है अथवा तमोगुण में?"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "In the Fourth Chapter, thirty-ninth verse, it is said that a person faithful to a particular type of worship gradually becomes elevated to the stage of knowledge and attains the highest perfectional stage of peace and prosperity. In the Sixteenth Chapter, it is concluded that one who does not follow the principles laid down in the scriptures is called an <i>asura,</i> demon, and one who follows the scriptural injunctions faithfully is called a <i>deva,</i> or demigod. Now, if one, with faith, follows some rules which are not mentioned in the scriptural injunctions, what is his position? This doubt of Arjuna is to be cleared by Kṛṣṇa. Are those who create some sort of God by selecting a human being and placing their faith in him worshiping in goodness, passion or ignorance? Do such persons attain the perfectional stage of life? Is it possible for them to be situated in real knowledge and elevate themselves to the highest perfectional stage? Do those who do not follow the rules and regulations of the scriptures but who have faith in something and worship gods and demigods and men attain success in their effort? Arjuna is putting these questions to Kṛṣṇa."
+      "text": "In the Fourth Chapter, thirty-ninth verse, it is said that a person faithful to a particular type of worship gradually becomes elevated to the stage of knowledge and attains the highest perfectional stage of peace and prosperity. In the Sixteenth Chapter, it is concluded that one who does not follow the principles laid down in the scriptures is called an <i>asura,</i> demon, and one who follows the scriptural injunctions faithfully is called a <i>deva,</i> or demigod. Now, if one, with faith, follows some rules which are not mentioned in the scriptural injunctions, what is his position? This doubt of Arjuna’s is to be cleared by Kṛṣṇa. Are those who create some sort of God by selecting a human being and placing their faith in him worshiping in goodness, passion or ignorance? Do such persons attain the perfectional stage of life? Is it possible for them to be situated in real knowledge and elevate themselves to the highest perfectional stage? Do those who do not follow the rules and regulations of the scriptures but who have faith in something and worship gods and demigods and men attain success in their effort? Arjuna is putting these questions to Kṛṣṇa."
      }
     ],
     "hi": [
@@ -45,7 +45,7 @@
      },
      {
       "word": "ye",
-      "meaning": "those"
+      "meaning": "those who"
      },
      {
       "word": "śāstra-vidhim",
@@ -57,7 +57,7 @@
      },
      {
       "word": "yajante",
-      "meaning": "worships"
+      "meaning": "worship"
      },
      {
       "word": "śraddhayā",
@@ -73,7 +73,7 @@
      },
      {
       "word": "niṣṭhā",
-      "meaning": "faith"
+      "meaning": "the faith"
      },
      {
       "word": "tu",
@@ -81,7 +81,7 @@
      },
      {
       "word": "kā",
-      "meaning": "what is that"
+      "meaning": "what"
      },
      {
       "word": "kṛṣṇa",
@@ -93,7 +93,7 @@
      },
      {
       "word": "āho",
-      "meaning": "said"
+      "meaning": "or else"
      },
      {
       "word": "rajaḥ",
@@ -171,7 +171,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/1/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/1/"
   },
   {
    "id": "bg-17-002",
@@ -180,9 +180,9 @@
    "verseEnd": 2,
    "label": "17.2",
    "sanskrit": [
-    "श्रीभगवानुवाच ।",
+    "श्रीभगवानुवाच",
     "त्रिविधा भवति श्रद्धा देहिनां सा स्वभावजा ।",
-    "सात्त्विकी राजसी चैव तामसी चेति तां शृणु ॥२॥"
+    "सात्त्विकी राजसी चैव तामसी चेति तां श‍ृणु ॥ २ ॥"
    ],
    "transliteration": [
     "śrī-bhagavān uvāca",
@@ -192,14 +192,14 @@
     "tāmasī ceti tāṁ śṛṇu"
    ],
    "translation": {
-    "en": "The Supreme Lord said, according to the modes of nature acquired by the embodied soul, one's faith can be of three kinds—goodness, passion or ignorance. Now hear about these.",
+    "en": "The Supreme Personality of Godhead said: According to the modes of nature acquired by the embodied soul, one’s faith can be of three kinds – in goodness, in passion or in ignorance. Now hear about this.",
     "hi": "श्रीभगवान् ने कहा, देहधारी जीव द्वारा अर्जित प्रकृति के गुणों के अनुसार, मनुष्य की श्रद्धा तीन प्रकार की हो सकती है—सतोगुणी, रजोगुणी अथवा तमोगुणी। अब इनके विषय में सुनो।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "Those who know the rules and regulations of the scriptures, but, out of laziness or indolence, give up following these rules and regulations, are governed by the modes of material nature. According to their previous activities in the modes of goodness, passion or ignorance, they acquire a nature which is of a specific quality. The association of the living entity with the different modes of nature has been going on perpetually since the living entity is in contact with material nature. Thus he acquires different types of mentality according to his association with the material modes. But this nature can be changed if one associates with a bona fide spiritual master and abides by his rules and the scriptures. Gradually, one can change his position from ignorance to goodness, or from passion to goodness. The conclusion is that blind faith in a particular mode of nature cannot help a person become elevated to the perfectional stage. One has to consider things carefully, with intelligence, in the association of a bona fide spiritual master. Thus one can change his position to a higher mode of nature."
+      "text": "Those who know the rules and regulations of the scriptures but out of laziness or indolence give up following these rules and regulations are governed by the modes of material nature. According to their previous activities in the mode of goodness, passion or ignorance, they acquire a nature which is of a specific quality. The association of the living entity with the different modes of nature has been going on perpetually; since the living entity is in contact with material nature, he acquires different types of mentality according to his association with the material modes. But this nature can be changed if one associates with a bona fide spiritual master and abides by his rules and the scriptures. Gradually, one can change his position from ignorance to goodness, or from passion to goodness. The conclusion is that blind faith in a particular mode of nature cannot help a person become elevated to the perfectional stage. One has to consider things carefully, with intelligence, in the association of a bona fide spiritual master. Thus one can change his position to a higher mode of nature."
      }
     ],
     "hi": [
@@ -212,20 +212,20 @@
    "synonyms": {
     "en": [
      {
-      "word": "śrī bhagavān uvāca",
+      "word": "śrī-bhagavān uvāca",
       "meaning": "the Supreme Personality of Godhead said"
      },
      {
       "word": "tri-vidhā",
-      "meaning": "three kinds"
+      "meaning": "of three kinds"
      },
      {
       "word": "bhavati",
-      "meaning": "become"
+      "meaning": "becomes"
      },
      {
       "word": "śraddhā",
-      "meaning": "faith"
+      "meaning": "the faith"
      },
      {
       "word": "dehinām",
@@ -241,11 +241,11 @@
      },
      {
       "word": "sāttvikī",
-      "meaning": "mode of goodness"
+      "meaning": "in the mode of goodness"
      },
      {
       "word": "rājasī",
-      "meaning": "mode of passion"
+      "meaning": "in the mode of passion"
      },
      {
       "word": "ca",
@@ -257,7 +257,7 @@
      },
      {
       "word": "tāmasī",
-      "meaning": "mode of ignorance"
+      "meaning": "in the mode of ignorance"
      },
      {
       "word": "ca",
@@ -272,7 +272,7 @@
       "meaning": "that"
      },
      {
-      "word": "sṛṇu",
+      "word": "śṛṇu",
       "meaning": "hear from Me."
      }
     ],
@@ -343,7 +343,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/2/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/2/"
   },
   {
    "id": "bg-17-003",
@@ -353,27 +353,27 @@
    "label": "17.3",
    "sanskrit": [
     "सत्त्वानुरूपा सर्वस्य श्रद्धा भवति भारत ।",
-    "श्रद्धामयोऽयं पुरुषो यो यच्छ्रद्धः स एव सः ॥३॥"
+    "श्रद्धामयोऽयं पुरुषो यो यच्छ्रद्ध: स एव स: ॥ ३ ॥"
    ],
    "transliteration": [
     "sattvānurūpā sarvasya",
     "śraddhā bhavati bhārata",
-    "śraddhā-mayo 'yaṁ puruṣo",
+    "śraddhā-mayo ’yaṁ puruṣo",
     "yo yac-chraddhaḥ sa eva saḥ"
    ],
    "translation": {
-    "en": "According to one's existence under the various modes of nature, one evolves a particular kind of faith. The living being is said to be of a particular faith according to the modes he has acquired.",
+    "en": "O son of Bharata, according to one’s existence under the various modes of nature, one evolves a particular kind of faith. The living being is said to be of a particular faith according to the modes he has acquired.",
     "hi": "प्रकृति के विभिन्न गुणों के अन्तर्गत अपने अस्तित्व के अनुसार, मनुष्य एक विशेष प्रकार की श्रद्धा विकसित करता है। कहा जाता है कि जीव ने जिन गुणों को अर्जित किया है, उन्हीं के अनुसार वह एक विशेष श्रद्धा वाला होता है।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "Everyone has a particular type of faith, regardless of what he is. But his faith is considered good, passionate or ignorant according to the nature he has acquired. Thus, according to his particular type of faith, one associates with certain persons. Now the real fact is that every living being, as is stated in the Fifteenth Chapter, is originally the fragmental part and parcel of the Supreme Lord. Therefore one is originally transcendental to all the modes of material nature. But when one forgets his relationship with the Supreme Personality of Godhead and comes into contact with the material nature in conditional life, he generates his own position by association with the different varieties of material nature. The resultant artificial faith and existence are only material. Although one may be conducted by some impression, or some conception of life, still, originally, he is <i>nirguṇa,</i> or transcendental. Therefore one has to become cleansed of the material contamination that he has acquired in order to regain his relationship with the Supreme Lord. That is the only path back without fear: Kṛṣṇa consciousness. If one is situated in Kṛṣṇa consciousness, then that path is guaranteed for his elevation to the perfectional stage. If one does not take to this path of self-realization, then he is surely to be conducted by the influence of the modes of nature."
+      "text": "Everyone has a particular type of faith, regardless of what he is. But his faith is considered good, passionate or ignorant according to the nature he has acquired. Thus, according to his particular type of faith, one associates with certain persons. Now the real fact is that every living being, as is stated in the Fifteenth Chapter, is originally a fragmental part and parcel of the Supreme Lord. Therefore one is originally transcendental to all the modes of material nature. But when one forgets his relationship with the Supreme Personality of Godhead and comes into contact with the material nature in conditional life, he generates his own position by association with the different varieties of material nature. The resultant artificial faith and existence are only material. Although one may be conducted by some impression, or some conception of life, originally he is <i>nirguṇa,</i> or transcendental. Therefore one has to become cleansed of the material contamination that he has acquired, in order to regain his relationship with the Supreme Lord. That is the only path back without fear: Kṛṣṇa consciousness. If one is situated in Kṛṣṇa consciousness, then that path is guaranteed for his elevation to the perfectional stage. If one does not take to this path of self-realization, then he is surely to be conducted by the influence of the modes of nature."
      },
      {
       "type": "p",
-      "text": "The word <i>sattva,</i> or faith, is very significant in this verse. <i>Sattva</i> or faith always comes out of the works of goodness. One's faith may be in a demigod or some created God or some mental concoction. It is supposed to be one's strong faith in something that is productive of the works of material goodness. But in material conditional life, no works of material nature are completely purified. They are mixed. They are not in pure goodness. Pure goodness is transcendental; in purified goodness one can understand the real nature of the Supreme Personality of Godhead. As long as one's faith is not completely in purified goodness, the faith is subject to contamination by any of the modes of material nature. The contaminated modes of material nature expand to the heart. Therefore according to the position of the heart in contact with a particular mode of material nature, one's faith is established. It should be understood, that if one's heart is in the mode of goodness, his faith is also in the mode of goodness. If his heart is in the mode of passion, his faith is also in the mode of passion. And if his heart is in the mode of darkness, illusion, his faith is also thus contaminated. Thus we find different types of faith in this world, and there are different types of religions due to different types of faith. The real principle of religious faith is situated in the mode of pure goodness, but because the heart is tainted, we find different types of religious principles. Thus according to different types of faith, there are different kinds of worship."
+      "text": "The word <i>śraddhā,</i> or “faith,” is very significant in this verse. <i>Śraddhā,</i> or faith, originally comes out of the mode of goodness. One’s faith may be in a demigod or some created God or some mental concoction. One’s strong faith is supposed to be productive of works of material goodness. But in material conditional life, no works are completely purified. They are mixed. They are not in pure goodness. Pure goodness is transcendental; in purified goodness one can understand the real nature of the Supreme Personality of Godhead. As long as one’s faith is not completely in purified goodness, the faith is subject to contamination by any of the modes of material nature. The contaminated modes of material nature expand to the heart. Therefore according to the position of the heart in contact with a particular mode of material nature, one’s faith is established. It should be understood that if one’s heart is in the mode of goodness his faith is also in the mode of goodness. If his heart is in the mode of passion, his faith is also in the mode of passion. And if his heart is in the mode of darkness, illusion, his faith is also thus contaminated. Thus we find different types of faith in this world, and there are different types of religions due to different types of faith. The real principle of religious faith is situated in the mode of pure goodness, but because the heart is tainted we find different types of religious principles. Thus according to different types of faith, there are different kinds of worship."
      }
     ],
     "hi": [
@@ -407,7 +407,7 @@
      },
      {
       "word": "bhārata",
-      "meaning": "O son of Bhārata"
+      "meaning": "O son of Bharata"
      },
      {
       "word": "śraddhā",
@@ -415,7 +415,7 @@
      },
      {
       "word": "mayaḥ",
-      "meaning": "full"
+      "meaning": "full of"
      },
      {
       "word": "ayam",
@@ -427,11 +427,11 @@
      },
      {
       "word": "yaḥ",
-      "meaning": "anyone"
+      "meaning": "who"
      },
      {
       "word": "yat",
-      "meaning": "that"
+      "meaning": "having which"
      },
      {
       "word": "śraddhaḥ",
@@ -439,7 +439,7 @@
      },
      {
       "word": "saḥ",
-      "meaning": "that"
+      "meaning": "thus"
      },
      {
       "word": "eva",
@@ -513,7 +513,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/3/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/3/"
   },
   {
    "id": "bg-17-004",
@@ -522,8 +522,8 @@
    "verseEnd": 4,
    "label": "17.4",
    "sanskrit": [
-    "यजन्ते सात्त्विका देवान्यक्षरक्षांसि राजसाः ।",
-    "प्रेतान्भूतगणांश्चान्ये यजन्ते तामसा जनाः ॥४॥"
+    "यजन्ते सात्त्विका देवान्यक्षरक्षांसि राजसा: ।",
+    "प्रेतान्भूतगणांश्चान्ये यजन्ते तामसा जना: ॥ ४ ॥"
    ],
    "transliteration": [
     "yajante sāttvikā devān",
@@ -539,15 +539,15 @@
     "en": [
      {
       "type": "p",
-      "text": "In this verse the Supreme Personality of Godhead describes different kinds of worshipers according to their external activities. According to scriptural injunction, only the Supreme Personality of Godhead is worshipable, but those who are not very conversant with, or faithful to, the scriptural injunctions worship different objects, according to their specific situations in the modes of material nature. Those who are situated in goodness generally worship the demigods. The demigods include Brahmā, Śiva and others such as Indra, Candra and the sun-god. There are various demigods. Those in goodness worship a particular demigod for a particular purpose. Similarly, those who are in the mode of passion worship the demons. We recall that during the Second World War, a man in Calcutta worshiped Hitler because thanks to that war he had amassed a large amount of wealth by dealing in the black market. Similarly, those in the modes of passion and ignorance generally select a powerful man to be God. They think that anyone can be worshiped as God and that the same results will be obtained."
+      "text": "In this verse the Supreme Personality of Godhead describes different kinds of worshipers according to their external activities. According to scriptural injunction, only the Supreme Personality of Godhead is worshipable, but those who are not very conversant with, or faithful to, the scriptural injunctions worship different objects, according to their specific situations in the modes of material nature. Those who are situated in goodness generally worship the demigods. The demigods include Brahmā, Śiva and others such as Indra, Candra and the sun-god. There are various demigods. Those in goodness worship a particular demigod for a particular purpose. Similarly, those who are in the mode of passion worship the demons. We recall that during the Second World War a man in Calcutta worshiped Hitler because thanks to that war he had amassed a large amount of wealth by dealing in the black market. Similarly, those in the modes of passion and ignorance generally select a powerful man to be God. They think that anyone can be worshiped as God and that the same results will be obtained."
      },
      {
       "type": "p",
-      "text": "Now, it is clearly described here that those who are in the mode of passion worship and create such gods, and those who are in the mode of ignorance, in darkness, worship dead spirits. Sometimes people worship at the tomb of some dead man. Sexual service is also considered to be in the mode of darkness. Similarly, in remote villages in India there are worshipers of ghosts. We have seen that in India the lower class people sometimes go to the forest, and if they have knowledge that a ghost lives in a tree, they worship that tree and offer sacrifices. These different kinds of worship are not actually God worship. God worship is for persons who are transcendentally situated in pure goodness. In the <i>Śrīmad-Bhāgavatam</i> it is said, <i>sattvaṁ viśuddham vāsudeva-śabditam.</i> \"When a man is situated in pure goodness, he worships Vāsudeva.\" The purport is that those who are completely purified of the material modes of nature and who are transcendentally situated can worship the Supreme Personality of Godhead."
+      "text": "Now, it is clearly described here that those who are in the mode of passion worship and create such gods, and those who are in the mode of ignorance, in darkness, worship dead spirits. Sometimes people worship at the tomb of some dead man. Sexual service is also considered to be in the mode of darkness. Similarly, in remote villages in India there are worshipers of ghosts. We have seen that in India the lower-class people sometimes go to the forest, and if they have knowledge that a ghost lives in a tree, they worship that tree and offer sacrifices. These different kinds of worship are not actually God worship. God worship is for persons who are transcendentally situated in pure goodness. In the <i>Śrīmad-Bhāgavatam</i> (4.3.23) it is said, <i>sattvaṁ viśuddhaṁ vasudeva-śabditam:</i> “When a man is situated in pure goodness, he worships Vāsudeva.” The purport is that those who are completely purified of the material modes of nature and who are transcendentally situated can worship the Supreme Personality of Godhead."
      },
      {
       "type": "p",
-      "text": "The impersonalists are supposed to be situated in the mode of goodness, and they worship five kinds of demigods. They worship the impersonal Viṣṇu, or Viṣṇu form in the material world, which is known as philosophized Viṣṇu. Viṣṇu is the expansion of the Supreme Personality of Godhead, but the impersonalists, because they do not ultimately believe in the Supreme Personality of Godhead, imagine that the Viṣṇu form is just another aspect of the impersonal Brahman; similarly, they imagine that Lord Brahmā is the impersonal form in the material mode of passion. Thus they sometimes describe five kinds of gods that are worshipable, but because they think that the actual truth is impersonal Brahman, they dispose of all worshipable objects at the ultimate end. In conclusion, the different qualities of the material modes of nature can be purified through association with persons who are of transcendental nature."
+      "text": "The impersonalists are supposed to be situated in the mode of goodness, and they worship five kinds of demigods. They worship the impersonal Viṣṇu form in the material world, which is known as philosophized Viṣṇu. Viṣṇu is the expansion of the Supreme Personality of Godhead, but the impersonalists, because they do not ultimately believe in the Supreme Personality of Godhead, imagine that the Viṣṇu form is just another aspect of the impersonal Brahman; similarly, they imagine that Lord Brahmā is the impersonal form in the material mode of passion. Thus they sometimes describe five kinds of gods that are worshipable, but because they think that the actual truth is impersonal Brahman, they dispose of all worshipable objects at the ultimate end. In conclusion, the different qualities of the material modes of nature can be purified through association with persons who are of transcendental nature."
      }
     ],
     "hi": [
@@ -580,20 +580,28 @@
       "meaning": "demigods"
      },
      {
-      "word": "yakṣa-rakṣāṁsi rājasāḥ",
-      "meaning": "those who are in the mode of passion worship demons"
+      "word": "yakṣa-rakṣāṁsi",
+      "meaning": "demons"
+     },
+     {
+      "word": "rājasāḥ",
+      "meaning": "those who are in the mode of passion"
      },
      {
       "word": "pretān",
-      "meaning": "dead spirits"
+      "meaning": "spirits of the dead"
      },
      {
       "word": "bhūta-gaṇān",
       "meaning": "ghosts"
      },
      {
-      "word": "ca anye",
-      "meaning": "and others"
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "anye",
+      "meaning": "others"
      },
      {
       "word": "yajante",
@@ -651,7 +659,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/4/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/4/"
   },
   {
    "id": "bg-17-005-006",
@@ -660,10 +668,10 @@
    "verseEnd": 6,
    "label": "17.5-6",
    "sanskrit": [
-    "अशास्त्रविहितं घोरं तप्यन्ते ये तपो जनाः ।",
-    "दम्भाहंकारसंयुक्ताः कामरागबलान्विताः ॥५॥",
-    "कर्षयन्तः शरीरस्थं भूतग्राममचेतसः ।",
-    "मां चैवान्तःशरीरस्थं तान्विद्ध्यासुरनिश्चयान् ॥६॥"
+    "अशास्त्रविहितं घोरं तप्यन्ते ये तपो जना: ।",
+    "दम्भाहङ्कारसंयुक्ता: कामरागबलान्विता: ॥ ५ ॥",
+    "कर्षयन्त: शरीरस्थं भूतग्राममचेतस: ।",
+    "मां चैवान्त: शरीरस्थं तान्विद्ध्यासुरनिश्चयान् ॥ ६ ॥"
    ],
    "transliteration": [
     "aśāstra-vihitaṁ ghoraṁ",
@@ -676,14 +684,14 @@
     "tān viddhy āsura-niścayān"
    ],
    "translation": {
-    "en": "Those who undergo severe austerities and penances not recommended in the scriptures, performing them out of pride, egotism, lust and attachment, who are impelled by passion and who torture their bodily organs as well as the Supersoul dwelling within are to be known as demons.",
+    "en": "Those who undergo severe austerities and penances not recommended in the scriptures, performing them out of pride and egoism, who are impelled by lust and attachment, who are foolish and who torture the material elements of the body as well as the Supersoul dwelling within, are to be known as demons.",
     "hi": "जो लोग शास्त्रों में अननुशंसित कठोर तप एवं तपस्या करते हैं, उन्हें गर्व, अहंकार, वासना एवं आसक्ति से करते हैं, जो रजोगुण से प्रेरित हैं और जो अपने शारीरिक अंगों के साथ-साथ भीतर निवास करने वाले परमात्मा को भी कष्ट देते हैं, उन्हें असुर समझना चाहिए।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "There are persons who manufacture modes of austerity and penances which are not mentioned in the scriptural injunctions. For instance, fasting for some ulterior purpose, such as to promote a purely political end, is not mentioned in the scriptural directions. The scriptures recommend fasting for spiritual advancement, not for some political end or social purpose. Persons who take to such austerities are, according to <i>Bhagavad-gītā,</i> certainly demoniac. Their acts are against the scriptural injunction and are not beneficial for the people in general. Actually, they act out of pride, false ego, lust and attachment for material enjoyment. By such activities, not only are the combination of material elements of which the body is constructed disturbed, but also the Supreme Personality of Godhead Himself living within the body. Such unauthorized fasting or austerities for some political end are certainly very disturbing to others. They are not mentioned in the Vedic literature. A demoniac person may think that he can force his enemy or other parties to comply with his desire by this method, but sometimes one dies by such fasting. These acts are not approved by the Supreme Personality of Godhead, and He says that those who engage in them are demons. Such demonstrations are insults to the Supreme Personality of Godhead because they are enacted in disobedience to the Vedic scriptural injunctions. The word <i>acetasaḥ</i> is significant in this connection—persons of normal mental condition must obey the scriptural injunctions. Those who are not in such a position neglect and disobey the scriptures and manufacture their own way of austerities and penances. One should always remember the ultimate end of the demoniac people, as described in the previous chapter. The Lord forces them to take birth in the womb of demoniac persons. Consequently they will live by demoniac principles life after life without knowing their relationship with the Supreme Personality of Godhead. If, however, such persons are fortunate enough to be guided by a spiritual master who can direct them to the path of Vedic wisdom, they can get out of this entanglement and ultimately achieve the supreme goal."
+      "text": "There are persons who manufacture modes of austerity and penance which are not mentioned in the scriptural injunctions. For instance, fasting for some ulterior purpose, such as to promote a purely political end, is not mentioned in the scriptural directions. The scriptures recommend fasting for spiritual advancement, not for some political end or social purpose. Persons who take to such austerities are, according to <i>Bhagavad-gītā,</i> certainly demoniac. Their acts are against the scriptural injunctions and are not beneficial for the people in general. Actually, they act out of pride, false ego, lust and attachment for material enjoyment. By such activities, not only is the combination of material elements of which the body is constructed disturbed, but also the Supreme Personality of Godhead Himself living within the body. Such unauthorized fasting or austerities for some political end are certainly very disturbing to others. They are not mentioned in the Vedic literature. A demoniac person may think that he can force his enemy or other parties to comply with his desire by this method, but sometimes one dies by such fasting. These acts are not approved by the Supreme Personality of Godhead, and He says that those who engage in them are demons. Such demonstrations are insults to the Supreme Personality of Godhead because they are enacted in disobedience to the Vedic scriptural injunctions. The word <i>acetasaḥ</i> is significant in this connection. Persons of normal mental condition must obey the scriptural injunctions. Those who are not in such a position neglect and disobey the scriptures and manufacture their own way of austerities and penances. One should always remember the ultimate end of the demoniac people, as described in the previous chapter. The Lord forces them to take birth in the wombs of demoniac persons. Consequently they will live by demoniac principles life after life without knowing their relationship with the Supreme Personality of Godhead. If, however, such persons are fortunate enough to be guided by a spiritual master who can direct them to the path of Vedic wisdom, they can get out of this entanglement and ultimately achieve the supreme goal."
      }
     ],
     "hi": [
@@ -697,7 +705,7 @@
     "en": [
      {
       "word": "aśāstra",
-      "meaning": "not mentioned in the scriptures"
+      "meaning": "not in the scriptures"
      },
      {
       "word": "vihitam",
@@ -709,11 +717,11 @@
      },
      {
       "word": "tapyante",
-      "meaning": "undergo penances"
+      "meaning": "undergo"
      },
      {
       "word": "ye",
-      "meaning": "those"
+      "meaning": "those who"
      },
      {
       "word": "tapaḥ",
@@ -725,11 +733,11 @@
      },
      {
       "word": "dambha",
-      "meaning": "pride"
+      "meaning": "with pride"
      },
      {
       "word": "ahaṅkāra",
-      "meaning": "egotism"
+      "meaning": "and egoism"
      },
      {
       "word": "saṁyuktāḥ",
@@ -737,19 +745,19 @@
      },
      {
       "word": "kāma",
-      "meaning": "lust"
+      "meaning": "of lust"
      },
      {
       "word": "rāga",
-      "meaning": "attachment"
+      "meaning": "and attachment"
      },
      {
       "word": "bala",
-      "meaning": "force"
+      "meaning": "by the force"
      },
      {
       "word": "anvitāḥ",
-      "meaning": "impelled by"
+      "meaning": "impelled"
      },
      {
       "word": "karṣayantaḥ",
@@ -760,16 +768,16 @@
       "meaning": "situated within the body"
      },
      {
-      "word": "bhūtagrāmam",
-      "meaning": "combination of material elements"
+      "word": "bhūta-grāmam",
+      "meaning": "the combination of material elements"
      },
      {
       "word": "acetasaḥ",
-      "meaning": "by such a misled mentality"
+      "meaning": "having a misled mentality"
      },
      {
       "word": "mām",
-      "meaning": "to Me"
+      "meaning": "Me"
      },
      {
       "word": "ca",
@@ -796,12 +804,8 @@
       "meaning": "understand"
      },
      {
-      "word": "āsura",
-      "meaning": "demons"
-     },
-     {
-      "word": "niścayān",
-      "meaning": "certainly."
+      "word": "āsura-niścayān",
+      "meaning": "demons."
      }
     ],
     "hi": [
@@ -915,7 +919,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/5-6/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/5-6/"
   },
   {
    "id": "bg-17-007",
@@ -924,8 +928,8 @@
    "verseEnd": 7,
    "label": "17.7",
    "sanskrit": [
-    "आहारस्त्वपि सर्वस्य त्रिविधो भवति प्रियः ।",
-    "यज्ञस्तपस्तथा दानं तेषां भेदमिमं शृणु ॥७॥"
+    "आहारस्त्वपि सर्वस्य त्रिविधो भवति प्रिय: ।",
+    "यज्ञस्तपस्तथा दानं तेषां भेदमिमं श‍ृणु ॥ ७ ॥"
    ],
    "transliteration": [
     "āhāras tv api sarvasya",
@@ -934,14 +938,14 @@
     "teṣāṁ bhedam imaṁ śṛṇu"
    ],
    "translation": {
-    "en": "Even food of which all partake is of three kinds, according to the three modes of material nature. The same is true of sacrifices, austerities and charity. Listen, and I shall tell you of the distinctions of these.",
+    "en": "Even the food each person prefers is of three kinds, according to the three modes of material nature. The same is true of sacrifices, austerities and charity. Now hear of the distinctions between them.",
     "hi": "जिस भोजन को सभी ग्रहण करते हैं, वह भी भौतिक प्रकृति के तीन गुणों के अनुसार तीन प्रकार का होता है। यही बात यज्ञ, तप एवं दान पर भी लागू होती है। सुनो, मैं तुम्हें इनके भेद बताऊँगा।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "In terms of different situations and the modes of material nature, there are differences in the manner of eating, performing sacrifices, austerities and charities. They are not all conducted on the same level. Those who can understand analytically what kind of performances are in what modes of material nature are actually wise; those who consider all kinds of sacrifice or foods or charity to be the same cannot discriminate, and they are foolish. There are missionary workers who advocate that one can do whatever he likes and attain perfection. But these foolish guides are not acting according to the direction of the scripture. They are manufacturing ways and misleading the people in general."
+      "text": "In terms of different situations in the modes of material nature, there are differences in the manner of eating and performing sacrifices, austerities and charities. They are not all conducted on the same level. Those who can understand analytically what kind of performances are in what modes of material nature are actually wise; those who consider all kinds of sacrifice or food or charity to be the same cannot discriminate, and they are foolish. There are missionary workers who advocate that one can do whatever he likes and attain perfection. But these foolish guides are not acting according to the direction of the scripture. They are manufacturing ways and misleading the people in general."
      }
     ],
     "hi": [
@@ -970,12 +974,12 @@
       "meaning": "of everyone"
      },
      {
-      "word": "trividhaḥ",
-      "meaning": "three kinds"
+      "word": "tri-vidhaḥ",
+      "meaning": "of three kinds"
      },
      {
       "word": "bhavati",
-      "meaning": "there are"
+      "meaning": "there is"
      },
      {
       "word": "priyaḥ",
@@ -1003,11 +1007,11 @@
      },
      {
       "word": "bhedam",
-      "meaning": "differences"
+      "meaning": "the differences"
      },
      {
       "word": "imam",
-      "meaning": "thus"
+      "meaning": "this"
      },
      {
       "word": "śṛṇu",
@@ -1077,70 +1081,29 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/7/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/7/"
   },
   {
-   "id": "bg-17-008-010",
+   "id": "bg-17-008",
    "chapter": 17,
    "verseStart": 8,
-   "verseEnd": 10,
-   "label": "17.8-10",
+   "verseEnd": 8,
+   "label": "17.8",
    "sanskrit": [
-    "आयुःसत्त्वबलारोग्यसुखप्रीतिविवर्धनाः ।",
-    "रस्याः स्निग्धाः स्थिरा हृद्या आहाराः सात्त्विकप्रियाः ॥८॥",
-    "कट्वम्ललवणात्युष्णतीक्ष्णरूक्षविदाहिनः ।",
-    "आहारा राजसस्येष्टा दुःखशोकामयप्रदाः ॥९॥",
-    "यातयामं गतरसं पूति पर्युषितं च यत् ।",
-    "उच्छिष्टमपि चामेध्यं भोजनं तामसप्रियम् ॥१०॥"
+    "आयु:सत्त्वबलारोग्यसुखप्रीतिविवर्धना: ।",
+    "रस्या: स्‍निग्धा: स्थिरा हृद्या आहारा: सात्त्विकप्रिया: ॥ ८ ॥"
    ],
    "transliteration": [
     "āyuḥ-sattva-balārogya-",
     "sukha-prīti-vivardhanāḥ",
     "rasyāḥ snigdhāḥ sthirā hṛdyā",
-    "āhārāḥ sāttvika-priyāḥ",
-    "kaṭv-amla-lavaṇāty-uṣṇa-",
-    "tīkṣṇa-rūkṣa-vidāhinaḥ",
-    "āhārā rājasasyeṣṭā",
-    "duḥkha-śokāmaya-pradāḥ",
-    "yāta-yāmaṁ gata-rasaṁ",
-    "pūti paryuṣitaṁ ca yat",
-    "ucchiṣṭam api cāmedhyaṁ",
-    "bhojanaṁ tāmasa-priyam"
+    "āhārāḥ sāttvika-priyāḥ"
    ],
    "translation": {
-    "en": "Foods in the mode of goodness increase the duration of life, purify one's existence and give strength, health, happiness and satisfaction. Such nourishing foods are sweet, juicy, fattening and palatable. Foods that are too bitter, too sour, salty, pungent, dry and hot, are liked by people in the modes of passion. Such foods cause pain, distress, and disease. Food cooked more than three hours before being eaten, which is tasteless, stale, putrid, decomposed and unclean, is food liked by people in the mode of ignorance.",
-    "hi": "सतोगुणी भोजन आयु की अवधि को बढ़ाते हैं, मनुष्य के अस्तित्व को शुद्ध करते हैं तथा बल, स्वास्थ्य, सुख एवं सन्तोष प्रदान करते हैं। ऐसे पौष्टिक भोजन मधुर, रसयुक्त, चिकने एवं रुचिकर होते हैं। जो भोजन अत्यधिक कटु, अत्यधिक खट्टे, नमकीन, तीखे, रूखे एवं गरम होते हैं, वे रजोगुणी लोगों को प्रिय होते हैं। ऐसे भोजन पीड़ा, क्लेश एवं रोग उत्पन्न करते हैं। जो भोजन खाए जाने से तीन घण्टे से अधिक पूर्व पकाया गया हो, जो स्वादहीन, बासी, सड़ा हुआ, विकृत एवं अपवित्र हो, वह भोजन तमोगुणी लोगों को प्रिय होता है।"
+    "en": "Foods dear to those in the mode of goodness increase the duration of life, purify one’s existence and give strength, health, happiness and satisfaction. Such foods are juicy, fatty, wholesome, and pleasing to the heart.",
+    "hi": null
    },
-   "purport": {
-    "en": [
-     {
-      "type": "p",
-      "text": "The purpose of food is to increase the duration of life, purify the mind and aid bodily strength. This is its only purpose. In the past, great authorities selected those foods that best aid health and increase life's duration, such as milk products, sugar, rice, wheat, fruits and vegetables. These foods are very dear to those in the mode of goodness. Some other foods, such as baked corn and molasses, while not very palatable in themselves, can be made pleasant when mixed with milk or other foods. They are then in the mode of goodness. All these foods are pure by nature. They are quite distinct from untouchable things like meat and liquor. Fatty foods, as mentioned in the eighth verse, have no connection with animal fat obtained by slaughter. Animal fat is available in the form of milk, which is the most wonderful of all foods. Milk, butter, cheese and similar products give animal fat in a form which rules out any need for the killing of innocent creatures. It is only through brute mentality that this killing goes on. The civilized method of obtaining needed fat is by milk. Slaughter is the way of subhumans. Protein is amply available through split peas, <i>dhall,</i> whole wheat, etc."
-     },
-     {
-      "type": "p",
-      "text": "Foods in the mode of passion, which are bitter, too salty, or too hot or overly mixed with red pepper, cause misery by producing mucous in the stomach, leading to disease. Foods in the mode of ignorance or darkness are essentially those that are not fresh. Any food cooked more than three hours before it is eaten (except <i>prasādam,</i> food offered to the Lord) is considered to be in the mode of darkness. Because they are decomposing, such foods give a bad odor, which often attracts people in this mode but repulses those in the mode of goodness."
-     },
-     {
-      "type": "p",
-      "text": "Remnants of food may be eaten only when they are part of a meal that was first offered to the Supreme Lord or first eaten by saintly persons, especially the spiritual master. Otherwise the remnants of food are considered to be in the mode of darkness, and they increase infection or disease. Such foodstuffs, although very palatable to persons in the mode of darkness, are neither liked nor even touched by those in the mode of goodness. The best food is the remnant of what is offered to the Supreme Personality of Godhead. In <i>Bhagavad-gītā</i> the Supreme Lord says that He accepts preparations of vegetables, flour and milk when offered with devotion. <i>Patraṁ puṣpaṁ phalaṁ toyam.</i> Of course, devotion and love are the chief things which the Supreme Personality of Godhead accepts. But it is also mentioned that the <i>prasādam</i> should be prepared in a particular way. Any food prepared by the injunction of the scripture offered to the Supreme Personality of Godhead can be taken even if prepared long, long ago, because such food is transcendental. Therefore to make food antiseptic, eatable and palatable for all persons, one should offer food to the Supreme Personality of Godhead."
-     }
-    ],
-    "hi": [
-     {
-      "type": "p",
-      "text": "भोजन का प्रयोजन आयु की अवधि को बढ़ाना, मन को शुद्ध करना तथा शारीरिक बल में सहायता करना है। यही इसका एकमात्र प्रयोजन है। भूतकाल में महान् अधिकारियों ने उन भोजनों का चयन किया जो स्वास्थ्य में सर्वाधिक सहायक होते हैं और आयु की अवधि को बढ़ाते हैं, जैसे दुग्ध-पदार्थ, शर्करा, चावल, गेहूँ, फल एवं शाक। ये भोजन सतोगुणी व्यक्तियों को अत्यन्त प्रिय हैं। कुछ अन्य भोजन, जैसे भुना हुआ अन्न एवं गुड़, यद्यपि स्वयं में अधिक रुचिकर नहीं होते, किन्तु दूध अथवा अन्य भोजनों के साथ मिलाए जाने पर सुखद बनाए जा सकते हैं। तब वे सतोगुण में होते हैं। ये सभी भोजन स्वभाव से शुद्ध हैं। वे मांस एवं मद्य जैसी अस्पृश्य वस्तुओं से सर्वथा भिन्न हैं। चिकने भोजन, जैसा कि आठवें श्लोक में उल्लिखित है, वध से प्राप्त पशु-चर्बी से कोई सम्बन्ध नहीं रखते। पशु-चर्बी दूध के रूप में उपलब्ध है, जो समस्त भोजनों में सर्वाधिक अद्भुत है। दूध, मक्खन, पनीर एवं इसी प्रकार के पदार्थ पशु-चर्बी को ऐसे रूप में प्रदान करते हैं जो निर्दोष प्राणियों के वध की किसी भी आवश्यकता को समाप्त कर देता है। यह वध केवल पाशविक मनोवृत्ति के कारण ही चलता रहता है। आवश्यक चर्बी प्राप्त करने की सभ्य विधि दूध है। वध अधम मनुष्यों का मार्ग है। प्रोटीन दाल, दलहन, समूचे गेहूँ आदि से पर्याप्त मात्रा में उपलब्ध है।"
-     },
-     {
-      "type": "p",
-      "text": "रजोगुणी भोजन, जो कटु, अत्यधिक नमकीन, अथवा अत्यधिक गरम अथवा अत्यधिक लाल मिर्च से युक्त होते हैं, आमाशय में श्लेष्मा उत्पन्न करके दुःख का कारण बनते हैं, जिससे रोग होता है। तमोगुणी अथवा अन्धकार के गुण वाले भोजन वस्तुतः वे हैं जो ताज़े नहीं होते। जो भी भोजन खाए जाने से तीन घण्टे से अधिक पूर्व पकाया गया हो (प्रसादम् को छोड़कर, अर्थात् भगवान् को अर्पित भोजन), वह तमोगुण में माना जाता है। क्योंकि वे विकृत हो रहे होते हैं, ऐसे भोजन दुर्गन्ध देते हैं, जो प्रायः इस गुण वाले लोगों को आकृष्ट करती है किन्तु सतोगुणी लोगों को विकर्षित करती है।"
-     },
-     {
-      "type": "p",
-      "text": "भोजन के अवशेष केवल तभी खाए जा सकते हैं जब वे ऐसे भोजन का अंश हों जो पहले परमेश्वर को अर्पित किया गया हो अथवा पहले सन्त-पुरुषों ने, विशेषतः आध्यात्मिक गुरु ने, ग्रहण किया हो। अन्यथा भोजन के अवशेष तमोगुण में माने जाते हैं, और वे संक्रमण अथवा रोग को बढ़ाते हैं। ऐसे खाद्य-पदार्थ, यद्यपि तमोगुणी व्यक्तियों को अत्यन्त रुचिकर होते हैं, सतोगुणी व्यक्तियों द्वारा न तो रुचिकर माने जाते हैं और न ही स्पर्श किए जाते हैं। सर्वोत्तम भोजन वह अवशेष है जो पूर्ण पुरुषोत्तम भगवान् को अर्पित किया जाता है। <i>भगवद्गीता</i> में परमेश्वर कहते हैं कि वे शाक, आटे एवं दूध के पदार्थों को स्वीकार करते हैं, जब वे भक्ति सहित अर्पित किए जाते हैं। पत्रं पुष्पं फलं तोयम्। निस्सन्देह, भक्ति एवं प्रेम ही प्रमुख वस्तुएँ हैं जिन्हें पूर्ण पुरुषोत्तम भगवान् स्वीकार करते हैं। किन्तु यह भी उल्लिखित है कि प्रसादम् किसी विशेष रीति से तैयार किया जाना चाहिए। शास्त्र के आदेश के अनुसार तैयार किया गया कोई भी भोजन जो पूर्ण पुरुषोत्तम भगवान् को अर्पित किया गया हो, वह दीर्घकाल पूर्व तैयार किया गया हो तो भी ग्रहण किया जा सकता है, क्योंकि ऐसा भोजन दिव्य है। अतः भोजन को सभी व्यक्तियों के लिए विषाणुरहित, खाद्य एवं रुचिकर बनाने हेतु, मनुष्य को भोजन पूर्ण पुरुषोत्तम भगवान् को अर्पित करना चाहिए।"
-     }
-    ]
-   },
+   "purport": null,
    "synonyms": {
     "en": [
      {
@@ -1165,7 +1128,7 @@
      },
      {
       "word": "prīti",
-      "meaning": "satisfaction"
+      "meaning": "and satisfaction"
      },
      {
       "word": "vivardhanāḥ",
@@ -1193,73 +1156,196 @@
      },
      {
       "word": "sāttvika",
-      "meaning": "goodness"
+      "meaning": "to one in goodness"
      },
      {
       "word": "priyāḥ",
       "meaning": "palatable."
      }
     ],
-    "hi": [
-     {
-      "word": "आयुः",
-      "meaning": "आयु की अवधि"
-     },
-     {
-      "word": "सत्त्व",
-      "meaning": "अस्तित्व"
-     },
-     {
-      "word": "बल",
-      "meaning": "बल"
-     },
-     {
-      "word": "आरोग्य",
-      "meaning": "स्वास्थ्य"
-     },
-     {
-      "word": "सुख",
-      "meaning": "सुख"
-     },
-     {
-      "word": "प्रीति",
-      "meaning": "और सन्तोष"
-     },
-     {
-      "word": "विवर्धनाः",
-      "meaning": "बढ़ाने वाले"
-     },
-     {
-      "word": "रस्याः",
-      "meaning": "रसयुक्त"
-     },
-     {
-      "word": "स्निग्धाः",
-      "meaning": "चिकने"
-     },
-     {
-      "word": "स्थिराः",
-      "meaning": "टिकाऊ"
-     },
-     {
-      "word": "हृद्याः",
-      "meaning": "हृदय को प्रिय"
-     },
-     {
-      "word": "आहाराः",
-      "meaning": "भोजन"
-     },
-     {
-      "word": "सात्त्विक",
-      "meaning": "सतोगुणी को"
-     },
-     {
-      "word": "प्रियाः",
-      "meaning": "रुचिकर।"
-     }
-    ]
+    "hi": null
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/8-10/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/8/"
+  },
+  {
+   "id": "bg-17-009",
+   "chapter": 17,
+   "verseStart": 9,
+   "verseEnd": 9,
+   "label": "17.9",
+   "sanskrit": [
+    "कट्‌वम्ललवणात्युष्णतीक्ष्णरूक्षविदाहिन: ।",
+    "आहारा राजसस्येष्टा दु:खशोकामयप्रदा: ॥ ९ ॥"
+   ],
+   "transliteration": [
+    "kaṭv-amla-lavaṇāty-uṣṇa-",
+    "tīkṣṇa-rūkṣa-vidāhinaḥ",
+    "āhārā rājasasyeṣṭā",
+    "duḥkha-śokāmaya-pradāḥ"
+   ],
+   "translation": {
+    "en": "Foods that are too bitter, too sour, salty, hot, pungent, dry and burning are dear to those in the mode of passion. Such foods cause distress, misery and disease.",
+    "hi": null
+   },
+   "purport": null,
+   "synonyms": {
+    "en": [
+     {
+      "word": "kaṭu",
+      "meaning": "bitter"
+     },
+     {
+      "word": "amla",
+      "meaning": "sour"
+     },
+     {
+      "word": "lavaṇa",
+      "meaning": "salty"
+     },
+     {
+      "word": "ati-uṣṇa",
+      "meaning": "very hot"
+     },
+     {
+      "word": "tīkṣṇa",
+      "meaning": "pungent"
+     },
+     {
+      "word": "rūkṣa",
+      "meaning": "dry"
+     },
+     {
+      "word": "vidāhinaḥ",
+      "meaning": "burning"
+     },
+     {
+      "word": "āhārāḥ",
+      "meaning": "food"
+     },
+     {
+      "word": "rājasasya",
+      "meaning": "to one in the mode of passion"
+     },
+     {
+      "word": "iṣṭāḥ",
+      "meaning": "palatable"
+     },
+     {
+      "word": "duḥkha",
+      "meaning": "distress"
+     },
+     {
+      "word": "śoka",
+      "meaning": "misery"
+     },
+     {
+      "word": "āmaya",
+      "meaning": "disease"
+     },
+     {
+      "word": "pradāḥ",
+      "meaning": "causing."
+     }
+    ],
+    "hi": null
+   },
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/9/"
+  },
+  {
+   "id": "bg-17-010",
+   "chapter": 17,
+   "verseStart": 10,
+   "verseEnd": 10,
+   "label": "17.10",
+   "sanskrit": [
+    "यातयामं गतरसं पूति पर्युषितं च यत् ।",
+    "उच्छिष्टमपि चामेध्यं भोजनं तामसप्रियम् ॥ १० ॥"
+   ],
+   "transliteration": [
+    "yāta-yāmaṁ gata-rasaṁ",
+    "pūti paryuṣitaṁ ca yat",
+    "ucchiṣṭam api cāmedhyaṁ",
+    "bhojanaṁ tāmasa-priyam"
+   ],
+   "translation": {
+    "en": "Food prepared more than three hours before being eaten, food that is tasteless, decomposed and putrid, and food consisting of remnants and untouchable things is dear to those in the mode of darkness.",
+    "hi": null
+   },
+   "purport": {
+    "en": [
+     {
+      "type": "p",
+      "text": "The purpose of food is to increase the duration of life, purify the mind and aid bodily strength. This is its only purpose. In the past, great authorities selected those foods that best aid health and increase life’s duration, such as milk products, sugar, rice, wheat, fruits and vegetables. These foods are very dear to those in the mode of goodness. Some other foods, such as baked corn and molasses, while not very palatable in themselves, can be made pleasant when mixed with milk or other foods. They are then in the mode of goodness. All these foods are pure by nature. They are quite distinct from untouchable things like meat and liquor. Fatty foods, as mentioned in the eighth verse, have no connection with animal fat obtained by slaughter. Animal fat is available in the form of milk, which is the most wonderful of all foods. Milk, butter, cheese and similar products give animal fat in a form which rules out any need for the killing of innocent creatures. It is only through brute mentality that this killing goes on. The civilized method of obtaining needed fat is by milk. Slaughter is the way of subhumans. Protein is amply available through split peas, <i>dāl,</i> whole wheat, etc."
+     },
+     {
+      "type": "p",
+      "text": "Foods in the mode of passion, which are bitter, too salty, or too hot or overly mixed with red pepper, cause misery by reducing the mucus in the stomach, leading to disease. Foods in the mode of ignorance or darkness are essentially those that are not fresh. Any food cooked more than three hours before it is eaten (except <i>prasādam,</i> food offered to the Lord) is considered to be in the mode of darkness. Because they are decomposing, such foods give a bad odor, which often attracts people in this mode but repulses those in the mode of goodness."
+     },
+     {
+      "type": "p",
+      "text": "Remnants of food may be eaten only when they are part of a meal that was first offered to the Supreme Lord or first eaten by saintly persons, especially the spiritual master. Otherwise the remnants of food are considered to be in the mode of darkness, and they increase infection or disease. Such foodstuffs, although very palatable to persons in the mode of darkness, are neither liked nor even touched by those in the mode of goodness. The best food is the remnants of what is offered to the Supreme Personality of Godhead. In <i>Bhagavad-gītā</i> the Supreme Lord says that He accepts preparations of vegetables, flour and milk when offered with devotion. <i>Patraṁ puṣpaṁ phalaṁ toyam.</i> Of course, devotion and love are the chief things which the Supreme Personality of Godhead accepts. But it is also mentioned that the <i>prasādam</i> should be prepared in a particular way. Any food prepared by the injunctions of the scripture and offered to the Supreme Personality of Godhead can be taken even if prepared long, long ago, because such food is transcendental. Therefore to make food antiseptic, eatable and palatable for all persons, one should offer food to the Supreme Personality of Godhead."
+     }
+    ],
+    "hi": null
+   },
+   "synonyms": {
+    "en": [
+     {
+      "word": "yāta-yāmam",
+      "meaning": "food cooked three hours before being eaten"
+     },
+     {
+      "word": "gata-rasam",
+      "meaning": "tasteless"
+     },
+     {
+      "word": "pūti",
+      "meaning": "bad-smelling"
+     },
+     {
+      "word": "paryuṣitam",
+      "meaning": "decomposed"
+     },
+     {
+      "word": "ca",
+      "meaning": "also"
+     },
+     {
+      "word": "yat",
+      "meaning": "that which"
+     },
+     {
+      "word": "ucchiṣṭam",
+      "meaning": "remnants of food eaten by others"
+     },
+     {
+      "word": "api",
+      "meaning": "also"
+     },
+     {
+      "word": "ca",
+      "meaning": "and"
+     },
+     {
+      "word": "amedhyam",
+      "meaning": "untouchable"
+     },
+     {
+      "word": "bhojanam",
+      "meaning": "eating"
+     },
+     {
+      "word": "tāmasa",
+      "meaning": "to one in the mode of darkness"
+     },
+     {
+      "word": "priyam",
+      "meaning": "dear."
+     }
+    ],
+    "hi": null
+   },
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/10/"
   },
   {
    "id": "bg-17-011",
@@ -1268,24 +1354,24 @@
    "verseEnd": 11,
    "label": "17.11",
    "sanskrit": [
-    "अफलाङ्क्षिभिर्यज्ञो विधिदृष्टो य इज्यते ।",
-    "यष्टव्यमेवेति मनः समाधाय स सात्त्विकः ॥११॥"
+    "अफलाकाङ्‌‍क्षिभिर्यज्ञो विधिदिष्टो य इज्यते ।",
+    "यष्टव्यमेवेति मन: समाधाय स सात्त्विक: ॥ ११ ॥"
    ],
    "transliteration": [
     "aphalākāṅkṣibhir yajño",
-    "vidhi-dṛṣṭo ya ijyate",
+    "vidhi-diṣṭo ya ijyate",
     "yaṣṭavyam eveti manaḥ",
     "samādhāya sa sāttvikaḥ"
    ],
    "translation": {
-    "en": "Of sacrifices, that sacrifice performed according to duty and to scriptural rules, and with no expectation of reward, is of the nature of goodness.",
+    "en": "Of sacrifices, the sacrifice performed according to the directions of scripture, as a matter of duty, by those who desire no reward, is of the nature of goodness.",
     "hi": "यज्ञों में, जो यज्ञ कर्तव्य एवं शास्त्रीय नियमों के अनुसार तथा फल की किसी अपेक्षा के बिना सम्पन्न किया जाता है, वह सतोगुणी स्वभाव का होता है।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "The general tendency is to offer sacrifice with some purpose in mind, but here it is stated that sacrifice should be performed without any such desire. It should be done as a matter of duty. Take, for example, the performance of rituals in temples or in churches. Generally they are performed with the purpose of material benefit, but that is not in the mode of goodness. One should go to a temple or church as a matter of duty, offer respect to the Supreme Personality of Godhead and offer flowers and eatables. Everyone thinks that there is no use in going to the temple just to worship God. But worship for economic benefit is not recommended in the scriptural injunction. One should go simply to offer respect to the Deity. That will place one in the mode of goodness. It is the duty of every civilized man to obey the injunctions of the scriptures and offer respect to the Supreme Personality of Godhead."
+      "text": "The general tendency is to offer sacrifice with some purpose in mind, but here it is stated that sacrifice should be performed without any such desire. It should be done as a matter of duty. Take, for example, the performance of rituals in temples or in churches. Generally they are performed with the purpose of material benefit, but that is not in the mode of goodness. One should go to a temple or church as a matter of duty, offer respect to the Supreme Personality of Godhead and offer flowers and eatables without any purpose of obtaining material benefit. Everyone thinks that there is no use in going to the temple just to worship God. But worship for economic benefit is not recommended in the scriptural injunctions. One should go simply to offer respect to the Deity. That will place one in the mode of goodness. It is the duty of every civilized man to obey the injunctions of the scriptures and offer respect to the Supreme Personality of Godhead."
      }
     ],
     "hi": [
@@ -1298,28 +1384,24 @@
    "synonyms": {
     "en": [
      {
-      "word": "aphala-kāñkṣibhiḥ",
-      "meaning": "devoid of desire for result"
+      "word": "aphala-ākāṅkṣibhiḥ",
+      "meaning": "by those devoid of desire for result"
      },
      {
       "word": "yajñaḥ",
       "meaning": "sacrifice"
      },
      {
-      "word": "vidhi",
-      "meaning": "accordingly"
-     },
-     {
-      "word": "dṛṣtaḥ",
-      "meaning": "direction"
+      "word": "vidhi-diṣṭaḥ",
+      "meaning": "according to the direction of scripture"
      },
      {
       "word": "yaḥ",
-      "meaning": "anyone"
+      "meaning": "which"
      },
      {
       "word": "ijyate",
-      "meaning": "performs"
+      "meaning": "is performed"
      },
      {
       "word": "yaṣṭavyam",
@@ -1339,15 +1421,15 @@
      },
      {
       "word": "samādhāya",
-      "meaning": "fixed in"
+      "meaning": "fixing"
      },
      {
       "word": "saḥ",
-      "meaning": "he"
+      "meaning": "it"
      },
      {
       "word": "sāttvikaḥ",
-      "meaning": "is in the mode of goodness."
+      "meaning": "in the mode of goodness."
      }
     ],
     "hi": [
@@ -1405,7 +1487,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/11/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/11/"
   },
   {
    "id": "bg-17-012",
@@ -1415,7 +1497,7 @@
    "label": "17.12",
    "sanskrit": [
     "अभिसन्धाय तु फलं दम्भार्थमपि चैव यत् ।",
-    "इज्यते भरतश्रेष्ठ तं यज्ञं विद्धि राजसम् ॥१२॥"
+    "इज्यते भरतश्रेष्ठ तं यज्ञं विद्धि राजसम् ॥ १२ ॥"
    ],
    "transliteration": [
     "abhisandhāya tu phalaṁ",
@@ -1424,7 +1506,7 @@
     "taṁ yajñaṁ viddhi rājasam"
    ],
    "translation": {
-    "en": "But that sacrifice performed for some material end or benefit or performed ostentatiously, out of pride, is of the nature of passion, O chief of the Bhāratas.",
+    "en": "But the sacrifice performed for some material benefit, or for the sake of pride, O chief of the Bhāratas, you should know to be in the mode of passion.",
     "hi": "किन्तु हे भरतश्रेष्ठ! जो यज्ञ किसी भौतिक लक्ष्य अथवा लाभ हेतु सम्पन्न किया जाता है, अथवा गर्ववश आडम्बरपूर्वक किया जाता है, वह रजोगुणी स्वभाव का होता है।"
    },
    "purport": {
@@ -1461,7 +1543,7 @@
      },
      {
       "word": "artham",
-      "meaning": "material benefits"
+      "meaning": "for the sake of"
      },
      {
       "word": "api",
@@ -1481,7 +1563,7 @@
      },
      {
       "word": "ijyate",
-      "meaning": "worship"
+      "meaning": "is performed"
      },
      {
       "word": "bharata-śreṣṭha",
@@ -1567,7 +1649,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/12/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/12/"
   },
   {
    "id": "bg-17-013",
@@ -1576,8 +1658,8 @@
    "verseEnd": 13,
    "label": "17.13",
    "sanskrit": [
-    "विधिहीनमसृष्टान्नं मन्त्रहीनमदक्षिणम् ।",
-    "श्रद्धाविरहितं यज्ञं तामसं परिचक्षते ॥१३॥"
+    "विधिहीनमसृष्टान्नं मन्‍त्रहीनमदक्षिणम् ।",
+    "श्रद्धाविरहितं यज्ञं तामसं परिचक्षते ॥ १३ ॥"
    ],
    "transliteration": [
     "vidhi-hīnam asṛṣṭānnaṁ",
@@ -1586,7 +1668,7 @@
     "tāmasaṁ paricakṣate"
    ],
    "translation": {
-    "en": "And that sacrifice performed in defiance of scriptural injunctions, in which no spiritual food is distributed, no hymns are chanted and no remunerations are made to the priests, and which is faithless—that sacrifice is of the nature of ignorance.",
+    "en": "Any sacrifice performed without regard for the directions of scripture, without distribution of prasādam [spiritual food], without chanting of Vedic hymns and remunerations to the priests, and without faith is considered to be in the mode of ignorance.",
     "hi": "और जो यज्ञ शास्त्रीय आदेशों की अवहेलना में सम्पन्न किया जाता है, जिसमें कोई आध्यात्मिक भोजन वितरित नहीं किया जाता, कोई मन्त्र उच्चारित नहीं किए जाते और पुरोहितों को कोई दक्षिणा नहीं दी जाती, और जो श्रद्धाहीन है—वह यज्ञ तमोगुणी स्वभाव का होता है।"
    },
    "purport": {
@@ -1681,7 +1763,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/13/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/13/"
   },
   {
    "id": "bg-17-014",
@@ -1691,7 +1773,7 @@
    "label": "17.14",
    "sanskrit": [
     "देवद्विजगुरुप्राज्ञपूजनं शौचमार्जवम् ।",
-    "ब्रह्मचर्यमहिंसा च शारीरं तप उच्यते ॥१४॥"
+    "ब्रह्मचर्यमहिंसा च शारीरं तप उच्यते ॥ १४ ॥"
    ],
    "transliteration": [
     "deva-dvija-guru-prājña-",
@@ -1700,14 +1782,14 @@
     "śārīraṁ tapa ucyate"
    ],
    "translation": {
-    "en": "The austerity of the body consists in this: worship of the Supreme Lord, the brāhmaṇas, the spiritual master, and superiors like the father and mother. Cleanliness, simplicity, celibacy and nonviolence are also austerities of the body.",
+    "en": "Austerity of the body consists in worship of the Supreme Lord, the brāhmaṇas, the spiritual master, and superiors like the father and mother, and in cleanliness, simplicity, celibacy and nonviolence.",
     "hi": "शरीर का तप इस प्रकार है: परमेश्वर, ब्राह्मणों, आध्यात्मिक गुरु तथा पिता एवं माता जैसे श्रेष्ठजनों की पूजा। पवित्रता, सरलता, ब्रह्मचर्य एवं अहिंसा भी शरीर के तप हैं।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "The Supreme Godhead here explains the different kinds of austerity and penance. First He explains the austerities and penances practiced by the body. One should offer, or learn to offer, respect to God or to the demigods, the perfect, qualified <i>brāhmaṇas</i> and the spiritual master and superiors like father, mother or any person who is conversant with Vedic knowledge. These should be given proper respect. One should practice cleansing oneself externally and internally, and he should learn to become simple in behavior. He should not do anything which is not sanctioned by the scriptural injunction. He should not indulge in sex outside of married life, for sex is sanctioned in the scripture only in marriage, not otherwise. This is called celibacy. These are penances and austerities as far as the body is concerned."
+      "text": "The Supreme Godhead here explains the different kinds of austerity and penance. First He explains the austerities and penances practiced by the body. One should offer, or learn to offer, respect to God or to the demigods, the perfect, qualified <i>brāhmaṇas</i> and the spiritual master and superiors like father, mother or any person who is conversant with Vedic knowledge. These should be given proper respect. One should practice cleansing oneself externally and internally, and he should learn to become simple in behavior. He should not do anything which is not sanctioned by the scriptural injunctions. He should not indulge in sex outside of married life, for sex is sanctioned in the scripture only in marriage, not otherwise. This is called celibacy. These are penances and austerities as far as the body is concerned."
      }
     ],
     "hi": [
@@ -1721,11 +1803,11 @@
     "en": [
      {
       "word": "deva",
-      "meaning": "the Supreme Lord"
+      "meaning": "of the Supreme Lord"
      },
      {
       "word": "dvija",
-      "meaning": "the brāhmaṇa"
+      "meaning": "the brāhmaṇas"
      },
      {
       "word": "guru",
@@ -1733,7 +1815,7 @@
      },
      {
       "word": "prājña",
-      "meaning": "worshipable personalities"
+      "meaning": "and worshipable personalities"
      },
      {
       "word": "pūjanam",
@@ -1748,7 +1830,7 @@
       "meaning": "simplicity"
      },
      {
-      "word": "brahma-caryam",
+      "word": "brahmacaryam",
       "meaning": "celibacy"
      },
      {
@@ -1827,7 +1909,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/14/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/14/"
   },
   {
    "id": "bg-17-015",
@@ -1837,7 +1919,7 @@
    "label": "17.15",
    "sanskrit": [
     "अनुद्वेगकरं वाक्यं सत्यं प्रियहितं च यत् ।",
-    "स्वाध्यायाभ्यसनं चैव वाङ्मयं तप उच्यते ॥१५॥"
+    "स्वाध्यायाभ्यसनं चैव वाङ्‍मयं तप उच्यते ॥ १५ ॥"
    ],
    "transliteration": [
     "anudvega-karaṁ vākyaṁ",
@@ -1846,14 +1928,14 @@
     "vāṅ-mayaṁ tapa ucyate"
    ],
    "translation": {
-    "en": "Austerity of speech consists in speaking truthfully and beneficially and in avoiding speech that offends. One should also recite the Vedas regularly.",
+    "en": "Austerity of speech consists in speaking words that are truthful, pleasing, beneficial, and not agitating to others, and also in regularly reciting Vedic literature.",
     "hi": "वाणी का तप सत्य एवं हितकर वचन बोलने तथा ऐसी वाणी से बचने में निहित है जो उद्वेग उत्पन्न करे। मनुष्य को नियमित रूप से वेदों का पाठ भी करना चाहिए।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "One should not speak in such a way as to agitate the minds of others. Of course, when a teacher speaks, he can speak the truth for the instruction of his students, but such a teacher should not speak to others who are not his students if he will agitate their minds. This is penance as far as talking is concerned. Besides that, one should not talk nonsense. When speaking in spiritual circles, one's statements must be upheld by the scriptures. One should at once quote from scriptural authority to back up what he is saying. At the same time, such talk should be very pleasurable to the ear. By such discussions, one may derive the highest benefit and elevate human society. There is a limitless stock of Vedic literature, and one should study this. This is called penance of speech."
+      "text": "One should not speak in such a way as to agitate the minds of others. Of course, when a teacher speaks, he can speak the truth for the instruction of his students, but such a teacher should not speak to those who are not his students if he will agitate their minds. This is penance as far as talking is concerned. Besides that, one should not talk nonsense. The process of speaking in spiritual circles is to say something upheld by the scriptures. One should at once quote from scriptural authority to back up what he is saying. At the same time, such talk should be very pleasurable to the ear. By such discussions, one may derive the highest benefit and elevate human society. There is a limitless stock of Vedic literature, and one should study this. This is called penance of speech."
      }
     ],
     "hi": [
@@ -1866,12 +1948,8 @@
    "synonyms": {
     "en": [
      {
-      "word": "anudvega",
+      "word": "anudvega-karam",
       "meaning": "not agitating"
-     },
-     {
-      "word": "karam",
-      "meaning": "producing"
      },
      {
       "word": "vākyam",
@@ -1899,7 +1977,7 @@
      },
      {
       "word": "svādhyāya",
-      "meaning": "Vedic study"
+      "meaning": "of Vedic study"
      },
      {
       "word": "abhyasanam",
@@ -1914,7 +1992,7 @@
       "meaning": "certainly"
      },
      {
-      "word": "vāṅmayaṁ",
+      "word": "vāk-mayam",
       "meaning": "of the voice"
      },
      {
@@ -1989,7 +2067,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/15/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/15/"
   },
   {
    "id": "bg-17-016",
@@ -1998,8 +2076,8 @@
    "verseEnd": 16,
    "label": "17.16",
    "sanskrit": [
-    "मनः प्रसादः सौम्यत्वं मौनमात्मविनिग्रहः ।",
-    "भावसंशुद्धिरित्येतत्तपो मानसमुच्यते ॥१६॥"
+    "मन:प्रसाद: सौम्यत्वं मौनमात्मविनिग्रह: ।",
+    "भावसंश‍ुद्धिरित्येतत्तपो मानसमुच्यते ॥ १६ ॥"
    ],
    "transliteration": [
     "manaḥ-prasādaḥ saumyatvaṁ",
@@ -2008,14 +2086,14 @@
     "tapo mānasam ucyate"
    ],
    "translation": {
-    "en": "And serenity, simplicity, gravity, self-control and purity of thought are the austerities of the mind.",
+    "en": "And satisfaction, simplicity, gravity, self-control and purification of one’s existence are the austerities of the mind.",
     "hi": "और प्रसन्नता, सरलता, गम्भीरता, आत्म-संयम एवं विचार की शुद्धता—ये मन के तप हैं।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "To make the mind austere is to detach it from sense gratification. It should be so trained that it can be always thinking of doing good for others. The best training for the mind is gravity in thought. One should not deviate from Kṛṣṇa consciousness and must always avoid sense gratification. To purify one's nature is to become Kṛṣṇa conscious. Satisfaction of the mind can be obtained only by taking the mind away from thoughts of sense enjoyment. The more we think of sense enjoyment, the more the mind becomes dissatisfied. In the present age we unnecessarily engage the mind in so many different ways for sense gratification, and so there is no possibility of the mind's becoming satisfied. The best course is to divert the mind to the Vedic literature, which is full of satisfying stories, as in the <i>Purāṇas</i> and the <i>Mahābhārata.</i> One can take advantage of this knowledge and thus become purified. The mind should be devoid of duplicity, and one should think of the welfare of all. Silence means that one is always thinking of self-realization. The person in Kṛṣṇa consciousness observes perfect silence in this sense. Control of the mind means detaching the mind from sense enjoyment. One should be straightforward in his dealing and thereby purify his existence. All these qualities together constitute austerity in mental activities."
+      "text": "To make the mind austere is to detach it from sense gratification. It should be so trained that it can be always thinking of doing good for others. The best training for the mind is gravity in thought. One should not deviate from Kṛṣṇa consciousness and must always avoid sense gratification. To purify one’s nature is to become Kṛṣṇa conscious. Satisfaction of the mind can be obtained only by taking the mind away from thoughts of sense enjoyment. The more we think of sense enjoyment, the more the mind becomes dissatisfied. In the present age we unnecessarily engage the mind in so many different ways for sense gratification, and so there is no possibility of the mind’s becoming satisfied. The best course is to divert the mind to the Vedic literature, which is full of satisfying stories, as in the <i>Purāṇas</i> and the <i>Mahābhārata.</i> One can take advantage of this knowledge and thus become purified. The mind should be devoid of duplicity, and one should think of the welfare of all. Silence means that one is always thinking of self-realization. The person in Kṛṣṇa consciousness observes perfect silence in this sense. Control of the mind means detaching the mind from sense enjoyment. One should be straightforward in his dealings and thereby purify his existence. All these qualities together constitute austerity in mental activities."
      }
     ],
     "hi": [
@@ -2033,7 +2111,7 @@
      },
      {
       "word": "saumyatvam",
-      "meaning": "without duplicity towards others"
+      "meaning": "being without duplicity towards others"
      },
      {
       "word": "maunam",
@@ -2041,7 +2119,7 @@
      },
      {
       "word": "ātma",
-      "meaning": "self"
+      "meaning": "of the self"
      },
      {
       "word": "vinigrahaḥ",
@@ -2049,7 +2127,7 @@
      },
      {
       "word": "bhāva",
-      "meaning": "nature"
+      "meaning": "of one’s nature"
      },
      {
       "word": "saṁśuddhiḥ",
@@ -2061,7 +2139,7 @@
      },
      {
       "word": "etat",
-      "meaning": "that is"
+      "meaning": "this"
      },
      {
       "word": "tapaḥ",
@@ -2127,7 +2205,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/16/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/16/"
   },
   {
    "id": "bg-17-017",
@@ -2136,8 +2214,8 @@
    "verseEnd": 17,
    "label": "17.17",
    "sanskrit": [
-    "श्रद्धया परया तप्तं तपस्तत्त्रिविधं नरैः ।",
-    "अफलाकाङ्क्षिभिर्युक्तैः सात्त्विकं परिचक्षते ॥१७॥"
+    "श्रद्धया परया तप्‍तं तपस्तत्‍त्रिविधं नरै: ।",
+    "अफलाकाङ्‌‍क्षिभिर्युक्तै: सात्त्विकं परिचक्षते ॥ १७ ॥"
    ],
    "transliteration": [
     "śraddhayā parayā taptaṁ",
@@ -2146,7 +2224,7 @@
     "sāttvikaṁ paricakṣate"
    ],
    "translation": {
-    "en": "This threefold austerity, practiced by men whose aim is not to benefit themselves materially but to please the Supreme, is of the nature of goodness.",
+    "en": "This threefold austerity, performed with transcendental faith by men not expecting material benefits but engaged only for the sake of the Supreme, is called austerity in goodness.",
     "hi": "यह त्रिविध तप, जो उन मनुष्यों द्वारा सम्पन्न किया जाता है जिनका लक्ष्य स्वयं को भौतिक रूप से लाभ पहुँचाना नहीं अपितु परमेश्वर को प्रसन्न करना है, सतोगुणी स्वभाव का होता है।"
    },
    "purport": null,
@@ -2174,7 +2252,7 @@
      },
      {
       "word": "tri-vidham",
-      "meaning": "three kinds"
+      "meaning": "of three kinds"
      },
      {
       "word": "naraiḥ",
@@ -2182,7 +2260,7 @@
      },
      {
       "word": "aphala-ākāṅkṣibhiḥ",
-      "meaning": "without desires for fruits"
+      "meaning": "who are without desires for fruits"
      },
      {
       "word": "yuktaiḥ",
@@ -2193,7 +2271,7 @@
       "meaning": "in the mode of goodness"
      },
      {
-      "word": "pari-cakṣate",
+      "word": "paricakṣate",
       "meaning": "is called."
      }
     ],
@@ -2244,7 +2322,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/17/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/17/"
   },
   {
    "id": "bg-17-018",
@@ -2254,7 +2332,7 @@
    "label": "17.18",
    "sanskrit": [
     "सत्कारमानपूजार्थं तपो दम्भेन चैव यत् ।",
-    "क्रियते तदिह प्रोक्तं राजसं चलमध्रुवम् ॥१८॥"
+    "क्रियते तदिह प्रोक्तं राजसं चलमध्रुवम् ॥ १८ ॥"
    ],
    "transliteration": [
     "satkāra-māna-pūjārthaṁ",
@@ -2263,7 +2341,7 @@
     "rājasaṁ calam adhruvam"
    ],
    "translation": {
-    "en": "Those ostentatious penances and austerities which are performed in order to gain respect, honor and reverence are said to be in the mode of passion. They are neither stable nor permanent.",
+    "en": "Penance performed out of pride and for the sake of gaining respect, honor and worship is said to be in the mode of passion. It is neither stable nor permanent.",
     "hi": "वे आडम्बरपूर्ण तप एवं तपस्याएँ जो आदर, सम्मान एवं श्रद्धा प्राप्त करने के लिए सम्पन्न की जाती हैं, रजोगुण में कही जाती हैं। वे न तो स्थिर हैं और न ही स्थायी।"
    },
    "purport": {
@@ -2283,7 +2361,7 @@
    "synonyms": {
     "en": [
      {
-      "word": "satkāra",
+      "word": "sat-kāra",
       "meaning": "respect"
      },
      {
@@ -2291,8 +2369,12 @@
       "meaning": "honor"
      },
      {
-      "word": "pūjā-artham",
-      "meaning": "for worship"
+      "word": "pūjā",
+      "meaning": "and worship"
+     },
+     {
+      "word": "artham",
+      "meaning": "for the sake of"
      },
      {
       "word": "tapaḥ",
@@ -2312,11 +2394,11 @@
      },
      {
       "word": "yat",
-      "meaning": "which is"
+      "meaning": "which"
      },
      {
       "word": "kriyate",
-      "meaning": "performed"
+      "meaning": "is performed"
      },
      {
       "word": "tat",
@@ -2406,7 +2488,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/18/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/18/"
   },
   {
    "id": "bg-17-019",
@@ -2415,8 +2497,8 @@
    "verseEnd": 19,
    "label": "17.19",
    "sanskrit": [
-    "मूढग्राहेणात्मनो यत्पीडया क्रियते तपः ।",
-    "परस्योत्सादनार्थं वा तत्तामसमुदाहृतम् ॥१९॥"
+    "मूढग्राहेणात्मनो यत्पीडया क्रियते तप: ।",
+    "परस्योत्सादनार्थं वा तत्तामसमुदाहृतम् ॥ १९ ॥"
    ],
    "transliteration": [
     "mūḍha-grāheṇātmano yat",
@@ -2425,7 +2507,7 @@
     "tat tāmasam udāhṛtam"
    ],
    "translation": {
-    "en": "And those penances and austerities which are performed foolishly by means of obstinant self-torture, or to destroy or injure others, are said to be in the mode of ignorance.",
+    "en": "Penance performed out of foolishness, with self-torture or to destroy or injure others, is said to be in the mode of ignorance.",
     "hi": "और जो तपस्याएँ हठपूर्वक आत्म-यातना द्वारा मूर्खतापूर्वक की जाती हैं, अथवा जो दूसरों के विनाश या हानि के लिए की जाती हैं, वे तमोगुण में कही जाती हैं।"
    },
    "purport": {
@@ -2454,7 +2536,7 @@
      },
      {
       "word": "ātmanaḥ",
-      "meaning": "of one's own self"
+      "meaning": "of one’s own self"
      },
      {
       "word": "yat",
@@ -2477,8 +2559,8 @@
       "meaning": "to others"
      },
      {
-      "word": "utsādanārtham",
-      "meaning": "causing annihilation"
+      "word": "utsādana-artham",
+      "meaning": "for the sake of causing annihilation"
      },
      {
       "word": "vā",
@@ -2552,7 +2634,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/19/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/19/"
   },
   {
    "id": "bg-17-020",
@@ -2562,16 +2644,16 @@
    "label": "17.20",
    "sanskrit": [
     "दातव्यमिति यद्दानं दीयतेऽनुपकारिणे ।",
-    "देशे काले च पात्रे च तद्दानं सात्त्विकं स्मृतम् ॥२०॥"
+    "देशे काले च पात्रे च तद्दानं सात्त्विकं स्मृतम् ॥ २० ॥"
    ],
    "transliteration": [
     "dātavyam iti yad dānaṁ",
-    "dīyate 'nupakāriṇe",
+    "dīyate ’nupakāriṇe",
     "deśe kāle ca pātre ca",
     "tad dānaṁ sāttvikaṁ smṛtam"
    ],
    "translation": {
-    "en": "That gift which is given out of duty, at the proper time and place, to a worthy person, and without expectation of return, is considered to be charity in the mode of goodness.",
+    "en": "Charity given out of duty, without expectation of return, at the proper time and place, and to a worthy person is considered to be in the mode of goodness.",
     "hi": "जो दान कर्तव्य समझकर, उचित स्थान एवं समय पर, सुपात्र व्यक्ति को, तथा प्रत्युपकार की आशा के बिना दिया जाता है, वह सतोगुणी दान माना जाता है।"
    },
    "purport": {
@@ -2608,19 +2690,19 @@
      },
      {
       "word": "dīyate",
-      "meaning": "given"
+      "meaning": "is given"
      },
      {
       "word": "anupakāriṇe",
-      "meaning": "to any person irrespective of doing good"
+      "meaning": "irrespective of return"
      },
      {
-      "word": "dese",
-      "meaning": "in place"
+      "word": "deśe",
+      "meaning": "in a proper place"
      },
      {
       "word": "kāle",
-      "meaning": "in time"
+      "meaning": "at a proper time"
      },
      {
       "word": "ca",
@@ -2628,7 +2710,7 @@
      },
      {
       "word": "pātre",
-      "meaning": "suitable person"
+      "meaning": "to a suitable person"
      },
      {
       "word": "ca",
@@ -2648,7 +2730,7 @@
      },
      {
       "word": "smṛtam",
-      "meaning": "consider."
+      "meaning": "is considered."
      }
     ],
     "hi": [
@@ -2714,7 +2796,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/20/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/20/"
   },
   {
    "id": "bg-17-021",
@@ -2723,8 +2805,8 @@
    "verseEnd": 21,
    "label": "17.21",
    "sanskrit": [
-    "यत्तु प्रत्युपकारार्थं फलमुद्दिश्य वा पुनः ।",
-    "दीयते च परिक्लिष्टं तद्दानं राजसं स्मृतम् ॥२१॥"
+    "यत्तु प्रत्युपकारार्थं फलमुद्दिश्य वा पुन: ।",
+    "दीयते च परिक्ल‍ि‍ष्टं तद्दानं राजसं स्मृतम् ॥ २१ ॥"
    ],
    "transliteration": [
     "yat tu pratyupakārārthaṁ",
@@ -2740,7 +2822,7 @@
     "en": [
      {
       "type": "p",
-      "text": "Charity is sometimes performed for elevation to the heavenly kingdom and sometimes with great trouble and with repentance afterwards. \"Why have I spent so much in this way?\" Charity is also sometimes made under some obligation, at the request of a superior. These kinds of charity are said to be made in the mode of passion."
+      "text": "Charity is sometimes performed for elevation to the heavenly kingdom and sometimes with great trouble and with repentance afterwards: “Why have I spent so much in this way?” Charity is also sometimes given under some obligation, at the request of a superior. These kinds of charity are said to be given in the mode of passion."
      },
      {
       "type": "p",
@@ -2774,7 +2856,7 @@
      },
      {
       "word": "phalam",
-      "meaning": "result"
+      "meaning": "a result"
      },
      {
       "word": "uddiśya",
@@ -2790,7 +2872,7 @@
      },
      {
       "word": "dīyate",
-      "meaning": "is given in charity"
+      "meaning": "is given"
      },
      {
       "word": "ca",
@@ -2876,7 +2958,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/21/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/21/"
   },
   {
    "id": "bg-17-022",
@@ -2886,7 +2968,7 @@
    "label": "17.22",
    "sanskrit": [
     "अदेशकाले यद्दानमपात्रेभ्यश्च दीयते ।",
-    "असत्कृतमवज्ञातं तत्तामसमुदाहृतम् ॥२२॥"
+    "असत्कृतमवज्ञातं तत्तामसमुदाहृतम् ॥ २२ ॥"
    ],
    "transliteration": [
     "adeśa-kāle yad dānam",
@@ -2895,14 +2977,14 @@
     "tat tāmasam udāhṛtam"
    ],
    "translation": {
-    "en": "And charity performed at an improper place and time and given to unworthy persons without respect and with contempt is charity in the mode of ignorance.",
+    "en": "And charity performed at an impure place, at an improper time, to unworthy persons, or without proper attention and respect is said to be in the mode of ignorance.",
     "hi": "और जो दान अनुपयुक्त स्थान एवं समय पर, अपात्र व्यक्तियों को, बिना आदर एवं तिरस्कारपूर्वक किया जाता है, वह तमोगुणी दान है।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "Contributions for indulgence in intoxication and gambling are not encouraged here. That sort of contribution is in the mode of ignorance. Such charity is not beneficial; rather, sinful persons are encouraged. Similarly, if a person gives charity to a suitable person without respect and without attention, that sort of charity is also said to be in the mode of darkness."
+      "text": "Contributions for indulgence in intoxication and gambling are not encouraged here. That sort of contribution is in the mode of ignorance. Such charity is not beneficial; rather, sinful persons are encouraged. Similarly, if a person gives charity to a suitable person but without respect and without attention, that sort of charity is also said to be in the mode of darkness."
      }
     ],
     "hi": [
@@ -2915,16 +2997,16 @@
    "synonyms": {
     "en": [
      {
-      "word": "adesa",
-      "meaning": "unpurified place"
+      "word": "adeśa",
+      "meaning": "at an unpurified place"
      },
      {
       "word": "kāle",
-      "meaning": "unpurified time"
+      "meaning": "and unpurified time"
      },
      {
       "word": "yat",
-      "meaning": "that which is"
+      "meaning": "that which"
      },
      {
       "word": "dānam",
@@ -2943,7 +3025,7 @@
       "meaning": "is given"
      },
      {
-      "word": "asatkṛtam",
+      "word": "asat-kṛtam",
       "meaning": "without respect"
      },
      {
@@ -3014,7 +3096,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/22/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/22/"
   },
   {
    "id": "bg-17-023",
@@ -3023,8 +3105,8 @@
    "verseEnd": 23,
    "label": "17.23",
    "sanskrit": [
-    "ॐतत्सदिति निर्देशो ब्रह्मणस्त्रिविधः स्मृतः ।",
-    "ब्राह्मणास्तेन वेदाश्च यज्ञाश्च विहिताः पुरा ॥२३॥"
+    "ॐ तत्सदिति निर्देशो ब्रह्मणस्त्रिविध: स्मृत: ।",
+    "ब्राह्मणास्तेन वेदाश्च यज्ञाश्च विहिता: पुरा ॥ २३ ॥"
    ],
    "transliteration": [
     "oṁ tat sad iti nirdeśo",
@@ -3033,18 +3115,18 @@
     "yajñāś ca vihitāḥ purā"
    ],
    "translation": {
-    "en": "From the beginning of creation, the three syllables—om tat sat—have been used to indicate the Supreme Absolute Truth [Brahman]. They were uttered by brāhmaṇas while chanting Vedic hymns and during sacrifices, for the satisfaction of the Supreme.",
+    "en": "From the beginning of creation, the three words oṁ tat sat were used to indicate the Supreme Absolute Truth. These three symbolic representations were used by brāhmaṇas while chanting the hymns of the Vedas and during sacrifices for the satisfaction of the Supreme.",
     "hi": "सृष्टि के आरम्भ से ही तीन अक्षरों—ॐ तत् सत्—का प्रयोग परम परब्रह्म [ब्रह्म] को इंगित करने के लिए होता आया है। परम के सन्तोष के लिए ब्राह्मणगण वैदिक स्तोत्रों का गायन करते समय तथा यज्ञों के समय इनका उच्चारण करते थे।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "It has been explained that penance, sacrifice, charity and foods are divided into three categories: the modes of goodness, passion and ignorance. But whether first class, second class or third class, they are all conditioned, contaminated by the material modes of nature. When they are aimed at the Supreme—<i>om tat sat,</i> the Supreme Personality of Godhead, the eternal—they become means for spiritual elevation. In the scriptural injunctions such an objective is indicated. These three words, <i>om tat sat,</i> particularly indicate the Absolute Truth, the Supreme Personality of Godhead. In the Vedic hymns, the word <i>om</i> is always found."
+      "text": "It has been explained that penance, sacrifice, charity and foods are divided into three categories: the modes of goodness, passion and ignorance. But whether first class, second class or third class, they are all conditioned, contaminated by the material modes of nature. When they are aimed at the Supreme – <i>oṁ tat sat,</i> the Supreme Personality of Godhead, the eternal – they become means for spiritual elevation. In the scriptural injunctions such an objective is indicated. These three words, <i>oṁ tat sat,</i> particularly indicate the Absolute Truth, the Supreme Personality of Godhead. In the Vedic hymns, the word <i>oṁ</i> is always found."
      },
      {
       "type": "p",
-      "text": "One who acts without following the regulations of the scriptures will not attain the Absolute Truth. He will get some temporary result, but not the ultimate end of life. The conclusion is that the performance of charities, sacrifice and penance must be done in the mode of goodness. Performed in the modes of passion or ignorance, they are certainly inferior in quality. The three words <i>om tat sat</i> are uttered in conjunction with the holy name of the Supreme Lord, e.g., <i>om tad viṣṇoḥ.</i> Whenever a Vedic hymn or the holy name of the Supreme Lord is uttered, <i>om</i> is added. This is the indication of Vedic literature. These three words are taken from Vedic hymns. <i>Om ity etad brahmaṇo nediṣṭaṁ nāma</i> indicates the first goal. Then <i>tattvamasi</i> indicates the second goal. And <i>sad eva saumya</i> indicates the third goal. Combined they become <i>om tat sat.</i> Formerly when Brahmā, the first created living entity, performed sacrifices, he spoke these three names of the Supreme Personality of Godhead. The same principle holds by disciplic succession. So this hymn has great significance. <i>Bhagavad-gītā</i> recommends, therefore, that any work done should be done for <i>om tat sat,</i> or for the Supreme Personality of Godhead. When one performs penance, charity, and sacrifice with these three words, he is acting in Krṣna consciousness. Kṛṣṇa consciousness is a scientific execution of transcendental activities which enables one to return home, back to Godhead. There is no loss of energy in acting in such a transcendental way."
+      "text": "One who acts without following the regulations of the scriptures will not attain the Absolute Truth. He will get some temporary result, but not the ultimate end of life. The conclusion is that the performance of charity, sacrifice and penance must be done in the mode of goodness. Performed in the mode of passion or ignorance, they are certainly inferior in quality. The three words <i>oṁ tat sat</i> are uttered in conjunction with the holy name of the Supreme Lord, e.g., <i>oṁ tad viṣṇoḥ.</i> Whenever a Vedic hymn or the holy name of the Supreme Lord is uttered, <i>oṁ</i> is added. This is the indication of Vedic literature. These three words are taken from Vedic hymns. <i>Oṁ ity etad brahmaṇo nediṣṭhaṁ nāma</i> (<i>Ṛg Veda</i>) indicates the first goal. Then <i>tat tvam asi</i> (<i>Chāndogya Upaniṣad</i> 6.8.7) indicates the second goal. And <i>sad eva saumya</i> (<i>Chāndogya Upaniṣad</i> 6.2.1) indicates the third goal. Combined they become <i>oṁ tat sat.</i> Formerly when Brahmā, the first created living entity, performed sacrifices, he indicated by these three words the Supreme Personality of Godhead. Therefore the same principle has always been followed by disciplic succession. So this hymn has great significance. <i>Bhagavad-gītā</i> recommends, therefore, that any work done should be done for <i>oṁ tat sat,</i> or for the Supreme Personality of Godhead. When one performs penance, charity and sacrifice with these three words, he is acting in Kṛṣṇa consciousness. Kṛṣṇa consciousness is a scientific execution of transcendental activities which enables one to return home, back to Godhead. There is no loss of energy in acting in such a transcendental way."
      }
     ],
     "hi": [
@@ -3061,7 +3143,7 @@
    "synonyms": {
     "en": [
      {
-      "word": "om",
+      "word": "oṁ",
       "meaning": "indication of the Supreme"
      },
      {
@@ -3074,31 +3156,31 @@
      },
      {
       "word": "iti",
-      "meaning": "that"
+      "meaning": "thus"
      },
      {
       "word": "nirdeśaḥ",
       "meaning": "indication"
      },
      {
-      "word": "brāhmaṇāḥ",
+      "word": "brahmaṇaḥ",
       "meaning": "of the Supreme"
      },
      {
       "word": "tri-vidhaḥ",
-      "meaning": "three kinds"
+      "meaning": "threefold"
      },
      {
       "word": "smṛtaḥ",
-      "meaning": "consider"
+      "meaning": "is considered"
      },
      {
-      "word": "brahmaṇaḥ",
+      "word": "brāhmaṇāḥ",
       "meaning": "the brāhmaṇas"
      },
      {
       "word": "tena",
-      "meaning": "therefore"
+      "meaning": "with that"
      },
      {
       "word": "vedāḥ",
@@ -3118,7 +3200,7 @@
      },
      {
       "word": "vihitāḥ",
-      "meaning": "sacrifice"
+      "meaning": "used"
      },
      {
       "word": "purā",
@@ -3192,7 +3274,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/23/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/23/"
   },
   {
    "id": "bg-17-024",
@@ -3201,8 +3283,8 @@
    "verseEnd": 24,
    "label": "17.24",
    "sanskrit": [
-    "तस्मादोमित्युदाहृत्य यज्ञदानतपःक्रियाः ।",
-    "प्रवर्तन्ते विधानोक्ताः सततं ब्रह्मवादिनाम् ॥२४॥"
+    "तस्माद् ॐ इत्युदाहृत्य यज्ञदानतप:क्रिया: ।",
+    "प्रवर्तन्ते विधानोक्ता: सततं ब्रह्मवादिनाम् ॥ २४ ॥"
    ],
    "transliteration": [
     "tasmād oṁ ity udāhṛtya",
@@ -3211,14 +3293,14 @@
     "satataṁ brahma-vādinām"
    ],
    "translation": {
-    "en": "Thus the transcendentalists undertake sacrifices, charities, and penances, beginning always with om, to attain the Supreme.",
+    "en": "Therefore, transcendentalists undertaking performances of sacrifice, charity and penance in accordance with scriptural regulations begin always with oṁ, to attain the Supreme.",
     "hi": "इस प्रकार दिव्यदर्शी परम की प्राप्ति के लिए सदा ॐ से आरम्भ करते हुए यज्ञ, दान एवं तपस्या करते हैं।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "<i>Om tad viṣṇoḥ paramaṁ padam.</i> The lotus feet of Viṣṇu are the supreme devotional platform. The performance of everything on behalf of the Supreme Personality of Godhead assures the perfection of all activity."
+      "text": "<i>Oṁ tad viṣṇoḥ paramaṁ padam</i> (<i>Ṛg Veda</i> 1.22.20). The lotus feet of Viṣṇu are the supreme devotional platform. The performance of everything on behalf of the Supreme Personality of Godhead assures the perfection of all activity."
      }
     ],
     "hi": [
@@ -3235,8 +3317,8 @@
       "meaning": "therefore"
      },
      {
-      "word": "om",
-      "meaning": "beginning with om"
+      "word": "oṁ",
+      "meaning": "beginning with oṁ"
      },
      {
       "word": "iti",
@@ -3248,7 +3330,7 @@
      },
      {
       "word": "yajña",
-      "meaning": "sacrifice"
+      "meaning": "of sacrifice"
      },
      {
       "word": "dāna",
@@ -3256,7 +3338,7 @@
      },
      {
       "word": "tapaḥ",
-      "meaning": "penance"
+      "meaning": "and penance"
      },
      {
       "word": "kriyāḥ",
@@ -3264,7 +3346,7 @@
      },
      {
       "word": "pravartante",
-      "meaning": "begins"
+      "meaning": "begin"
      },
      {
       "word": "vidhāna-uktāḥ",
@@ -3330,7 +3412,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/24/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/24/"
   },
   {
    "id": "bg-17-025",
@@ -3339,8 +3421,8 @@
    "verseEnd": 25,
    "label": "17.25",
    "sanskrit": [
-    "तदित्यनभिसन्धाय फलं यज्ञतपःक्रियाः ।",
-    "दानक्रियाश्च विविधाः क्रियन्ते मोक्षकाङ्क्षिभिः ॥२५॥"
+    "तदित्यनभिसन्धाय फलं यज्ञतप:क्रिया: ।",
+    "दानक्रियाश्च विविधा: क्रियन्ते मोक्षकाङ्‌‍क्षिभि: ॥ २५ ॥"
    ],
    "transliteration": [
     "tad ity anabhisandhāya",
@@ -3349,7 +3431,7 @@
     "kriyante mokṣa-kāṅkṣibhiḥ"
    ],
    "translation": {
-    "en": "One should perform sacrifice, penance and charity with the word tat. The purpose of such transcendental activities is to get free from the material entanglement.",
+    "en": "Without desiring fruitive results, one should perform various kinds of sacrifice, penance and charity with the word tat. The purpose of such transcendental activities is to get free from material entanglement.",
     "hi": "मनुष्य को 'तत्' शब्द के साथ यज्ञ, तपस्या एवं दान करना चाहिए। ऐसे दिव्य कार्यों का प्रयोजन भौतिक बन्धन से मुक्त होना है।"
    },
    "purport": {
@@ -3374,23 +3456,23 @@
      },
      {
       "word": "iti",
-      "meaning": "they"
+      "meaning": "thus"
      },
      {
       "word": "anabhisandhāya",
-      "meaning": "without fruitive result"
+      "meaning": "without desiring"
      },
      {
       "word": "phalam",
-      "meaning": "result of sacrifice"
+      "meaning": "the fruitive result"
      },
      {
       "word": "yajña",
-      "meaning": "sacrifice"
+      "meaning": "of sacrifice"
      },
      {
       "word": "tapaḥ",
-      "meaning": "penance"
+      "meaning": "and penance"
      },
      {
       "word": "kriyāḥ",
@@ -3398,7 +3480,7 @@
      },
      {
       "word": "dāna",
-      "meaning": "charity"
+      "meaning": "of charity"
      },
      {
       "word": "kriyāḥ",
@@ -3410,15 +3492,15 @@
      },
      {
       "word": "vividhāḥ",
-      "meaning": "varieties"
+      "meaning": "various"
      },
      {
       "word": "kriyante",
-      "meaning": "done"
+      "meaning": "are done"
      },
      {
       "word": "mokṣa-kāṅkṣibhiḥ",
-      "meaning": "those who actually desire liberation."
+      "meaning": "by those who actually desire liberation."
      }
     ],
     "hi": [
@@ -3476,7 +3558,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/25/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/25/"
   },
   {
    "id": "bg-17-026-027",
@@ -3485,10 +3567,10 @@
    "verseEnd": 27,
    "label": "17.26-27",
    "sanskrit": [
-    "सद्भावे साधुभावे च सदित्येतत्प्रयुज्यते ।",
-    "प्रशस्ते कर्मणि तथा सच्छब्दः पार्थ युज्यते ॥२६॥",
-    "यज्ञे तपसि दाने च स्थितिः सदिति चोच्यते ।",
-    "कर्म चैव तदर्थीयं सदित्येवाभिधीयते ॥२७॥"
+    "सद्भ‍ावे साधुभावे च सदित्येतत्प्रयुज्यते ।",
+    "प्रशस्ते कर्मणि तथा सच्छब्द: पार्थ युज्यते ॥ २६ ॥",
+    "यज्ञे तपसि दाने च स्थिति: सदिति चोच्यते ।",
+    "कर्म चैव तदर्थीयं सदित्येवाभिधीयते ॥ २७ ॥"
    ],
    "transliteration": [
     "sad-bhāve sādhu-bhāve ca",
@@ -3501,14 +3583,14 @@
     "sad ity evābhidhīyate"
    ],
    "translation": {
-    "en": "The Absolute Truth is the objective of devotional sacrifice, and it is indicated by the word sat. These works of sacrifice, of penance and of charity, true to the absolute nature, are performed to please the Supreme Person, O son of Pṛthā.",
+    "en": "The Absolute Truth is the objective of devotional sacrifice, and it is indicated by the word sat. The performer of such sacrifice is also called sat, as are all works of sacrifice, penance and charity which, true to the absolute nature, are performed to please the Supreme Person, O son of Pṛthā.",
     "hi": "परम सत्य भक्तिमय यज्ञ का लक्ष्य है, तथा इसे 'सत्' शब्द से इंगित किया जाता है। हे पृथापुत्र, परम पुरुष को प्रसन्न करने के लिए किए गए यज्ञ, तपस्या एवं दान के ये कार्य परम स्वभाव के अनुरूप होते हैं।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "The words <i>praśaste karmaṇi,</i> or prescribed duties, indicate that there are many activities prescribed in the Vedic literature which are purificatory processes beginning from parental care up to the end of one's life. Such purificatory processes are adopted for the ultimate liberation of the living entity. In all such activities it is recommended that one should vibrate <i>om tat sat.</i> The words <i>sad-bhāve</i> and <i>sādhu-bhāve</i> indicate the transcendental situation. One who is acting in Kṛṣṇa consciousness is called <i>sattva,</i> and one who is fully conscious of activities in Kṛṣṇa consciousness is called <i>svarūpa.</i> In the <i>Śrīmad-Bhāgavatam</i> it is said that the transcendental subject matter becomes clear in the association of the devotees. Without good association, one cannot achieve transcendental knowledge. When initiating a person or offering the sacred thread, one vibrates the words <i>om tat sat.</i> Similarly, in all kinds of yogic performances, the supreme object, <i>om tat sat</i> is invoked. These words <i>om tat sat</i> are used to perfect all activities. This supreme <i>om tat sat</i> makes everything complete."
+      "text": "The words <i>praśaste karmaṇi,</i> or “prescribed duties,” indicate that there are many activities prescribed in the Vedic literature which are purificatory processes, beginning from the time of conception up to the end of one’s life. Such purificatory processes are adopted for the ultimate liberation of the living entity. In all such activities it is recommended that one vibrate <i>oṁ tat sat.</i> The words <i>sad-bhāve</i> and <i>sādhu-bhāve</i> indicate the transcendental situation. Acting in Kṛṣṇa consciousness is called <i>sattva,</i> and one who is fully conscious of the activities of Kṛṣṇa consciousness is called a <i>sādhu.</i> In the <i>Śrīmad-Bhāgavatam</i> (3.25.25) it is said that the transcendental subject matter becomes clear in the association of the devotees. The words used are <i>satāṁ prasaṅgāt.</i> Without good association, one cannot achieve transcendental knowledge. When initiating a person or offering the sacred thread, one vibrates the words <i>oṁ tat sat.</i> Similarly, in all kinds of performance of <i>yajña</i> the object is the Supreme, <i>oṁ tat sat.</i> The word <i>tad-arthīyam</i> further means offering service to anything which represents the Supreme, including such service as cooking and helping in the Lord’s temple, or any other kind of work for broadcasting the glories of the Lord. These supreme words <i>oṁ tat sat</i> are thus used in many ways to perfect all activities and make everything complete."
      }
     ],
     "hi": [
@@ -3526,7 +3608,7 @@
      },
      {
       "word": "sādhu-bhāve",
-      "meaning": "in the sense of the nature of devotion"
+      "meaning": "in the sense of the nature of the devotee"
      },
      {
       "word": "ca",
@@ -3534,7 +3616,7 @@
      },
      {
       "word": "sat",
-      "meaning": "the Supreme"
+      "meaning": "the word sat"
      },
      {
       "word": "iti",
@@ -3550,7 +3632,7 @@
      },
      {
       "word": "praśaste",
-      "meaning": "bona fide"
+      "meaning": "in bona fide"
      },
      {
       "word": "karmaṇi",
@@ -3562,7 +3644,7 @@
      },
      {
       "word": "sat-śabdaḥ",
-      "meaning": "sound"
+      "meaning": "the sound sat"
      },
      {
       "word": "pārtha",
@@ -3574,7 +3656,7 @@
      },
      {
       "word": "yajñe",
-      "meaning": "sacrifice"
+      "meaning": "in sacrifice"
      },
      {
       "word": "tapasi",
@@ -3582,7 +3664,7 @@
      },
      {
       "word": "dāne",
-      "meaning": "charity"
+      "meaning": "in charity"
      },
      {
       "word": "ca",
@@ -3590,7 +3672,7 @@
      },
      {
       "word": "sthitiḥ",
-      "meaning": "situated"
+      "meaning": "the situation"
      },
      {
       "word": "sat",
@@ -3606,7 +3688,7 @@
      },
      {
       "word": "ucyate",
-      "meaning": "pronounced"
+      "meaning": "is pronounced"
      },
      {
       "word": "karma",
@@ -3622,15 +3704,15 @@
      },
      {
       "word": "tat",
-      "meaning": "that"
+      "meaning": "for that"
      },
      {
       "word": "arthīyam",
-      "meaning": "are meant"
+      "meaning": "meant"
      },
      {
       "word": "sat",
-      "meaning": "Supreme"
+      "meaning": "the Supreme"
      },
      {
       "word": "iti",
@@ -3642,7 +3724,7 @@
      },
      {
       "word": "abhidhīyate",
-      "meaning": "is practiced."
+      "meaning": "is indicated."
      }
     ],
     "hi": [
@@ -3772,7 +3854,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/26-27/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/26-27/"
   },
   {
    "id": "bg-17-028",
@@ -3781,8 +3863,8 @@
    "verseEnd": 28,
    "label": "17.28",
    "sanskrit": [
-    "अश्रद्धया हुतं दत्तं तपस्तप्तं कृतं च यत् ।",
-    "असदित्युच्यते पार्थ न च तत्प्रेत्य नो इह ॥२८॥"
+    "अश्रद्धया हुतं दत्तं तपस्तप्‍तं कृतं च यत् ।",
+    "असदित्युच्यते पार्थ न च तत्प्रेत्य नो इह ॥ २८ ॥"
    ],
    "transliteration": [
     "aśraddhayā hutaṁ dattaṁ",
@@ -3791,22 +3873,22 @@
     "na ca tat pretya no iha"
    ],
    "translation": {
-    "en": "But sacrifices, austerities and charities performed without faith in the Supreme are nonpermanent, O son of Pṛthā, regardless of whatever rites are performed. They are called asat and are useless both in this life and the next.",
+    "en": "Anything done as sacrifice, charity or penance without faith in the Supreme, O son of Pṛthā, is impermanent. It is called asat and is useless both in this life and the next.",
     "hi": "किन्तु हे पृथापुत्र, परम में श्रद्धा के बिना किए गए यज्ञ, तपस्या एवं दान, चाहे जो भी विधि सम्पन्न की जाए, अनित्य होते हैं। वे असत् कहलाते हैं तथा इस जीवन एवं अगले, दोनों में निरर्थक होते हैं।"
    },
    "purport": {
     "en": [
      {
       "type": "p",
-      "text": "Anything done without the transcendental objective—whether it be sacrifice, charity or penance—is useless. Therefore, in this verse, it is declared that such activities are abominable. Everything should be done for the Supreme in Kṛṣṇa consciousness. Without such faith, and without the proper guidance, there can never be any fruit. In all the Vedic scriptures, faith in the Supreme is advised. In the pursuit of all Vedic instructions, the ultimate goal is the understanding of Kṛṣṇa. No one can obtain success without following this principle. Therefore, the best course is to work from the very beginning in Kṛṣṇa consciousness under the guidance of a bona fide spiritual master. That is the way to make everything successful."
+      "text": "Anything done without the transcendental objective – whether it be sacrifice, charity or penance – is useless. Therefore in this verse it is declared that such activities are abominable. Everything should be done for the Supreme in Kṛṣṇa consciousness. Without such faith, and without the proper guidance, there can never be any fruit. In all the Vedic scriptures, faith in the Supreme is advised. In the pursuit of all Vedic instructions, the ultimate goal is the understanding of Kṛṣṇa. No one can obtain success without following this principle. Therefore, the best course is to work from the very beginning in Kṛṣṇa consciousness under the guidance of a bona fide spiritual master. That is the way to make everything successful."
      },
      {
       "type": "p",
-      "text": "In the conditional state, people are attracted to worship demigods, ghosts, or Yakṣas like Kuvera. The mode of goodness is better than the modes of passion and ignorance, but one who takes directly to Kṛṣṇa consciousness is transcendental to all three modes of material nature. Although there is a process of gradual elevation, if one, by the association of pure devotees, takes directly to Kṛṣṇa consciousness, that is the best way. And that is recommended in this chapter. To achieve success in this way, one must first find the proper spiritual master and receive training under his direction. Then one can achieve faith in the Supreme. When that faith matures, in course of time, it is called love of God. This love is the ultimate goal of the living entities. One should, therefore, take to Krṣṇa consciousness directly. That is the message of this Seventeenth Chapter."
+      "text": "In the conditional state, people are attracted to worshiping demigods, ghosts, or Yakṣas like Kuvera. The mode of goodness is better than the modes of passion and ignorance, but one who takes directly to Kṛṣṇa consciousness is transcendental to all three modes of material nature. Although there is a process of gradual elevation, if one, by the association of pure devotees, takes directly to Kṛṣṇa consciousness, that is the best way. And that is recommended in this chapter. To achieve success in this way, one must first find the proper spiritual master and receive training under his direction. Then one can achieve faith in the Supreme. When that faith matures, in course of time, it is called love of God. This love is the ultimate goal of the living entities. One should therefore take to Kṛṣṇa consciousness directly. That is the message of this Seventeenth Chapter."
      },
      {
       "type": "p",
-      "text": "<i>Thus end the Bhaktivedanta Purports to the Seventeenth Chapter of the</i> Śrīmad-Bhagavad-gītā <i>in the matter of the Divisions of Faith.</i>"
+      "text": "<i>Thus end the Bhaktivedanta Purports to the Seventeenth Chapter of the</i> Śrīmad Bhagavad-gītā <i>in the matter of the Divisions of Faith.</i>"
      }
     ],
     "hi": [
@@ -3832,7 +3914,7 @@
      },
      {
       "word": "hutam",
-      "meaning": "performed"
+      "meaning": "offered in sacrifice"
      },
      {
       "word": "dattam",
@@ -3860,7 +3942,7 @@
      },
      {
       "word": "asat",
-      "meaning": "falls"
+      "meaning": "false"
      },
      {
       "word": "iti",
@@ -3891,7 +3973,7 @@
       "meaning": "after death"
      },
      {
-      "word": "no",
+      "word": "na u",
       "meaning": "nor"
      },
      {
@@ -3974,7 +4056,7 @@
      }
     ]
    },
-   "sourceUrl": "https://vedabase.cc/bg/17/28/"
+   "sourceUrl": "https://vedabase.io/en/library/bg/17/28/"
   }
  ]
 }

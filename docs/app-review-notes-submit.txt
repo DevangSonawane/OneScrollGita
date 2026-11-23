@@ -16,4 +16,4 @@ Apple's In-App Purchase (StoreKit) for the Sadhak and Shravan plans. Shravan aud
 None. The app works the same in all regions; only the plan price differs, as set by the App Store per storefront.
 
 6. THIRD-PARTY MATERIAL
-Bhagavad-gita As It Is (c) The Bhaktivedanta Book Trust. The text is from vedabase.cc, used with permission and reproduced without alteration. The attribution is shown in the app under Profile (Credits, and About and credits).
+Bhagavad-gita As It Is (c) The Bhaktivedanta Book Trust. The English text is from vedabase.io and the Hindi text from vedabase.cc, used with permission and reproduced without alteration. The attribution is shown in the app under Profile (Credits, and About and credits).

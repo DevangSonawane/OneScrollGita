@@ -53,7 +53,7 @@ Upload `build/app/outputs/bundle/release/app-release.aab`. Without
 
 ## 4. Copyright
 
-The scripture text is from vedabase.cc (Śrīla Prabhupāda's books; rights held
+The English scripture text is from vedabase.io and the Hindi from vedabase.cc (Śrīla Prabhupāda's books; rights held
 by The Bhaktivedanta Book Trust). Keep your written permission ready: Play can
 ask for proof that you may publish it. The app credits the source in Profile →
 Credits and in About.

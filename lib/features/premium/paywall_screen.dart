@@ -101,7 +101,7 @@ class PaywallOffer {
       (
         LucideIcons.audio_lines,
         'Shlokas recited',
-        'Hear each verse chanted in Sanskrit, verse by verse.',
+        'Hear each verse chanted in Sanskrit, then its English translation.',
       ),
       (
         LucideIcons.lock,

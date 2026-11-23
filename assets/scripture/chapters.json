@@ -1,30 +1,30 @@
 {
   "isPlaceholder": false,
   "source": {
-    "name": "vedabase.cc",
+    "name": "vedabase.io (English), vedabase.cc (Hindi)",
     "edition": "Bhagavad-gītā As It Is, by His Divine Grace A.C. Bhaktivedanta Swami Prabhupāda",
     "rightsHolder": "The Bhaktivedanta Book Trust",
-    "attribution": "Texts of Śrīla Prabhupāda from vedabase.cc (https://vedabase.cc), used with permission and reproduced without alteration.",
-    "datasetVersion": "vedabase-cc-2026-11-12",
+    "attribution": "English texts of Śrīla Prabhupāda from vedabase.io (https://vedabase.io); Hindi texts from vedabase.cc (https://vedabase.cc). © The Bhaktivedanta Book Trust International, Inc. Used with permission and reproduced without alteration.",
+    "datasetVersion": "vedabase-io-2026-11-23",
     "checksums": {
-      "chapter_01.json": "15882f543e5ce4e9df2609eab30e311bedd06f0ef2a6b0542395d4fe8d37dba0",
-      "chapter_02.json": "c00938e10a339473ae046ae5487dd46fbabb49bf002f7cc91ce4d69e8f7b050f",
-      "chapter_03.json": "f0035ee4f2c8b48ebd4134adadac62bdbb8bfd5f3a51be19b570d39ca133772c",
-      "chapter_04.json": "2c4de16b1edddc802345c9ae2be30e652529244d83ff577a1273d645f2aa9664",
-      "chapter_05.json": "2650b5aff8a0be3b903d6619bd7046d2c9c379fec821c82dd809cca3da5af6eb",
-      "chapter_06.json": "a6ba4376b5d066d8f60f69e55413bb384e27d3d08ae095f3dd8fdb3e3ae052c5",
-      "chapter_07.json": "760eb8381587664bb0053085f1795f102c750d8120e89c2bb19fb7b928334ee3",
-      "chapter_08.json": "1438e465bb05f7d8e8a44fa3cb58a24565dec90d302ac4ae5023693696049049",
-      "chapter_09.json": "764d7ba04d1791034190f24e491d1d6fb5bd91bab04c23a61ae50e4dce468588",
-      "chapter_10.json": "407325fb94724159afcbcd4826d0914012239d66d793d8a79bb60af4f902f429",
-      "chapter_11.json": "fe809b2e645d9f321ebe9316a768c7e4b0afa39d20d9c23641206e46144b2c42",
-      "chapter_12.json": "6bf52cc1ad3253b9b015df7480e42bee1d664ce1c8e39bd5b1d6dc1c44c7e64c",
-      "chapter_13.json": "6c894fce54e6262233c721a9d6f3ebb6191321135d2b2d8db91451bb89f12417",
-      "chapter_14.json": "f977efdf809c1e0e3621c7aab7799c8311f56f208b609de594c47ff683e567ab",
-      "chapter_15.json": "b0ed36102c4c122a7864952f767e15052ffd32eb70cf50b25a6b9ab8430b189e",
-      "chapter_16.json": "7f2f4ad3a31114e49aaa96aad9ae69e0b0bbd26c9750843375ab6ade22c7dbe8",
-      "chapter_17.json": "b43535dac12cde9de2917c11ae29ae60dae5fbd0feba0866f61feab3c2b4e3e5",
-      "chapter_18.json": "1032a1a56b4cb08ed87d23fa3cd8b9068ecfd2c0f944c87f3ba21e1a384bb24a"
+      "chapter_01.json": "f724c27d15bc3ccf3ab786248eff85cc820dac90b02efbd1aabb33fc92c2c795",
+      "chapter_02.json": "e586965b1911668749e86d194e3249cc83451df79c7eaa135eb24a92c0dc04a0",
+      "chapter_03.json": "4924e90549c41365790b041927b6571b6cf550ca8e6818b2bbaef4919d8dc297",
+      "chapter_04.json": "9499cb4b9359bc0c27e8eab2ca723a2bfe097374b517f0baaeed6fd58c968e61",
+      "chapter_05.json": "8463f32f0697fa7ddc9a7568dfd0e48f20ccf0ee27731efde66d85a697af26ef",
+      "chapter_06.json": "f889d3d4aa1832d6804397c1f741b0684d9a621b37cc770802b8e08065bc1c65",
+      "chapter_07.json": "e08ca9c64c0b92c3ab51134fb24ab6b7f7bbe1f9d765f94c30450513cd57c5ed",
+      "chapter_08.json": "697ea5c725fa797502e45fa84a79ecc0e7c123a44b7c27fb1976c614304be2bc",
+      "chapter_09.json": "71d5993e62ea6055a1e75bd50e60a244fa58d66bc7e92b8dd712acc2f230df79",
+      "chapter_10.json": "671684b6b52aa932322d541a26d10972806b42a190907e533a6e5aecd335af93",
+      "chapter_11.json": "827591daecd1b2e24c0f4ea470f6a411e7b8a1739fecf2ae4637ce93254bbca9",
+      "chapter_12.json": "4bbfc352a61ff0efd579b219af81b255edd91a89c7f16ac8031cbc4264dfbbf5",
+      "chapter_13.json": "69d4cff29500db57b79834d3a9fe14dbdd8cb8785c1812ee071e7869aad29bdc",
+      "chapter_14.json": "fb88940b6b6c09d627e9ccb78e24021072fde60ee0a05e0b658a370fa5dca119",
+      "chapter_15.json": "6888c958adafafd849a0e71227a52320fb26d22e19f605b7420e6d763c07336f",
+      "chapter_16.json": "a8e252226ffca82f8af2de3e9e6c8388e10e3b04edda19a06db48c71d21cdf2f",
+      "chapter_17.json": "23d815ba397587511831440ecbab18f1ca65a64ba5e425d823016f0de8a33220",
+      "chapter_18.json": "73abc6844da357b1bcfbd0d836b45618ec6e2eb18794aaa829667dbce017f4b0"
     }
   },
   "chapters": [
@@ -58,14 +58,14 @@
     },
     {
       "number": 5,
-      "titleEn": "Karma-yoga — Action in Kṛṣṇa Consciousness",
+      "titleEn": "Karma-yoga – Action in Kṛṣṇa Consciousness",
       "titleHi": "कर्मयोग — कृष्णभावनामृत में कर्म",
       "verseCount": 29,
       "entryCount": 27
     },
     {
       "number": 6,
-      "titleEn": "Sāṅkhya-yoga",
+      "titleEn": "Dhyāna-yoga",
       "titleHi": "सांख्ययोग",
       "verseCount": 47,
       "entryCount": 42
@@ -114,7 +114,7 @@
     },
     {
       "number": 13,
-      "titleEn": "Nature, the Enjoyer, and Consciousness",
+      "titleEn": "Nature, the Enjoyer and Consciousness",
       "titleHi": "प्रकृति, भोक्ता तथा चेतना",
       "verseCount": 35,
       "entryCount": 29
@@ -145,14 +145,14 @@
       "titleEn": "The Divisions of Faith",
       "titleHi": "श्रद्धा के विभाग",
       "verseCount": 28,
-      "entryCount": 24
+      "entryCount": 26
     },
     {
       "number": 18,
-      "titleEn": "Conclusion — The Perfection of Renunciation",
+      "titleEn": "Conclusion – The Perfection of Renunciation",
       "titleHi": "उपसंहार—संन्यास की सिद्धि",
       "verseCount": 78,
-      "entryCount": 74
+      "entryCount": 76
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "approved": false,
-  "note": "Counts taken from the vedabase.cc table of contents. Check them against the printed edition, then set approved to true.",
+  "note": "Counts taken from the vedabase.io table of contents. Check them against the printed edition, then set approved to true.",
   "chapters": 18,
   "totalVerses": 700,
   "perChapter": [
@@ -87,12 +87,12 @@
     {
       "chapter": 17,
       "verses": 28,
-      "entries": 24
+      "entries": 26
     },
     {
       "chapter": 18,
       "verses": 78,
-      "entries": 74
+      "entries": 76
     }
   ]
 }

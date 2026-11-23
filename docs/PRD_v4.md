@@ -223,7 +223,12 @@ headset control for free.
 ### V4-5: Real playback (needs recordings)
 - [x] `just_audio` + `just_audio_background`, background play, media
       session, iOS background audio mode, Android foreground service.
-      **Not yet heard on a real phone.** English translations: owner to send.
+      **Not yet heard on a real phone.** English translations: added 2026-11-24
+      (owner's ElevenLabs narration, 657/657 entries, matched to the vedabase.io
+      text; `tool/audio/match_translations.py`, check in
+      `docs/audio-translation-check.md`). Served at `v2/manifest.json` (dataset
+      ids from the vedabase.io import); the root `manifest.json` stays as it was
+      for builds up to Play 1.2.0 (12) / iOS build 9.
       Listen is on in store builds from build 9 (2026-11-21); chapter
       downloads stay hidden there until V4-6.
 

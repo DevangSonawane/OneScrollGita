@@ -164,3 +164,15 @@ was written. The new tests are written but have **not been run**.
 | "3D" icons | `Icon3D` in `lib/core/design/tactile.dart` | Drawn in code (gradient tile, gloss, coloured shadow). Supply real 3D artwork if you want rendered icons. |
 | Trainer word bank | `lib/features/trainer/word_bank.dart` | Steps 2 to 4 now fill blanks from 3D word buttons in reading order, the same as the onboarding demo. A wrong word shakes and counts as one "help". Tapping a blank still reveals it. Step 5 (recite) is unchanged. |
 | Default text size | `defaultTextScaleStep` in `lib/domain/models/app_settings.dart` | Now step 2 of 5 ("small", 0.92) instead of the middle. People who never changed it get the smaller size after updating. |
+
+## English text from vedabase.io (2026-11-24)
+
+English now comes from vedabase.io (`tool/fetch_vedabase_io.py`, `tool/convert_vedabase_io.py`, then `dart run tool/import_vedabase.dart --english=io`). Hindi still comes from vedabase.cc. Full list of changed verses: `docs/vedabase-io-changes.md`.
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Edition change | `assets/scripture/` | vedabase.io has the revised wording (e.g. 2.20 "neither birth nor death at any time"); translations changed in 526 entries and purports in 580. Read a few verses you know well. |
+| Devanagari visarga | 333 entries, e.g. 1.1 `युयुत्सव:` | vedabase.io uses an ASCII colon `:` where the visarga `ः` belongs. Kept as the source has it: owner decision (2026-11-24) to keep vedabase.io's Devanagari unchanged. |
+| Split verses | 17.8, 17.9, 17.10, 18.13, 18.14, 18.36, 18.37 | vedabase.io gives these their own entries (vedabase.cc grouped them). They have no Hindi, because vedabase.cc's Hindi is per group and is not split by hand. Saved bookmarks/notes on the old group IDs open at the first verse. |
+| Theme remap | `assets/search/themes.json`, `docs/theme-review.csv` | Food, health → 17.8 (was 17.8-10); happiness → 18.36 (was 18.36-37). `reviewed: false`. |
+| Credit wording | `store/listing.md`, `store/app-store-listing.md`, `docs/app-review-notes-submit.txt`, in-app About (from `chapters.json`) | Now names vedabase.io (English) and vedabase.cc (Hindi). Paste the new listing text into both stores. |

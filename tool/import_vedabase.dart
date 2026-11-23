@@ -7,7 +7,13 @@
 // tool/.cache/vedabase_cc/ and requests stay under the API's limit of
 // 120 a minute, so a re-run only fetches what is missing.
 //
-// Run: dart run tool/import_vedabase.dart
+// English from vedabase.io instead (the owner's choice, 2026-11-23): first run
+// python3 tool/fetch_vedabase_io.py and python3 tool/convert_vedabase_io.py,
+// then add --english=io. English then comes only from the local vedabase.io
+// cache (no network); Hindi still comes from vedabase.cc, which has it and
+// vedabase.io does not.
+//
+// Run: dart run tool/import_vedabase.dart [--english=io]
 import 'dart:convert';
 import 'dart:io';
 
@@ -18,11 +24,30 @@ import 'package:versescroll/domain/word_meanings.dart';
 
 const _api = 'https://vedabase.cc/api/v1';
 const _gap = Duration(milliseconds: 600); // 100 requests a minute
-const attribution =
+const attributionCc =
     'Texts of Śrīla Prabhupāda from vedabase.cc (https://vedabase.cc), used '
     'with permission and reproduced without alteration.';
+const attributionIo =
+    'English texts of Śrīla Prabhupāda from vedabase.io (https://vedabase.io); '
+    'Hindi texts from vedabase.cc (https://vedabase.cc). © The Bhaktivedanta '
+    'Book Trust International, Inc. Used with permission and reproduced '
+    'without alteration.';
 
 final _cacheDir = Directory('tool/.cache/vedabase_cc');
+final _ioDir = Directory('tool/.cache/vedabase_io');
+
+/// English JSON converted from vedabase.io pages. Never touches the network.
+Map<String, dynamic> _io(String name) {
+  final file = File('${_ioDir.path}/$name.json');
+  if (!file.existsSync()) {
+    throw StateError(
+      'Missing ${file.path}. Run python3 '
+      'tool/fetch_vedabase_io.py and tool/convert_vedabase_io.py first.',
+    );
+  }
+  return jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+}
+
 final _client = HttpClient()..userAgent = 'GitaOfflineApp-importer/1.0';
 DateTime? _last;
 
@@ -41,10 +66,12 @@ Future<Map<String, dynamic>?> _get(String path, String cacheName) async {
     }
     _last = DateTime.now();
     try {
-      final res = await (await _client.getUrl(Uri.parse('$_api/$path'))).close();
+      final res = await (await _client.getUrl(Uri.parse('$_api/$path')))
+          .close();
       final body = await res.transform(utf8.decoder).join();
       if (res.statusCode == 429) {
-        final retry = int.tryParse(res.headers.value('retry-after') ?? '') ?? 30;
+        final retry =
+            int.tryParse(res.headers.value('retry-after') ?? '') ?? 30;
         stderr.writeln('rate limited, waiting ${retry}s');
         await Future<void>.delayed(Duration(seconds: retry));
         continue;
@@ -131,11 +158,7 @@ final _meaningProblems = <String>[];
 /// Markdown removal. English must parse completely or the import fails. A
 /// Hindi list with any unsplittable pair is left out for that entry (the app
 /// then shows the English list) and reported; nothing is guessed.
-List<Map<String, String>>? _wordMeanings(
-  String? raw,
-  String lang,
-  String ref,
-) {
+List<Map<String, String>>? _wordMeanings(String? raw, String lang, String ref) {
   if (raw == null || raw.trim().isEmpty) {
     if (lang == 'en') _meaningProblems.add('ERROR $ref en: no word meanings');
     return null;
@@ -160,9 +183,17 @@ List<Map<String, dynamic>> _chaptersOf(Map<String, dynamic>? toc) => [
     if ((n as Map<String, dynamic>)['children'] != null) n,
 ];
 
-Future<void> main() async {
-  final tocEn = (await _get('books/bg/toc?lang=en', 'toc_en'))!;
+Future<void> main(List<String> args) async {
+  final io = args.contains('--english=io');
+  final tocEn = io
+      ? _io('toc_en')
+      : (await _get('books/bg/toc?lang=en', 'toc_en'))!;
   final tocHi = await _get('books/bg/toc?lang=hi', 'toc_hi');
+  final hiRefs = {
+    for (final c in _chaptersOf(tocHi))
+      for (final v in c['children'] as List) (v as Map)['ref'] as String,
+  };
+  final hindiGaps = <String>[];
   final hiTitles = {
     for (final c in _chaptersOf(tocHi))
       c['ref']: _chapterTitle(c['title'] as String),
@@ -183,8 +214,13 @@ Future<void> main() async {
       final start = int.parse(part.split('-').first);
       final end = int.parse(part.split('-').last);
       verses = end;
-      final en = (await _get('verse/$ref?lang=en', 'en/$ref'))!;
-      final hi = await _get('verse/$ref?lang=hi', 'hi/$ref');
+      final en = io
+          ? _io('en/$ref')
+          : (await _get('verse/$ref?lang=en', 'en/$ref'))!;
+      // Hindi only where vedabase.cc has an entry with the same verse range.
+      final hasHi = !io || hiRefs.contains(ref);
+      if (!hasHi) hindiGaps.add(ref);
+      final hi = hasHi ? await _get('verse/$ref?lang=hi', 'hi/$ref') : null;
       final hiTranslation = hi?['translation'] as String?;
       final purportEn = _purport(en['purport'] as String?);
       final purportHi = _purport(hi?['purport'] as String?);
@@ -212,10 +248,8 @@ Future<void> main() async {
         'sourceUrl': en['url'],
       });
     }
-    final raw = '${const JsonEncoder.withIndent(' ').convert({
-      'chapter': c,
-      'entries': entries,
-    })}\n';
+    final raw =
+        '${const JsonEncoder.withIndent(' ').convert({'chapter': c, 'entries': entries})}\n';
     final file = chapterFileName(c);
     // Stop before writing anything if English meanings failed to split.
     if (_meaningProblems.any((p) => p.startsWith('ERROR'))) break;
@@ -236,9 +270,11 @@ Future<void> main() async {
     for (final p in _meaningProblems) {
       stderr.writeln('word meanings: $p');
     }
-    stderr.writeln('English word meanings could not be split. Nothing after '
-        'the failing chapter was written. Fix the parser; never edit '
-        'assets/scripture by hand.');
+    stderr.writeln(
+      'English word meanings could not be split. Nothing after '
+      'the failing chapter was written. Fix the parser; never edit '
+      'assets/scripture by hand.',
+    );
     _client.close();
     exitCode = 1;
     return;
@@ -246,34 +282,32 @@ Future<void> main() async {
   final index = {
     'isPlaceholder': false,
     'source': {
-      'name': 'vedabase.cc',
+      'name': io ? 'vedabase.io (English), vedabase.cc (Hindi)' : 'vedabase.cc',
       'edition':
           'Bhagavad-gītā As It Is, by His Divine Grace A.C. Bhaktivedanta '
           'Swami Prabhupāda',
       'rightsHolder': 'The Bhaktivedanta Book Trust',
-      'attribution': attribution,
+      'attribution': io ? attributionIo : attributionCc,
       'datasetVersion':
-          'vedabase-cc-${DateTime.now().toUtc().toIso8601String().substring(0, 10)}',
+          '${io ? 'vedabase-io' : 'vedabase-cc'}-${DateTime.now().toUtc().toIso8601String().substring(0, 10)}',
       'checksums': checksums,
     },
     'chapters': chapters,
   };
-  File('${outDir.path}/chapters.json').writeAsStringSync(
-    '${const JsonEncoder.withIndent('  ').convert(index)}\n',
-  );
+  File(
+    '${outDir.path}/chapters.json',
+  ).writeAsStringSync('${const JsonEncoder.withIndent('  ').convert(index)}\n');
   File('tool/expected_counts.json').writeAsStringSync(
-    '${const JsonEncoder.withIndent('  ').convert({
-      'approved': false,
-      'note': 'Counts taken from the vedabase.cc table of contents. Check '
-          'them against the printed edition, then set approved to true.',
-      'chapters': chapterCount,
-      'totalVerses': perChapter.fold<int>(0, (s, c) => s + (c['verses'] as int)),
-      'perChapter': perChapter,
-    })}\n',
+    '${const JsonEncoder.withIndent('  ').convert({'approved': false, 'note': 'Counts taken from the ${io ? 'vedabase.io' : 'vedabase.cc'} '
+        'table of contents. Check '
+        'them against the printed edition, then set approved to true.', 'chapters': chapterCount, 'totalVerses': perChapter.fold<int>(0, (s, c) => s + (c['verses'] as int)), 'perChapter': perChapter})}\n',
   );
   _client.close();
   for (final p in _meaningProblems) {
     stderr.writeln('word meanings: $p');
+  }
+  for (final r in hindiGaps) {
+    stderr.writeln('hindi: vedabase.cc has no entry $r; Hindi left empty');
   }
   stdout.writeln('Done. Now run: dart run tool/validate_scripture.dart');
 }

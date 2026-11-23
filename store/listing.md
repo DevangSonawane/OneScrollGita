@@ -43,7 +43,7 @@ MADE FOR READING
 • Light and dark themes, five text sizes
 • Your favourites, bookmarks and history stay on your phone
 
-Bhagavad-gītā As It Is, by His Divine Grace A.C. Bhaktivedanta Swami Prabhupāda. Texts from vedabase.cc, used with permission and reproduced without alteration.
+Bhagavad-gītā As It Is, by His Divine Grace A.C. Bhaktivedanta Swami Prabhupāda. English texts from vedabase.io and Hindi texts from vedabase.cc, used with permission and reproduced without alteration.
 
 ## Category
 Books & Reference
