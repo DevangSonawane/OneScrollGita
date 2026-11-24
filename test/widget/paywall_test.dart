@@ -7,7 +7,7 @@ import 'package:versescroll/application/premium_providers.dart';
 import 'package:versescroll/data/purchases/purchase_gateway.dart';
 import 'package:versescroll/domain/premium.dart';
 import 'package:versescroll/features/premium/paywall_screen.dart';
-import 'package:versescroll/features/premium/sadhak_card.dart';
+import 'package:versescroll/features/home/home_extras.dart';
 
 import '../fakes/fake_purchase_gateway.dart';
 import '../helpers.dart';
@@ -168,14 +168,15 @@ void main() {
     expect(tester.binding.transientCallbackCount, 0);
   });
 
-  testWidgets('Profile shows the Sadhak card and opens the paywall', (
+  testWidgets('Profile shows the plan banners and opens the paywall', (
     tester,
   ) async {
     await pumpApp(tester);
     await tester.tap(find.bySemanticsLabel(RegExp('^Profile, tab')));
     await settle(tester);
-    expect(find.byType(SadhakCard), findsOneWidget);
-    await tester.tap(find.byType(SadhakCard));
+    final banner = find.byKey(PlanBanners.sadhakKey);
+    expect(banner, findsOneWidget);
+    await tester.tap(banner);
     await settle(tester, 5);
     expect(find.byType(PaywallScreen), findsOneWidget);
   });

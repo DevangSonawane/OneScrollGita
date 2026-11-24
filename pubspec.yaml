@@ -84,6 +84,8 @@ flutter:
     - assets/summaries/
     - assets/search/
     - assets/fonts/licences/
+    - assets/banners/
+    - assets/feelings/
   fonts:
     - family: Literata
       fonts:

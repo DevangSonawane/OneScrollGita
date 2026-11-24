@@ -4,6 +4,7 @@ import 'package:versescroll/app/router.dart';
 import 'package:versescroll/application/core_providers.dart';
 import 'package:versescroll/application/ui_providers.dart';
 import 'package:versescroll/core/design/glass_nav_bar.dart';
+import 'package:versescroll/core/design/tokens.dart';
 import 'package:versescroll/data/settings/settings_repository.dart';
 
 import '../helpers.dart';
@@ -45,12 +46,23 @@ void main() {
         await settle(tester);
 
         // Purport
-        await tester.scrollUntilVisible(
-          find.text('Purport'),
-          200,
-          scrollable: find.byType(Scrollable).last,
+        // Dragging makes the reader snap from verse to verse, which can
+        // leave the button off screen at the largest reading size. Jump
+        // instead, so the first verse's Purport button sits near the bottom
+        // of the screen: the verse's end is in view there, so the reader
+        // stays put (VerseSnapPhysics).
+        final purport = find.text('Purport').first;
+        final reader = tester
+            .state<ScrollableState>(find.byType(Scrollable).last)
+            .position;
+        reader.jumpTo(
+          reader.pixels +
+              tester.getTopLeft(purport).dy -
+              reader.viewportDimension +
+              Touch.minTarget * 2,
         );
-        await tester.tap(find.text('Purport'));
+        await settle(tester);
+        await tester.tap(purport);
         await settle(tester);
         await tester.tap(find.bySemanticsLabel('Text size'));
         await settle(tester);

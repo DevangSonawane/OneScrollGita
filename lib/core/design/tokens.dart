@@ -439,60 +439,32 @@ abstract final class TactileMetrics {
   static const radius = 14.0;
   static const press = Duration(milliseconds: 70);
   static const shake = Duration(milliseconds: 360);
-  static const iconTile = 56.0;
-  static const iconGlyph = 28.0;
 }
 
 /// Feeling cards on Home: one gentle hue per card, top and bottom of the
 /// icon tile's gradient.
 @immutable
-class FeelingPalette {
-  const FeelingPalette(this.top, this.bottom);
-
-  final Color top;
-  final Color bottom;
-
-  static const light = [
-    FeelingPalette(Color(0xFFFFD59E), Color(0xFFF29A4A)), // saffron
-    FeelingPalette(Color(0xFFB9E4F7), Color(0xFF4FA3D9)), // sky
-    FeelingPalette(Color(0xFFD9C9F5), Color(0xFF8E6BD6)), // lilac
-    FeelingPalette(Color(0xFFC6EBC9), Color(0xFF52B06A)), // leaf
-    FeelingPalette(Color(0xFFFFC9C4), Color(0xFFE2675B)), // rose
-    FeelingPalette(Color(0xFFFFE9A8), Color(0xFFE0B23A)), // gold
-  ];
-
-  static const dark = [
-    FeelingPalette(Color(0xFFF2B26B), Color(0xFFB8621E)),
-    FeelingPalette(Color(0xFF7CC3E8), Color(0xFF2E6F9E)),
-    FeelingPalette(Color(0xFFB29BE6), Color(0xFF5E43A3)),
-    FeelingPalette(Color(0xFF8FD39C), Color(0xFF2F7A44)),
-    FeelingPalette(Color(0xFFF29A90), Color(0xFFA8433A)),
-    FeelingPalette(Color(0xFFF2D27A), Color(0xFFA67E1E)),
-  ];
-
-  static List<FeelingPalette> of(BuildContext context) =>
-      Theme.of(context).brightness == Brightness.dark ? dark : light;
-}
-
-/// The Shravan banner on Home: a deep night-blue card with light text,
-/// the same in light and dark mode (text on it is at least 4.5:1).
-abstract final class ShravanBannerColors {
-  static const top = Color(0xFF2B2350);
-  static const bottom = Color(0xFF4B3B7F);
-  static const text = Color(0xFFFFFFFF);
-  static const textSoft = Color(0xCCFFFFFF);
-}
-
-/// Home's auto-scrolling plan banners.
+/// Home's auto-scrolling plan banners (owner artwork, 2026-11-24).
 abstract final class BannerMetrics {
-  static const height = 156.0;
-  static const art = 112.0;
   static const interval = Duration(seconds: 4);
   static const slide = Duration(milliseconds: 600);
-  static const maxTextScale = 1.3;
-  static const title = 19.0;
-  static const feelingCardWidth = 112.0;
-  static const feelingCardHeight = 120.0;
+
+  /// Width / height of the banner artwork in assets/banners.
+  static const aspect = 2.5;
+
+  /// Share of the screen width one banner takes in the carousel.
+  static const viewport = 0.9;
+}
+
+/// Home's "Find a verse for" cards: wide, 3D icon above the word.
+abstract final class FeelingMetrics {
+  static const width = 148.0;
+  static const height = 112.0;
+  static const icon = 48.0;
+  static const word = 15.0;
+
+  /// The word grows up to this much, so the cards keep their shape.
+  static const maxTextScale = 1.6;
 }
 
 /// Third-party brand marks, used only inside their own logos and buttons

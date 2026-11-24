@@ -203,7 +203,16 @@ void main() {
     app.container.read(routerProvider).go('/profile');
     await settle(tester);
     // Signed out: a Sign in row.
-    await tester.scrollUntilVisible(find.text('Sign in'), 300);
+    // The page scroll, not the plan banners' sideways one.
+    await tester.scrollUntilVisible(
+      find.text('Sign in'),
+      300,
+      scrollable: find
+          .byWidgetPredicate(
+            (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
+          )
+          .first,
+    );
     expect(find.text('With Apple or Google'), findsOneWidget);
   });
 }

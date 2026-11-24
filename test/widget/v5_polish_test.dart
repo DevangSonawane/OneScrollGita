@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:versescroll/core/design/tactile.dart';
 import 'package:versescroll/features/trainer/word_bank.dart';
@@ -214,10 +215,53 @@ void main() {
     expect(find.text("Read today's verse"), findsNothing);
     expect(find.textContaining('Continue at'), findsNothing);
     expect(find.byKey(PlanBanners.sadhakKey), findsOneWidget);
+    // Owner, 2026-11-24: the banners are the owner's artwork.
+    expect(
+      find.descendant(
+        of: find.byKey(PlanBanners.sadhakKey),
+        matching: find.byWidgetPredicate(
+          (w) =>
+              w is Image &&
+              w.image is AssetImage &&
+              (w.image as AssetImage).assetName == BannerAssets.sadhak,
+        ),
+      ),
+      findsOneWidget,
+    );
+    expect(find.text('Learn shlokas by heart'), findsNothing);
     for (final w in ['Peace', 'Stress', 'Confusion']) {
       expect(find.text(w, skipOffstage: false), findsOneWidget);
     }
     expect(find.text('Peace of mind', skipOffstage: false), findsNothing);
+    // Owner, 2026-11-24: only the five feelings with 3D icons, no arrow card.
+    Finder art(String asset) => find.byWidgetPredicate(
+      (w) =>
+          w is Image &&
+          w.image is AssetImage &&
+          (w.image as AssetImage).assetName == asset,
+      skipOffstage: false,
+    );
+    expect(art(FeelingArt.peace), findsOneWidget);
+    expect(art(FeelingArt.stress), findsOneWidget);
+    await tester.ensureVisible(find.byType(FeelingCards, skipOffstage: false));
+    await settle(tester);
+    await tester.scrollUntilVisible(
+      find.text('Motivation'),
+      200,
+      scrollable: find.descendant(
+        of: find.byType(FeelingCards),
+        matching: find.byType(Scrollable),
+      ),
+    );
+    expect(art(FeelingArt.motivation), findsOneWidget);
+    expect(find.text('Sadness', skipOffstage: false), findsNothing);
+    expect(
+      find.descendant(
+        of: find.byType(FeelingCards),
+        matching: find.byIcon(LucideIcons.arrow_right),
+      ),
+      findsNothing,
+    );
   });
 
   testWidgets('home: the greeting uses the account first name', (tester) async {

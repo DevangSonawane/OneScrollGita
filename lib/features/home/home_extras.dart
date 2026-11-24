@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,12 +11,10 @@ import '../../application/search_providers.dart';
 import '../../core/config/audio_config.dart';
 import '../../core/design/glass.dart';
 import '../../core/design/motion.dart';
-import '../../core/design/tactile.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/premium.dart';
 import '../common/common_widgets.dart';
-import '../premium/figure_art.dart';
 import '../premium/paywall_screen.dart';
 import '../trainer/trainer_entry.dart';
 
@@ -62,6 +59,13 @@ class HomeGreeting extends ConsumerWidget {
 // ---------------------------------------------------------------------------
 // Plan banners: Sadhak and Shravan, sliding by themselves.
 
+/// The owner's banner artwork (2026-11-24), cropped from
+/// assets/sadhak_banners.png and assets/shravan_banners.png.
+abstract final class BannerAssets {
+  static const sadhak = 'assets/banners/sadhak.jpg';
+  static const shravan = 'assets/banners/shravan.jpg';
+}
+
 class PlanBanners extends ConsumerStatefulWidget {
   const PlanBanners({super.key});
 
@@ -73,7 +77,7 @@ class PlanBanners extends ConsumerStatefulWidget {
 }
 
 class _PlanBannersState extends ConsumerState<PlanBanners> {
-  final _controller = PageController(viewportFraction: 0.9);
+  final _controller = PageController(viewportFraction: BannerMetrics.viewport);
   Timer? _timer;
   int _page = 0;
   bool _touching = false;
@@ -113,74 +117,53 @@ class _PlanBannersState extends ConsumerState<PlanBanners> {
   @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
-    final p = PremiumColors.of(context);
     final sadhak = ref.watch(isPremiumProvider);
     final shravan =
         ref.watch(shravanEntitlementProvider) == Entitlement.premium;
     final banners = <Widget>[
       _Banner(
         key: PlanBanners.sadhakKey,
-        badge: 'SADHAK',
-        title: sadhak ? 'Keep learning by heart' : 'Learn shlokas by heart',
-        line: sadhak
-            ? 'Open the shloka trainer.'
-            : 'Trainer, notes, highlights and your notebook.',
-        action: sadhak ? 'Open' : 'Explore',
-        top: p.cardTop,
-        bottom: p.cardBottom,
-        text: c.textPrimary,
-        textSoft: c.textSecondary,
-        accent: c.accent,
-        onAccent: c.onAccent,
-        art: const SeekerFigure(pose: FigurePose.reading),
+        image: BannerAssets.sadhak,
+        semanticLabel: sadhak
+            ? 'Sadhak. Study. Reflect. Open the shloka trainer.'
+            : 'Sadhak. Study. Reflect. See the Sadhak plan.',
         onTap: () => sadhak ? openTrainerHome(context) : openPaywall(context),
       ),
       if (AudioConfig.enabled)
         _Banner(
           key: PlanBanners.shravanKey,
-          badge: 'SHRAVAN',
-          title: shravan ? 'Listen today' : 'Hear every shloka',
-          line: shravan
-              ? 'Pick up where you left off.'
-              : 'Sanskrit recitation with the translation.',
-          action: shravan ? 'Listen' : 'Explore',
-          top: ShravanBannerColors.top,
-          bottom: ShravanBannerColors.bottom,
-          text: ShravanBannerColors.text,
-          textSoft: ShravanBannerColors.textSoft,
-          accent: p.gold,
-          onAccent: ShravanBannerColors.top,
-          art: const SeekerFigure(pose: FigurePose.listening),
+          image: BannerAssets.shravan,
+          semanticLabel: shravan
+              ? 'Shravan. Listen to the Gita. Open Listen.'
+              : 'Shravan. Listen to the Gita. See the Shravan plan.',
           onTap: () =>
               shravan ? context.go('/listen') : openShravanPaywall(context),
         ),
     ];
     return Column(
       children: [
-        SizedBox(
-          height: MediaQuery.textScalerOf(context)
-              .clamp(maxScaleFactor: BannerMetrics.maxTextScale)
-              .scale(BannerMetrics.height),
-          child: Listener(
-            onPointerDown: (_) => _touching = true,
-            onPointerUp: (_) => _touching = false,
-            onPointerCancel: (_) => _touching = false,
-            child: PageView(
-              controller: _controller,
-              padEnds: true,
-              onPageChanged: (i) => setState(() => _page = i),
-              children: [
-                for (final b in banners)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: Space.s4),
-                    // Banner text grows up to 1.3x, so the card keeps its
-                    // shape; the paywall behind it follows the full size.
-                    child: MediaQuery.withClampedTextScaling(
-                      maxScaleFactor: BannerMetrics.maxTextScale,
+        LayoutBuilder(
+          builder: (context, box) => SizedBox(
+            // The artwork keeps its own shape; text scaling does not apply.
+            height:
+                (box.maxWidth * BannerMetrics.viewport - Space.s8) /
+                BannerMetrics.aspect,
+            child: Listener(
+              onPointerDown: (_) => _touching = true,
+              onPointerUp: (_) => _touching = false,
+              onPointerCancel: (_) => _touching = false,
+              child: PageView(
+                controller: _controller,
+                padEnds: true,
+                onPageChanged: (i) => setState(() => _page = i),
+                children: [
+                  for (final b in banners)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: Space.s4),
                       child: b,
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -213,133 +196,42 @@ class _PlanBannersState extends ConsumerState<PlanBanners> {
   }
 }
 
+/// One plan banner: the owner's artwork (assets/banners), tappable as a
+/// whole. The words are part of the picture, so the label carries them.
 class _Banner extends StatelessWidget {
   const _Banner({
     super.key,
-    required this.badge,
-    required this.title,
-    required this.line,
-    required this.action,
-    required this.top,
-    required this.bottom,
-    required this.text,
-    required this.textSoft,
-    required this.accent,
-    required this.onAccent,
-    required this.art,
+    required this.image,
+    required this.semanticLabel,
     required this.onTap,
   });
 
-  final String badge;
-  final String title;
-  final String line;
-  final String action;
-  final Color top;
-  final Color bottom;
-  final Color text;
-  final Color textSoft;
-  final Color accent;
-  final Color onAccent;
-  final Widget art;
+  final String image;
+  final String semanticLabel;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
-    final ui = UiStyles(c);
     return Pressable(
       onTap: onTap,
       radius: Radii.card,
-      semanticLabel: '$badge. $title. $line',
-      child: Container(
+      semanticLabel: semanticLabel,
+      child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Radii.card),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [top, bottom],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: bottom.withValues(alpha: 0.35),
-              blurRadius: Space.s16,
-              offset: const Offset(0, Space.s8),
-            ),
-          ],
+          boxShadow: Elevation.soft(c),
         ),
-        clipBehavior: Clip.antiAlias,
-        child: Stack(
-          children: [
-            Positioned(
-              right: -Space.s8,
-              bottom: -Space.s8,
-              width: BannerMetrics.art,
-              height: BannerMetrics.art + Space.s16,
-              child: art,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(Radii.card),
+          child: ExcludeSemantics(
+            child: Image.asset(
+              image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Space.s16,
-                Space.s16,
-                BannerMetrics.art - Space.s16,
-                Space.s16,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(badge, style: ui.overline.copyWith(color: accent)),
-                  const SizedBox(height: Space.s4),
-                  Text(
-                    title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: ui.title.copyWith(
-                      fontSize: BannerMetrics.title,
-                      height: 1.15,
-                      color: text,
-                    ),
-                  ),
-                  const SizedBox(height: Space.s4),
-                  Text(
-                    line,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: ui.body(size: 13, color: textSoft),
-                  ),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Space.s12,
-                      vertical: Space.s4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: accent,
-                      borderRadius: BorderRadius.circular(Radii.pill),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            action,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: ui.label(size: 13, color: onAccent),
-                          ),
-                        ),
-                        const SizedBox(width: Space.s4),
-                        Icon(
-                          LucideIcons.arrow_right,
-                          size: IconSizes.small - 6,
-                          color: onAccent,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -347,24 +239,29 @@ class _Banner extends StatelessWidget {
 }
 
 // ---------------------------------------------------------------------------
-// Feelings: short words with a raised icon, swiped by hand.
+// Feelings: wide cards with a 3D icon and the word under it, swiped by hand.
 
-/// One feeling: the dataset theme it opens, a short word and an icon.
+/// The owner's 3D feeling icons (2026-11-24), trimmed from assets/3dicons.
+abstract final class FeelingArt {
+  static const peace = 'assets/feelings/peace.png';
+  static const stress = 'assets/feelings/stress.png';
+  static const confusion = 'assets/feelings/confusion.png';
+  static const anger = 'assets/feelings/anger.png';
+  static const motivation = 'assets/feelings/motivation.png';
+}
+
+/// One feeling: the dataset theme it opens, a short word and its 3D icon.
 /// The short words are written content: reviewed:false until the owner
 /// checks them (docs/review-needed.md).
-typedef Feeling = ({String themeId, String word, IconData icon});
+typedef Feeling = ({String themeId, String word, String art});
 
+/// Only the feelings with artwork; the header's "See all" opens the rest.
 const List<Feeling> homeFeelings = [
-  (themeId: 'peace', word: 'Peace', icon: LucideIcons.leaf),
-  (themeId: 'stress', word: 'Stress', icon: LucideIcons.wind),
-  (themeId: 'confusion', word: 'Confusion', icon: LucideIcons.signpost),
-  (themeId: 'sadness', word: 'Sadness', icon: LucideIcons.cloud_rain),
-  (themeId: 'anger', word: 'Anger', icon: LucideIcons.flame),
-  (themeId: 'fear', word: 'Fear', icon: LucideIcons.shield),
-  (themeId: 'loneliness', word: 'Lonely', icon: LucideIcons.users),
-  (themeId: 'motivation', word: 'Motivation', icon: LucideIcons.zap),
-  (themeId: 'grief', word: 'Grief', icon: LucideIcons.heart_crack),
-  (themeId: 'doubt', word: 'Doubt', icon: LucideIcons.circle_question_mark),
+  (themeId: 'peace', word: 'Peace', art: FeelingArt.peace),
+  (themeId: 'stress', word: 'Stress', art: FeelingArt.stress),
+  (themeId: 'confusion', word: 'Confusion', art: FeelingArt.confusion),
+  (themeId: 'anger', word: 'Anger', art: FeelingArt.anger),
+  (themeId: 'motivation', word: 'Motivation', art: FeelingArt.motivation),
 ];
 
 class FeelingCards extends ConsumerWidget {
@@ -376,14 +273,16 @@ class FeelingCards extends ConsumerWidget {
     final ui = UiStyles(c);
     final lang = ref.watch(languageProvider);
     final themes = ref.watch(themesProvider).value ?? const [];
-    final palettes = FeelingPalette.of(context);
     final items = [
       for (final f in homeFeelings)
         if (themes.where((t) => t.id == f.themeId).firstOrNull case final t?)
           (feeling: f, query: t.title.of(lang), hindi: lang == 'hi'),
     ];
     if (items.isEmpty) return const SizedBox.shrink();
-    final scale = MediaQuery.textScalerOf(context).scale(1);
+    // The word grows with the text size; the icon keeps its size.
+    final scale = MediaQuery.textScalerOf(context)
+        .clamp(maxScaleFactor: FeelingMetrics.maxTextScale)
+        .scale(1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -408,8 +307,9 @@ class FeelingCards extends ConsumerWidget {
         ),
         SizedBox(
           height:
-              BannerMetrics.feelingCardHeight * scale.clamp(1, 1.6) +
-              TactileMetrics.depth * 3,
+              FeelingMetrics.height +
+              FeelingMetrics.word * (scale - 1) * 1.3 +
+              Space.s8,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(
@@ -420,12 +320,14 @@ class FeelingCards extends ConsumerWidget {
             separatorBuilder: (_, _) => const SizedBox(width: Space.s12),
             itemBuilder: (context, i) {
               final it = items[i];
-              return _FeelingCard(
-                // Hindi readers see the dataset's Hindi theme title.
-                word: it.hindi ? it.query : it.feeling.word,
-                icon: it.feeling.icon,
-                palette: palettes[i % palettes.length],
-                onTap: () => openSearch(context, query: it.query),
+              return MediaQuery.withClampedTextScaling(
+                maxScaleFactor: FeelingMetrics.maxTextScale,
+                child: _FeelingCard(
+                  // Hindi readers see the dataset's Hindi theme title.
+                  word: it.hindi ? it.query : it.feeling.word,
+                  art: it.feeling.art,
+                  onTap: () => openSearch(context, query: it.query),
+                ),
               );
             },
           ),
@@ -435,17 +337,16 @@ class FeelingCards extends ConsumerWidget {
   }
 }
 
+/// A wide card: the 3D icon on the left, the word below it.
 class _FeelingCard extends StatelessWidget {
   const _FeelingCard({
     required this.word,
-    required this.icon,
-    required this.palette,
+    required this.art,
     required this.onTap,
   });
 
   final String word;
-  final IconData icon;
-  final FeelingPalette palette;
+  final String art;
   final VoidCallback onTap;
 
   @override
@@ -457,7 +358,7 @@ class _FeelingCard extends StatelessWidget {
       radius: Radii.card,
       semanticLabel: 'Verses for $word',
       child: Container(
-        width: BannerMetrics.feelingCardWidth,
+        width: FeelingMetrics.width,
         padding: const EdgeInsets.all(Space.s12),
         decoration: BoxDecoration(
           color: c.surface,
@@ -468,12 +369,17 @@ class _FeelingCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon3D(icon: icon, palette: palette),
+            SizedBox.square(
+              dimension: FeelingMetrics.icon,
+              child: Image.asset(art, fit: BoxFit.contain),
+            ),
             Text(
               word,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: ui.label(size: 15).copyWith(fontWeight: FontWeight.w600),
+              style: ui
+                  .label(size: FeelingMetrics.word)
+                  .copyWith(fontWeight: FontWeight.w600),
             ),
           ],
         ),

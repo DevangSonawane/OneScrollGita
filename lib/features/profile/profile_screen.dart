@@ -21,7 +21,7 @@ import '../../domain/trainer/trainer.dart';
 import '../../application/streak_providers.dart';
 import '../account/account_screen.dart';
 import '../common/common_widgets.dart';
-import '../premium/sadhak_card.dart';
+import '../home/home_extras.dart' show PlanBanners;
 import '../study/journal_screens.dart';
 import '../study/notebook_export.dart';
 import '../trainer/trainer_entry.dart';
@@ -168,7 +168,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 const SizedBox(height: Space.s12),
                 const StreakCard(),
                 const SizedBox(height: Space.s12),
-                const SadhakCard(),
+                // Owner, 2026-11-24: the same plan banners as Home.
+                const PlanBanners(),
                 const SizedBox(height: Space.s8),
                 const ContinueRow(),
                 const SizedBox(height: Space.s8),
