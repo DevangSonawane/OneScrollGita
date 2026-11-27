@@ -96,6 +96,7 @@ class EntitlementNotifier extends Notifier<Entitlement> {
                 ? 'ios'
                 : 'android',
             transactionId: u.transactionId,
+            purchaseToken: u.purchaseToken,
           ),
         )
         .ignore();

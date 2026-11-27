@@ -58,3 +58,14 @@
 - The only extra network use is the single configured Supabase project (sign-in, sign-out, delete account, purchase record). No sync, no analytics.
 - Owner decision (2026-11-22): new installs must sign in at the end of first launch (no skip). After that, signing out never blocks reading or anything the user made. Never unlock anything from the Supabase purchase record; the store stays the truth.
 - Supabase keys come from --dart-define only. Never commit them.
+- Owner decision (2026-11-25): Supabase Edge Functions (supabase/functions) check purchases with the stores, take store notifications and revoke the Apple token on account deletion. Their only outside calls are Apple's and Google's APIs. Apple sign-in on Android uses Apple's web page behind APPLE_ON_ANDROID. Server keys are Supabase secrets, never in the app or the repo.
+
+## v10 additions (Apple Watch)
+- v10 spec is in docs/PRD_v10.md: a native SwiftUI watch app (ios/GitaWatch) and complication (ios/GitaWatchWidgets). No Flutter on the watch.
+- The watch's verse text is ios/GitaWatch/Shared/gita_watch.json, written only by tool/build_watch_scripture.dart. Re-run it after every import; never edit it by hand.
+- The iPhone is the only store of bookmarks and reading position; the watch mirrors IDs over WatchConnectivity (paired watch only, not a network call). Never send scripture text to the watch.
+- The watch daily verse (Shared/DailyVerse.swift) must match lib/domain/daily_verse.dart. Change both together and run sh tool/check_watch_daily_parity.sh.
+
+## v11 additions (Listen widgets)
+- v11 spec is in docs/PRD_v11.md: Listen widget (iPhone Home and Lock Screen, Android home screen), Listen control (Control Center, Android Quick Settings).
+- Every Listen widget or control goes through `quickActionRoute` (Start Listening). Without Shravan it opens the paywall; widgets never decide access and never get purchase data.

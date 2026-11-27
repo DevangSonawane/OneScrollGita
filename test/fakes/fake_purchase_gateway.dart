@@ -24,7 +24,11 @@ class FakePurchaseGateway implements PurchaseGateway {
     ],
     this.owned,
     this.buyResult,
+    this.purchaseToken,
   });
+
+  /// The Google Play purchase token bought purchases carry.
+  final String? purchaseToken;
 
   List<SadhakPlan> plans;
 
@@ -56,7 +60,11 @@ class FakePurchaseGateway implements PurchaseGateway {
     bought.add(plan.id);
     final r = buyResult;
     if (r != null) {
-      scheduleMicrotask(() => _out.add(PurchaseUpdate(plan.id, r, raw: 'x')));
+      scheduleMicrotask(
+        () => _out.add(
+          PurchaseUpdate(plan.id, r, raw: 'x', purchaseToken: purchaseToken),
+        ),
+      );
     }
     return true;
   }

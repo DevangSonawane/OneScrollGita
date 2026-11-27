@@ -18,12 +18,17 @@ class PurchaseUpdate {
     this.message,
     this.raw,
     this.transactionId,
+    this.purchaseToken,
   });
 
   final String productId;
 
   /// The store's transaction ID, when it gave one.
   final String? transactionId;
+
+  /// Google Play's purchase token, which the server checks the purchase
+  /// with (PRD_v9). Null on the App Store.
+  final String? purchaseToken;
   final PurchaseOutcome outcome;
   final String? message;
 
@@ -90,6 +95,9 @@ class StorePurchaseGateway implements PurchaseGateway {
             message: p.error?.message,
             raw: p,
             transactionId: p.purchaseID,
+            purchaseToken: p is GooglePlayPurchaseDetails
+                ? p.billingClientPurchase.purchaseToken
+                : null,
           ),
         );
       }

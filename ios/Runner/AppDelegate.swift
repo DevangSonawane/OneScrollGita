@@ -11,6 +11,8 @@ import UserNotifications
   ) -> Bool {
     // Local reminders show while the app is open too.
     UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+    // Apple Watch companion (WatchSync.swift): ready before Flutter is.
+    WatchSync.shared.activate()
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
@@ -21,6 +23,9 @@ import UserNotifications
     }
     // Apple's own Liquid Glass controls on iOS 26+ (NativeGlass.swift).
     NativeGlass.register(with: engineBridge.pluginRegistry)
+    if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "WatchSync") {
+      WatchSync.shared.register(with: registrar)
+    }
   }
 }
 

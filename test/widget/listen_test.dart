@@ -7,11 +7,13 @@ import 'package:versescroll/application/audio_providers.dart';
 import 'package:versescroll/application/premium_providers.dart';
 import 'package:versescroll/data/audio/manifest_source.dart';
 import 'package:versescroll/data/audio/audio_engine.dart';
+import 'package:versescroll/data/settings/settings_repository.dart';
 import 'package:versescroll/domain/audio/audio.dart';
 import 'package:versescroll/features/listen/chapter_player_screen.dart';
 import 'package:versescroll/features/listen/listen_library_screen.dart';
 import 'package:versescroll/features/listen/listen_widgets.dart';
 
+import '../fakes/fake_home_widget_repository.dart';
 import '../helpers.dart';
 
 Future<void> openListen(WidgetTester tester) async {
@@ -25,6 +27,11 @@ Future<void> tapVisible(WidgetTester tester, Finder f) async {
   await tester.tap(f.first);
   await settle(tester);
 }
+
+/// A chapter tile in the "All chapters" row (deck cards end in an action).
+Finder tileOf(int chapter) => find.bySemanticsLabel(
+  RegExp('^Chapter $chapter, (?!.*(Play chapter|Continue [0-9.]+)\$)'),
+);
 
 AudioUiState audioOf(TestApp app) =>
     app.container.read(audioControllerProvider);
@@ -51,16 +58,75 @@ void main() {
       find.textContaining('Preview: silent stand-in audio'),
       findsOneWidget,
     );
+    // The chapters are tiles in one sideways row, under the deck.
+    await Scrollable.ensureVisible(tester.element(tileOf(1)), alignment: 0.5);
+    await settle(tester);
     await tester.scrollUntilVisible(
-      find.textContaining('Chapter 18 ·'),
+      tileOf(18),
       300,
       scrollable: find
           .byWidgetPredicate(
-            (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
+            (w) => w is Scrollable && w.axisDirection == AxisDirection.right,
           )
           .first,
     );
-    expect(find.textContaining('Chapter 18 ·'), findsOneWidget);
+    expect(tileOf(18), findsOneWidget);
+  });
+
+  testWidgets('swipe the chapter deck, then play the front card', (
+    tester,
+  ) async {
+    final app = await pumpApp(tester);
+    await openListen(tester);
+    final front = find.bySemanticsLabel(RegExp(r'Play chapter$'));
+    expect(tester.getSemantics(front).label, startsWith('Chapter 1, '));
+    await tester.fling(front, const Offset(200, 0), 1000);
+    await settle(tester);
+    expect(tester.getSemantics(front).label, startsWith('Chapter 2, '));
+    await tester.tap(front);
+    await settle(tester);
+    expect(find.byType(ChapterPlayerScreen), findsOneWidget);
+    expect(audioOf(app).queue!.chapter, 2);
+    await app.container.read(audioControllerProvider.notifier).stop();
+    await settle(tester);
+  });
+
+  testWidgets('chapter names follow the reading language', (tester) async {
+    await pumpApp(
+      tester,
+      prefs: const {
+        SettingsRepository.kFirstLaunch: true,
+        SettingsRepository.kLanguage: 'hi',
+      },
+    );
+    await openListen(tester);
+    // From the imported dataset (chapters.json titleHi).
+    expect(
+      find.text('कुरुक्षेत्र के युद्धक्षेत्र में सेनाओं का अवलोकन'),
+      findsWidgets,
+    );
+    expect(find.text('अध्याय १'), findsWidgets);
+    expect(find.text('Chapter 1'), findsNothing);
+  });
+
+  testWidgets('Listen widgets get the last place, in the reading language', (
+    tester,
+  ) async {
+    final widgets = FakeHomeWidgetRepository();
+    final app = await pumpApp(tester, homeWidgets: widgets);
+    // Nothing heard yet: chapter 1.
+    expect(widgets.listen.last['chapter'], 1);
+    await app.container
+        .read(audioControllerProvider.notifier)
+        .playChapter(2, verseId: 'bg-02-047');
+    await settle(tester);
+    expect(widgets.listen.last['chapter'], 2);
+    expect(widgets.listen.last['label'], '2.47');
+    expect(widgets.listen.last['title'], 'Contents of the Gītā Summarized');
+    // No purchase data for the widgets (PRD_v11).
+    expect(widgets.listen.last.keys, {'chapter', 'title', 'label', 'lang'});
+    await app.container.read(audioControllerProvider.notifier).stop();
+    await settle(tester);
   });
 
   testWidgets('play a chapter: Sanskrit, then translation, then next verse', (
@@ -68,7 +134,7 @@ void main() {
   ) async {
     final app = await pumpApp(tester);
     await openListen(tester);
-    await tapVisible(tester, find.textContaining('Chapter 2 ·'));
+    await tapVisible(tester, tileOf(2));
     expect(find.byType(ChapterPlayerScreen), findsOneWidget);
     var s = audioOf(app);
     expect(s.queue!.chapter, 2);
@@ -109,6 +175,94 @@ void main() {
       app.container.read(audioControllerProvider.notifier).lastPlace!.chapter,
       3,
     );
+  });
+
+  testWidgets('player: Devanagari and English by default; More menu', (
+    tester,
+  ) async {
+    final app = await pumpApp(tester);
+    final audio = app.container.read(audioControllerProvider.notifier);
+    await audio.playChapter(2);
+    unawaited(app.container.read(routerProvider).push('/player'));
+    await settle(tester, 4);
+    expect(app.container.read(playerTextProvider), {
+      PlayerText.devanagari,
+      PlayerText.translation,
+    });
+
+    // View: tick transliteration on.
+    await tester.tap(find.bySemanticsLabel('More options'));
+    await settle(tester);
+    for (final label in [
+      'View',
+      'Sleep timer',
+      'Repeat this verse',
+      'Playlist',
+    ]) {
+      expect(find.text(label), findsOneWidget);
+    }
+    await tester.tap(find.text('View'));
+    await settle(tester);
+    await tester.tap(find.text('Transliteration'));
+    await settle(tester);
+    expect(
+      app.container.read(playerTextProvider),
+      contains(PlayerText.transliteration),
+    );
+    Navigator.of(tester.element(find.text('Transliteration'))).pop();
+    await settle(tester);
+
+    // Repeat from the menu.
+    await tester.tap(find.bySemanticsLabel('More options'));
+    await settle(tester);
+    await tester.tap(find.text('Repeat this verse'));
+    await settle(tester);
+    expect(audioOf(app).repeatVerse, isTrue);
+
+    // Listen to: English only (owner, 2026-11-27).
+    await tester.tap(find.bySemanticsLabel('More options'));
+    await settle(tester);
+    await tester.tap(find.text('Listen to: Sanskrit + translation'));
+    await settle(tester);
+    await tester.tap(find.text('English only'));
+    await settle(tester);
+    expect(audioOf(app).mode, PlayMode.translationOnly);
+    expect(audioOf(app).track!.phase, AudioPhase.translation);
+    expect(audioOf(app).track!.label, '2.1');
+    expect(find.text('NOW · ENGLISH ONLY'), findsOneWidget);
+
+    // Speed sits on the controls card.
+    await tester.tap(find.bySemanticsLabel(RegExp('^Speed 1×')));
+    await settle(tester);
+    expect(audioOf(app).speed, isNot(1.0));
+    await audio.stop();
+    await settle(tester);
+  });
+
+  testWidgets('while a chapter loads the player says Loading, not Nothing', (
+    tester,
+  ) async {
+    final slow = _SlowManifest();
+    final app = await pumpApp(tester, audioManifest: slow);
+    await app.container
+        .read(shravanEntitlementProvider.notifier)
+        .setPretendPremium(true);
+    final audio = app.container.read(audioControllerProvider.notifier);
+    final play = audio.playChapter(2);
+    unawaited(app.container.read(routerProvider).push('/player'));
+    for (var i = 0; i < 10; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    expect(find.byType(ChapterPlayerScreen), findsOneWidget);
+    expect(find.bySemanticsLabel('Loading'), findsOneWidget);
+    expect(find.text('Nothing is playing'), findsNothing);
+    slow.release();
+    await play;
+    await settle(tester, 4);
+    expect(find.bySemanticsLabel('Loading'), findsNothing);
+    expect(audioOf(app).queue!.chapter, 2);
+    await audio.stop();
+    await settle(tester);
   });
 
   testWidgets('Sanskrit only and repeat this verse', (tester) async {
@@ -198,19 +352,6 @@ void main() {
     await settle(tester);
   });
 
-  testWidgets('pretend download shows progress, then done', (tester) async {
-    final app = await pumpApp(tester);
-    await openListen(tester);
-    await tapVisible(
-      tester,
-      find.bySemanticsLabel(RegExp(r'^Download chapter')),
-    );
-    expect(find.bySemanticsLabel(RegExp('^Downloading')), findsOneWidget);
-    await advance(tester, const Duration(seconds: 4));
-    expect(app.container.read(audioDownloadsProvider)[1], 1.0);
-    expect(find.byTooltip('Downloaded. Tap to remove'), findsOneWidget);
-  });
-
   for (final dark in [false, true]) {
     testWidgets('library and player fit at text scale 2.0 on 360 px '
         '(${dark ? 'dark' : 'light'})', (tester) async {
@@ -272,8 +413,9 @@ void main() {
     final app = await pumpApp(tester, audioManifest: _FakeManifest());
     await openListen(tester);
     expect(find.text('Unlock Shravan'), findsOneWidget);
-    expect(find.byTooltip('Downloading is part of Shravan'), findsWidgets);
-    await tapVisible(tester, find.textContaining('Chapter 2 ·'));
+    // No download buttons on the Listen page (owner, 2026-11-27).
+    expect(find.bySemanticsLabel(RegExp('^Download')), findsNothing);
+    await tapVisible(tester, tileOf(2));
     expect(find.text('The audio library is part of Shravan'), findsOneWidget);
     expect(audioOf(app).active, isFalse);
 
@@ -284,7 +426,7 @@ void main() {
     app.container.read(routerProvider).pop();
     await settle(tester, 4);
     expect(find.text('Unlock Shravan'), findsNothing);
-    await tapVisible(tester, find.textContaining('Chapter 2 ·'));
+    await tapVisible(tester, tileOf(2));
     expect(audioOf(app).queue!.chapter, 2);
     await app.container.read(audioControllerProvider.notifier).stop();
     await settle(tester);
@@ -309,4 +451,19 @@ class _FakeManifest extends ManifestSource {
     },
     translation: const {},
   );
+}
+
+/// A manifest that arrives only when [release] is called (a slow network).
+class _SlowManifest extends ManifestSource {
+  _SlowManifest() : super('https://example.invalid');
+
+  final _gate = Completer<void>();
+
+  void release() => _gate.complete();
+
+  @override
+  Future<AudioManifest?> load() async {
+    await _gate.future;
+    return _FakeManifest().load();
+  }
 }

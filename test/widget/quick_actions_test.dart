@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:versescroll/app/router.dart';
+import 'package:versescroll/application/audio_providers.dart';
 import 'package:versescroll/application/core_providers.dart';
+import 'package:versescroll/application/premium_providers.dart';
 import 'package:versescroll/application/library_providers.dart';
 import 'package:versescroll/application/scripture_providers.dart';
 import 'package:versescroll/data/settings/settings_repository.dart';
@@ -159,14 +161,39 @@ void main() {
     });
   });
 
-  testWidgets('Start Listening without Shravan opens the Listen library', (
+  testWidgets('Start Listening without Shravan opens the paywall', (
     tester,
   ) async {
     final channel = FakeQuickActionsChannel();
     final app = await pumpApp(tester, quickActions: channel);
     channel.choose(QuickAction.startListening.type);
     await settle(tester, 5);
-    // Nothing plays and no paywall is pushed; the library explains Shravan.
-    expect(_location(app), '/listen');
+    // The Listen widgets use this too: nothing plays without Shravan.
+    expect(find.text('The audio library is part of Shravan'), findsOneWidget);
+    expect(app.container.read(audioControllerProvider).active, isFalse);
+  });
+
+  testWidgets('Listen widget link: with Shravan it resumes and plays', (
+    tester,
+  ) async {
+    final app = await pumpApp(tester);
+    await app.container
+        .read(shravanEntitlementProvider.notifier)
+        .setPretendPremium(true);
+    app.container
+        .read(routerProvider)
+        .go('/quick?type=${QuickAction.startListening.type}');
+    // The player never opens before its chapter is loaded.
+    for (var i = 0; i < 40; i++) {
+      await tester.pump(const Duration(milliseconds: 50));
+      expect(find.text('Nothing is playing'), findsNothing);
+    }
+    await settle(tester, 5);
+    expect(find.text('Nothing is playing'), findsNothing);
+    final s = app.container.read(audioControllerProvider);
+    expect(s.active, isTrue);
+    expect(s.queue!.chapter, 1);
+    await app.container.read(audioControllerProvider.notifier).stop();
+    await settle(tester);
   });
 }

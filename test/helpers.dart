@@ -8,6 +8,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:versescroll/application/widget_sync.dart';
+import 'package:versescroll/data/widgets/home_widget_repository.dart';
 import 'package:versescroll/app/app.dart';
 import 'package:versescroll/features/gita/reader_screen.dart';
 import 'package:versescroll/application/audio_providers.dart';
@@ -91,6 +93,10 @@ Future<TestApp> pumpApp(
 
   /// Pretend to be iOS 26+, where the nav is Apple's UIKit tab bar.
   bool nativeTabBar = false,
+
+  /// A stand-in for the home-screen widget store (null: the real one, whose
+  /// platform calls fail quietly in tests).
+  HomeWidgetRepository? homeWidgets,
 }) async {
   driftRuntimeOptions.dontWarnAboutMultipleDatabases = true;
   tester.view.devicePixelRatio = 1;
@@ -154,6 +160,8 @@ Future<TestApp> pumpApp(
       authGatewayProvider.overrideWithValue(
         auth ?? const DisabledAuthGateway(),
       ),
+      if (homeWidgets != null)
+        homeWidgetRepositoryProvider.overrideWithValue(homeWidgets),
     ],
   );
   addTearDown(() async {

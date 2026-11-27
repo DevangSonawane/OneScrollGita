@@ -56,7 +56,7 @@ class RemindersScreen extends ConsumerWidget {
             onTap: () => ctl.setEnabled(!on),
             showChevron: false,
           ),
-          if (state.permissionDenied && !on)
+          if (state.permissionDenied)
             Container(
               margin: const EdgeInsets.fromLTRB(
                 Space.readingSide,
@@ -73,9 +73,16 @@ class RemindersScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Notifications are turned off for this app. To get a '
-                    'daily reminder, allow notifications in your phone '
-                    'settings, then switch the reminder on here.',
+                    on
+                        // Switched off in system settings after reminders
+                        // were turned on here: nothing can arrive.
+                        ? 'Notifications are turned off for this app in your '
+                              'phone settings, so reminders cannot arrive. '
+                              'Allow notifications there to get them again.'
+                        : 'Notifications are turned off for this app. To get '
+                              'a daily reminder, allow notifications in your '
+                              'phone settings, then switch the reminder on '
+                              'here.',
                     style: ui.body(color: c.textPrimary),
                   ),
                   const SizedBox(height: Space.s8),

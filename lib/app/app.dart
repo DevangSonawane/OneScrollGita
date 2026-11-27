@@ -8,6 +8,7 @@ import '../application/premium_providers.dart';
 import '../application/quick_actions.dart';
 import '../application/reminder_providers.dart';
 import '../application/scripture_providers.dart';
+import '../application/watch_sync.dart';
 import '../application/widget_sync.dart';
 import '../core/design/theme.dart';
 import '../domain/models/app_settings.dart';
@@ -31,6 +32,10 @@ class _GitaAppState extends ConsumerState<GitaApp> with WidgetsBindingObserver {
     // Home-screen widgets: start syncing once the first verse is on screen.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(widgetSyncProvider);
+      // Apple Watch companion: bookmarks, reading position, language.
+      // Listened, not read: Riverpod pauses an unlistened provider's
+      // listeners, which would stop the sync.
+      ref.listenManual(watchSyncProvider, (_, _) {});
       // iOS Home Screen Quick Actions (long-press the app icon).
       ref.read(quickActionsProvider);
       _startReminders().ignore();

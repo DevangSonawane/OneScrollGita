@@ -32,6 +32,13 @@ void main() {
       expect(q.tracks.every((t) => t.phase == AudioPhase.sanskrit), isTrue);
     });
 
+    test('English only keeps just the translations', () {
+      final q = buildChapterQueue(2, verses(3), mode: PlayMode.translationOnly);
+      expect(q.tracks, hasLength(3));
+      expect(q.tracks.every((t) => t.phase == AudioPhase.translation), isTrue);
+      expect(q.tracks.map((t) => t.verseId).toSet(), hasLength(3));
+    });
+
     test('locate maps chapter time to track and offset', () {
       final q = buildChapterQueue(2, verses(3));
       expect(q.locate(0), (index: 0, offsetMs: 0));

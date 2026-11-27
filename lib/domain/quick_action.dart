@@ -8,7 +8,8 @@ enum QuickAction {
   randomVerse('com.onescrollgita.app.quick.random-verse'),
   bookmarks('com.onescrollgita.app.quick.bookmarks'),
 
-  /// Shortcuts / Action Button only (not a Home Screen Quick Action).
+  /// Shortcuts / Action Button, and the Listen widgets and controls
+  /// (PRD_v11). Not a Home Screen Quick Action.
   startListening('com.onescrollgita.app.quick.start-listening');
 
   const QuickAction(this.type);

@@ -1,6 +1,6 @@
-
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/notifications/notification_service.dart';
@@ -153,6 +153,7 @@ class ReminderController extends Notifier<ReminderState> {
     }
     final run = _rebuild()
         .catchError((Object e) {
+          debugPrint('Reminders: rebuild failed: $e');
           state = state.copyWith(lastError: () => '$e');
         })
         .whenComplete(() {
@@ -169,13 +170,12 @@ class ReminderController extends Notifier<ReminderState> {
     final svc = _svc;
     await svc.init();
     await svc.refreshTimeZone();
-    // Pending only: notifications already delivered stay visible.
-    await svc.cancelPending();
     final s = state.settings;
     final granted = await svc.hasPermission();
-    if (!s.remindersEnabled) return;
-    if (!granted) {
-      state = state.copyWith(permissionDenied: true);
+    if (!s.remindersEnabled || !granted) {
+      // Pending only: notifications already delivered stay visible.
+      await svc.cancelPending();
+      if (s.remindersEnabled) state = state.copyWith(permissionDenied: true);
       return;
     }
     final exact = await svc.canScheduleExact();
@@ -260,7 +260,17 @@ class ReminderController extends Notifier<ReminderState> {
         );
       }
     }
+    // Cancel only once the new schedule is ready: if anything above fails,
+    // the previous schedule stays in place instead of leaving nothing.
+    await svc.cancelPending();
     final report = await svc.schedule(requests);
+    if (report.lastError != null) {
+      // debugPrint also reaches the device log in release builds.
+      debugPrint(
+        'Reminders: ${report.failed} of ${requests.length} not scheduled: '
+        '${report.lastError}',
+      );
+    }
     state = state.copyWith(
       lastError: () => report.lastError == null
           ? null

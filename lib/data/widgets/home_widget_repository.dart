@@ -11,13 +11,16 @@ class HomeWidgetRepository {
   static const kDaily = 'daily_verses';
   static const kDailyStamp = 'daily_verses_stamp';
   static const kHistory = 'history_items';
+  static const kListen = 'listen_state';
 
   static const _dailyProvider = 'com.example.versescroll.DailyVerseWidget';
   static const _historyProvider = 'com.example.versescroll.RecentWidget';
+  static const _listenProvider = 'com.example.versescroll.ListenWidget';
 
   /// iOS widget kinds (WidgetKit `kind`).
   static const _dailyIos = 'DailyVerseWidget';
   static const _historyIos = 'RecentWidget';
+  static const _listenIos = 'ListenWidget';
 
   Future<void>? _ready;
 
@@ -48,6 +51,17 @@ class HomeWidgetRepository {
     await HomeWidget.updateWidget(
       qualifiedAndroidName: _historyProvider,
       iOSName: _historyIos,
+    );
+  }
+
+  /// The Listen widgets (PRD_v11): `{chapter, title, label}` of the last
+  /// place listened to. Nothing about purchases: the app decides on tap.
+  Future<void> saveListen(Map<String, Object> state) async {
+    await _init();
+    await HomeWidget.saveWidgetData(kListen, jsonEncode(state));
+    await HomeWidget.updateWidget(
+      qualifiedAndroidName: _listenProvider,
+      iOSName: _listenIos,
     );
   }
 }

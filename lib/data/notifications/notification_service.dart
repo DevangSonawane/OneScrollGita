@@ -146,26 +146,76 @@ tz.Location zoneForOffset(Duration offset, {DateTime? at}) {
   return tz.UTC;
 }
 
+/// Runs a setup step once. Callers that arrive while it runs wait for the
+/// same run; a failed run is forgotten so the next call tries again.
+@visibleForTesting
+class RetryingOnce {
+  Future<void>? _run;
+
+  Future<void> call(Future<void> Function() step) {
+    return _run ??= step().catchError((Object e, StackTrace st) {
+      _run = null;
+      Error.throwWithStackTrace(e, st);
+    });
+  }
+}
+
+/// An Android notification channel for reminders.
+typedef ReminderChannel = ({String id, String name, String oldId});
+
+/// Reminder channels. High importance so reminders show as a banner and on
+/// the lock screen; the first channels used the default importance, which
+/// only puts a small icon in the status bar. Android never raises the
+/// importance of an existing channel, so these use new ids and replace
+/// [ReminderChannel.oldId].
+const reminderChannels = <MessageCategory, ReminderChannel>{
+  MessageCategory.invite: (
+    id: 'daily_reminder_v2',
+    name: 'Daily reading reminder',
+    oldId: 'daily_reminder',
+  ),
+  MessageCategory.reflection: (
+    id: 'daily_reminder_v2',
+    name: 'Daily reading reminder',
+    oldId: 'daily_reminder',
+  ),
+  MessageCategory.comeback: (
+    id: 'daily_reminder_v2',
+    name: 'Daily reading reminder',
+    oldId: 'daily_reminder',
+  ),
+  MessageCategory.streakRisk: (
+    id: 'streak_nudge_v2',
+    name: 'Streak nudges',
+    oldId: 'streak_nudge',
+  ),
+  MessageCategory.randomVerse: (
+    id: 'verse_of_day_v2',
+    name: 'Verse of the day',
+    oldId: 'verse_of_day',
+  ),
+};
+
+/// Importance for a new reminder channel: high, unless the user had
+/// switched the old channel off in system settings (then it stays off).
+@visibleForTesting
+Importance channelImportance(Importance? oldImportance) =>
+    oldImportance == Importance.none ? Importance.none : Importance.high;
+
 class LocalNotificationService implements NotificationService {
   final _plugin = FlutterLocalNotificationsPlugin();
   final _taps = StreamController<String>.broadcast();
-  bool _ready = false;
-
-  static const _channels = {
-    MessageCategory.invite: ('daily_reminder', 'Daily reading reminder'),
-    MessageCategory.reflection: ('daily_reminder', 'Daily reading reminder'),
-    MessageCategory.comeback: ('daily_reminder', 'Daily reading reminder'),
-    MessageCategory.streakRisk: ('streak_nudge', 'Streak nudges'),
-    MessageCategory.randomVerse: ('verse_of_day', 'Verse of the day'),
-  };
+  final _init = RetryingOnce();
 
   @override
   Stream<String> get taps => _taps.stream;
 
+  /// Safe to call from several places at once: everyone waits for the same
+  /// setup, and a failed setup is tried again on the next call.
   @override
-  Future<void> init() async {
-    if (_ready) return;
-    _ready = true;
+  Future<void> init() => _init(_setUp);
+
+  Future<void> _setUp() async {
     tzdata.initializeTimeZones();
     await refreshTimeZone();
     await _plugin.initialize(
@@ -181,11 +231,26 @@ class LocalNotificationService implements NotificationService {
       onDidReceiveNotificationResponse: (r) => _taps.add(r.payload ?? ''),
     );
     final android = _android;
-    if (android != null) {
-      for (final (id, name) in _channels.values.toSet()) {
-        await android.createNotificationChannel(
-          AndroidNotificationChannel(id, name),
+    if (android != null) await _createChannels(android);
+  }
+
+  Future<void> _createChannels(AndroidFlutterLocalNotificationsPlugin a) async {
+    final channels =
+        await a.getNotificationChannels() ??
+        const <AndroidNotificationChannel>[];
+    final existing = {for (final c in channels) c.id: c.importance};
+    for (final c in reminderChannels.values.toSet()) {
+      if (!existing.containsKey(c.id)) {
+        await a.createNotificationChannel(
+          AndroidNotificationChannel(
+            c.id,
+            c.name,
+            importance: channelImportance(existing[c.oldId]),
+          ),
         );
+      }
+      if (existing.containsKey(c.oldId)) {
+        await a.deleteNotificationChannel(channelId: c.oldId);
       }
     }
   }
@@ -310,8 +375,9 @@ class LocalNotificationService implements NotificationService {
     required bool exact,
     bool exactSeconds = false,
   }) {
-    final (channelId, channelName) =
-        _channels[r.category] ?? _channels[MessageCategory.invite]!;
+    final channel =
+        reminderChannels[r.category] ??
+        reminderChannels[MessageCategory.invite]!;
     final at = r.at;
     return _plugin.zonedSchedule(
       id: r.id,
@@ -327,8 +393,11 @@ class LocalNotificationService implements NotificationService {
             ),
       notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
-          channelId,
-          channelName,
+          channel.id,
+          channel.name,
+          // Matches the channel, in case the plugin has to create it.
+          importance: Importance.high,
+          priority: Priority.high,
           icon: 'ic_notification',
           styleInformation: BigTextStyleInformation(r.body),
         ),

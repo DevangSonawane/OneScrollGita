@@ -36,6 +36,9 @@ class PendingQuickAction extends Notifier<String?> {
 /// The full-screen chapter player.
 const playerRoute = '/player';
 
+/// The Shravan paywall, for Start Listening without Shravan (PRD_v11).
+const shravanPaywallRoute = '/shravan?reason=recitation';
+
 /// Where a quick action leads, as a route of the existing router. Reuses
 /// the persisted reading position, the daily-verse rule, the dataset and
 /// the bookmarks screen; nothing is decided here that the app does not
@@ -56,19 +59,20 @@ Future<String?> quickActionRoute(Ref ref, QuickAction action) async {
       return '/profile/bookmarks';
     case QuickAction.startListening:
       if (!AudioConfig.enabled) return '/home';
-      // Without Shravan: the Listen library (nothing plays, no paywall
-      // pushed). With it: resume where listening stopped, or chapter 1.
+      // Without Shravan: the paywall over the Listen tab, nothing plays
+      // (widgets and controls must not be a way around it, PRD_v11).
+      // With it: resume where listening stopped, or chapter 1.
       if (!canListen(
         ListenFeature.recitation,
         ref.read(shravanEntitlementProvider),
       )) {
-        return '/listen';
+        return shravanPaywallRoute;
       }
       final audio = ref.read(audioControllerProvider.notifier);
       final place = audio.lastPlace;
-      unawaited(
-        audio.playChapter(place?.chapter ?? 1, verseId: place?.verseId),
-      );
+      // Loaded before the player opens, so it never flashes "Nothing is
+      // playing" (playChapter returns once the chapter is loaded).
+      await audio.playChapter(place?.chapter ?? 1, verseId: place?.verseId);
       return playerRoute;
   }
 }
@@ -86,10 +90,11 @@ final quickActionsProvider = Provider<void>((ref) {
     try {
       final route = await quickActionRoute(ref, action);
       final router = ref.read(routerProvider);
-      if (route == playerRoute) {
-        // The player opens over the Listen tab, as it does from the app.
+      if (route == playerRoute || route == shravanPaywallRoute) {
+        // The player or the paywall opens over the Listen tab, as from the
+        // app.
         router.go('/listen');
-        unawaited(router.push(playerRoute));
+        unawaited(router.push(route!));
       } else if (route != null) {
         router.go(route);
       }

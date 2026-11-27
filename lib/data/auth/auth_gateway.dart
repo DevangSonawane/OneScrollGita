@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart' show AppLifecycleListener;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -78,6 +79,12 @@ class SupabaseAuthGateway implements AuthGateway {
 
   bool _googleReady = false;
 
+  /// The raw nonce for this app session's Google sign-ins. Its SHA-256 goes
+  /// to Google (the package takes a nonce only at initialize), the raw one
+  /// to Supabase, so a Google ID token taken from elsewhere cannot be
+  /// replayed against the project.
+  String? _googleNonce;
+
   /// Call once in main() before runApp.
   static Future<void> initialize() => Supabase.initialize(
     url: AuthConfig.supabaseUrl,
@@ -88,11 +95,10 @@ class SupabaseAuthGateway implements AuthGateway {
   bool get available => true;
 
   @override
-  List<SignInMethod> get methods => [
-    // Apple on Android needs a web redirect flow; not built (PRD_v9).
-    if (defaultTargetPlatform == TargetPlatform.iOS) SignInMethod.apple,
-    SignInMethod.google,
-  ];
+  List<SignInMethod> get methods => signInMethodsFor(
+    iOS: defaultTargetPlatform == TargetPlatform.iOS,
+    appleOnAndroid: AuthConfig.appleOnAndroid,
+  );
 
   @override
   AppUser? get currentUser => _toUser(_auth.currentUser);
@@ -105,7 +111,10 @@ class SupabaseAuthGateway implements AuthGateway {
   Future<AppUser?> signIn(SignInMethod method) async {
     try {
       return switch (method) {
-        SignInMethod.apple => await _signInWithApple(),
+        SignInMethod.apple =>
+          defaultTargetPlatform == TargetPlatform.iOS
+              ? await _signInWithApple()
+              : await _signInWithAppleWeb(),
         SignInMethod.google => await _signInWithGoogle(),
       };
     } on AuthFailure {
@@ -172,13 +181,84 @@ class SupabaseAuthGateway implements AuthGateway {
         // Signed in anyway; the name is a nicety.
       }
     }
+    // Keep Apple's refresh token on the server so deleting the account can
+    // revoke it (Apple requires that). Best effort, never awaited.
+    final code = cred.authorizationCode;
+    if (code.isNotEmpty) {
+      unawaited(_storeAppleToken({'client': 'ios', 'code': code}));
+    }
     return _toUser(res.user ?? _auth.currentUser);
+  }
+
+  /// How long to wait for Apple's web page to hand the session back once
+  /// the user is back in the app. Longer than this: they closed it.
+  static const _webReturnWait = Duration(seconds: 8);
+
+  /// Sign in with Apple on Android: Apple's web page in the browser, which
+  /// returns to [AuthConfig.authRedirect]; supabase_flutter picks up the
+  /// session from that link.
+  Future<AppUser?> _signInWithAppleWeb() async {
+    final done = Completer<Session?>();
+    Timer? giveUp;
+    final sub = _auth.onAuthStateChange.listen((s) {
+      if (s.event == AuthChangeEvent.signedIn && !done.isCompleted) {
+        done.complete(s.session);
+      }
+    }, onError: (_) {});
+    final lifecycle = AppLifecycleListener(
+      onResume: () {
+        giveUp?.cancel();
+        giveUp = Timer(_webReturnWait, () {
+          if (!done.isCompleted) done.complete(null);
+        });
+      },
+    );
+    try {
+      final opened = await _auth
+          .signInWithOAuth(
+            OAuthProvider.apple,
+            redirectTo: AuthConfig.authRedirect,
+            authScreenLaunchMode: LaunchMode.externalApplication,
+          )
+          .timeout(_networkTimeout);
+      if (!opened) {
+        throw const AuthFailure(
+          'Apple sign-in did not finish. Please try again.',
+        );
+      }
+      final session = await done.future.timeout(
+        const Duration(minutes: 5),
+        onTimeout: () => null,
+      );
+      if (session == null) return null; // closed the page
+      final refresh = session.providerRefreshToken;
+      if (refresh != null && refresh.isNotEmpty) {
+        unawaited(_storeAppleToken({'client': 'web', 'refreshToken': refresh}));
+      }
+      return _toUser(session.user);
+    } finally {
+      giveUp?.cancel();
+      lifecycle.dispose();
+      await sub.cancel();
+    }
+  }
+
+  Future<void> _storeAppleToken(Map<String, String> body) async {
+    try {
+      await _client.functions
+          .invoke('apple-token', body: body)
+          .timeout(_networkTimeout);
+    } catch (_) {
+      // The account works without it; only the revoke on delete is missed.
+    }
   }
 
   Future<AppUser?> _signInWithGoogle() async {
     final google = GoogleSignIn.instance;
     if (!_googleReady) {
+      final rawNonce = _auth.generateRawNonce();
       await google.initialize(
+        nonce: sha256.convert(utf8.encode(rawNonce)).toString(),
         clientId:
             defaultTargetPlatform == TargetPlatform.iOS &&
                 AuthConfig.googleIosClientId.isNotEmpty
@@ -188,6 +268,7 @@ class SupabaseAuthGateway implements AuthGateway {
             ? null
             : AuthConfig.googleWebClientId,
       );
+      _googleNonce = rawNonce;
       _googleReady = true;
     }
     final account = await google.authenticate();
@@ -198,7 +279,11 @@ class SupabaseAuthGateway implements AuthGateway {
       );
     }
     final res = await _auth
-        .signInWithIdToken(provider: OAuthProvider.google, idToken: idToken)
+        .signInWithIdToken(
+          provider: OAuthProvider.google,
+          idToken: idToken,
+          nonce: _googleNonce,
+        )
         .timeout(_networkTimeout);
     return _toUser(res.user ?? _auth.currentUser);
   }
@@ -220,7 +305,16 @@ class SupabaseAuthGateway implements AuthGateway {
   @override
   Future<void> deleteAccount() async {
     try {
-      await _client.rpc<void>('delete_my_account');
+      // Revokes the Apple token first, then deletes (delete-account
+      // function). If the function is unreachable for any reason other
+      // than the network, the database function still deletes the account.
+      try {
+        await _client.functions
+            .invoke('delete-account')
+            .timeout(_networkTimeout);
+      } on FunctionException {
+        await _client.rpc<void>('delete_my_account');
+      }
     } on AuthRetryableFetchException {
       throw const AuthFailure(_offline);
     } catch (_) {
@@ -237,26 +331,24 @@ class SupabaseAuthGateway implements AuthGateway {
     final user = _auth.currentUser;
     if (user == null) return;
     try {
-      final row = {
-        'user_id': user.id,
-        'product_id': record.productId,
-        'platform': record.platform,
-        'transaction_id': record.transactionId,
-      };
-      final table = _client.from('purchases');
-      if (record.transactionId == null) {
-        await table.insert(row);
-      } else {
-        await table.upsert(
-          row,
-          onConflict: 'user_id,transaction_id',
-          ignoreDuplicates: true,
-        );
-      }
+      // The verify-purchase function checks it with the store and keeps
+      // the record; the app no longer writes the table itself.
+      await _client.functions
+          .invoke('verify-purchase', body: purchaseBody(record))
+          .timeout(_networkTimeout);
     } catch (_) {
       // Support record only: the purchase itself is already granted.
     }
   }
+
+  /// What the app sends to the verify-purchase function.
+  @visibleForTesting
+  static Map<String, String> purchaseBody(PurchaseRecord r) => {
+    'productId': r.productId,
+    'platform': r.platform,
+    'transactionId': ?r.transactionId,
+    'purchaseToken': ?r.purchaseToken,
+  };
 
   static AppUser? _toUser(User? u) {
     if (u == null) return null;

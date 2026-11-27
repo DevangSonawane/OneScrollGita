@@ -9,4 +9,9 @@
     <string name="widget_recent_header">CONTINUE READING</string>
     <string name="widget_open_app">Open One Scroll Gita to load today\'s verse.</string>
     <string name="widget_recent_empty">Verses you read will appear here.</string>
+    <string name="widget_listen_label">Listen</string>
+    <string name="widget_listen_description">Continue listening to the Gītā where you stopped (Shravan).</string>
+    <string name="widget_listen_header">SHRAVAN</string>
+    <string name="widget_listen_play">Play</string>
+    <string name="tile_listen_label">Listen</string>
 </resources>

@@ -13,10 +13,6 @@ abstract final class AudioConfig {
   /// must never ship, so then only debug and owner preview builds show it.
   static bool get enabled => baseUrl.isNotEmpty || previewBuild;
 
-  /// Chapter downloads are still pretend until V4-6, so the download button
-  /// shows only in debug and owner preview builds.
-  static bool get downloads => previewBuild;
-
   /// The summary screen's player (chapter narrations once uploaded).
   static bool get summaryAudio => enabled;
 }

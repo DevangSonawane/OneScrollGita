@@ -576,4 +576,79 @@ abstract final class PlayerMetrics {
   static const chapterTile = 40.0;
   static const waveBar = 3.0;
   static const waveHeight = 18.0;
+
+  /// The cover fills this share of the screen height (at least heroMin);
+  /// the title block rises this far into its faded foot.
+  static const heroShare = 0.44;
+  static const heroMin = 240.0;
+  static const heroOverlap = 72.0;
+  static const heroNumeral = 160.0;
+
+  /// The waveform scrubber: bar width, gap and tallest bar.
+  static const scrubBar = 3.5;
+  static const scrubGap = 3.0;
+  static const scrubHeight = 56.0;
+
+  static const sideButton = 52.0;
+  static const mainButton = 72.0;
+}
+
+/// Listen library: the fanned chapter deck and the chapter tiles
+/// (owner reference, 2026-11-27).
+abstract final class ListenMetrics {
+  /// Front card: share of the screen width, capped, and height / width.
+  static const deckShare = 0.64;
+  static const deckMaxWidth = 280.0;
+  static const deckAspect = 1.3;
+
+  /// Cards drawn behind the front one, each shifted, tilted and shrunk.
+  static const deckBehind = 3;
+  static const deckTilt = 0.07;
+  static const deckFanTilt = 0.09;
+  static const deckFanShift = 30.0;
+  static const deckFanDrop = 4.0;
+  static const deckFanScale = 0.06;
+  static const deckCentre = 36.0;
+
+  /// How far (in card widths) and how much the front card swings when thrown.
+  static const deckThrow = 1.2;
+  static const deckThrowTilt = 0.3;
+  static const deckFlick = 500.0;
+
+  static const cardTitle = 22.0;
+  static const tileTitle = 19.0;
+  static const tileWidth = 168.0;
+  static const tileHeight = 216.0;
+  static const numeral = 120.0;
+  static const tileNumeral = 84.0;
+  static const playDisc = 40.0;
+
+  static const dot = 7.0;
+  static const dotActive = 16.0;
+  static const dotsShown = 5;
+
+  /// Text on cards and tiles grows up to this much, so they keep their shape.
+  static const maxTextScale = 1.4;
+}
+
+/// Chapter covers: the owner's artwork (assets/chapter_art), with deep warm
+/// gradients behind it while it loads. White text sits on dark scrims.
+abstract final class ListenArtColors {
+  static const gradients = [
+    [Color(0xFF6E2A0C), Color(0xFFD2691E)],
+    [Color(0xFF4E1620), Color(0xFFB0443A)],
+    [Color(0xFF34203F), Color(0xFFB85C3C)],
+    [Color(0xFF2E361C), Color(0xFFA9822A)],
+    [Color(0xFF1E2848), Color(0xFF85579A)],
+    [Color(0xFF452010), Color(0xFFC08A2C)],
+  ];
+  static const onArt = Color(0xFFFFFFFF);
+  static const onArtSoft = Color(0xE6FFFFFF);
+  static const watermark = Color(0x26FFFFFF);
+  static const scrim = Color(0x99000000);
+  static const scrimStrong = Color(0xB3000000);
+  static const pill = Color(0x38000000);
+  static const pillBorder = Color(0x40FFFFFF);
+  static const disc = Color(0xFFFFFFFF);
+  static const discIcon = Color(0xFFA04A12);
 }

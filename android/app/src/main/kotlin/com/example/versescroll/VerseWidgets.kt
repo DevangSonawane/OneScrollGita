@@ -121,3 +121,65 @@ class RecentWidget : HomeWidgetProvider() {
         }
     }
 }
+
+/** The Start Listening link (PRD_v11): the app plays only with Shravan. */
+internal fun listenIntent(context: Context): Intent =
+    Intent(
+        Intent.ACTION_VIEW,
+        Uri.parse("gitaapp://open/quick?type=com.onescrollgita.app.quick.start-listening"),
+        context,
+        MainActivity::class.java,
+    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+private val devanagariDigits = charArrayOf('०', '१', '२', '३', '४', '५', '६', '७', '८', '९')
+
+/**
+ * Listen (PRD_v11): the last place listened to, from the app's
+ * "listen_state" (chapter, title in the reading language, verse label).
+ * Tapping opens the app through the Start Listening link. No purchase data.
+ */
+class ListenWidget : HomeWidgetProvider() {
+    override fun onUpdate(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetIds: IntArray,
+        widgetData: SharedPreferences,
+    ) {
+        val state = try {
+            JSONObject(widgetData.getString("listen_state", "{}") ?: "{}")
+        } catch (e: Exception) {
+            JSONObject()
+        }
+        val chapter = state.optInt("chapter", 1).coerceIn(1, 18)
+        val hindi = state.optString("lang") == "hi"
+        val number = if (hindi) {
+            "अध्याय " + chapter.toString().map { devanagariDigits[it - '0'] }.joinToString("")
+        } else {
+            "Chapter $chapter"
+        }
+        val label = state.optString("label")
+        val place = if (label.isEmpty()) number else "$number · $label"
+        val title = state.optString("title").ifEmpty {
+            "Observing the Armies on the Battlefield of Kurukṣetra"
+        }
+        val cover = context.resources.getIdentifier(
+            "listen_cover_%02d".format(chapter),
+            "drawable",
+            context.packageName,
+        )
+        val tap = PendingIntent.getActivity(
+            context,
+            300,
+            listenIntent(context),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+        )
+        for (id in appWidgetIds) {
+            val views = RemoteViews(context.packageName, R.layout.widget_listen)
+            views.setTextViewText(R.id.listen_title, title)
+            views.setTextViewText(R.id.listen_place, place)
+            if (cover != 0) views.setImageViewResource(R.id.listen_cover, cover)
+            views.setOnClickPendingIntent(R.id.listen_root, tap)
+            appWidgetManager.updateAppWidget(id, views)
+        }
+    }
+}

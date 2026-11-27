@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,17 +8,17 @@ import 'package:go_router/go_router.dart';
 import '../../application/audio_providers.dart';
 import '../../application/core_providers.dart';
 import '../../application/scripture_providers.dart';
-import '../../core/design/components.dart';
+import '../../core/design/glass.dart';
 import '../../core/design/motion.dart';
 import '../../core/design/reading_views.dart';
 import '../../core/design/tokens.dart';
 import '../../core/design/typography.dart';
 import '../../domain/audio/audio.dart';
 import '../common/common_widgets.dart';
-import '../premium/sadhak_art.dart';
 import 'listen_widgets.dart';
 
-/// The full player for the chapter queue (PRD_v4 section 4).
+/// The full player for the chapter queue (PRD_v4 section 4): the chapter's
+/// cover on top, the verse being heard, and the controls on a card below.
 class ChapterPlayerScreen extends ConsumerWidget {
   const ChapterPlayerScreen({super.key});
 
@@ -42,119 +44,178 @@ class ChapterPlayerScreen extends ConsumerWidget {
             icon: const Icon(LucideIcons.chevron_down),
           ),
         ),
-        body: Center(child: Text('Nothing is playing', style: ui.emptyTitle)),
+        body: Center(
+          child: s.loadingChapter != null
+              ? Semantics(
+                  label: 'Loading',
+                  child: CircularProgressIndicator(color: c.accent),
+                )
+              : Text('Nothing is playing', style: ui.emptyTitle),
+        ),
       );
     }
 
+    final heroHeight = math
+        .max(
+          PlayerMetrics.heroMin,
+          MediaQuery.sizeOf(context).height * PlayerMetrics.heroShare,
+        )
+        .roundToDouble(); // whole pixels: no anti-aliased seam at its foot
+
     return Scaffold(
       backgroundColor: c.bg,
-      body: SafeArea(
-        child: Column(
-          children: [
-            _TopBar(
-              chapter: q.chapter,
-              title: index?.chapter(q.chapter).title(lang) ?? '',
-              onClose: close,
-              onVerses: () => _showVerses(context, ref),
-            ),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Space.readingSide,
-                ),
-                children: [
-                  ContentWidth(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    Stack(
                       children: [
-                        _Art(chapter: q.chapter, playing: s.playing),
-                        const SizedBox(height: Space.s8),
-                        _PhaseChips(phase: track.phase, mode: s.mode),
-                        const SizedBox(height: Space.s16),
-                        _VerseCard(verseId: track.verseId, phase: track.phase),
-                        const SizedBox(height: Space.s16),
-                        // Large text: the controls scroll with the verse.
-                        if (largeText) _Controls(state: s),
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: heroHeight,
+                          child: _Hero(chapter: q.chapter, playing: s.playing),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: heroHeight - PlayerMetrics.heroOverlap,
+                          ),
+                          child: ContentWidth(
+                            child: _NowPlayingText(
+                              title:
+                                  index?.chapter(q.chapter).title(lang) ?? '',
+                              verseId: track.verseId,
+                              phase: track.phase,
+                              mode: s.mode,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                ],
+                    const SizedBox(height: Space.s24),
+                    // Large text: the controls scroll with the verse.
+                    if (largeText) _Controls(state: s),
+                  ],
+                ),
               ),
-            ),
-            if (!largeText) _Controls(state: s),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _TopBar extends StatelessWidget {
-  const _TopBar({
-    required this.chapter,
-    required this.title,
-    required this.onClose,
-    required this.onVerses,
-  });
-
-  final int chapter;
-  final String title;
-  final VoidCallback onClose;
-  final VoidCallback onVerses;
-
-  @override
-  Widget build(BuildContext context) {
-    final c = AppColors.of(context);
-    final ui = UiStyles(c);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Space.s8),
-      child: Row(
-        children: [
-          IconButton(
-            tooltip: 'Close player',
-            onPressed: onClose,
-            icon: Icon(LucideIcons.chevron_down, color: c.textPrimary),
+              if (!largeText) _Controls(state: s),
+            ],
           ),
-          Expanded(
-            child: Column(
-              children: [
-                Text(
-                  'CHAPTER $chapter',
-                  style: ui.overline.copyWith(color: c.textSecondary),
-                ),
-                Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: ui.label(size: 14),
-                ),
-              ],
-            ),
-          ),
-          IconButton(
-            tooltip: 'Verses in this chapter',
-            onPressed: onVerses,
-            icon: Icon(LucideIcons.list_music, color: c.textPrimary),
-          ),
+          _TopButtons(onClose: close),
         ],
       ),
     );
   }
 }
 
-/// The turning mandala with the chapter number, breathing while it plays.
-class _Art extends StatefulWidget {
-  const _Art({required this.chapter, required this.playing});
+/// Back and more, floating over the cover (one glass layer).
+class _TopButtons extends ConsumerWidget {
+  const _TopButtons({required this.onClose});
+
+  final VoidCallback onClose;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Space.s16,
+          vertical: Space.s8,
+        ),
+        child: GlassLayer(
+          strength: GlassStrength.light,
+          child: Row(
+            children: [
+              GlassIconButton(
+                icon: LucideIcons.arrow_left,
+                semanticLabel: 'Close player',
+                onTap: onClose,
+              ),
+              const Spacer(),
+              Builder(
+                builder: (anchor) => GlassIconButton(
+                  icon: LucideIcons.ellipsis,
+                  semanticLabel: 'More options',
+                  onTap: () => _showMore(anchor, ref),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+enum _More { view, sleep, repeat, playlist, mode }
+
+Future<void> _showMore(BuildContext anchor, WidgetRef ref) async {
+  final s = ref.read(audioControllerProvider);
+  final audio = ref.read(audioControllerProvider.notifier);
+  final choice = await showGlassMenu<_More>(
+    anchor,
+    items: [
+      const GlassMenuItem(
+        value: _More.view,
+        icon: LucideIcons.eye,
+        label: 'View',
+      ),
+      GlassMenuItem(
+        value: _More.sleep,
+        icon: LucideIcons.moon,
+        label: s.sleep == null ? 'Sleep timer' : 'Sleep: ${s.sleep!.label}',
+      ),
+      GlassMenuItem(
+        value: _More.repeat,
+        icon: LucideIcons.repeat_1,
+        label: s.repeatVerse ? 'Repeat this verse: on' : 'Repeat this verse',
+      ),
+      const GlassMenuItem(
+        value: _More.playlist,
+        icon: LucideIcons.list_music,
+        label: 'Playlist',
+      ),
+      GlassMenuItem(
+        value: _More.mode,
+        icon: LucideIcons.languages,
+        label: 'Listen to: ${s.mode.label}',
+      ),
+    ],
+  );
+  if (!anchor.mounted) return;
+  switch (choice) {
+    case _More.view:
+      await _showView(anchor);
+    case _More.sleep:
+      await _showSleep(anchor, ref);
+    case _More.repeat:
+      audio.toggleRepeat();
+    case _More.playlist:
+      await _showVerses(anchor, ref);
+    case _More.mode:
+      await _showMode(anchor);
+    case null:
+  }
+}
+
+/// The chapter's cover, full bleed, fading into the page at its foot.
+/// It drifts very slowly closer while it plays (still under reduced motion).
+class _Hero extends StatefulWidget {
+  const _Hero({required this.chapter, required this.playing});
 
   final int chapter;
   final bool playing;
 
   @override
-  State<_Art> createState() => _ArtState();
+  State<_Hero> createState() => _HeroState();
 }
 
-class _ArtState extends State<_Art> with SingleTickerProviderStateMixin {
+class _HeroState extends State<_Hero> with SingleTickerProviderStateMixin {
   late final _c = AnimationController(
     vsync: this,
     duration: AppDurations.breathe,
@@ -176,7 +237,7 @@ class _ArtState extends State<_Art> with SingleTickerProviderStateMixin {
   }
 
   @override
-  void didUpdateWidget(_Art old) {
+  void didUpdateWidget(_Hero old) {
     super.didUpdateWidget(old);
     _sync();
   }
@@ -190,49 +251,39 @@ class _ArtState extends State<_Art> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final c = AppColors.of(context);
-    final p = PremiumColors.of(context);
-    return SizedBox(
-      height: PlayerMetrics.art,
+    return Semantics(
+      label: 'Chapter ${widget.chapter}',
+      excludeSemantics: true,
       child: Stack(
-        alignment: Alignment.center,
-        clipBehavior: Clip.none,
+        fit: StackFit.expand,
         children: [
-          // Full bleed past the page's side padding, soft at both edges.
-          const Positioned(
-            top: 0,
-            bottom: 0,
-            left: -Space.readingSide,
-            right: -Space.readingSide,
-            child: SadhakAmbient(height: PlayerMetrics.art, fadeTop: true),
+          ClipRect(
+            child: AnimatedBuilder(
+              animation: _c,
+              builder: (context, child) {
+                final v = Curves.easeInOut.transform(_c.value);
+                return Transform.scale(scale: 1 + 0.04 * v, child: child);
+              },
+              child: ChapterCover(
+                chapter: widget.chapter,
+                numeralSize: PlayerMetrics.heroNumeral,
+              ),
+            ),
           ),
-          AnimatedBuilder(
-            animation: _c,
-            builder: (context, child) {
-              final v = Curves.easeInOut.transform(_c.value);
-              return Transform.scale(scale: 0.96 + 0.06 * v, child: child);
-            },
-            child: Semantics(
-              label: 'Chapter ${widget.chapter}',
-              excludeSemantics: true,
-              child: Container(
-                width: PlayerMetrics.art * 0.5,
-                height: PlayerMetrics.art * 0.5,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                    colors: [p.cardTop, p.cardTop.withValues(alpha: 0)],
-                  ),
-                ),
-                child: Text(
-                  devanagariNumber(widget.chapter),
-                  textScaler: TextScaler.noScaling,
-                  style: ReadingStyles(c, 1).sanskrit.copyWith(
-                    fontSize: PlayerMetrics.artNumeral,
-                    height: 1.1,
-                    color: c.accentText,
-                  ),
-                ),
+          // Melts into the page so the title can sit on its foot.
+          DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                // Solid for its last strip, so no seam shows at the edge.
+                stops: const [0, 0.4, 0.92, 1],
+                colors: [
+                  c.bg.withValues(alpha: 0),
+                  c.bg.withValues(alpha: 0),
+                  c.bg,
+                  c.bg,
+                ],
               ),
             ),
           ),
@@ -242,145 +293,120 @@ class _ArtState extends State<_Art> with SingleTickerProviderStateMixin {
   }
 }
 
-class _PhaseChips extends StatelessWidget {
-  const _PhaseChips({required this.phase, required this.mode});
+/// Chapter title, verse reference, then the verse from the dataset:
+/// Devanagari and the English translation, the one being heard in full
+/// colour. On the page, never on glass.
+class _NowPlayingText extends ConsumerWidget {
+  const _NowPlayingText({
+    required this.title,
+    required this.verseId,
+    required this.phase,
+    required this.mode,
+  });
 
+  final String title;
+  final String verseId;
   final AudioPhase phase;
   final PlayMode mode;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final c = AppColors.of(context);
     final ui = UiStyles(c);
-    final duration = Motion.of(context).reduced
-        ? AppDurations.instant
-        : AppDurations.base;
-    Widget chip(AudioPhase p) {
-      final on = p == phase;
-      return AnimatedContainer(
-        duration: duration,
-        padding: const EdgeInsets.symmetric(
-          horizontal: Space.s12,
-          vertical: Space.s4,
-        ),
-        decoration: BoxDecoration(
-          color: on ? c.accentSoft : Colors.transparent,
-          borderRadius: BorderRadius.circular(Radii.pill),
-          border: Border.all(color: on ? c.accentSoft : c.hairline),
-        ),
-        child: Text(
-          p.label,
-          style: ui.label(size: 13, color: on ? c.accentText : c.textTertiary),
-        ),
-      );
-    }
-
-    return Semantics(
-      container: true,
-      label: 'Now: ${phase.label}',
-      excludeSemantics: true,
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: Space.s8,
-        runSpacing: Space.s8,
+    final entry = ref.watch(entryProvider(verseId)).value;
+    final styles = readingStyles(context, ref);
+    final k = PlayerMetrics.verseTextFactor * styles.scale;
+    final sanskrit = phase == AudioPhase.sanskrit;
+    final show = ref.watch(playerTextProvider);
+    final translation = show.contains(PlayerText.translation);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Space.readingSide),
+      child: Column(
         children: [
-          chip(AudioPhase.sanskrit),
-          if (mode == PlayMode.withTranslation) ...[
-            Icon(
-              LucideIcons.chevron_right,
-              size: IconSizes.small - 4,
-              color: c.textTertiary,
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: chapterNameStyle(
+              ui.title.copyWith(fontWeight: FontWeight.w700),
+              ref.watch(languageProvider),
             ),
-            chip(AudioPhase.translation),
-          ],
+          ),
+          const SizedBox(height: Space.s4),
+          if (entry != null)
+            Text(
+              'Bhagavad-gītā ${entry.label}',
+              textAlign: TextAlign.center,
+              style: ui.label(size: 17, color: c.textSecondary),
+            ),
+          const SizedBox(height: Space.s8),
+          Semantics(
+            container: true,
+            label: 'Now: ${phase.label}',
+            excludeSemantics: true,
+            child: Text(switch (mode) {
+              PlayMode.sanskritOnly => 'NOW · SANSKRIT ONLY',
+              PlayMode.translationOnly => 'NOW · ENGLISH ONLY',
+              PlayMode.withTranslation => 'NOW · ${phase.label.toUpperCase()}',
+            }, style: ui.overline),
+          ),
+          const SizedBox(height: Space.s16),
+          if (entry == null)
+            const SizedBox(height: Touch.minTarget * 3)
+          else
+            AnimatedSwitcher(
+              duration: Motion.of(context).crossFade,
+              child: Column(
+                key: ValueKey('$verseId-$sanskrit'),
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (show.contains(PlayerText.devanagari))
+                    Text(
+                      entry.sanskrit.join('\n'),
+                      textAlign: TextAlign.center,
+                      style: styles.sanskrit.copyWith(
+                        fontSize: ReadingType.shloka * k,
+                        color: sanskrit ? c.textPrimary : c.textTertiary,
+                      ),
+                    ),
+                  if (show.contains(PlayerText.transliteration)) ...[
+                    if (show.contains(PlayerText.devanagari))
+                      const SizedBox(height: Space.s8),
+                    Text(
+                      entry.transliteration.join('\n'),
+                      textAlign: TextAlign.center,
+                      style: styles.transliteration.copyWith(
+                        fontSize: ReadingType.transliteration * k,
+                        color: sanskrit ? c.textSecondary : c.textTertiary,
+                      ),
+                    ),
+                  ],
+                  if (translation) ...[
+                    if (show.length > 1) const SizedBox(height: Space.s16),
+                    Text(
+                      // English narration: the English translation from the
+                      // dataset.
+                      entry.translationEn,
+                      textAlign: TextAlign.center,
+                      locale: const Locale('en'),
+                      style: styles
+                          .translation('en')
+                          .copyWith(
+                            fontSize: ReadingType.translation * k,
+                            color: sanskrit ? c.textTertiary : c.textPrimary,
+                          ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
         ],
       ),
     );
   }
 }
 
-/// The verse being heard, from the dataset, on a solid card (never glass).
-class _VerseCard extends ConsumerWidget {
-  const _VerseCard({required this.verseId, required this.phase});
-
-  final String verseId;
-  final AudioPhase phase;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final c = AppColors.of(context);
-    final entry = ref.watch(entryProvider(verseId)).value;
-    final lang = ref.watch(languageProvider);
-    final styles = readingStyles(context, ref);
-    final k = PlayerMetrics.verseTextFactor * styles.scale;
-    if (entry == null) {
-      return const SizedBox(height: Touch.minTarget * 3);
-    }
-    final sanskrit = phase == AudioPhase.sanskrit;
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Space.s16,
-        vertical: Space.s12,
-      ),
-      decoration: BoxDecoration(
-        color: c.surface,
-        borderRadius: BorderRadius.circular(Radii.card),
-        border: Border.all(color: c.hairline),
-      ),
-      child: AnimatedSwitcher(
-        duration: Motion.of(context).crossFade,
-        child: Column(
-          key: ValueKey('$verseId-$sanskrit'),
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Center(child: ReferenceChip(label: 'Bhagavad-gītā ${entry.label}')),
-            const SizedBox(height: Space.s12),
-            // A little smaller than the reader, by one even factor.
-            if (sanskrit) ...[
-              Text(
-                entry.sanskrit.join('\n'),
-                textAlign: TextAlign.center,
-                style: styles.sanskrit.copyWith(
-                  fontSize: ReadingType.shloka * k,
-                ),
-              ),
-              const SizedBox(height: Space.s8),
-              Text(
-                entry.transliteration.join('\n'),
-                textAlign: TextAlign.center,
-                style: styles.transliteration.copyWith(
-                  fontSize: ReadingType.transliteration * k,
-                ),
-              ),
-            ] else
-              Text(
-                // English narration: the English translation from the dataset.
-                entry.translationEn,
-                style: styles
-                    .translation('en')
-                    .copyWith(fontSize: ReadingType.translation * k),
-                locale: const Locale('en'),
-              ),
-            if (sanskrit && lang == 'hi' && entry.hasTranslation('hi')) ...[
-              const SizedBox(height: Space.s12),
-              Text(
-                entry.translation('hi'),
-                style: styles
-                    .translation('hi')
-                    .copyWith(
-                      color: c.textTertiary,
-                      fontSize: ReadingType.translation * k,
-                    ),
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-}
-
+/// The white card at the foot: times, waveform, then previous, play/pause,
+/// next, and the speed on the right.
 class _Controls extends ConsumerWidget {
   const _Controls({required this.state});
 
@@ -389,58 +415,28 @@ class _Controls extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final c = AppColors.of(context);
-    final p = PremiumColors.of(context);
     final ui = UiStyles(c);
     final audio = ref.read(audioControllerProvider.notifier);
     final s = state;
-    final now = ref.read(clockProvider)();
-    final sleepLabel = switch (s.sleep) {
-      null => 'Sleep',
-      SleepOption.endOfVerse => 'After verse',
-      SleepOption.endOfChapter => 'After chapter',
-      _ when s.sleepEndsAt != null =>
-        '${(s.sleepEndsAt!.difference(now).inSeconds / 60).ceil().clamp(0, 99)} min',
-      _ => 'Sleep',
-    };
     final speedLabel =
         '${s.speed == s.speed.roundToDouble() ? s.speed.toStringAsFixed(0) : s.speed.toString()}×';
 
-    Widget small(
-      IconData icon,
-      String label,
-      VoidCallback onTap, {
-      bool on = false,
-      String? semantics,
-    }) => Semantics(
-      button: true,
-      toggled: on,
-      label: semantics ?? label,
-      excludeSemantics: true,
-      child: InkResponse(
-        onTap: onTap,
-        radius: Touch.minTarget,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            minWidth: Touch.minTarget + Space.s16,
-            minHeight: Touch.minTarget,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: IconSizes.small,
-                color: on ? c.accentText : c.textSecondary,
-              ),
-              const SizedBox(height: 2),
-              Text(
-                label,
-                style: ui.body(
-                  size: 11,
-                  color: on ? c.accentText : c.textTertiary,
-                ),
-              ),
-            ],
+    Widget side(IconData icon, String tooltip, VoidCallback onTap) => Tooltip(
+      message: tooltip,
+      child: Semantics(
+        button: true,
+        label: tooltip,
+        excludeSemantics: true,
+        child: Material(
+          color: c.surfaceSoft,
+          shape: const CircleBorder(),
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: onTap,
+            child: SizedBox.square(
+              dimension: PlayerMetrics.sideButton,
+              child: Icon(icon, size: IconSizes.regular, color: c.textPrimary),
+            ),
           ),
         ),
       ),
@@ -449,119 +445,106 @@ class _Controls extends ConsumerWidget {
     // Control labels grow to 1.5x at most, like the nav bar (1.3x).
     return MediaQuery.withClampedTextScaling(
       maxScaleFactor: 1.5,
-      child: Container(
-        decoration: BoxDecoration(
-          color: c.bg,
-          border: Border(top: BorderSide(color: c.hairline)),
-        ),
-        padding: const EdgeInsets.fromLTRB(
-          Space.readingSide,
-          Space.s8,
-          Space.readingSide,
-          Space.s8,
-        ),
+      child: SafeArea(
+        top: false,
+        minimum: const EdgeInsets.only(bottom: Space.s16),
         child: ContentWidth(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _Scrubber(state: s),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    tooltip: 'Previous verse',
-                    iconSize: IconSizes.large,
-                    onPressed: audio.previousVerse,
-                    icon: Icon(LucideIcons.skip_back, color: c.textPrimary),
-                  ),
-                  const SizedBox(width: Space.s16),
-                  Semantics(
-                    button: true,
-                    label: s.playing ? 'Pause' : 'Play',
-                    excludeSemantics: true,
-                    child: GestureDetector(
-                      onTap: audio.toggle,
-                      child: Container(
-                        width: PlayerMetrics.playButton,
-                        height: PlayerMetrics.playButton,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [c.accent, p.gold],
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: Space.s16),
+            padding: const EdgeInsets.fromLTRB(
+              Space.s24,
+              Space.s16,
+              Space.s24,
+              Space.s24,
+            ),
+            decoration: BoxDecoration(
+              color: c.surface,
+              borderRadius: BorderRadius.circular(Radii.sheet),
+              border: Border.all(color: c.hairline),
+              boxShadow: Elevation.soft(c),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _Scrubber(state: s),
+                const SizedBox(height: Space.s16),
+                Row(
+                  children: [
+                    const Expanded(child: SizedBox()),
+                    side(
+                      LucideIcons.skip_back,
+                      'Previous verse',
+                      audio.previousVerse,
+                    ),
+                    const SizedBox(width: Space.s16),
+                    Semantics(
+                      button: true,
+                      label: s.playing ? 'Pause' : 'Play',
+                      excludeSemantics: true,
+                      child: GestureDetector(
+                        onTap: audio.toggle,
+                        child: Container(
+                          width: PlayerMetrics.mainButton,
+                          height: PlayerMetrics.mainButton,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: c.accent,
+                            boxShadow: Elevation.soft(c),
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: p.glow,
-                              blurRadius: PaywallMetrics.glowBlur * 0.6,
-                              offset: const Offset(0, Space.s4),
+                          child: AnimatedSwitcher(
+                            duration: Motion.of(context).crossFade,
+                            child: Icon(
+                              s.playing ? LucideIcons.pause : LucideIcons.play,
+                              key: ValueKey(s.playing),
+                              size: IconSizes.large,
+                              color: c.onAccent,
                             ),
-                          ],
-                        ),
-                        child: AnimatedSwitcher(
-                          duration: AppDurations.fast,
-                          child: Icon(
-                            s.playing ? LucideIcons.pause : LucideIcons.play,
-                            key: ValueKey(s.playing),
-                            size: IconSizes.large,
-                            color: c.onAccent,
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: Space.s16),
-                  IconButton(
-                    tooltip: 'Next verse',
-                    iconSize: IconSizes.large,
-                    onPressed: audio.nextVerse,
-                    icon: Icon(LucideIcons.skip_forward, color: c.textPrimary),
-                  ),
-                ],
-              ),
-              const SizedBox(height: Space.s4),
-              Wrap(
-                alignment: WrapAlignment.spaceEvenly,
-                children: [
-                  small(
-                    LucideIcons.gauge,
-                    speedLabel,
-                    audio.cycleSpeed,
-                    semantics: 'Speed $speedLabel. Tap to change',
-                  ),
-                  small(
-                    LucideIcons.moon,
-                    sleepLabel,
-                    () => _showSleep(context, ref),
-                    on: s.sleep != null,
-                    semantics: s.sleep == null
-                        ? 'Sleep timer'
-                        : 'Sleep timer: $sleepLabel',
-                  ),
-                  small(
-                    LucideIcons.languages,
-                    s.mode == PlayMode.sanskritOnly
-                        ? 'Sanskrit only'
-                        : '+ Meaning',
-                    () => audio.setMode(
-                      s.mode == PlayMode.sanskritOnly
-                          ? PlayMode.withTranslation
-                          : PlayMode.sanskritOnly,
+                    const SizedBox(width: Space.s16),
+                    side(
+                      LucideIcons.skip_forward,
+                      'Next verse',
+                      audio.nextVerse,
                     ),
-                    on: s.mode == PlayMode.sanskritOnly,
-                    semantics: s.mode.label,
-                  ),
-                  small(
-                    LucideIcons.repeat_1,
-                    'Repeat',
-                    audio.toggleRepeat,
-                    on: s.repeatVerse,
-                    semantics: 'Repeat this verse',
-                  ),
-                ],
-              ),
-            ],
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Semantics(
+                          button: true,
+                          label: 'Speed $speedLabel. Tap to change',
+                          excludeSemantics: true,
+                          child: InkResponse(
+                            onTap: audio.cycleSpeed,
+                            radius: Touch.minTarget / 2,
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(
+                                minWidth: Touch.minTarget,
+                                minHeight: Touch.minTarget,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  speedLabel,
+                                  maxLines: 1,
+                                  style: ui.label(
+                                    size: 15,
+                                    color: s.speed == 1
+                                        ? c.textSecondary
+                                        : c.accentText,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -569,7 +552,8 @@ class _Controls extends ConsumerWidget {
   }
 }
 
-/// Chapter progress with a small tick at each verse. Drag or tap to seek.
+/// Elapsed and remaining time over a waveform that fills as the chapter
+/// plays. Drag or tap to seek.
 class _Scrubber extends ConsumerStatefulWidget {
   const _Scrubber({required this.state});
 
@@ -588,7 +572,6 @@ class _ScrubberState extends ConsumerState<_Scrubber> {
     final ui = UiStyles(c);
     final s = widget.state;
     final value = _drag ?? s.progress;
-    final marks = s.queue?.verseMarks ?? const [];
     final shownMs = (s.totalMs * value).round();
     final audio = ref.read(audioControllerProvider.notifier);
 
@@ -597,6 +580,17 @@ class _ScrubberState extends ConsumerState<_Scrubber> {
 
     return Column(
       children: [
+        Row(
+          children: [
+            Text(formatDuration(shownMs), style: ui.body(size: 13)),
+            const Spacer(),
+            Text(
+              '-${formatDuration(math.max(0, s.totalMs - shownMs))}',
+              style: ui.body(size: 13),
+            ),
+          ],
+        ),
+        const SizedBox(height: Space.s8),
         Semantics(
           slider: true,
           label: 'Chapter position',
@@ -620,85 +614,76 @@ class _ScrubberState extends ConsumerState<_Scrubber> {
                 if (f != null) audio.seekFraction(f);
               },
               child: SizedBox(
-                height: PlayerMetrics.scrubberHeight,
+                height: PlayerMetrics.scrubHeight,
                 width: double.infinity,
                 child: CustomPaint(
-                  painter: _ScrubberPainter(
+                  painter: _WavePainter(
                     value: value,
-                    marks: [for (final m in marks) m.at],
-                    track: c.hairline,
-                    fill: c.accent,
-                    tick: c.textTertiary.withValues(alpha: 0.5),
-                    thumb: c.accent,
-                    dragging: _drag != null,
+                    seed: s.queue?.chapter ?? 1,
+                    played: c.accent,
+                    rest: c.hairline,
                   ),
                 ),
               ),
             ),
           ),
         ),
-        Row(
-          children: [
-            Text(formatDuration(shownMs), style: ui.body(size: 12)),
-            const Spacer(),
-            Text(formatDuration(s.totalMs), style: ui.body(size: 12)),
-          ],
-        ),
       ],
     );
   }
 }
 
-class _ScrubberPainter extends CustomPainter {
-  _ScrubberPainter({
+/// Bars of a steady made-up waveform (the same for a chapter every time);
+/// those before [value] take the played colour.
+class _WavePainter extends CustomPainter {
+  _WavePainter({
     required this.value,
-    required this.marks,
-    required this.track,
-    required this.fill,
-    required this.tick,
-    required this.thumb,
-    required this.dragging,
+    required this.seed,
+    required this.played,
+    required this.rest,
   });
 
   final double value;
-  final List<double> marks;
-  final Color track;
-  final Color fill;
-  final Color tick;
-  final Color thumb;
-  final bool dragging;
+  final int seed;
+  final Color played;
+  final Color rest;
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    final y = size.height / 2;
-    final line = Paint()
-      ..strokeWidth = 3
-      ..strokeCap = StrokeCap.round;
-    canvas.drawLine(Offset(0, y), Offset(size.width, y), line..color = track);
-    final ticks = Paint()
-      ..color = tick
-      ..strokeWidth = 1;
-    // Too many verses to tick each one clearly: thin them out.
-    final step = (marks.length / 40).ceil().clamp(1, 1000);
-    for (var i = 0; i < marks.length; i += step) {
-      final x = marks[i] * size.width;
-      canvas.drawLine(
-        Offset(x, y - PlayerMetrics.tickHeight / 2),
-        Offset(x, y + PlayerMetrics.tickHeight / 2),
-        ticks,
-      );
+  double _height(int i) {
+    double noise(int n) {
+      final x = math.sin(n * 12.9898 + seed * 78.233) * 43758.5453;
+      return x - x.floorToDouble();
     }
-    final x = value * size.width;
-    canvas.drawLine(Offset(0, y), Offset(x, y), line..color = fill);
-    canvas.drawCircle(Offset(x, y), dragging ? 8 : 6, Paint()..color = thumb);
+
+    // A slow swell times a little jitter, so it reads like speech.
+    final swell = 0.55 + 0.45 * math.sin(i * 0.35 + seed);
+    return (0.2 + 0.8 * swell * (0.45 + 0.55 * noise(i))).clamp(0.15, 1.0);
   }
 
   @override
-  bool shouldRepaint(_ScrubberPainter old) =>
+  void paint(Canvas canvas, Size size) {
+    const step = PlayerMetrics.scrubBar + PlayerMetrics.scrubGap;
+    final count = ((size.width + PlayerMetrics.scrubGap) / step).floor();
+    if (count <= 0) return;
+    final spare = size.width - (count * step - PlayerMetrics.scrubGap);
+    final mid = size.height / 2;
+    final paint = Paint()
+      ..strokeWidth = PlayerMetrics.scrubBar
+      ..strokeCap = StrokeCap.round;
+    final cut = value * size.width;
+    for (var i = 0; i < count; i++) {
+      final x = spare / 2 + i * step + PlayerMetrics.scrubBar / 2;
+      final half = (size.height - PlayerMetrics.scrubBar) * _height(i) / 2;
+      paint.color = x <= cut ? played : rest;
+      canvas.drawLine(Offset(x, mid - half), Offset(x, mid + half), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(_WavePainter old) =>
       old.value != value ||
-      old.dragging != dragging ||
-      old.marks.length != marks.length ||
-      old.fill != fill;
+      old.seed != seed ||
+      old.played != played ||
+      old.rest != rest;
 }
 
 Future<void> _showVerses(BuildContext context, WidgetRef ref) =>
@@ -815,3 +800,98 @@ Future<void> _showSleep(BuildContext context, WidgetRef ref) =>
         },
       ),
     );
+
+/// Which lines of the verse the player shows: tick any of the three.
+Future<void> _showView(BuildContext context) => showModalBottomSheet<void>(
+  context: context,
+  useRootNavigator: true,
+  builder: (sheet) => Consumer(
+    builder: (context, ref, _) {
+      final c = AppColors.of(context);
+      final ui = UiStyles(c);
+      final show = ref.watch(playerTextProvider);
+      final view = ref.read(playerTextProvider.notifier);
+      Widget option(String label, PlayerText t) => CheckboxListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: Space.readingSide,
+        ),
+        activeColor: c.accent,
+        checkColor: c.onAccent,
+        title: Text(label, style: ui.label()),
+        value: show.contains(t),
+        // The last line left on stays on.
+        onChanged: show.length == 1 && show.contains(t)
+            ? null
+            : (_) => view.toggle(t),
+      );
+      return SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Space.readingSide,
+                Space.s16,
+                Space.readingSide,
+                Space.s8,
+              ),
+              child: Text('View', style: ui.emptyTitle),
+            ),
+            option('Devanagari', PlayerText.devanagari),
+            option('Transliteration', PlayerText.transliteration),
+            option('English translation', PlayerText.translation),
+            const SizedBox(height: Space.s8),
+          ],
+        ),
+      );
+    },
+  ),
+);
+
+/// What is heard: Sanskrit and its translation, Sanskrit only, or English
+/// only.
+Future<void> _showMode(BuildContext context) => showModalBottomSheet<void>(
+  context: context,
+  useRootNavigator: true,
+  builder: (sheet) => Consumer(
+    builder: (context, ref, _) {
+      final c = AppColors.of(context);
+      final ui = UiStyles(c);
+      final current = ref.watch(audioControllerProvider.select((s) => s.mode));
+      final audio = ref.read(audioControllerProvider.notifier);
+      return SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Space.readingSide,
+                Space.s16,
+                Space.readingSide,
+                Space.s8,
+              ),
+              child: Text('Listen to', style: ui.emptyTitle),
+            ),
+            for (final m in PlayMode.values)
+              ListTile(
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: Space.readingSide,
+                ),
+                title: Text(m.label, style: ui.label()),
+                trailing: current == m
+                    ? Icon(LucideIcons.check, color: c.accentText)
+                    : null,
+                onTap: () {
+                  audio.setMode(m);
+                  Navigator.of(sheet).pop();
+                },
+              ),
+            const SizedBox(height: Space.s8),
+          ],
+        ),
+      );
+    },
+  ),
+);

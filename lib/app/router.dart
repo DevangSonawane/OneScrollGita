@@ -91,6 +91,18 @@ final routerProvider = Provider<GoRouter>((ref) {
       // Control Center controls (iOS 18): gitaapp://open/quick?type=<type>.
       // The quick-action handler decides the destination with the app's
       // own data (lib/application/quick_actions.dart); Home meanwhile.
+      // Apple's web sign-in on Android returns here
+      // (gitaapp://open/login-callback?code=...). supabase_flutter turns the
+      // link into a session; this only puts the user back where they were.
+      GoRoute(
+        path: '/login-callback',
+        redirect: (context, state) {
+          final s = ref.read(settingsProvider);
+          return s.firstLaunchDone && !s.accountStepPending
+              ? '/profile/account'
+              : '/signup';
+        },
+      ),
       GoRoute(
         path: '/quick',
         redirect: (context, state) {

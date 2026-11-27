@@ -35,10 +35,16 @@ class AudioTrack {
 
 enum PlayMode {
   withTranslation('Sanskrit + translation'),
-  sanskritOnly('Sanskrit only');
+  sanskritOnly('Sanskrit only'),
+
+  /// The English translation narration only (owner, 2026-11-27).
+  translationOnly('English only');
 
   const PlayMode(this.label);
   final String label;
+
+  bool get sanskrit => this != translationOnly;
+  bool get translation => this != sanskritOnly;
 }
 
 /// Durations of one verse's two recordings.
@@ -174,7 +180,7 @@ ChapterQueue buildChapterQueue(
   mode: mode,
   tracks: [
     for (final v in verses) ...[
-      if (v.sanskritMs > 0)
+      if (mode.sanskrit && v.sanskritMs > 0)
         AudioTrack(
           verseId: v.verseId,
           label: v.label,
@@ -182,7 +188,7 @@ ChapterQueue buildChapterQueue(
           ms: v.sanskritMs,
           file: v.sanskritFile,
         ),
-      if (mode == PlayMode.withTranslation && v.translationMs > 0)
+      if (mode.translation && v.translationMs > 0)
         AudioTrack(
           verseId: v.verseId,
           label: v.label,

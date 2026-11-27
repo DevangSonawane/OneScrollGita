@@ -64,9 +64,14 @@ class AudioUiState {
     this.summaryEnded = false,
     this.resumePlace,
     this.finished = false,
+    this.loadingChapter,
   });
 
   final AudioKind kind;
+
+  /// A chapter asked for and still loading (its timings or the manifest),
+  /// so the player shows "Loading" instead of "Nothing is playing".
+  final int? loadingChapter;
 
   /// The chapter queue (kept while a summary plays, for "Resume").
   final ChapterQueue? queue;
@@ -146,6 +151,8 @@ class AudioUiState {
     AudioPlace? resumePlace,
     bool clearResume = false,
     bool? finished,
+    int? loadingChapter,
+    bool clearLoading = false,
   }) => AudioUiState(
     kind: kind ?? this.kind,
     queue: clearQueue ? null : (queue ?? this.queue),
@@ -165,6 +172,9 @@ class AudioUiState {
     summaryEnded: summaryEnded ?? this.summaryEnded,
     resumePlace: clearResume ? null : (resumePlace ?? this.resumePlace),
     finished: finished ?? this.finished,
+    loadingChapter: clearLoading
+        ? null
+        : (loadingChapter ?? this.loadingChapter),
   );
 }
 
@@ -280,9 +290,17 @@ class AudioController extends Notifier<AudioUiState> {
   /// Plays [chapter] from [verseId] (or the start).
   Future<void> playChapter(int chapter, {String? verseId}) async {
     if (locked) return;
-    final q = await _queue(chapter, state.mode);
+    state = state.copyWith(loadingChapter: chapter);
+    final ChapterQueue q;
+    try {
+      q = await _queue(chapter, state.mode);
+    } catch (_) {
+      state = state.copyWith(clearLoading: true);
+      rethrow;
+    }
     final index = verseId == null ? 0 : (q.indexOfVerse(verseId) ?? 0);
     state = state.copyWith(
+      clearLoading: true,
       kind: AudioKind.chapter,
       queue: q,
       index: index,
@@ -630,5 +648,28 @@ class VersePreview extends Notifier<VersePreviewState> {
           : VersePreviewStatus.paused,
       progress: p,
     );
+  }
+}
+
+/// Lines of the verse the player shows (owner, 2026-11-27).
+enum PlayerText { devanagari, transliteration, translation }
+
+/// Devanagari and the English translation by default; the listener picks
+/// from the player's View menu. At least one stays on.
+final playerTextProvider = NotifierProvider<PlayerTextView, Set<PlayerText>>(
+  PlayerTextView.new,
+);
+
+class PlayerTextView extends Notifier<Set<PlayerText>> {
+  @override
+  Set<PlayerText> build() => const {
+    PlayerText.devanagari,
+    PlayerText.translation,
+  };
+
+  void toggle(PlayerText t) {
+    final next = {...state};
+    if (!next.remove(t)) next.add(t);
+    if (next.isNotEmpty) state = next;
   }
 }

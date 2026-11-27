@@ -1,0 +1,90 @@
+{
+  "_status": "Captions drafted by Claude Code, reviewed: false. Listed in docs/review-needed.md.",
+  "_raw": "Put raw screenshots in raw/ (iPhone) and raw-android/ (optional; falls back to raw/). Same file names as below.",
+  "_stores": "App Store takes up to 10, Google Play up to 8: slides with \"play\": false are skipped for Play.",
+  "slides": [
+    {
+      "id": "01-home",
+      "eyebrow": "One Scroll Gita",
+      "title": "Swap the scroll\nfor a verse",
+      "subtitle": "One verse of the Bhagavad-gītā As It Is, every day",
+      "theme": "light",
+      "layout": "bottom"
+    },
+    {
+      "id": "02-reader",
+      "eyebrow": "All 18 chapters",
+      "title": "Swipe through\nall 700 verses",
+      "subtitle": "Sanskrit, transliteration and translation",
+      "theme": "dark",
+      "layout": "bottom"
+    },
+    {
+      "id": "03-feelings",
+      "eyebrow": "For how you feel",
+      "title": "Find a verse\nfor your moment",
+      "subtitle": "Peace of mind, anger, fear, doubt and more",
+      "theme": "light",
+      "layout": "bottom"
+    },
+    {
+      "id": "04-purport",
+      "eyebrow": "Book-like reading",
+      "title": "Śrīla Prabhupāda’s\nfull purports",
+      "subtitle": "Every word as published",
+      "theme": "light",
+      "layout": "top"
+    },
+    {
+      "id": "05-hindi",
+      "eyebrow": "English · हिन्दी",
+      "title": "Read in English\nor हिन्दी",
+      "subtitle": "Switch any time with one tap",
+      "theme": "dark",
+      "layout": "bottom"
+    },
+    {
+      "id": "06-listen",
+      "eyebrow": "Shravan",
+      "title": "Listen to\nthe Gita",
+      "subtitle": "Each shloka recited, then its meaning",
+      "theme": "dark",
+      "layout": "bottom"
+    },
+    {
+      "id": "07-trainer",
+      "eyebrow": "Sadhak",
+      "title": "Learn shlokas\nby heart",
+      "subtitle": "Step by step, a few words at a time",
+      "theme": "light",
+      "layout": "bottom"
+    },
+    {
+      "id": "08-library",
+      "eyebrow": "Your library",
+      "title": "A calm\ndaily habit",
+      "subtitle": "Streak, favourites, bookmarks and notes",
+      "theme": "light",
+      "layout": "top",
+      "play": false
+    },
+    {
+      "id": "09-goto",
+      "eyebrow": "Jump anywhere",
+      "title": "Any verse,\nin one tap",
+      "subtitle": "Every chapter, verse and summary",
+      "theme": "dark",
+      "layout": "bottom",
+      "play": false
+    },
+    {
+      "id": "10-themes",
+      "pair": "10-themes-light",
+      "eyebrow": "Light or dark",
+      "title": "Easy on the eyes,\nday or night",
+      "subtitle": "Light and dark themes, five text sizes",
+      "theme": "light",
+      "layout": "bottom"
+    }
+  ]
+}

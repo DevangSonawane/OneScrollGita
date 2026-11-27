@@ -4,8 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/widgets/home_widget_repository.dart';
+import '../domain/verse_navigation.dart';
 import '../domain/daily_verse.dart';
 import '../domain/models/user_items.dart';
+import 'audio_providers.dart';
 import 'core_providers.dart';
 import 'library_providers.dart';
 import 'scripture_providers.dart';
@@ -28,7 +30,14 @@ final widgetSyncProvider = Provider<void>((ref) {
   ref.listen(languageProvider, (_, _) {
     sync.daily();
     sync.history(ref.read(historyProvider).value);
+    sync.listen();
   });
+  // The Listen widgets (PRD_v11) show where listening stopped.
+  ref.listen(
+    audioControllerProvider.select((s) => s.track?.verseId),
+    (_, _) => sync.listen(),
+    fireImmediately: true,
+  );
   ref.listen(
     historyProvider,
     (_, next) => sync.history(next.value),
@@ -100,6 +109,39 @@ class _WidgetSync {
         if (out.length == _historyCount) break;
       }
       await _widgets.saveHistory(out);
+    } catch (_) {
+      // A widget that is a little out of date is fine.
+    }
+  }
+
+  String? _listenSent;
+
+  /// The last place listened to (or chapter 1): chapter, its title in the
+  /// reading language (from the dataset) and the verse label.
+  Future<void> listen() async {
+    try {
+      // What is loaded now (the saved place can lag a moment behind),
+      // else where listening last stopped.
+      final now = ref.read(audioControllerProvider);
+      final saved = ref.read(audioControllerProvider.notifier).lastPlace;
+      final live = now.kind == AudioKind.chapter && now.track != null;
+      final verseId = live ? now.track!.verseId : saved?.verseId;
+      final lang = ref.read(languageProvider);
+      final v = verseId == null ? null : parseVerseId(verseId);
+      final chapter = v?.chapter ?? saved?.chapter ?? 1;
+      final index = await ref.read(scriptureRepositoryProvider).chapters();
+      final state = <String, Object>{
+        'chapter': chapter,
+        'title': index.chapter(chapter).title(lang),
+        'label': v == null
+            ? ''
+            : formatLabel(v.chapter, v.verseStart, v.verseEnd),
+        'lang': lang,
+      };
+      final key = state.toString();
+      if (key == _listenSent) return;
+      _listenSent = key;
+      await _widgets.saveListen(state);
     } catch (_) {
       // A widget that is a little out of date is fine.
     }

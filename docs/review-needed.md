@@ -32,7 +32,7 @@ all of it must be checked **before release**.
 
 | Item | Where | Notes |
 | --- | --- | --- |
-| Message bank, 564 messages | `assets/messages/messages.json` | Original wording, no quotations. Validated by `dart run tool/validate_messages.dart`. Check tone. |
+| Message bank, 689 messages | `assets/messages/messages.json` | Original wording, no quotations. Validated by `dart run tool/validate_messages.dart`. Check tone. |
 | Hindi for every message | same file, `hi` fields | Needs a native speaker. |
 | 18 chapter summaries (EN + HI) | `assets/summaries/summaries.json` | Written only from the bundled translations of each chapter, 198-249 words each. Shown with "Summary. Not part of Srila Prabhupada's text." Hindi needs a native speaker. **Needs owner review before release.** |
 | Theme map, 105 themes | `assets/search/themes.json`, `docs/theme-review.csv` | Every verse was found with FTS keyword search of the dataset and kept only when its translation addresses the theme. Mark each CSV row yes/no. Hindi titles and Hinglish synonyms also need a look. A "gratitude" theme was dropped because no verse text clearly addressed it. |
@@ -176,3 +176,48 @@ English now comes from vedabase.io (`tool/fetch_vedabase_io.py`, `tool/convert_v
 | Split verses | 17.8, 17.9, 17.10, 18.13, 18.14, 18.36, 18.37 | vedabase.io gives these their own entries (vedabase.cc grouped them). They have no Hindi, because vedabase.cc's Hindi is per group and is not split by hand. Saved bookmarks/notes on the old group IDs open at the first verse. |
 | Theme remap | `assets/search/themes.json`, `docs/theme-review.csv` | Food, health → 17.8 (was 17.8-10); happiness → 18.36 (was 18.36-37). `reviewed: false`. |
 | Credit wording | `store/listing.md`, `store/app-store-listing.md`, `docs/app-review-notes-submit.txt`, in-app About (from `chapters.json`) | Now names vedabase.io (English) and vedabase.cc (Hindi). Paste the new listing text into both stores. |
+
+## Apple Watch companion (2026-11-25, docs/PRD_v10.md)
+
+Built and compiled; nothing here has run on a real watch or a watch simulator yet (this Mac has no watchOS simulator runtime).
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Signing | Xcode, targets GitaWatch and GitaWatchWidgets | Automatic signing must create the two new App IDs (`com.onescrollgita.app.watchkitapp`, `.watchkitapp.widgets`) with the App Group `group.com.onescrollgita.app`. Open Runner.xcworkspace once, select each target, and let Xcode fix signing. |
+| Install | paired iPhone + Apple Watch (watchOS 10+) | Install the iPhone app from Xcode or TestFlight; the watch app appears in the Watch app on the phone (or installs on its own if "Automatic App Install" is on). |
+| Sync | watch Home, Bookmarks, Continue Reading | Bookmark a verse on the phone: it appears on the watch within seconds while both are near, or the next time the watch app opens. Read a verse on the phone: Continue Reading follows. Switch the phone to Hindi: watch translations switch. |
+| Phone away | Airplane Mode on the phone | The watch still opens Today, Random, cached Bookmarks and Continue Reading. |
+| Now Playing | Shravan on the phone, watch Now Playing | Play/pause and skip work from the watch; the title shows. |
+| Complication | watch face edit | "Verse of the Day" appears in circular, rectangular, inline and corner slots; it shows the same verse as the phone; it changes after midnight; tapping it opens today's verse. |
+| Devanagari | verse screen | Sanskrit and Hindi render in the watch's system Devanagari font and read comfortably at default and large text sizes. |
+| Watch name | watch app grid | Shown as "Gita" (short to fit). Say if you want "One Scroll Gita". |
+| Store listing | App Store Connect | The watch app ships inside the iOS app; add Apple Watch screenshots and decide whether to mention it in the listing. |
+| Simulator runs | `flutter run` | With a watch app in the project, Flutter needs a device ID for simulator builds: use `flutter run -d <simulator id>`; plain `flutter build ios --simulator` stops with "A device ID is required". |
+
+## Account backend (2026-11-25, docs/PRD_v9.md V9-3)
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| Privacy policy | account section | It now also needs: purchase status, renewal and refund details from the stores; store notification history (kept a year); the Apple sign-in token kept only to revoke it on deletion. Owner wording. |
+| Store labels | App Store privacy, Play Data safety | Still email, name, user ID, purchase history; confirm nothing else is needed for the server checks. |
+| Apple on Android | `APPLE_ON_ANDROID` | Off by default. Turn on only after docs/auth-setup.md 3b, and renew the Apple secret key every 6 months. |
+| Not run for real | Edge Functions | Type-checked and unit-tested only. Nothing has called Apple's or Google's APIs yet: test with a sandbox purchase, a Play test notification and an account deletion. |
+
+## Notification fixes and more messages (2026-11-25)
+
+Users reported not getting reminders. Code fixes: reminder channels are now high importance (banner and lock screen; the old channels only showed a status-bar icon), the plugin setup is safe to call twice and retries after a failure, and a failed schedule rebuild keeps the previous schedule instead of leaving nothing.
+
+| Item | Where | What to check |
+| --- | --- | --- |
+| New messages (reviewed: false) | `assets/messages/messages.json` | 125 new messages, English and Hindi: invite-0153 to 0182, reflection-0121 to 0150, streak-risk-0103 to 0127, comeback-0081 to 0105, lead-in-0021 to 0035. Check tone and Hindi. |
+| Existing Hindi | `streak-risk-0018` | The Hindi body leaves out the day number ({streak}) that the English has. Harmless; change it if you want them to match. |
+| New screen text (reviewed: false) | `lib/features/reminders/reminders_screen.dart` | Shown when reminders are on but notifications are blocked in phone settings: "Notifications are turned off for this app in your phone settings, so reminders cannot arrive. Allow notifications there to get them again." |
+| Android channels | system notification settings | After updating, the app shows new "Daily reading reminder", "Streak nudges" and "Verse of the day" channels and removes the old ones. A channel the user had switched off stays off. Check on a phone that reminders now pop up as a banner. |
+| Reminders off by default | first launch | The "Remind me at…" step was removed from first launch on 2026-11-23, so new installs get no reminders unless they find Profile > Reminders. Decide whether to offer reminders again somewhere (likely the main reason users get none). |
+| Real-device check | Android and iPhone | Still not tested on a phone (see "Real-device notifications" above). |
+
+
+## Store screenshots (2026-11-26)
+- `store/screenshots/slides.json`: eyebrow, title and subtitle for the 10 store
+  screenshots (EN). reviewed: false. Check "Swap the scroll for a verse",
+  the Shravan/Sadhak captions (paid features) and that each matches the screen.

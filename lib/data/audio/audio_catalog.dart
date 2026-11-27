@@ -62,8 +62,8 @@ class AudioCatalog {
   }) async {
     var total = 0;
     for (final v in await this.chapter(chapter)) {
-      total += v.sanskritMs;
-      if (mode == PlayMode.withTranslation) total += v.translationMs;
+      if (mode.sanskrit) total += v.sanskritMs;
+      if (mode.translation) total += v.translationMs;
     }
     return total;
   }

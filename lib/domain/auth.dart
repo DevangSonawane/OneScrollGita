@@ -63,6 +63,7 @@ class PurchaseRecord {
     required this.productId,
     required this.platform,
     this.transactionId,
+    this.purchaseToken,
   });
 
   final String productId;
@@ -70,7 +71,18 @@ class PurchaseRecord {
   /// `ios` or `android`.
   final String platform;
   final String? transactionId;
+
+  /// Google Play's purchase token (null on the App Store).
+  final String? purchaseToken;
 }
+
+/// The sign-in buttons a platform shows, in display order. Apple shows on
+/// iPhone (the native sheet) and, when this build turns it on, on Android
+/// (Apple's web sign-in, owner decision 2026-11-25). Google shows on both.
+List<SignInMethod> signInMethodsFor({
+  required bool iOS,
+  required bool appleOnAndroid,
+}) => [if (iOS || appleOnAndroid) SignInMethod.apple, SignInMethod.google];
 
 /// Whether the sign-up page shows after first launch: once, to a new
 /// install, when accounts exist in this build and nobody is signed in.

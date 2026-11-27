@@ -163,7 +163,10 @@ void main() {
       () async {
         final (c, auth, g, _) = await setup(
           user: _user,
-          store: FakePurchaseGateway(buyResult: PurchaseOutcome.purchased),
+          store: FakePurchaseGateway(
+            buyResult: PurchaseOutcome.purchased,
+            purchaseToken: 'play-token',
+          ),
         );
         c.listen(entitlementProvider, (_, _) {});
         c.listen(paywallControllerProvider(Package.sadhak), (_, _) {});
@@ -174,6 +177,8 @@ void main() {
         expect(g.lastAccountId, _user.id);
         expect(c.read(entitlementProvider), Entitlement.premium);
         expect(auth.records.single.productId, SadhakProducts.yearly);
+        // The server checks Google Play purchases with this token.
+        expect(auth.records.single.purchaseToken, 'play-token');
       },
     );
 

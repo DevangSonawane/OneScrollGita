@@ -147,7 +147,7 @@ class ChapterNumeral extends StatelessWidget {
   return (
     title: 'Chapter $chapter · ${s.track?.label ?? ''}',
     subtitle:
-        '${s.track?.phase.label ?? ''}${s.mode == PlayMode.sanskritOnly
+        '${s.track?.phase.label ?? ''}${s.mode != PlayMode.withTranslation
             ? ''
             : s.track?.phase == AudioPhase.sanskrit
             ? ' · then translation'
@@ -260,6 +260,129 @@ class MiniPlayer extends ConsumerWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The two colours of a chapter's placeholder cover.
+List<Color> chapterArtColors(int chapter) =>
+    ListenArtColors.gradients[(chapter - 1) % ListenArtColors.gradients.length];
+
+/// "Chapter 2", or "अध्याय २" when reading in Hindi.
+String chapterLabel(int chapter, String lang) =>
+    lang == 'hi' ? 'अध्याय ${devanagariNumber(chapter)}' : 'Chapter $chapter';
+
+/// Chapter names in Hindi take the app's Devanagari face, with room for
+/// its marks above and below.
+TextStyle chapterNameStyle(TextStyle s, String lang) =>
+    lang == 'hi' ? s.copyWith(fontFamily: Fonts.devanagari, height: 1.4) : s;
+
+/// The owner's cover for a chapter (made by tool/build_chapter_art.sh).
+String chapterArtPath(int chapter) =>
+    'assets/chapter_art/ch${chapter.toString().padLeft(2, '0')}.jpg';
+
+/// A chapter's cover picture, filling its box. The warm gradient shows
+/// while it loads, and with the chapter numeral if the picture is missing.
+class ChapterCover extends StatelessWidget {
+  const ChapterCover({
+    super.key,
+    required this.chapter,
+    required this.numeralSize,
+  });
+
+  final int chapter;
+  final double numeralSize;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = AppColors.of(context);
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    return ExcludeSemantics(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: chapterArtColors(chapter),
+          ),
+        ),
+        child: LayoutBuilder(
+          builder: (context, box) => Image.asset(
+            chapterArtPath(chapter),
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            // Decode only as large as it is drawn (square art: the longer side).
+            cacheWidth: box.biggest.isFinite
+                ? (math.max(box.maxWidth, box.maxHeight) * dpr).round()
+                : null,
+            errorBuilder: (context, _, _) => Center(
+              child: Text(
+                devanagariNumber(chapter),
+                textScaler: TextScaler.noScaling,
+                style: ReadingStyles(c, 1).sanskrit.copyWith(
+                  fontSize: numeralSize,
+                  height: 1,
+                  color: ListenArtColors.watermark,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// A rounded card on a chapter's cover, darkened top and bottom so the
+/// white text on it always reads.
+class ChapterArt extends StatelessWidget {
+  const ChapterArt({
+    super.key,
+    required this.chapter,
+    required this.radius,
+    required this.numeralSize,
+    required this.child,
+  });
+
+  final int chapter;
+  final double radius;
+  final double numeralSize;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = AppColors.of(context);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(radius),
+        boxShadow: Elevation.soft(c),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(radius),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            ChapterCover(chapter: chapter, numeralSize: numeralSize),
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0, 0.4, 0.55, 1],
+                  colors: [
+                    ListenArtColors.scrim,
+                    Colors.transparent,
+                    Colors.transparent,
+                    ListenArtColors.scrimStrong,
+                  ],
+                ),
+              ),
+            ),
+            child,
+          ],
         ),
       ),
     );

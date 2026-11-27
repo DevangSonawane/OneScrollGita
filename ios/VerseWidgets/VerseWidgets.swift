@@ -1,6 +1,6 @@
 // Home-screen widgets for iOS. They mirror the Android widgets
-// (android/app/src/main/kotlin/.../VerseWidgets.kt): "Verse of the day" and
-// "Continue reading". The Flutter app writes the data through home_widget
+// (android/app/src/main/kotlin/.../VerseWidgets.kt): "Verse of the day",
+// "Continue reading" and "Listen" (PRD_v11). The Flutter app writes the data through home_widget
 // into the shared App Group; these widgets only read it. No network.
 
 import AppIntents
@@ -393,6 +393,241 @@ struct RecentWidget: Widget {
 // own data (last-read position, daily verse, dataset, bookmarks).
 // Keep names, titles and types identical in both files.
 
+// MARK: - Listen (PRD_v11)
+//
+// The last place listened to, from the app ("listen_state": chapter, title
+// in the reading language, verse label). Tapping opens the app through the
+// Start Listening link; the app plays only with Shravan, otherwise it shows
+// the paywall. The widget never knows about purchases.
+
+private struct ListenState: Decodable {
+  let chapter: Int
+  let title: String
+  let label: String
+  let lang: String?
+}
+
+private func readListen() -> ListenState? {
+  guard
+    let raw = UserDefaults(suiteName: appGroup)?.string(forKey: "listen_state"),
+    let data = raw.data(using: .utf8)
+  else { return nil }
+  return try? JSONDecoder().decode(ListenState.self, from: data)
+}
+
+private let listenURL = URL(
+  string: "gitaapp://open/quick?type=com.onescrollgita.app.quick.start-listening")!
+
+private func devanagariDigits(_ n: Int) -> String {
+  let digits: [Character] = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"]
+  return String(String(n).map { digits[Int(String($0))!] })
+}
+
+/// "Chapter 2 · 2.47", or "अध्याय २ · 2.47" when reading in Hindi.
+private func listenSubtitle(_ s: ListenState) -> String {
+  let chapter = s.lang == "hi" ? "अध्याय \(devanagariDigits(s.chapter))" : "Chapter \(s.chapter)"
+  return s.label.isEmpty ? chapter : "\(chapter) · \(s.label)"
+}
+
+private func coverName(_ chapter: Int) -> String {
+  String(format: "cover%02d", min(max(chapter, 1), 18))
+}
+
+private struct ListenEntry: TimelineEntry {
+  let date: Date
+  let state: ListenState
+}
+
+private let listenFallback = ListenState(
+  chapter: 1, title: "Observing the Armies on the Battlefield of Kurukṣetra",
+  label: "", lang: "en")
+
+private struct ListenProvider: TimelineProvider {
+  func placeholder(in context: Context) -> ListenEntry {
+    ListenEntry(date: Date(), state: listenFallback)
+  }
+
+  func getSnapshot(in context: Context, completion: @escaping (ListenEntry) -> Void) {
+    completion(ListenEntry(date: Date(), state: readListen() ?? listenFallback))
+  }
+
+  func getTimeline(in context: Context, completion: @escaping (Timeline<ListenEntry>) -> Void) {
+    // The app reloads this widget whenever the place or language changes.
+    completion(Timeline(
+      entries: [ListenEntry(date: Date(), state: readListen() ?? listenFallback)],
+      policy: .never))
+  }
+}
+
+private extension Color {
+  static let onCover = Color.white
+  static let onCoverSoft = Color.white.opacity(0.88)
+}
+
+/// The white disc with a play triangle.
+private struct PlayDisc: View {
+  let size: CGFloat
+  var body: some View {
+    ZStack {
+      Circle().fill(Color.white)
+      Image(systemName: "play.fill")
+        .font(.system(size: size * 0.4, weight: .bold))
+        .foregroundColor(.widgetAccent)
+        .offset(x: size * 0.04)
+    }
+    .frame(width: size, height: size)
+    .shadow(color: .black.opacity(0.25), radius: 4, y: 2)
+  }
+}
+
+private struct CoverScrim: View {
+  var body: some View {
+    LinearGradient(
+      stops: [
+        .init(color: .black.opacity(0.35), location: 0),
+        .init(color: .clear, location: 0.35),
+        .init(color: .black.opacity(0.75), location: 1),
+      ],
+      startPoint: .top, endPoint: .bottom)
+  }
+}
+
+private struct ListenView: View {
+  let entry: ListenEntry
+  @Environment(\.widgetFamily) private var family
+
+  var body: some View {
+    Group {
+      if #available(iOSApplicationExtension 16.0, *), isLockScreen(family) {
+        lock.lockAwareBackground(family)
+      } else if family == .systemSmall {
+        small
+      } else {
+        medium
+      }
+    }
+    .widgetURL(listenURL)
+  }
+
+  private var s: ListenState { entry.state }
+
+  // Small: the cover fills the widget; name and play over its foot.
+  @ViewBuilder private var small: some View {
+    let content = VStack(alignment: .leading, spacing: 2) {
+      HStack {
+        Image(systemName: "headphones")
+          .font(.system(size: 13, weight: .semibold))
+          .foregroundColor(.onCover)
+        Spacer()
+        PlayDisc(size: 34)
+      }
+      Spacer(minLength: 0)
+      Text(s.title)
+        .font(.system(size: 15, weight: .bold))
+        .foregroundColor(.onCover)
+        .lineLimit(2)
+        .minimumScaleFactor(0.8)
+      Text(listenSubtitle(s))
+        .font(.system(size: 11, weight: .medium))
+        .foregroundColor(.onCoverSoft)
+        .lineLimit(1)
+    }
+    if #available(iOS 17.0, *) {
+      content.containerBackground(for: .widget) {
+        ZStack {
+          Image(coverName(s.chapter)).resizable().scaledToFill()
+          CoverScrim()
+        }
+      }
+    } else {
+      content
+        .padding(14)
+        .background(
+          ZStack {
+            Image(coverName(s.chapter)).resizable().scaledToFill()
+            CoverScrim()
+          })
+    }
+  }
+
+  // Medium: cover on the left, words and a Play button on the right.
+  private var medium: some View {
+    HStack(spacing: 14) {
+      Image(coverName(s.chapter))
+        .resizable()
+        .scaledToFill()
+        .frame(width: 112, height: 112)
+        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+      VStack(alignment: .leading, spacing: 3) {
+        Header(text: "SHRAVAN")
+        Text(s.title)
+          .font(.system(size: 16, weight: .bold))
+          .foregroundColor(.widgetText)
+          .lineLimit(2)
+          .minimumScaleFactor(0.85)
+        Text(listenSubtitle(s))
+          .font(.system(size: 12))
+          .foregroundColor(.widgetTextSecondary)
+          .lineLimit(1)
+        Spacer(minLength: 4)
+        HStack(spacing: 6) {
+          Image(systemName: "play.fill").font(.system(size: 11, weight: .bold))
+          Text("Play").font(.system(size: 13, weight: .semibold))
+        }
+        .foregroundColor(.white)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 7)
+        .background(Capsule().fill(Color.widgetAccent))
+      }
+      .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    .widgetBackground()
+  }
+
+  @available(iOSApplicationExtension 16.0, *)
+  @ViewBuilder private var lock: some View {
+    switch family {
+    case .accessoryInline:
+      Label("\(listenSubtitle(s)) · \(s.title)", systemImage: "headphones")
+    case .accessoryCircular:
+      ZStack {
+        AccessoryWidgetBackground()
+        VStack(spacing: 0) {
+          Image(systemName: "headphones")
+            .font(.system(size: 15, weight: .semibold))
+            .widgetAccentable()
+          Text(s.lang == "hi" ? devanagariDigits(s.chapter) : "\(s.chapter)")
+            .font(.system(size: 12, weight: .semibold))
+            .minimumScaleFactor(0.6)
+            .lineLimit(1)
+        }
+        .padding(2)
+      }
+    default:
+      VStack(alignment: .leading, spacing: 1) {
+        Label(listenSubtitle(s), systemImage: "headphones")
+          .font(.system(size: 12, weight: .semibold))
+          .widgetAccentable()
+        Text(s.title)
+          .font(.system(size: 13))
+          .lineLimit(2)
+      }
+      .frame(maxWidth: .infinity, alignment: .leading)
+    }
+  }
+}
+
+struct ListenWidget: Widget {
+  var body: some WidgetConfiguration {
+    StaticConfiguration(kind: "ListenWidget", provider: ListenProvider()) { entry in
+      ListenView(entry: entry)
+    }
+    .configurationDisplayName("Listen")
+    .description("Continue listening to the Gītā where you stopped (Shravan).")
+    .supportedFamilies(families([.systemSmall, .systemMedium], lock: true))
+  }
+}
+
 @available(iOSApplicationExtension 16.0, *)
 struct OpenTodaysVerseIntent: AppIntent {
   static let title: LocalizedStringResource = "Open Today's Verse"
@@ -421,6 +656,16 @@ struct OpenContinueReadingIntent: AppIntent {
 struct OpenBookmarksIntent: AppIntent {
   static let title: LocalizedStringResource = "Open Bookmarks"
   static let description = IntentDescription("Open your bookmarked verses in One Scroll Gita.")
+  static let openAppWhenRun = true
+  func perform() async throws -> some IntentResult { .result() }
+}
+
+@available(iOSApplicationExtension 16.0, *)
+struct StartListeningIntent: AppIntent {
+  static let title: LocalizedStringResource = "Start Listening"
+  static let description = IntentDescription(
+    "Resume listening to the Bhagavad-gītā recitation in One Scroll Gita (Shravan)."
+  )
   static let openAppWhenRun = true
   func perform() async throws -> some IntentResult { .result() }
 }
@@ -477,17 +722,32 @@ struct BookmarksControl: ControlWidget {
   }
 }
 
+@available(iOSApplicationExtension 18.0, *)
+struct ListenControl: ControlWidget {
+  var body: some ControlWidgetConfiguration {
+    StaticControlConfiguration(kind: "com.onescrollgita.app.control.listen") {
+      ControlWidgetButton(action: StartListeningIntent()) {
+        Label("Listen", systemImage: "headphones")
+      }
+    }
+    .displayName("Listen")
+    .description("Continue listening in One Scroll Gita (Shravan).")
+  }
+}
+
 @main
 struct VerseWidgetsBundle: WidgetBundle {
   var body: some Widget {
     DailyVerseWidget()
     RecentWidget()
+    ListenWidget()
     // Control Center (iOS 18+). Older iOS versions get the widgets only.
     if #available(iOSApplicationExtension 18.0, *) {
       TodaysVerseControl()
       RandomVerseControl()
       ContinueReadingControl()
       BookmarksControl()
+      ListenControl()
     }
   }
 }

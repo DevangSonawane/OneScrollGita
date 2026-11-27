@@ -1,3 +1,5 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart'
+    show Importance;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'package:versescroll/data/notifications/notification_service.dart';
@@ -66,6 +68,59 @@ void main() {
       final at = DateTime.utc(2026, 11, 20);
       final z = zoneForOffset(Duration.zero, at: at);
       expect(z.timeZone(at.millisecondsSinceEpoch).offset, Duration.zero);
+    });
+  });
+
+  group('init runs once and retries after a failure', () {
+    test('concurrent callers share one run', () async {
+      final once = RetryingOnce();
+      var runs = 0;
+      Future<void> step() async {
+        runs++;
+        await Future<void>.delayed(Duration.zero);
+      }
+
+      await Future.wait([once(step), once(step), once(step)]);
+      await once(step);
+      expect(runs, 1);
+    });
+
+    test('a failed run is tried again on the next call', () async {
+      final once = RetryingOnce();
+      var runs = 0;
+      Future<void> step() async {
+        runs++;
+        if (runs == 1) throw StateError('plugin not ready');
+      }
+
+      await expectLater(once(step), throwsStateError);
+      await once(step);
+      await once(step);
+      expect(runs, 2);
+    });
+  });
+
+  group('reminder channels', () {
+    test('new channels are high importance', () {
+      expect(channelImportance(null), Importance.high);
+      expect(channelImportance(Importance.defaultImportance), Importance.high);
+    });
+
+    test('a channel the user switched off stays off', () {
+      expect(channelImportance(Importance.none), Importance.none);
+    });
+
+    test('every category has a new id that replaces an old one', () {
+      for (final c in MessageCategory.values) {
+        if (c == MessageCategory.milestone ||
+            c == MessageCategory.popupGoodWork ||
+            c == MessageCategory.verseLeadIn) {
+          continue; // never sent as notifications
+        }
+        final ch = reminderChannels[c]!;
+        expect(ch.id, isNot(ch.oldId));
+        expect(ch.id, endsWith('_v2'));
+      }
     });
   });
 }

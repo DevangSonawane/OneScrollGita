@@ -9,6 +9,7 @@ create table if not exists public.profiles (
 
 alter table public.profiles enable row level security;
 
+drop policy if exists "Read own profile" on public.profiles;
 create policy "Read own profile" on public.profiles
   for select using (auth.uid() = id);
 
@@ -44,9 +45,11 @@ create table if not exists public.purchases (
 
 alter table public.purchases enable row level security;
 
+drop policy if exists "Read own purchases" on public.purchases;
 create policy "Read own purchases" on public.purchases
   for select using (auth.uid() = user_id);
 
+drop policy if exists "Add own purchases" on public.purchases;
 create policy "Add own purchases" on public.purchases
   for insert with check (auth.uid() = user_id);
 
